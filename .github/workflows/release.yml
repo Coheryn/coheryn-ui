@@ -246,7 +246,7 @@ jobs:
             )
             for crate in "${crates[@]}"; do
               echo "==> Publishing $crate to crates.io..."
-              cargo publish -p "$crate" --token "$CARGO_REGISTRY_TOKEN" --no-verify || true
+              cargo publish -p "$crate" || true
               echo "Waiting 10 seconds for crates.io index to update..."
               sleep 10
             done
