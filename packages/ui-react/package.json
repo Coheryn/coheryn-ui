@@ -2,6 +2,12 @@
   "name": "@coherynui/react",
   "version": "0.1.0",
   "description": "Accessible React component facade styled with CoherynUI CSS Engine recipes and tokens",
+  "homepage": "https://coheryntech.com/coherynui",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Coheryn/coheryn-ui.git",
+    "directory": "packages/ui-react"
+  },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",

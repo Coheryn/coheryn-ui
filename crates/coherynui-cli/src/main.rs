@@ -427,7 +427,7 @@ brand = "#60a5fa"
                 let agents_md_path = root.join("AGENTS.md");
                 let content = r#"# CoherynUI Agent Guidelines
 
-This project uses CoherynUI (https://coherynui.dev) for styling, components, motion, and GPU materials.
+This project uses CoherynUI (https://coheryntech.com/coherynui) for styling, components, motion, and GPU materials.
 
 1. **Installed APIs Only**: Always inspect the installed version and use documented classes and components.
 2. **Deterministic Layers**: Use standard cascade layers (@layer cyn.reset, cyn.tokens, cyn.recipes, cyn.utilities).

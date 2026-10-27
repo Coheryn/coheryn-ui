@@ -2,6 +2,8 @@
 
 Official **CoherynUI** Vite plugin providing on-demand CSS compilation, instant sub-5ms Hot Module Replacement (HMR), and virtual cascade-layered stylesheet resolution.
 
+[**Documentation & Homepage**](https://coheryntech.com/coherynui) • [**GitHub Repository**](https://github.com/Coheryn/coheryn-ui)
+
 ---
 
 ## Features
@@ -122,4 +124,4 @@ coherynui({
 
 ## License
 
-MIT © [Coheryn Team](https://github.com/Coheryn)
+MIT © [Coheryn Team](https://github.com/Coheryn/coheryn-ui)

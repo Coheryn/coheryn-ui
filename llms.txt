@@ -3,7 +3,8 @@
 > CoherynUI is an independent, Rust-native, agent-native UI framework and intelligent styling platform. Its Coheryn CSS Engine produces deterministic, cascade-layered standards-compliant CSS with zero mandatory browser JavaScript.
 
 ## Quick Reference
-- Official Website: https://coherynui.dev
+- Official Website: https://coheryntech.com/coherynui
+- GitHub Repository: https://github.com/Coheryn/coheryn-ui
 - CLI Binary: `coherynui`
 - Cascade Layers: `@layer cyn.reset, cyn.tokens, cyn.base, cyn.recipes, cyn.utilities;`
 - Token Prefix: `--cyn-*` (configurable in `coherynui.config.toml`)

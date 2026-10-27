@@ -1,6 +1,8 @@
 # CoherynUI
 
 > **Style the next generation.**
+> 
+> [**Homepage & Documentation**](https://coheryntech.com/coherynui) • [**GitHub Repository**](https://github.com/Coheryn/coheryn-ui)
 
 CoherynUI is an independent, Rust-native UI framework and intelligent styling platform. Its CoherynUI CSS Engine produces deterministic, cascade-layered standards-compliant CSS without mandatory browser JavaScript, while delivering five first-party advanced capabilities for Stable 1.0:
 

@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "description": "CoherynUI — Independent Rust-native UI framework, client packages, motion runtime, and GPU materials",
+  "homepage": "https://coheryntech.com/coherynui",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Coheryn/coheryn-ui.git"
+  },
   "scripts": {
     "build": "pnpm --filter \"./packages/*\" build",
     "test": "pnpm --filter \"./packages/*\" test",
