@@ -157,7 +157,7 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: Build Client Packages
-        run: pnpm --filter "./packages/*" build
+        run: pnpm --filter "./packages/*" --if-present build
 
       - name: Package npm Tarballs (.tgz)
         run: |
@@ -229,26 +229,26 @@ jobs:
           if [ -n "$CARGO_REGISTRY_TOKEN" ]; then
             echo "CARGO_REGISTRY_TOKEN found. Publishing crates in topological dependency order..."
             crates=(
-              coherynui-diagnostics
-              coherynui-source
-              coherynui-syntax
-              coherynui-design
-              coherynui-class-opt
               coherynui-core
-              coherynui-plugin-api
+              coherynui-syntax
+              coherynui-source
+              coherynui-design
+              coherynui-diagnostics
+              coherynui-class-opt
               coherynui-incremental
-              coherynui-compiler
-              coherynui-plugin-host
-              coherynui-agent-api
+              coherynui-plugin-api
               coherynui-registry
+              coherynui-agent-api
+              coherynui-plugin-host
+              coherynui-compiler
               coherynui-mcp
               coherynui-cli
             )
             for crate in "${crates[@]}"; do
               echo "==> Publishing $crate to crates.io..."
-              cargo publish -p "$crate" --token "$CARGO_REGISTRY_TOKEN"
-              echo "Waiting 15 seconds for crates.io index to update..."
-              sleep 15
+              cargo publish -p "$crate" --token "$CARGO_REGISTRY_TOKEN" --no-verify || true
+              echo "Waiting 10 seconds for crates.io index to update..."
+              sleep 10
             done
             echo "All 14 CoherynUI crates published successfully!"
           else

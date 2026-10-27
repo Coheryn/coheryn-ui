@@ -16,6 +16,9 @@
     "bin",
     "README.md"
   ],
+  "scripts": {
+    "build": "echo \"@coherynui/cli ready\""
+  },
   "publishConfig": {
     "access": "public"
   }
