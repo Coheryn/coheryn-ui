@@ -3,7 +3,7 @@
 > **Native W3C Custom Elements for CoherynUI**  
 > Zero-framework, fully accessible custom elements with focus trapping, touch ergonomics, and cascade layer styling.
 
-[![Homepage](https://img.shields.io/badge/docs-coheryntech.com-6366f1)](https://coheryntech.com/coherynui)
+[![Homepage](https://img.shields.io/badge/docs-coheryntech.com-6366f1)](https://coheryntech.com/products/coheryn-ui)
 [![GitHub](https://img.shields.io/badge/github-CoherynUI-1e293b)](https://github.com/Coheryn/coheryn-ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](../../LICENSE-MIT)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](../../LICENSE-APACHE)

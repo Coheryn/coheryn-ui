@@ -1,0 +1,108 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="1660" height="1410" viewBox="0 0 1660 1410">
+ <title>CoherynTech geometric icon - annotated golden-ratio construction</title>
+ <defs>
+  <marker id="arr" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse">
+   <path d="M0,0 L8,4 L0,8 Z" fill="#567E9D"/></marker>
+  <style>
+    .hd{font-family:DejaVu Sans,Arial,sans-serif;font-size:36px;font-weight:700;fill:#071D39}
+    .sub{font-family:DejaVu Sans,Arial,sans-serif;font-size:17px;fill:#536C81}
+    .m{font-family:DejaVu Sans,Arial,sans-serif;font-size:17px;fill:#244A70}
+    .n{font-family:DejaVu Sans,Arial,sans-serif;font-size:15px;fill:#5B7891}
+    .fine{fill:none;stroke:#85B4D0;stroke-width:1.3}
+    .dash{fill:none;stroke:#92B5CD;stroke-width:1;stroke-dasharray:8 7}
+    .dim{fill:none;stroke:#567E9D;stroke-width:1.7;marker-start:url(#arr);marker-end:url(#arr)}
+  </style>
+  >
+ <linearGradient id="navyMain" x1="0" y1="0.23" x2="0.86" y2="0.90">
+  <stop offset="0" stop-color="#2468AA"/><stop offset=".40" stop-color="#092A54"/>
+  <stop offset="1" stop-color="#04142E"/>
+ </linearGradient>
+ <linearGradient id="navyTop" x1=".15" y1=".88" x2=".72" y2=".06">
+  <stop offset="0" stop-color="#0B345F"/><stop offset=".40" stop-color="#082748"/>
+  <stop offset="1" stop-color="#03162F"/>
+ </linearGradient>
+ <linearGradient id="cyanRight" x1="0" y1="1" x2="1" y2=".1">
+  <stop offset="0" stop-color="#00627B"/>
+  <stop offset=".52" stop-color="#078BA5"/>
+  <stop offset="1" stop-color="#04B3C9"/>
+ </linearGradient>
+ <linearGradient id="cyanTop" x1="0" y1=".9" x2=".78" y2="0">
+  <stop offset="0" stop-color="#08768C"/>
+  <stop offset=".45" stop-color="#0AA2B6"/>
+  <stop offset=".85" stop-color="#12C6D5"/>
+  <stop offset="1" stop-color="#00B2C3"/>
+ </linearGradient>
+ <linearGradient id="bottomMain" x1="0" y1="1" x2=".95" y2="0">
+  <stop offset="0" stop-color="#11BCD0"/>
+  <stop offset=".52" stop-color="#048FA7"/>
+  <stop offset="1" stop-color="#035368"/>
+ </linearGradient>
+ <clipPath id="navyClip"><path d="M 0,340.0874395082 A 55.7280900008,55.7280900008 0 0 1 26.4300992684,292.682294701 L 471.9272305128,17.3499257014 A 55.7280900008,55.7280900008 0 0 1 528.7089925167,16.2755662636 L 708.2039324994,118.0339887499 L 252.4026771737,399.734656656 A 34.4418537486,34.4418537486 0 0 0 236.0679774998,429.0326473884 L 236.0679774998,545.1896858597 A 34.4418537486,34.4418537486 0 0 0 249.7107677911,572.6421948332 L 400.5420412504,686.9176962472 L 189.0432065001,746.761002768 A 34.4418537486,34.4418537486 0 0 1 171.5496220631,747.0920801156 L 42.5953998293,715.8225074709 A 55.7280900008,55.7280900008 0 0 1 0,661.6639212264 L 0,340.0874395082 Z"/></clipPath>
+ <clipPath id="cyanClip"><path d="M 381.9660112501,429.0326473884 A 34.4418537486,34.4418537486 0 0 1 398.300710924,399.734656656 L 735.7132485088,191.2022401983 A 55.7280900008,55.7280900008 0 0 1 792.7155188007,190.2535546583 L 971.9761895587,292.9607797335 A 55.7280900008,55.7280900008 0 0 1 1000,341.3146100805 L 1000,702.8077864308 A 55.7280900008,55.7280900008 0 0 1 970.7261614598,751.8566660795 L 763.9320225002,863.3899812498 L 763.9320225002,465.3814671518 A 34.4418537486,34.4418537486 0 0 0 714.17492135,434.5320832573 L 381.9660112501,599.4579587496 L 381.9660112501,429.0326473884 Z"/></clipPath>
+
+ </defs>
+ <rect width="1660" height="1410" fill="#FFFFFF"/>
+ <text class="hd" x="110" y="69">GOLDEN-RATIO CONSTRUCTION</text>
+ <text class="sub" x="110" y="109">Source-matched, three-part interlocking symbol · dimension S = 1000 units</text>
+ <g transform="translate(324 195) scale(0.91)">
+  <rect x="0" y="0" width="1000" height="1000" fill="#F7FBFD" stroke="#78A5C3" stroke-width="2"/>
+  <path d="M0,0 L1000,1000 M1000,0 L0,1000" class="dash"/>
+  <path d="M 500,0 L500,1000 M0,500 L1000,500" class="dash"/>
+  <line x1="236.0679774998" y1="0" x2="236.0679774998" y2="1000" class="dash"/><line x1="381.9660112501" y1="0" x2="381.9660112501" y2="1000" class="dash"/><line x1="618.0339887499" y1="0" x2="618.0339887499" y2="1000" class="dash"/><line x1="763.9320225002" y1="0" x2="763.9320225002" y2="1000" class="dash"/><line x1="708.2039324994" y1="0" x2="708.2039324994" y2="1000" class="dash"/>
+  <line x1="0" y1="236.0679774998" x2="1000" y2="236.0679774998" class="dash"/><line x1="0" y1="381.9660112501" x2="1000" y2="381.9660112501" class="dash"/><line x1="0" y1="618.0339887499" x2="1000" y2="618.0339887499" class="dash"/><line x1="0" y1="763.9320225002" x2="1000" y2="763.9320225002" class="dash"/>
+  <rect x="0" y="0" width="618.0339887499" height="1000" class="fine" opacity=".50"/>
+  <rect x="618.0339887499" y="0" width="381.9660112501" height="1000" class="fine" opacity=".5"/>
+  <circle cx="500" cy="500" r="381.9660112501" class="dash" opacity=".8"/>
+  <circle cx="500" cy="500" r="236.0679774998" class="dash" opacity=".8"/>
+  <path d="M0,309.0169943749 L500,0 M708.2039324994,118.0339887499 L236.0679774998,409.8300562505
+   M381.9660112501,409.8300562505 L763.9320225002,173.7620787507"
+     stroke="#3672A0" stroke-dasharray="14 7" stroke-width="3" fill="none"/>
+  <g opacity=".98">
+      <path id="navy-left-ribbon" d="M 0,340.0874395082 A 55.7280900008,55.7280900008 0 0 1 26.4300992684,292.682294701 L 471.9272305128,17.3499257014 A 55.7280900008,55.7280900008 0 0 1 528.7089925167,16.2755662636 L 708.2039324994,118.0339887499 L 252.4026771737,399.734656656 A 34.4418537486,34.4418537486 0 0 0 236.0679774998,429.0326473884 L 236.0679774998,545.1896858597 A 34.4418537486,34.4418537486 0 0 0 249.7107677911,572.6421948332 L 400.5420412504,686.9176962472 L 189.0432065001,746.761002768 A 34.4418537486,34.4418537486 0 0 1 171.5496220631,747.0920801156 L 42.5953998293,715.8225074709 A 55.7280900008,55.7280900008 0 0 1 0,661.6639212264 L 0,340.0874395082 Z" fill="url(#navyMain)"/>
+      <path id="upper-right-cyan-ribbon" d="M 381.9660112501,429.0326473884 A 34.4418537486,34.4418537486 0 0 1 398.300710924,399.734656656 L 735.7132485088,191.2022401983 A 55.7280900008,55.7280900008 0 0 1 792.7155188007,190.2535546583 L 971.9761895587,292.9607797335 A 55.7280900008,55.7280900008 0 0 1 1000,341.3146100805 L 1000,702.8077864308 A 55.7280900008,55.7280900008 0 0 1 970.7261614598,751.8566660795 L 763.9320225002,863.3899812498 L 763.9320225002,465.3814671518 A 34.4418537486,34.4418537486 0 0 0 714.17492135,434.5320832573 L 381.9660112501,599.4579587496 L 381.9660112501,429.0326473884 Z" fill="url(#cyanRight)"/>
+      <path id="lower-cyan-ribbon" d="M 236.0679774998,854.1019662497 L 708.2039324994,604.1019662497 L 708.2039324994,909.8300562505 L 525.1353892509,989.11424675 A 55.7280900008,55.7280900008 0 0 1 476.0275024378,986.7483292657 L 236.0679774998,854.1019662497 Z" fill="url(#bottomMain)"/>
+    
+        <g clip-path="url(#navyClip)">
+          <path id="navy-top-plane" d="M 0,309.0169943749 L 500,0 L 708.2039324994,118.0339887499
+           L 236.0679774998,409.8300562505 Q 226.0679774998,400.8300562505 206.0679774998,386.8300562505
+           L 25,313.0169943749 Z" fill="url(#navyTop)"/>
+        </g>
+        <g clip-path="url(#cyanClip)">
+          <path id="cyan-upper-plane" d="M 381.9660112501,409.8300562505
+           L 763.9320225002,173.7620787507 L 1000,309.0169943749
+           L 763.9320225002,409.8300562505
+           L 381.9660112501,599.4579587496 Z" fill="url(#cyanTop)"/>
+        </g>
+        </g>
+  <circle cx="500" cy="500" r="381.9660112501" class="fine" opacity=".36"/>
+  <rect x="0" y="0" width="1000" height="1000" fill="none" stroke="#376A8F" stroke-width="2"/>
+  <line x1="708.2039324994" y1="716" x2="763.9320225002" y2="716" class="dim"/>
+  <text x="736.0679774998" y="704" text-anchor="middle" fill="#153D61" font-family="DejaVu Sans,Arial" font-size="16">G</text>
+ </g>
+ <line x1="324" y1="151" x2="1234" y2="151" class="dim"/>
+ <text x="779" y="138" text-anchor="middle" class="m">S = 1000</text>
+ <line x1="293" y1="195" x2="293" y2="1105" class="dim"/>
+ <text x="267" y="650" transform="rotate(-90 267 650)" text-anchor="middle" class="m">S = 1000</text>
+ <text class="m" x="1270" y="275">VERIFIED ANCHORS</text>
+ <text class="n" x="1270" y="315">x navy inner = S/φ³</text>
+ <text class="n" x="1270" y="345">x cyan start = S/φ²</text>
+ <text class="n" x="1270" y="375">offset = S/φ⁴</text>
+ <text class="n" x="1270" y="405">right inner = S − S/φ³</text>
+ <text class="n" x="1270" y="435">channel width = S/φ⁶</text>
+ <text class="m" x="1270" y="516">CIRCULAR FILLETS</text>
+ <text class="n" x="1270" y="555">R = S/φ⁷ = 34.44185</text>
+ <text class="n" x="1270" y="585">Larger corners use G = S/φ⁶</text>
+ <text class="n" x="1270" y="617">Arc endpoints tangent to edges</text>
+ <text class="m" x="1270" y="699">ANGLE &amp; FORM</text>
+ <text class="n" x="1270" y="737">Upper parallel edges: −1/φ</text>
+ <text class="n" x="1270" y="766">Lower diagonals: optical fit</text>
+ <text class="n" x="1270" y="795">Guide circles: reference only</text>
+ <text class="n" x="1270" y="825">Not silhouette generators</text>
+ <line x1="112" y1="1160" x2="1546" y2="1160" stroke="#DDE7ED"/>
+ <text class="hd" x="112" y="1210" style="font-size:24px">RATIO-CHECKED REFERENCES</text>
+ <text class="m" x="112" y="1252">φ = 1.61803398875</text>
+ <text class="m" x="112" y="1289">S/φ = 618.033989      S/φ² = 381.966011      S/φ³ = 236.067977</text>
+ <text class="m" x="112" y="1326">S/φ⁴ = 145.898034      S/φ⁶ = 55.728090      S/φ⁷ = 34.441854</text>
+ <text class="sub" x="112" y="1371">Note: golden references are verified numerically; perspective-matching contour choices are separately disclosed in the guide.</text>
+</svg>

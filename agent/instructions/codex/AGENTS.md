@@ -1,6 +1,6 @@
 # CoherynUI Project Instructions
 
-This repository uses **CoherynUI** (https://coheryntech.com/coherynui) for styling, components, motion, and GPU materials.
+This repository uses **CoherynUI** (https://coheryntech.com/products/coheryn-ui) for styling, components, motion, and GPU materials.
 
 ## Agent Directives
 1. **Respect Project Stack**: Use CoherynUI native components and CSS utilities; do not introduce unauthorized third-party CSS or utility libraries.

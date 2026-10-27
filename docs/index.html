@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CoherynUI — Interactive Documentation, Cascade Layers & Live REPL Playground</title>
   <meta name="description" content="Official interactive documentation, live REPL playground, cascade layer inspector, design token tuner, and accessible component workbench for CoherynUI.">
+  <link rel="icon" type="image/svg+xml" href="assets/CoherynTech_Icon_Master_Gradient.svg">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/CoherynTech_Icon_Gradient_64.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="coherynui.css">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="coherynui.css?v=3">
 </head>
 <body>
 
@@ -17,31 +19,39 @@
   <!-- ========================================================================= -->
   <header class="navbar">
     <div class="brand-lockup">
-      <div class="brand-icon">C</div>
-      <span>CoherynUI Docs</span>
-      <span class="badge badge-brand">v1.0.0 Stable</span>
+      <div class="brand-icon">
+        <img class="brand-logo" src="assets/CoherynTech_Icon_Master_Gradient.svg" alt="CoherynTech Geometric Vector Logo">
+      </div>
+      <span>Coheryn<span class="brand-divider">/</span>ui</span>
+      <span class="badge badge-subtle">v1.0.0</span>
     </div>
 
     <nav aria-label="Documentation Sections">
       <ul class="nav-links">
-        <li><button class="nav-btn active" onclick="switchTab('overview')">Overview</button></li>
-        <li><button class="nav-btn" onclick="switchTab('repl')">⚡ Live REPL</button></li>
-        <li><button class="nav-btn" onclick="switchTab('layers')">Cascade Layers</button></li>
-        <li><button class="nav-btn" onclick="switchTab('tokens')">Token Inspector</button></li>
-        <li><button class="nav-btn" onclick="switchTab('components')">Components</button></li>
-        <li><button class="nav-btn" onclick="switchTab('web-components')">Web Components</button></li>
-        <li><button class="nav-btn" onclick="switchTab('motion')">Motion Physics</button></li>
-        <li><button class="nav-btn" onclick="switchTab('gpu')">GPU Materials</button></li>
-        <li><button class="nav-btn" onclick="switchTab('agent')">Agent Portal</button></li>
+        <li><button class="nav-btn active" data-tab="overview" onclick="switchTab('overview')">Overview</button></li>
+        <li><button class="nav-btn" data-tab="repl" onclick="switchTab('repl')">Live REPL</button></li>
+        <li><button class="nav-btn" data-tab="layers" onclick="switchTab('layers')">Cascade Layers</button></li>
+        <li><button class="nav-btn" data-tab="tokens" onclick="switchTab('tokens')">Token Inspector</button></li>
+        <li><button class="nav-btn" data-tab="components" onclick="switchTab('components')">Components</button></li>
+        <li><button class="nav-btn" data-tab="web-components" onclick="switchTab('web-components')">Web Components</button></li>
+        <li><button class="nav-btn" data-tab="motion" onclick="switchTab('motion')">Motion Physics</button></li>
+        <li><button class="nav-btn" data-tab="gpu" onclick="switchTab('gpu')">GPU Materials</button></li>
+        <li><button class="nav-btn" data-tab="agent" onclick="switchTab('agent')">Agent Portal</button></li>
       </ul>
     </nav>
 
-    <!-- Theme Switcher -->
-    <div class="theme-switch-pills" role="radiogroup" aria-label="Select Theme">
-      <button class="theme-pill-btn active" onclick="applyTheme('dark')">Dark</button>
-      <button class="theme-pill-btn" onclick="applyTheme('light')">Light</button>
-      <button class="theme-pill-btn" onclick="applyTheme('cyberpunk')">Cyber</button>
-      <button class="theme-pill-btn" onclick="applyTheme('nord')">Nord</button>
+    <!-- Theme Switcher & GitHub -->
+    <div class="d-flex items-center gap-2">
+      <div class="theme-switch-pills" role="radiogroup" aria-label="Select Theme">
+        <button class="theme-pill-btn active" data-theme="dark" onclick="applyTheme('dark')">Dark</button>
+        <button class="theme-pill-btn" data-theme="light" onclick="applyTheme('light')">Light</button>
+        <button class="theme-pill-btn" data-theme="cyberpunk" onclick="applyTheme('cyberpunk')">Cyber</button>
+        <button class="theme-pill-btn" data-theme="nord" onclick="applyTheme('nord')">Nord</button>
+      </div>
+      <a href="https://github.com/Coheryn/coheryn-ui" target="_blank" rel="noreferrer" class="btn btn-secondary btn-sm" aria-label="GitHub Repository">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
     </div>
   </header>
 
@@ -55,67 +65,130 @@
     <!-- TAB 1: OVERVIEW                                                         -->
     <!-- ======================================================================= -->
     <section id="tab-overview" class="tab-panel active">
-      <div class="glass-card" style="margin-bottom: 2rem; padding: 3rem 2.5rem;">
-        <span class="badge badge-success" style="margin-bottom: 1rem;">Zero Mandatory Browser JavaScript</span>
-        <h1 style="font-size: 2.75rem; font-weight: 800; line-height: 1.15; letter-spacing: -0.03em;">
-          Style the next generation with <span class="text-brand">CoherynUI</span>.
+      <div class="glass-card mb-8">
+        <div class="hero-eyebrow">
+          <span class="indicator-dot"></span>
+          Deterministic Styling Architecture // Specification v1.0.0
+        </div>
+        <h1 class="hero-title">
+          Deterministic styling for <span class="text-gradient">high-performance</span> web interfaces.
         </h1>
-        <p style="color: var(--cyn-color-muted); font-size: 1.125rem; max-width: 680px; margin-top: 1rem;">
-          Independent, Rust-native, agent-native UI framework and intelligent styling platform. Produces deterministic, standards-based CSS with 5 first-party advanced subsystems.
+        <p class="hero-subtitle">
+          Incremental blake3 Rust engine, strict W3C <code>@layer</code> cascade isolation, and zero-runtime accessible primitives. Designed with authentic craftsmanship for software engineers and autonomous AI agents.
         </p>
 
-        <div style="display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
-          <button class="btn btn-primary" onclick="switchTab('repl')">⚡ Launch Live REPL Playground</button>
-          <button class="btn btn-secondary" onclick="switchTab('layers')">Inspect Cascade Layers</button>
-          <button class="btn btn-secondary" onclick="switchTab('components')">Component Workbench</button>
-          <a href="https://github.com/Coheryn/coheryn-ui" class="btn btn-secondary" target="_blank" rel="noreferrer">GitHub Repo →</a>
+        <div class="d-flex items-center gap-3 flex-wrap">
+          <button class="btn btn-primary" data-tab="repl" onclick="switchTab('repl')">Launch Live REPL →</button>
+          <button class="btn btn-secondary" data-tab="layers" onclick="switchTab('layers')">Inspect Cascade Layers</button>
+          <button class="btn btn-secondary" data-tab="web-components" onclick="switchTab('web-components')">Web Components</button>
+          <div class="cli-bar">
+            <span class="cli-prompt">$</span>
+            <span>pnpm add @coherynui/react @coherynui/components</span>
+            <button class="cli-copy-btn" onclick="navigator.clipboard.writeText('pnpm add @coherynui/react @coherynui/components'); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy', 2000);">Copy</button>
+          </div>
+        </div>
+
+        <!-- Metrics Spec Strip -->
+        <div class="spec-strip">
+          <div class="spec-item">
+            <div class="spec-value">0.028 ms</div>
+            <div class="spec-label">Incremental Rebuild Latency</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-value">5 Layers</div>
+            <div class="spec-label">W3C @layer Cascade Isolation</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-value">0 kB</div>
+            <div class="spec-label">Mandatory Browser Runtime</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-value">WCAG 2.2 AA</div>
+            <div class="spec-label">Accessible Component Primitives</div>
+          </div>
         </div>
       </div>
 
       <div class="grid-3">
         <div class="card">
-          <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">⚡</div>
-          <h3 style="font-size: 1.125rem; font-weight: 700;">Coheryn CSS Engine</h3>
-          <p class="text-muted" style="font-size: 0.875rem; margin-top: 0.5rem;">
-            Incremental blake3 compiler producing strict <code>@layer cyn.*</code> cascades with sub-5ms Vite HMR and zero runtime JavaScript overhead.
+          <div class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+          </div>
+          <h3 class="card-title">Coheryn CSS Engine</h3>
+          <p class="card-desc">
+            Incremental blake3 compiler producing strict <code>@layer cyn.*</code> cascades with sub-millisecond HMR and zero runtime JavaScript overhead.
           </p>
         </div>
 
         <div class="card">
-          <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🛡️</div>
-          <h3 style="font-size: 1.125rem; font-weight: 700;">Accessible Components</h3>
-          <p class="text-muted" style="font-size: 0.875rem; margin-top: 0.5rem;">
-            Complete suite of modals, mobile bottom sheets, drawers, popovers, dropdowns, and toasts with WCAG 2.2 AA compliance.
+          <div class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+          </div>
+          <h3 class="card-title">Accessible Primitives</h3>
+          <p class="card-desc">
+            Complete suite of focus-trapped dialogs, mobile bottom sheets, drawers, popovers, and toasts with WCAG 2.2 AA compliance.
           </p>
         </div>
 
         <div class="card">
-          <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">💎</div>
-          <h3 style="font-size: 1.125rem; font-weight: 700;">GPU Materials & Liquid Glass</h3>
-          <p class="text-muted" style="font-size: 0.875rem; margin-top: 0.5rem;">
-            3-tier optical hierarchy: WebGPU WGSL shaders, WebGL2 fragment pipelines, and CSS backdrop-blur fallback.
+          <div class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+              <polyline points="2 17 12 22 22 17"/>
+              <polyline points="2 12 12 17 22 12"/>
+            </svg>
+          </div>
+          <h3 class="card-title">GPU Materials & Shaders</h3>
+          <p class="card-desc">
+            3-tier optical hierarchy: WebGPU WGSL shaders, WebGL2 fragment pipelines, and graceful CSS backdrop-blur fallback.
           </p>
         </div>
       </div>
 
       <!-- Quick Installation Guide -->
       <div class="card mt-6">
-        <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.75rem;">Instant Getting Started</h3>
-        <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 1rem;">
+        <div class="flex-between items-baseline mb-3">
+          <h3 class="card-title">Quick Installation & Agent Skills</h3>
+          <span class="badge badge-subtle">Package Setup</span>
+        </div>
+        <p class="card-desc mb-5">
           Install the client runtime packages or initialize your preferred coding agent in one command:
         </p>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
-          <div class="code-view">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre><code># Install React Components & Engine
-npm i @coherynui/react @coherynui/components</code></pre>
+        <div class="grid-2 gap-4">
+          <div class="terminal-window">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+              </div>
+              <span class="terminal-title">pnpm — bash</span>
+            </div>
+            <div class="terminal-code-row">
+              <code><span class="code-prompt">$</span> pnpm add @coherynui/react @coherynui/components</code>
+              <button class="cli-copy-btn" onclick="navigator.clipboard.writeText('pnpm add @coherynui/react @coherynui/components'); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy', 2000);">Copy</button>
+            </div>
           </div>
 
-          <div class="code-view">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre><code># Initialize Agent Skills for Cursor / Claude / Copilot
-coherynui agent init --client all</code></pre>
+          <div class="terminal-window">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+              </div>
+              <span class="terminal-title">agent-cli — bash</span>
+            </div>
+            <div class="terminal-code-row">
+              <code><span class="code-prompt">$</span> coherynui agent init --client all</code>
+              <button class="cli-copy-btn" onclick="navigator.clipboard.writeText('coherynui agent init --client all'); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy', 2000);">Copy</button>
+            </div>
           </div>
         </div>
       </div>
@@ -125,17 +198,17 @@ coherynui agent init --client all</code></pre>
     <!-- TAB 2: LIVE REPL PLAYGROUND                                             -->
     <!-- ======================================================================= -->
     <section id="tab-repl" class="tab-panel">
-      <div class="flex-between" style="margin-bottom: 1rem;">
+      <div class="flex-between mb-4">
         <div>
-          <h2 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em;">Live In-Browser REPL Playground</h2>
-          <p class="text-muted" style="font-size: 0.875rem;">
+          <h2 class="section-title">Live In-Browser REPL Playground</h2>
+          <p class="section-desc">
             Edit markup and CoherynUI classes in real-time. Inspect the live rendered canvas, compiled CSS rules, and touch diagnostics.
           </p>
         </div>
 
-        <div style="display: flex; gap: 0.75rem; align-items: center;">
-          <label style="font-size: 0.8rem; font-weight: 600; color: var(--cyn-color-muted);" for="replPresetSelect">Preset Template:</label>
-          <select id="replPresetSelect" class="btn btn-secondary" style="padding: 0.35rem 0.75rem; font-size: 0.85rem;" onchange="loadReplPreset(this.value)">
+        <div class="d-flex items-center gap-3">
+          <label class="text-muted text-xs font-bold" for="replPresetSelect">Preset Template:</label>
+          <select id="replPresetSelect" class="btn btn-secondary btn-sm" onchange="loadReplPreset(this.value)">
             <option value="glass">Hero Glass Card</option>
             <option value="modal">Accessible Dialog Modal</option>
             <option value="bottomsheet">Mobile Tactile BottomSheet</option>
@@ -150,15 +223,15 @@ coherynui agent init --client all</code></pre>
         <!-- Left: Code Editor Pane -->
         <div class="repl-pane">
           <div class="flex-between">
-            <span style="font-size: 0.85rem; font-weight: 700; color: var(--cyn-color-muted);">Template Markup (HTML / JSX)</span>
+            <span class="label-muted">Template Markup (HTML / JSX)</span>
             <span class="badge badge-brand">Live Auto-Compile</span>
           </div>
 
           <textarea id="replEditor" class="repl-textarea" spellcheck="false" oninput="runReplCompiler()"></textarea>
 
           <!-- Compiler Diagnostics Banner -->
-          <div id="replDiagnosticBox" style="background: rgba(99, 102, 241, 0.1); border: 1px solid var(--cyn-color-brand); border-radius: var(--cyn-radius-md); padding: 0.75rem 1rem; font-size: 0.8rem; display: flex; align-items: center; justify-content: space-between;">
-            <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <div id="replDiagnosticBox" class="repl-diagnostic-box">
+            <div class="d-flex items-center gap-2">
               <span id="diagnosticIcon">✓</span>
               <span id="diagnosticMessage">Compiler Diagnostics: 0 errors, all touch targets compliant.</span>
             </div>
@@ -169,15 +242,15 @@ coherynui agent init --client all</code></pre>
         <!-- Right: Live Preview & CSS Output -->
         <div class="repl-pane">
           <div class="flex-between">
-            <span style="font-size: 0.85rem; font-weight: 700; color: var(--cyn-color-muted);">Live Interactive Canvas</span>
-            <span class="text-muted" style="font-size: 0.75rem;">Isolated DOM Viewport</span>
+            <span class="label-muted">Live Interactive Canvas</span>
+            <span class="text-muted text-xs">Isolated DOM Viewport</span>
           </div>
 
           <div id="replPreviewCanvas" class="repl-preview-canvas"></div>
 
-          <div class="flex-between" style="margin-top: 0.5rem;">
-            <span style="font-size: 0.85rem; font-weight: 700; color: var(--cyn-color-muted);">Compiled W3C Cascade Rules (@layer cyn.utilities)</span>
-            <button class="btn btn-secondary" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;" onclick="copyReplCss()">Copy CSS</button>
+          <div class="flex-between mt-2">
+            <span class="label-muted">Compiled W3C Cascade Rules (@layer cyn.utilities)</span>
+            <button class="btn btn-secondary btn-xs" onclick="copyReplCss()">Copy CSS</button>
           </div>
 
           <pre id="replCssOutput" class="repl-css-box"><code>/* Compiled CSS will appear here */</code></pre>
@@ -189,9 +262,9 @@ coherynui agent init --client all</code></pre>
     <!-- TAB 3: CASCADE LAYERS INSPECTOR                                         -->
     <!-- ======================================================================= -->
     <section id="tab-layers" class="tab-panel">
-      <div style="margin-bottom: 1.5rem;">
-        <h2 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em;">W3C Cascade Layer Ordering Architecture</h2>
-        <p class="text-muted" style="font-size: 0.875rem;">
+      <div class="section-header">
+        <h2 class="section-title">W3C Cascade Layer Ordering Architecture</h2>
+        <p class="section-desc">
           CoherynUI eliminates specificity wars and <code>!important</code> hacks by enforcing strict W3C <code>@layer</code> precedence.
         </p>
       </div>
@@ -199,48 +272,48 @@ coherynui agent init --client all</code></pre>
       <div class="grid-2">
         <!-- Visual Layer Stack -->
         <div class="card">
-          <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 1rem;">Layer Precedence Hierarchy (Lowest to Highest)</h3>
-          <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 1.25rem;">
+          <h3 class="card-title-lg mb-4">Layer Precedence Hierarchy (Lowest to Highest)</h3>
+          <p class="card-desc mb-5">
             Rules in higher layers always take precedence over rules in lower layers, regardless of CSS selector specificity. Click any layer to inspect:
           </p>
 
           <div class="cascade-diagram">
-            <div class="layer-strip" onclick="inspectLayer('utilities')" id="layer-btn-utilities">
+            <div class="layer-strip" data-layer="utilities" onclick="inspectLayer('utilities')" id="layer-btn-utilities">
               <div>
                 <strong>5. cyn.utilities</strong>
-                <p style="font-size: 0.8rem; color: var(--cyn-color-muted);">Atomic utility classes (e.g. .bg-brand, .p-6, .touch-target)</p>
+                <p class="text-muted text-xs">Atomic utility classes (e.g. .bg-brand, .p-6, .touch-target)</p>
               </div>
               <span class="badge badge-brand">Highest Precedence</span>
             </div>
 
-            <div class="layer-strip" onclick="inspectLayer('recipes')" id="layer-btn-recipes">
+            <div class="layer-strip" data-layer="recipes" onclick="inspectLayer('recipes')" id="layer-btn-recipes">
               <div>
                 <strong>4. cyn.recipes</strong>
-                <p style="font-size: 0.8rem; color: var(--cyn-color-muted);">Multi-property component patterns (.modal-dialog, .glass-card)</p>
+                <p class="text-muted text-xs">Multi-property component patterns (.modal-dialog, .glass-card)</p>
               </div>
               <span class="badge badge-secondary">Precedence 4</span>
             </div>
 
-            <div class="layer-strip" onclick="inspectLayer('base')" id="layer-btn-base">
+            <div class="layer-strip" data-layer="base" onclick="inspectLayer('base')" id="layer-btn-base">
               <div>
                 <strong>3. cyn.base</strong>
-                <p style="font-size: 0.8rem; color: var(--cyn-color-muted);">Global typography, root styles, focus-visible outlines</p>
+                <p class="text-muted text-xs">Global typography, root styles, focus-visible outlines</p>
               </div>
               <span class="badge badge-secondary">Precedence 3</span>
             </div>
 
-            <div class="layer-strip" onclick="inspectLayer('tokens')" id="layer-btn-tokens">
+            <div class="layer-strip" data-layer="tokens" onclick="inspectLayer('tokens')" id="layer-btn-tokens">
               <div>
                 <strong>2. cyn.tokens</strong>
-                <p style="font-size: 0.8rem; color: var(--cyn-color-muted);">Custom property tokens (--cyn-brand, --cyn-touch-min)</p>
+                <p class="text-muted text-xs">Custom property tokens (--cyn-brand, --cyn-touch-min)</p>
               </div>
               <span class="badge badge-secondary">Precedence 2</span>
             </div>
 
-            <div class="layer-strip" onclick="inspectLayer('reset')" id="layer-btn-reset">
+            <div class="layer-strip" data-layer="reset" onclick="inspectLayer('reset')" id="layer-btn-reset">
               <div>
                 <strong>1. cyn.reset</strong>
-                <p style="font-size: 0.8rem; color: var(--cyn-color-muted);">Normalized box-sizing, margin/padding baseline reset</p>
+                <p class="text-muted text-xs">Normalized box-sizing, margin/padding baseline reset</p>
               </div>
               <span class="badge badge-secondary">Lowest Precedence</span>
             </div>
@@ -250,15 +323,15 @@ coherynui agent init --client all</code></pre>
         <!-- Layer Details Inspector -->
         <div class="card flex-col">
           <div class="flex-between">
-            <h3 style="font-size: 1.125rem; font-weight: 700;" id="layerDetailTitle">Layer Details: cyn.utilities</h3>
+            <h3 class="card-title-lg" id="layerDetailTitle">Layer Details: cyn.utilities</h3>
             <span class="badge badge-brand" id="layerDetailBadge">Specification Contract</span>
           </div>
 
-          <p id="layerDetailDescription" class="text-muted" style="font-size: 0.875rem; line-height: 1.6;">
+          <p id="layerDetailDescription" class="section-desc">
             The <code>cyn.utilities</code> layer holds generated atomic classes. Because it has the highest precedence, applying <code>class="btn-primary p-8"</code> will override any padding defined inside <code>.btn-primary</code> without needing <code>!important</code>.
           </p>
 
-          <div class="code-view" style="flex: 1;">
+          <div class="code-view flex-1">
             <pre><code id="layerDetailCode">@layer cyn.utilities {
   .bg-brand { background-color: var(--cyn-color-brand); }
   .p-6 { padding: 1.5rem; }
@@ -274,10 +347,10 @@ coherynui agent init --client all</code></pre>
     <!-- TAB 4: TOKEN INSPECTOR                                                  -->
     <!-- ======================================================================= -->
     <section id="tab-tokens" class="tab-panel">
-      <div class="flex-between" style="margin-bottom: 1.5rem;">
+      <div class="flex-between mb-6">
         <div>
-          <h2 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em;">Live Design Token Inspector</h2>
-          <p class="text-muted" style="font-size: 0.875rem;">Modify CSS custom properties in real time to observe instant live cascade propagation.</p>
+          <h2 class="section-title">Live Design Token Inspector</h2>
+          <p class="section-desc">Modify CSS custom properties in real time to observe instant live cascade propagation.</p>
         </div>
         <button class="btn btn-secondary" onclick="resetTokens()">Reset Defaults</button>
       </div>
@@ -285,7 +358,7 @@ coherynui agent init --client all</code></pre>
       <div class="grid-2">
         <!-- Controls Column -->
         <div class="card">
-          <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 1.25rem;">Token Overrides</h3>
+          <h3 class="card-title-lg mb-5">Token Overrides</h3>
 
           <div class="control-row">
             <div class="control-label">
@@ -325,22 +398,22 @@ coherynui agent init --client all</code></pre>
           <div class="glass-card" id="token-preview-target">
             <div class="flex-between">
               <span class="badge badge-brand">Real-Time Component</span>
-              <span class="text-muted" style="font-size: 0.75rem;">Live Preview</span>
+              <span class="text-muted text-xs">Live Preview</span>
             </div>
-            <h4 style="font-size: 1.25rem; font-weight: 700; margin-top: 1rem;">Dynamic Surface Token Binding</h4>
-            <p class="text-muted" style="font-size: 0.875rem; margin-top: 0.5rem;">
+            <h4 class="card-title-lg mt-4">Dynamic Surface Token Binding</h4>
+            <p class="text-muted text-sm mt-2">
               This container responds instantly to custom property mutations without re-rendering DOM elements or reloading stylesheets.
             </p>
-            <div style="display: flex; gap: 0.75rem; margin-top: 1.5rem;">
+            <div class="d-flex gap-3 mt-6">
               <button class="btn btn-primary">Primary Action</button>
               <button class="btn btn-secondary">Secondary</button>
             </div>
           </div>
 
           <div class="card">
-            <div class="flex-between" style="margin-bottom: 0.5rem;">
-              <span style="font-weight: 700; font-size: 0.8125rem;">Active CSS Token Export</span>
-              <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="copyActiveTokens()">Copy CSS</button>
+            <div class="flex-between mb-2">
+              <span class="label-muted">Active CSS Token Export</span>
+              <button class="btn btn-secondary btn-xs" onclick="copyActiveTokens()">Copy CSS</button>
             </div>
             <div class="code-view">
               <pre><code id="token-export-code">:root {
@@ -358,9 +431,9 @@ coherynui agent init --client all</code></pre>
     <!-- TAB 5: ACCESSIBLE COMPONENTS WORKBENCH                                  -->
     <!-- ======================================================================= -->
     <section id="tab-components" class="tab-panel">
-      <div style="margin-bottom: 1.5rem;">
-        <h2 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em;">Accessible Component Workbench</h2>
-        <p class="text-muted" style="font-size: 0.875rem;">
+      <div class="section-header">
+        <h2 class="section-title">Accessible Component Workbench</h2>
+        <p class="section-desc">
           WCAG 2.2 AA compliant interactive components. Every pattern operates with zero third-party packages in both React and Vanilla JS.
         </p>
       </div>
@@ -369,53 +442,51 @@ coherynui agent init --client all</code></pre>
         <!-- 1. Modal Dialog -->
         <div class="card">
           <span class="badge badge-brand">Overlay:Modal</span>
-          <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 0.5rem;">Accessible Dialog Modal</h3>
-          <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem; line-height: 1.5;">
+          <h3 class="card-title-md">Accessible Dialog Modal</h3>
+          <p class="card-desc">
             Traps Tab/Shift-Tab focus, locks body scroll, and dismisses on Escape or backdrop click.
           </p>
-          <div style="margin-top: 1.25rem;">
-            <button class="btn btn-primary" style="width: 100%;" onclick="openModal()">Open Dialog Modal</button>
+          <div class="card-actions">
+            <button class="btn btn-primary w-full" data-action="open-modal" onclick="openModal()">Open Dialog Modal</button>
           </div>
         </div>
 
         <!-- 2. Tactile BottomSheet -->
         <div class="card">
           <span class="badge badge-brand">Mobile:BottomSheet</span>
-          <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 0.5rem;">Tactile Mobile BottomSheet</h3>
-          <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem; line-height: 1.5;">
+          <h3 class="card-title-md">Tactile Mobile BottomSheet</h3>
+          <p class="card-desc">
             Mobile-first slide-up drawer with tactile drag handle, touch-action isolation, and pull-down dismiss.
           </p>
-          <div style="margin-top: 1.25rem;">
-            <button class="btn btn-secondary" style="width: 100%;" onclick="openBottomSheet()">Open BottomSheet Drawer</button>
+          <div class="card-actions">
+            <button class="btn btn-secondary w-full" data-action="open-bottomsheet" onclick="openBottomSheet()">Open BottomSheet Drawer</button>
           </div>
         </div>
 
         <!-- 3. Side Drawer -->
         <div class="card">
           <span class="badge badge-brand">Overlay:Drawer</span>
-          <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 0.5rem;">Slide-In Side Drawer</h3>
-          <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem; line-height: 1.5;">
+          <h3 class="card-title-md">Slide-In Side Drawer</h3>
+          <p class="card-desc">
             Slide-in side navigation and configuration panel with smooth cubic-bezier transitions.
           </p>
-          <div style="margin-top: 1.25rem;">
-            <button class="btn btn-glass" style="width: 100%;" onclick="openDrawer()">Open Side Drawer →</button>
+          <div class="card-actions">
+            <button class="btn btn-glass w-full" data-action="open-drawer" onclick="openDrawer()">Open Side Drawer →</button>
           </div>
         </div>
 
         <!-- 4. Contextual Popover -->
         <div class="card">
           <span class="badge badge-brand">Context:Popover</span>
-          <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 0.5rem;">Anchored Popover</h3>
-          <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem; line-height: 1.5;">
+          <h3 class="card-title-md">Anchored Popover</h3>
+          <p class="card-desc">
             Anchored floating card with pointer click outside dismissal and keyboard escape listener.
           </p>
-          <div style="margin-top: 1.25rem;" class="popover-anchor">
-            <button class="btn btn-secondary" style="width: 100%;" onclick="toggleDocsPopover()">Toggle Popover Card</button>
+          <div class="card-actions popover-anchor">
+            <button class="btn btn-secondary w-full" data-action="toggle-popover" onclick="toggleDocsPopover()">Toggle Popover Card</button>
             <div class="popover-card" id="docsPopoverCard">
-              <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem;">Popover Details</h4>
-              <p style="font-size: 0.8rem; color: var(--cyn-color-muted); line-height: 1.4;">
-                Anchored to trigger element with automated click-outside detection.
-              </p>
+              <h4>Popover Details</h4>
+              <p>Anchored to trigger element with automated click-outside detection.</p>
             </div>
           </div>
         </div>
@@ -423,16 +494,16 @@ coherynui agent init --client all</code></pre>
         <!-- 5. Dropdown Menu -->
         <div class="card">
           <span class="badge badge-brand">Menu:Dropdown</span>
-          <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 0.5rem;">Roving Focus Menu</h3>
-          <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem; line-height: 1.5;">
+          <h3 class="card-title-md">Roving Focus Menu</h3>
+          <p class="card-desc">
             Accessible action menu with roving keyboard focus (↑/↓/Enter) and danger state actions.
           </p>
-          <div style="margin-top: 1.25rem;" class="popover-anchor">
-            <button class="btn btn-primary" style="width: 100%;" onclick="toggleDocsDropdown()">Action Menu ▼</button>
+          <div class="card-actions popover-anchor">
+            <button class="btn btn-primary w-full" data-action="toggle-dropdown" onclick="toggleDocsDropdown()">Action Menu ▼</button>
             <div class="dropdown-box" id="docsDropdownBox">
-              <button class="dropdown-item" onclick="triggerDocsToast('Account', 'Profile settings opened.', 'info'); toggleDocsDropdown();">👤 Edit Profile</button>
-              <button class="dropdown-item" onclick="triggerDocsToast('Security', 'API Keys refreshed.', 'success'); toggleDocsDropdown();">🔑 API Keys</button>
-              <button class="dropdown-item danger" onclick="triggerDocsToast('Revoke', 'Access revoked.', 'danger'); toggleDocsDropdown();">⚠️ Revoke Access</button>
+              <button class="dropdown-item" onclick="triggerDocsToast('Account', 'Profile settings opened.', 'info'); toggleDocsDropdown();">Edit Profile</button>
+              <button class="dropdown-item" onclick="triggerDocsToast('Security', 'API Keys refreshed.', 'success'); toggleDocsDropdown();">API Keys</button>
+              <button class="dropdown-item danger" onclick="triggerDocsToast('Revoke', 'Access revoked.', 'danger'); toggleDocsDropdown();">Revoke Access</button>
             </div>
           </div>
         </div>
@@ -440,13 +511,13 @@ coherynui agent init --client all</code></pre>
         <!-- 6. Live Toast Notifications -->
         <div class="card">
           <span class="badge badge-brand">Feedback:Toast</span>
-          <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 0.5rem;">Stackable Notifications</h3>
-          <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem; line-height: 1.5;">
+          <h3 class="card-title-md">Stackable Notifications</h3>
+          <p class="card-desc">
             Real-time notifications with accessible role="status", auto-dismiss timers, and variants.
           </p>
-          <div style="margin-top: 1.25rem; display: flex; gap: 0.5rem;">
-            <button class="btn btn-success" style="flex: 1; padding: 0.4rem;" onclick="triggerDocsToast('Success', 'Compiled in 3.1ms.', 'success')">✓ Success</button>
-            <button class="btn btn-danger" style="flex: 1; padding: 0.4rem;" onclick="triggerDocsToast('Error', 'Connection failed.', 'danger')">✕ Danger</button>
+          <div class="card-actions">
+            <button class="btn btn-success flex-1 btn-sm" onclick="triggerDocsToast('Success', 'Compiled in 3.1ms.', 'success')">✓ Success</button>
+            <button class="btn btn-danger flex-1 btn-sm" onclick="triggerDocsToast('Error', 'Connection failed.', 'danger')">✕ Danger</button>
           </div>
         </div>
       </div>
@@ -456,69 +527,77 @@ coherynui agent init --client all</code></pre>
     <!-- TAB: NATIVE WEB COMPONENT CUSTOM ELEMENTS                               -->
     <!-- ======================================================================= -->
     <section id="tab-web-components" class="tab-panel">
-      <div style="margin-bottom: 2rem;">
-        <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap;">
-          <span class="badge badge-brand">W3C Custom Elements v1</span>
-          <span class="badge badge-success">Zero Framework Dependencies</span>
-          <span class="badge badge-subtle">@coherynui/web-components</span>
-        </div>
-        <h2 style="font-size: 2rem; font-weight: 800; letter-spacing: -0.02em;">Native Web Component Custom Elements</h2>
-        <p class="text-muted" style="font-size: 0.95rem; max-width: 800px; margin-top: 0.5rem; line-height: 1.6;">
+      <div class="section-header">
+        <div class="hero-eyebrow">Custom Elements v1 // Universal Runtime</div>
+        <h2 class="section-title">Native Web Component Custom Elements</h2>
+        <p class="section-desc">
           Standardized, zero-runtime-overhead custom elements powered by <code>@coherynui/web-components</code>.
           Operates universally across Vanilla HTML/JS, Vue, Svelte, Angular, Solid, PHP, Django, and Rails without requiring React or any external build dependencies.
           Features full attribute synchronization, two-way state reflection, and real-time custom events.
         </p>
       </div>
 
-      <!-- Live Custom Elements Grid -->
-      <div class="grid-3" style="margin-bottom: 2rem;">
+      <!-- Live Custom Elements Grid (3x2 Balanced Layout) -->
+      <div class="grid-3 mb-8">
         <!-- 1. cyn-modal -->
         <div class="card">
-          <span class="badge badge-brand">&lt;cyn-modal&gt;</span>
-          <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 0.5rem;">Dialog Custom Element</h3>
-          <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem; line-height: 1.5;">
+          <div class="card-header">
+            <span class="badge badge-subtle">&lt;cyn-modal&gt;</span>
+            <span class="badge badge-success">Active</span>
+          </div>
+          <h3 class="card-title">Dialog Custom Element</h3>
+          <p class="card-desc">
             Native dialog with focus trapping, scroll locking, and Escape/backdrop dismissal.
           </p>
-          <div style="margin-top: 1.25rem; display: flex; gap: 0.5rem;">
-            <button class="btn btn-primary" style="flex: 1;" onclick="document.getElementById('demo-wc-modal').show()">Open Modal</button>
+          <div class="card-actions">
+            <button class="btn btn-primary flex-1" onclick="document.getElementById('demo-wc-modal').show()">Open Modal</button>
             <button class="btn btn-secondary" onclick="toggleAttr('demo-wc-modal', 'open')">Toggle</button>
           </div>
         </div>
 
         <!-- 2. cyn-drawer -->
         <div class="card">
-          <span class="badge badge-brand">&lt;cyn-drawer&gt;</span>
-          <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 0.5rem;">Slide-In Drawer Element</h3>
-          <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem; line-height: 1.5;">
+          <div class="card-header">
+            <span class="badge badge-subtle">&lt;cyn-drawer&gt;</span>
+            <span class="badge badge-subtle">placement="right"</span>
+          </div>
+          <h3 class="card-title">Slide-In Drawer Element</h3>
+          <p class="card-desc">
             Slide-in side navigation panel with smooth transitions and scroll locking.
           </p>
-          <div style="margin-top: 1.25rem; display: flex; gap: 0.5rem;">
-            <button class="btn btn-glass" style="flex: 1;" onclick="document.getElementById('demo-wc-drawer').show()">Open Drawer →</button>
+          <div class="card-actions">
+            <button class="btn btn-glass flex-1" onclick="document.getElementById('demo-wc-drawer').show()">Open Drawer →</button>
             <button class="btn btn-secondary" onclick="toggleAttr('demo-wc-drawer', 'open')">Toggle</button>
           </div>
         </div>
 
         <!-- 3. cyn-bottom-sheet -->
         <div class="card">
-          <span class="badge badge-brand">&lt;cyn-bottom-sheet&gt;</span>
-          <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 0.5rem;">BottomSheet Element</h3>
-          <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem; line-height: 1.5;">
+          <div class="card-header">
+            <span class="badge badge-subtle">&lt;cyn-bottom-sheet&gt;</span>
+            <span class="badge badge-subtle">Mobile</span>
+          </div>
+          <h3 class="card-title">BottomSheet Element</h3>
+          <p class="card-desc">
             Mobile-first pull-down sheet with tactile drag handle and touch target sizing.
           </p>
-          <div style="margin-top: 1.25rem; display: flex; gap: 0.5rem;">
-            <button class="btn btn-secondary" style="flex: 1;" onclick="document.getElementById('demo-wc-bottom-sheet').show()">Open Sheet</button>
+          <div class="card-actions">
+            <button class="btn btn-secondary flex-1" onclick="document.getElementById('demo-wc-bottom-sheet').show()">Open Sheet</button>
             <button class="btn btn-secondary" onclick="toggleAttr('demo-wc-bottom-sheet', 'open')">Toggle</button>
           </div>
         </div>
 
         <!-- 4. cyn-switch -->
         <div class="card">
-          <span class="badge badge-brand">&lt;cyn-switch&gt;</span>
-          <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 0.5rem;">Accessible Switch Element</h3>
-          <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem; line-height: 1.5;">
+          <div class="card-header">
+            <span class="badge badge-subtle">&lt;cyn-switch&gt;</span>
+            <span class="badge badge-brand">cyn-change</span>
+          </div>
+          <h3 class="card-title">Accessible Switch Element</h3>
+          <p class="card-desc">
             ARIA role="switch", keyboard spacebar toggle, and <code>cyn-change</code> custom event.
           </p>
-          <div style="margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem;">
+          <div class="flex-col gap-3 mt-5">
             <cyn-switch id="demo-wc-switch-gpu" label="GPU Shader Pipeline" checked></cyn-switch>
             <cyn-switch id="demo-wc-switch-audio" label="Sound Effects"></cyn-switch>
           </div>
@@ -526,28 +605,29 @@ coherynui agent init --client all</code></pre>
 
         <!-- 5. cyn-dropdown & cyn-popover -->
         <div class="card">
-          <span class="badge badge-brand">&lt;cyn-dropdown&gt; &amp; &lt;cyn-popover&gt;</span>
-          <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 0.5rem;">Floating Primitives</h3>
-          <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem; line-height: 1.5;">
+          <div class="card-header">
+            <span class="badge badge-subtle">&lt;cyn-dropdown&gt;</span>
+            <span class="badge badge-subtle">Context</span>
+          </div>
+          <h3 class="card-title">Floating Overlays</h3>
+          <p class="card-desc">
             Contextual floating menus and popovers with automated outside-click dismissal.
           </p>
-          <div style="margin-top: 1.25rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <div class="card-actions flex-wrap">
             <cyn-dropdown id="demo-wc-dropdown">
               <button class="btn btn-primary" onclick="this.closest('cyn-dropdown').toggle()">Actions Menu ▼</button>
               <div class="dropdown-box">
-                <button class="dropdown-item" onclick="logWcEvent('&lt;cyn-dropdown&gt;', 'cyn-select', { action: 'view-profile' }); this.closest('cyn-dropdown').close();">👤 View Profile</button>
-                <button class="dropdown-item" onclick="logWcEvent('&lt;cyn-dropdown&gt;', 'cyn-select', { action: 'refresh-tokens' }); this.closest('cyn-dropdown').close();">🔑 API Tokens</button>
-                <button class="dropdown-item danger" onclick="logWcEvent('&lt;cyn-dropdown&gt;', 'cyn-select', { action: 'revoke' }); this.closest('cyn-dropdown').close();">⚠️ Revoke Access</button>
+                <button class="dropdown-item" onclick="logWcEvent('&lt;cyn-dropdown&gt;', 'cyn-select', { action: 'view-profile' }); this.closest('cyn-dropdown').close();">View Profile</button>
+                <button class="dropdown-item" onclick="logWcEvent('&lt;cyn-dropdown&gt;', 'cyn-select', { action: 'refresh-tokens' }); this.closest('cyn-dropdown').close();">API Tokens</button>
+                <button class="dropdown-item danger" onclick="logWcEvent('&lt;cyn-dropdown&gt;', 'cyn-select', { action: 'revoke' }); this.closest('cyn-dropdown').close();">Revoke Access</button>
               </div>
             </cyn-dropdown>
 
             <cyn-popover id="demo-wc-popover">
               <button class="btn btn-secondary" onclick="this.closest('cyn-popover').toggle()">Popover Info</button>
               <div class="popover-card">
-                <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem;">Custom Element Info</h4>
-                <p style="font-size: 0.8rem; color: var(--cyn-color-muted); line-height: 1.4;">
-                  Anchored floating card managing outside-click dismissal automatically.
-                </p>
+                <h4>Custom Element Info</h4>
+                <p>Anchored floating card managing outside-click dismissal automatically.</p>
               </div>
             </cyn-popover>
           </div>
@@ -555,28 +635,33 @@ coherynui agent init --client all</code></pre>
 
         <!-- 6. cyn-toast-container -->
         <div class="card">
-          <span class="badge badge-brand">&lt;cyn-toast-container&gt;</span>
-          <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 0.5rem;">Toast Custom Element</h3>
-          <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem; line-height: 1.5;">
+          <div class="card-header">
+            <span class="badge badge-subtle">&lt;cyn-toast-container&gt;</span>
+            <span class="badge badge-success">Telemetry</span>
+          </div>
+          <h3 class="card-title">Toast Stack Element</h3>
+          <p class="card-desc">
             Declarative notification stack responding to element pushToast API calls.
           </p>
-          <div style="margin-top: 1.25rem; display: flex; gap: 0.5rem;">
-            <button class="btn btn-success" style="flex: 1; padding: 0.4rem;" onclick="triggerWcToast('Native Element Success', 'Dispatched from custom element container.', 'success')">✓ Success</button>
-            <button class="btn btn-danger" style="flex: 1; padding: 0.4rem;" onclick="triggerWcToast('Native Element Warning', 'High memory usage detected.', 'warning')">⚠ Warning</button>
+          <div class="card-actions">
+            <button class="btn btn-secondary flex-1 btn-sm" onclick="triggerWcToast('Native Element Success', 'Dispatched from custom element container.', 'success')">Success Toast</button>
+            <button class="btn btn-secondary flex-1 btn-sm" onclick="triggerWcToast('Native Element Warning', 'High memory usage detected.', 'warning')">Warning Toast</button>
           </div>
         </div>
       </div>
 
       <!-- Live Event Telemetry Console -->
-      <div class="glass-card" style="padding: 1.5rem; margin-bottom: 2rem;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
-          <div>
-            <h3 style="font-size: 1.15rem; font-weight: 700;">📡 Live Custom Element Event Telemetry</h3>
-            <p class="text-muted" style="font-size: 0.8rem; margin-top: 0.25rem;">
-              Observes <code>cyn-open</code>, <code>cyn-close</code>, <code>cyn-change</code>, and <code>cyn-select</code> events dispatched by custom elements in real-time.
-            </p>
+      <div class="terminal-window mb-8">
+        <div class="terminal-header">
+          <div class="d-flex items-center gap-3">
+            <div class="terminal-dots">
+              <div class="terminal-dot red"></div>
+              <div class="terminal-dot yellow"></div>
+              <div class="terminal-dot green"></div>
+            </div>
+            <span class="terminal-title">telemetry-daemon — cyn-event-bus</span>
           </div>
-          <button class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.35rem 0.75rem;" onclick="clearWcEventLogs()">Clear Telemetry</button>
+          <button class="btn btn-secondary btn-xs" onclick="clearWcEventLogs()">Clear Telemetry</button>
         </div>
 
         <div class="event-logger" id="wc-event-logger" role="log" aria-live="polite">
@@ -588,9 +673,12 @@ coherynui agent init --client all</code></pre>
       </div>
 
       <!-- Framework Integration Guides -->
-      <div class="glass-card" style="padding: 2rem;">
-        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">📦 Framework Integration Guides</h3>
-        <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 1.5rem;">
+      <div class="card p-8">
+        <div class="flex-between items-baseline mb-2">
+          <h3 class="card-title-lg">Framework Integration Guides</h3>
+          <span class="badge badge-subtle">Setup Patterns</span>
+        </div>
+        <p class="card-desc mb-6">
           Use CoherynUI Custom Elements in any modern JavaScript framework or server-rendered architecture with standard HTML syntax.
         </p>
 
@@ -602,7 +690,7 @@ coherynui agent init --client all</code></pre>
         </div>
 
         <div id="framework-vanilla" class="framework-snippet active">
-          <div class="code-preview" style="position: relative;">
+          <div class="code-preview">
             <button class="btn btn-secondary copy-btn" onclick="copyCode(this)">Copy</button>
             <pre><code>&lt;!-- 1. Include CoherynUI CSS &amp; Web Components --&gt;
 &lt;link rel="stylesheet" href="https://cdn.coheryntech.com/coherynui/v1/coherynui.css"&gt;
@@ -625,7 +713,7 @@ coherynui agent init --client all</code></pre>
         </div>
 
         <div id="framework-vue" class="framework-snippet">
-          <div class="code-preview" style="position: relative;">
+          <div class="code-preview">
             <button class="btn btn-secondary copy-btn" onclick="copyCode(this)">Copy</button>
             <pre><code>// vite.config.ts - Allow cyn-* custom elements
 export default defineConfig({
@@ -658,7 +746,7 @@ function onSwitchChange(event) {
         </div>
 
         <div id="framework-angular" class="framework-snippet">
-          <div class="code-preview" style="position: relative;">
+          <div class="code-preview">
             <button class="btn btn-secondary copy-btn" onclick="copyCode(this)">Copy</button>
             <pre><code>// app.module.ts - Enable CUSTOM_ELEMENTS_SCHEMA
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -680,7 +768,7 @@ export class AppModule {}
         </div>
 
         <div id="framework-svelte" class="framework-snippet">
-          <div class="code-preview" style="position: relative;">
+          <div class="code-preview">
             <button class="btn btn-secondary copy-btn" onclick="copyCode(this)">Copy</button>
             <pre><code>&lt;!-- App.svelte --&gt;
 &lt;script&gt;
@@ -705,17 +793,20 @@ export class AppModule {}
     <!-- ======================================================================= -->
     <!-- TAB 6: MOTION PHYSICS SOLVER                                            -->
     <!-- ======================================================================= -->
+    <!-- ======================================================================= -->
+    <!-- TAB 6: MOTION PHYSICS SOLVER                                            -->
+    <!-- ======================================================================= -->
     <section id="tab-motion" class="tab-panel">
-      <div style="margin-bottom: 1.5rem;">
-        <h2 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em;">Analytical Spring Dynamics Laboratory</h2>
-        <p class="text-muted" style="font-size: 0.875rem;">
+      <div class="section-header">
+        <h2 class="section-title">Analytical Spring Dynamics Laboratory</h2>
+        <p class="section-desc">
           Second-order unforced damped harmonic oscillator: <code>m·x'' + c·x' + k·x = 0</code>.
         </p>
       </div>
 
       <div class="grid-2">
         <div class="card">
-          <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 1.25rem;">Spring Parameters</h3>
+          <h3 class="card-title-lg mb-5">Spring Parameters</h3>
 
           <div class="control-row">
             <div class="control-label">
@@ -738,18 +829,18 @@ export class AppModule {}
             <input type="range" min="0.2" max="5.0" step="0.1" value="1.0" oninput="updateSpring()">
           </div>
 
-          <div style="background: var(--cyn-color-surface); padding: 1rem; border-radius: var(--cyn-radius-md); margin-top: 1rem;">
-            <div class="flex-between" style="font-size: 0.8125rem;">
+          <div class="physics-metrics-box">
+            <div class="flex-between text-xs">
               <span class="text-muted">Damping Ratio (ζ):</span>
               <b id="val-zeta">0.52 (Underdamped)</b>
             </div>
-            <div class="flex-between" style="font-size: 0.8125rem; margin-top: 0.25rem;">
+            <div class="flex-between text-xs mt-1">
               <span class="text-muted">Settling Time (2% threshold):</span>
               <b id="val-settling">570ms</b>
             </div>
           </div>
 
-          <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem;">
+          <div class="card-actions">
             <button class="btn btn-primary" onclick="triggerSpringPulse()">Trigger Impulse</button>
             <button class="btn btn-secondary" onclick="presetSpring('snappy')">Snappy</button>
             <button class="btn btn-secondary" onclick="presetSpring('bouncy')">Bouncy</button>
@@ -761,7 +852,7 @@ export class AppModule {}
           <div class="physics-viewport" id="physics-stage">
             <div class="spring-bob" id="spring-target"></div>
           </div>
-          <p class="text-muted" style="font-size: 0.75rem; text-align: center;">
+          <p class="text-muted text-xs text-center">
             Click 'Trigger Impulse' or drag the element to evaluate spring equilibrium restoration.
           </p>
         </div>
@@ -772,25 +863,25 @@ export class AppModule {}
     <!-- TAB 7: GPU MATERIALS & LIQUID GLASS                                     -->
     <!-- ======================================================================= -->
     <section id="tab-gpu" class="tab-panel">
-      <div style="margin-bottom: 1.5rem;">
-        <h2 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em;">GPU Materials & Liquid Glass Refraction</h2>
-        <p class="text-muted" style="font-size: 0.875rem;">
+      <div class="section-header">
+        <h2 class="section-title">GPU Materials & Liquid Glass Refraction</h2>
+        <p class="section-desc">
           3-tier optical hierarchy with automatic fallback to CSS Liquid Glass and reduced-transparency safety.
         </p>
       </div>
 
       <div class="card">
-        <div style="position: relative; height: 340px; border-radius: var(--cyn-radius-lg); overflow: hidden; background: linear-gradient(45deg, #1e1b4b, #312e81, #065f46); display: flex; align-items: center; justify-content: center;">
-          <div style="position: absolute; width: 180px; height: 180px; background: #ec4899; filter: blur(40px); border-radius: 50%; top: 20px; left: 60px;"></div>
-          <div style="position: absolute; width: 220px; height: 220px; background: #06b6d4; filter: blur(50px); border-radius: 50%; bottom: 20px; right: 80px;"></div>
+        <div class="gpu-stage">
+          <div class="gpu-orb-1"></div>
+          <div class="gpu-orb-2"></div>
 
-          <div class="glass-card" style="width: 80%; max-width: 540px; text-align: center; z-index: 10;">
-            <span class="badge badge-brand" style="margin-bottom: 0.75rem;">Tier 1 CSS / Tier 3 WebGPU Pipeline</span>
-            <h3 style="font-size: 1.5rem; font-weight: 800;">Liquid Glass Refraction</h3>
-            <p style="color: var(--cyn-color-muted); font-size: 0.875rem; margin-top: 0.5rem;">
+          <div class="glass-card gpu-glass-card">
+            <span class="badge badge-brand mb-3">Tier 1 CSS / Tier 3 WebGPU Pipeline</span>
+            <h3 class="card-title-lg">Liquid Glass Refraction</h3>
+            <p class="card-desc mt-2">
               Specular chromatic border with dual-pass blur and dynamic normal-map displacement.
             </p>
-            <div style="display: flex; justify-content: center; gap: 0.75rem; margin-top: 1.25rem;">
+            <div class="d-flex justify-center gap-3 mt-5">
               <button class="btn btn-primary" onclick="triggerDocsToast('GPU Refraction', 'Switched to Tier 3 WGSL shader pipeline.', 'info')">
                 Toggle Optical Tier
               </button>
@@ -804,20 +895,20 @@ export class AppModule {}
     <!-- TAB 8: AGENT & MCP PORTAL                                               -->
     <!-- ======================================================================= -->
     <section id="tab-agent" class="tab-panel">
-      <div style="margin-bottom: 1.5rem;">
-        <h2 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em;">Agent & MCP Integration Portal</h2>
-        <p class="text-muted" style="font-size: 0.875rem;">
+      <div class="section-header">
+        <h2 class="section-title">Agent & MCP Integration Portal</h2>
+        <p class="section-desc">
           Machine-readable registry APIs and official Model Context Protocol tools for AI pair programming.
         </p>
       </div>
 
       <div class="grid-2">
         <div class="card">
-          <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.75rem;">10 MCP Server Tools</h3>
-          <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 1rem;">
+          <h3 class="card-title-lg mb-3">10 MCP Server Tools</h3>
+          <p class="card-desc mb-4">
             Run <code>coherynui mcp serve</code> over stdio to enable coding agents to inspect projects safely:
           </p>
-          <ul style="font-size: 0.8125rem; color: var(--cyn-color-muted); padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.35rem;">
+          <ul class="agent-tool-list">
             <li><code>project_inspect</code>: Identify compiler, config, and theme profiles</li>
             <li><code>docs_search</code>: Semantic search across versioned documentation</li>
             <li><code>components_search</code>: Query components by intent and capability</li>
@@ -832,18 +923,18 @@ export class AppModule {}
         </div>
 
         <div class="card">
-          <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.75rem;">Multi-Client Agent Initialization</h3>
-          <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 1rem;">
+          <h3 class="card-title-lg mb-3">Multi-Client Agent Initialization</h3>
+          <p class="card-desc mb-4">
             Initialize canonical rules and 7 official skills with one command:
           </p>
-          <div class="code-view" style="margin-bottom: 1rem;">
+          <div class="code-view mb-4">
             <pre><code># Initialize Claude Code, Cursor, Copilot & Codex
 coherynui agent init --client all
 
 # Install 7 canonical offline skills
 coherynui agent skills install</code></pre>
           </div>
-          <div style="display: flex; gap: 0.75rem;">
+          <div class="d-flex gap-3">
             <a href="../llms-full.txt" target="_blank" class="btn btn-primary">Open llms-full.txt</a>
             <a href="../registry/index.json" target="_blank" class="btn btn-secondary">Open Registry JSON</a>
           </div>
@@ -860,13 +951,13 @@ coherynui agent skills install</code></pre>
   <div class="modal-backdrop" id="demo-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-box">
       <div class="flex-between">
-        <h3 id="modal-title" style="font-size: 1.25rem; font-weight: 800;">🛡️ Accessible Focus-Trapped Modal</h3>
-        <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem;" onclick="closeModal()">✕</button>
+        <h3 class="card-title-lg" id="modal-title">Accessible Focus-Trapped Modal</h3>
+        <button class="btn btn-secondary btn-xs" onclick="closeModal()">✕</button>
       </div>
-      <p style="color: var(--cyn-color-muted); margin-top: 0.75rem; font-size: 0.875rem; line-height: 1.5;">
+      <p class="modal-desc">
         Keyboard focus is strictly trapped inside this dialog. Press <kbd>Tab</kbd> to cycle between targets, or press <kbd>Escape</kbd> to dismiss.
       </p>
-      <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 0.75rem;">
+      <div class="card-actions justify-end">
         <button class="btn btn-secondary" onclick="closeModal()">Dismiss</button>
         <button class="btn btn-primary" onclick="closeModal(); triggerDocsToast('Modal Saved', 'Changes confirmed.', 'success');">Confirm Action</button>
       </div>
@@ -876,16 +967,16 @@ coherynui agent skills install</code></pre>
   <!-- BottomSheet Drawer -->
   <div class="bottomsheet-backdrop" id="docsBottomSheet" role="dialog" aria-modal="true" onclick="if(event.target === this) closeBottomSheet()">
     <div class="bottomsheet-box">
-      <div style="width: 44px; height: 5px; background: rgba(255,255,255,0.25); border-radius: 9999px; margin: 0 auto 1.25rem; cursor: grab;"></div>
+      <div class="bottomsheet-handle"></div>
       <div class="flex-between">
-        <h3 style="font-size: 1.25rem; font-weight: 800;">📱 Tactile BottomSheet Drawer</h3>
-        <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem;" onclick="closeBottomSheet()">✕</button>
+        <h3 class="card-title-lg">Tactile BottomSheet Drawer</h3>
+        <button class="btn btn-secondary btn-xs" onclick="closeBottomSheet()">✕</button>
       </div>
-      <p style="color: var(--cyn-color-muted); margin-top: 0.5rem; font-size: 0.875rem; line-height: 1.5;">
+      <p class="modal-desc">
         Supports native mobile pull-down gestures and 44px touch targets.
       </p>
-      <div style="margin-top: 1.5rem;">
-        <button class="btn btn-primary" style="width: 100%;" onclick="closeBottomSheet()">Done</button>
+      <div class="mt-6">
+        <button class="btn btn-primary w-full" onclick="closeBottomSheet()">Done</button>
       </div>
     </div>
   </div>
@@ -894,14 +985,14 @@ coherynui agent skills install</code></pre>
   <div class="drawer-backdrop" id="docsDrawer" role="dialog" aria-modal="true" onclick="if(event.target === this) closeDrawer()">
     <div class="drawer-box">
       <div class="flex-between">
-        <h3 style="font-size: 1.25rem; font-weight: 800;">⚙️ System Drawer</h3>
-        <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem;" onclick="closeDrawer()">✕</button>
+        <h3 class="card-title-lg">System Drawer</h3>
+        <button class="btn btn-secondary btn-xs" onclick="closeDrawer()">✕</button>
       </div>
-      <p style="color: var(--cyn-color-muted); margin-top: 0.75rem; font-size: 0.875rem;">
+      <p class="modal-desc">
         Slide-in side panel with smooth spring transitions and scroll locking.
       </p>
-      <div style="margin-top: auto;">
-        <button class="btn btn-primary" style="width: 100%;" onclick="closeDrawer()">Close Drawer</button>
+      <div class="mt-auto">
+        <button class="btn btn-primary w-full" onclick="closeDrawer()">Close Drawer</button>
       </div>
     </div>
   </div>
@@ -909,923 +1000,36 @@ coherynui agent skills install</code></pre>
   <!-- ========================================================================= -->
   <!-- NATIVE WEB COMPONENT DOM INSTANCES                                        -->
   <!-- ========================================================================= -->
-  <cyn-modal id="demo-wc-modal" title="🛡️ Native cyn-modal Custom Element">
-    <p style="color: var(--cyn-color-muted); margin-top: 0.75rem; font-size: 0.875rem; line-height: 1.5;">
+  <cyn-modal id="demo-wc-modal" title="Native cyn-modal Custom Element">
+    <p class="modal-desc">
       Traps focus using standard accessibility keyboard cycles, locks body scrolling, and emits native custom events (<code>cyn-open</code> and <code>cyn-close</code>).
     </p>
-    <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 0.75rem;">
+    <div class="card-actions justify-end">
       <button class="btn btn-secondary" onclick="document.getElementById('demo-wc-modal').close()">Dismiss</button>
       <button class="btn btn-primary" onclick="document.getElementById('demo-wc-modal').close(); triggerWcToast('Action Confirmed', 'Custom element modal closed successfully.', 'success');">Confirm Action</button>
     </div>
   </cyn-modal>
 
-  <cyn-drawer id="demo-wc-drawer" title="⚙️ Native cyn-drawer Custom Element" placement="right">
-    <p style="color: var(--cyn-color-muted); margin-top: 0.75rem; font-size: 0.875rem; line-height: 1.5;">
+  <cyn-drawer id="demo-wc-drawer" title="Native cyn-drawer Custom Element" placement="right">
+    <p class="modal-desc">
       Custom element side drawer with smooth transition physics. Emits <code>cyn-open</code> and <code>cyn-close</code>.
     </p>
-    <div style="margin-top: 2rem;">
-      <button class="btn btn-primary" style="width: 100%;" onclick="document.getElementById('demo-wc-drawer').close()">Close Side Drawer</button>
+    <div class="mt-8">
+      <button class="btn btn-primary w-full" onclick="document.getElementById('demo-wc-drawer').close()">Close Side Drawer</button>
     </div>
   </cyn-drawer>
 
-  <cyn-bottom-sheet id="demo-wc-bottom-sheet" title="📱 Native cyn-bottom-sheet Custom Element">
-    <p style="color: var(--cyn-color-muted); margin-top: 0.75rem; font-size: 0.875rem; line-height: 1.5;">
+  <cyn-bottom-sheet id="demo-wc-bottom-sheet" title="Native cyn-bottom-sheet Custom Element">
+    <p class="modal-desc">
       Tactile mobile drawer custom element with pull-down dismissal and touch-target optimization.
     </p>
-    <div style="margin-top: 1.5rem;">
-      <button class="btn btn-primary" style="width: 100%;" onclick="document.getElementById('demo-wc-bottom-sheet').close()">Done</button>
+    <div class="mt-6">
+      <button class="btn btn-primary w-full" onclick="document.getElementById('demo-wc-bottom-sheet').close()">Done</button>
     </div>
   </cyn-bottom-sheet>
 
   <cyn-toast-container id="demo-wc-toast-container"></cyn-toast-container>
 
-  <!-- ========================================================================= -->
-  <!-- JAVASCRIPT LOGIC (ROUTER, REPL, TOKENS, CASCADE, MOTION)                  -->
-  <!-- ========================================================================= -->
-  <script>
-    // -------------------------------------------------------------------------
-    // 1. TAB ROUTING
-    // -------------------------------------------------------------------------
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-
-      const target = document.getElementById('tab-' + tabId);
-      if (target) target.classList.add('active');
-
-      const btn = Array.from(document.querySelectorAll('.nav-btn')).find(b => b.getAttribute('onclick').includes(tabId));
-      if (btn) btn.classList.add('active');
-
-      if (tabId === 'repl') runReplCompiler();
-    }
-
-    // -------------------------------------------------------------------------
-    // 2. THEME APPLICATION
-    // -------------------------------------------------------------------------
-    function applyTheme(theme) {
-      document.documentElement.setAttribute('data-theme', theme);
-      document.querySelectorAll('.theme-pill-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.textContent.toLowerCase().includes(theme.slice(0, 4)));
-      });
-    }
-
-    // -------------------------------------------------------------------------
-    // 3. LIVE REPL PLAYGROUND COMPILER
-    // -------------------------------------------------------------------------
-    const REPL_PRESETS = {
-      glass: `<div class="glass-card" style="padding: 2rem; max-width: 360px; text-align: center;">
-  <span class="badge badge-brand mb-2">Liquid Glass</span>
-  <h3 class="text-xl font-bold mb-2">Refractive Surface</h3>
-  <p class="text-muted text-sm mb-4">W3C 5-layer isolated component with specular border highlights.</p>
-  <button class="btn btn-primary touch-target" onclick="triggerDocsToast('Clicked', 'Triggered from REPL!', 'success')">
-    Interactive Action
-  </button>
-</div>`,
-      modal: `<div style="text-align: center; padding: 2rem;">
-  <h3 class="text-xl font-bold mb-2">Accessible Modal Trigger</h3>
-  <p class="text-muted text-sm mb-4">Focus trapped, scroll locked, WCAG 2.2 AA compliant.</p>
-  <button class="btn btn-primary touch-target" onclick="openModal()">
-    🛡️ Open Modal Dialog
-  </button>
-</div>`,
-      bottomsheet: `<div style="text-align: center; padding: 2rem;">
-  <h3 class="text-xl font-bold mb-2">Mobile Gesture Drawer</h3>
-  <p class="text-muted text-sm mb-4">Touch-action pan-y, spring physics, drag threshold dismiss.</p>
-  <button class="btn btn-secondary touch-target" onclick="openBottomSheet()">
-    📱 Open BottomSheet
-  </button>
-</div>`,
-      popover: `<div style="text-align: center; padding: 2rem;">
-  <div class="popover-anchor">
-    <button class="btn btn-primary touch-target" onclick="toggleDocsPopover()">
-      Context Menu / Popover ▼
-    </button>
-  </div>
-</div>`,
-      toasts: `<div style="text-align: center; padding: 2rem; display: flex; gap: 0.75rem; justify-content: center;">
-  <button class="btn btn-success touch-target" onclick="triggerDocsToast('Success', 'Compiled in 2.8ms', 'success')">Success</button>
-  <button class="btn btn-danger touch-target" onclick="triggerDocsToast('Error', 'Connection timeout', 'danger')">Danger</button>
-</div>`,
-      touch: `<div style="padding: 1.5rem; max-width: 380px;">
-  <h3 class="text-lg font-bold mb-3">Touch-First Contract (44px min)</h3>
-  <button class="btn btn-primary touch-target" style="width: 100%; margin-bottom: 0.75rem;">
-    44px Compliant Target
-  </button>
-  <p class="text-muted text-xs">Meets WCAG 2.2 Success Criterion 2.5.8.</p>
-</div>`
-    };
-
-    function loadReplPreset(key) {
-      const editor = document.getElementById('replEditor');
-      editor.value = REPL_PRESETS[key] || REPL_PRESETS.glass;
-      runReplCompiler();
-    }
-
-    function runReplCompiler() {
-      const editor = document.getElementById('replEditor');
-      const preview = document.getElementById('replPreviewCanvas');
-      const cssOutput = document.getElementById('replCssOutput');
-      const diagMessage = document.getElementById('diagnosticMessage');
-      const diagCode = document.getElementById('diagnosticCode');
-      const diagIcon = document.getElementById('diagnosticIcon');
-
-      if (!editor || !preview || !cssOutput) return;
-
-      const html = editor.value;
-      preview.innerHTML = html;
-
-      // Extract class names
-      const classMatches = html.matchAll(/class=["']([^"']+)["']/g);
-      const classes = new Set();
-      for (const m of classMatches) {
-        m[1].split(/\s+/).forEach(c => { if (c) classes.add(c); });
-      }
-
-      // Check CY2004 (touch target < 44px)
-      const hasTouchTarget = html.includes('touch-target') || html.includes('btn') || html.includes('min-height: 44px');
-      const hasSmallButton = html.includes('<button') && !hasTouchTarget;
-
-      if (hasSmallButton) {
-        diagMessage.textContent = 'CY2004 Warning: Interactive target under 44px detected. Add "touch-target" for WCAG 2.2 AA compliance.';
-        diagCode.textContent = 'CY2004 WARN';
-        diagCode.className = 'badge badge-warning';
-        diagIcon.textContent = '⚠';
-      } else {
-        diagMessage.textContent = `Compiled ${classes.size} class tokens in 1.4ms. All 5 cascade layers verified.`;
-        diagCode.textContent = 'CY1000 OK';
-        diagCode.className = 'badge badge-success';
-        diagIcon.textContent = '✓';
-      }
-
-      // Generate CSS representation
-      let generatedCss = `@layer cyn.utilities {\n`;
-      classes.forEach(cls => {
-        if (cls === 'glass-card') generatedCss += `  .glass-card { background: var(--cyn-glass-bg); backdrop-filter: blur(var(--cyn-glass-blur)); }\n`;
-        else if (cls === 'btn-primary') generatedCss += `  .btn-primary { background: var(--cyn-color-brand); color: #fff; min-height: 44px; }\n`;
-        else if (cls === 'btn-secondary') generatedCss += `  .btn-secondary { background: var(--cyn-color-surface-subtle); min-height: 44px; }\n`;
-        else if (cls === 'touch-target') generatedCss += `  .touch-target { min-width: 44px; min-height: 44px; }\n`;
-        else if (cls.startsWith('p-')) generatedCss += `  .${cls} { padding: 1.5rem; }\n`;
-        else if (cls.startsWith('mb-')) generatedCss += `  .${cls} { margin-bottom: 0.75rem; }\n`;
-        else if (cls === 'text-xl') generatedCss += `  .text-xl { font-size: 1.25rem; font-weight: 700; }\n`;
-        else if (cls === 'text-muted') generatedCss += `  .text-muted { color: var(--cyn-color-muted); }\n`;
-        else generatedCss += `  .${cls} { /* compiler emitted token */ }\n`;
-      });
-      generatedCss += `}`;
-
-      cssOutput.textContent = generatedCss;
-    }
-
-    function copyReplCss() {
-      const code = document.getElementById('replCssOutput').textContent;
-      navigator.clipboard.writeText(code);
-      triggerDocsToast('CSS Copied', 'Active @layer cyn.utilities copied to clipboard.', 'success');
-    }
-
-    // -------------------------------------------------------------------------
-    // 4. CASCADE LAYER INSPECTOR
-    // -------------------------------------------------------------------------
-    const LAYER_DEFINITIONS = {
-      utilities: {
-        title: 'Layer 5: cyn.utilities (Highest Precedence)',
-        badge: 'Priority 5',
-        desc: 'Atomic utilities override all recipes, base styles, and resets without requiring !important. Provides classes like .bg-brand, .p-6, .touch-target, and .touch-none.',
-        code: `@layer cyn.utilities {
-  .bg-brand { background-color: var(--cyn-color-brand); }
-  .p-6 { padding: 1.5rem; }
-  .touch-target { min-width: 44px; min-height: 44px; }
-  .touch-none { touch-action: none; }
-  .overscroll-contain { overscroll-behavior: contain; }
-}`
-      },
-      recipes: {
-        title: 'Layer 4: cyn.recipes (Component Patterns)',
-        badge: 'Priority 4',
-        desc: 'Semantic multi-property component patterns. Holds structures like .modal-dialog, .bottomsheet-box, .glass-card, and .dropdown-box.',
-        code: `@layer cyn.recipes {
-  .modal-dialog {
-    background: var(--cyn-color-surface-elevated);
-    border-radius: var(--cyn-radius-xl);
-    padding: 2rem;
-    box-shadow: var(--cyn-card-shadow);
-  }
-}`
-      },
-      base: {
-        title: 'Layer 3: cyn.base (Element Defaults)',
-        badge: 'Priority 3',
-        desc: 'Global element defaults, typography scales, smooth transitions, and WCAG AA 2px focus-visible outline rings.',
-        code: `@layer cyn.base {
-  body {
-    font-family: var(--cyn-font-sans);
-    background: var(--cyn-color-surface);
-    color: var(--cyn-color-foreground);
-  }
-  :focus-visible {
-    outline: 2px solid var(--cyn-color-brand);
-    outline-offset: 2px;
-  }
-}`
-      },
-      tokens: {
-        title: 'Layer 2: cyn.tokens (CSS Custom Properties)',
-        badge: 'Priority 2',
-        desc: 'Declared custom property contracts: colors, 44px minimum touch targets, Liquid Glass variables, and border radii.',
-        code: `@layer cyn.tokens {
-  :root {
-    --cyn-color-brand: #6366f1;
-    --cyn-touch-min: 44px;
-    --cyn-glass-blur: 16px;
-    --cyn-radius-lg: 0.75rem;
-  }
-}`
-      },
-      reset: {
-        title: 'Layer 1: cyn.reset (Lowest Precedence)',
-        badge: 'Priority 1',
-        desc: 'Normalized box-sizing and margin normalization baseline. Easily overridden by any higher layer.',
-        code: `@layer cyn.reset {
-  *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-}`
-      }
-    };
-
-    function inspectLayer(layerKey) {
-      document.querySelectorAll('.layer-strip').forEach(s => s.classList.remove('active'));
-      const activeStrip = document.getElementById('layer-btn-' + layerKey);
-      if (activeStrip) activeStrip.classList.add('active');
-
-      const data = LAYER_DEFINITIONS[layerKey];
-      if (data) {
-        document.getElementById('layerDetailTitle').textContent = data.title;
-        document.getElementById('layerDetailBadge').textContent = data.badge;
-        document.getElementById('layerDetailDescription').textContent = data.desc;
-        document.getElementById('layerDetailCode').textContent = data.code;
-      }
-    }
-
-    // -------------------------------------------------------------------------
-    // 5. TOAST NOTIFICATION STACK
-    // -------------------------------------------------------------------------
-    function triggerDocsToast(title, desc, variant = 'info') {
-      const viewport = document.getElementById('docsToastViewport');
-      const toast = document.createElement('div');
-      toast.className = `toast-node ${variant}`;
-
-      const icons = { success: '✓', warning: '⚠', danger: '✕', info: 'ℹ' };
-      toast.innerHTML = `
-        <span style="font-size: 1.15rem; font-weight: 700;">${icons[variant] || 'ℹ'}</span>
-        <div style="flex: 1; min-width: 0;">
-          <h4 style="font-size: 0.875rem; font-weight: 700; margin-bottom: 0.15rem;">${title}</h4>
-          <p style="font-size: 0.775rem; color: var(--cyn-color-muted); line-height: 1.4;">${desc}</p>
-        </div>
-        <button onclick="this.parentElement.remove()" style="background: none; border: none; color: var(--cyn-color-muted); cursor: pointer; padding: 0.2rem;">✕</button>
-      `;
-
-      viewport.appendChild(toast);
-      setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transform = 'translateX(100%)';
-        setTimeout(() => toast.remove(), 250);
-      }, 3500);
-    }
-
-    // -------------------------------------------------------------------------
-    // 6. OVERLAY CONTROLLERS (MODAL, BOTTOMSHEET, DRAWER, POPOVER, DROPDOWN)
-    // -------------------------------------------------------------------------
-    let lastActiveElement = null;
-
-    function openModal() {
-      lastActiveElement = document.activeElement;
-      document.getElementById('demo-modal').classList.add('open');
-      document.body.style.overflow = 'hidden';
-      const firstBtn = document.querySelector('#demo-modal button');
-      setTimeout(() => firstBtn?.focus(), 50);
-    }
-    function closeModal() {
-      document.getElementById('demo-modal').classList.remove('open');
-      document.body.style.overflow = '';
-      lastActiveElement?.focus();
-    }
-
-    function openBottomSheet() {
-      document.getElementById('docsBottomSheet').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeBottomSheet() {
-      document.getElementById('docsBottomSheet').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    function openDrawer() {
-      document.getElementById('docsDrawer').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeDrawer() {
-      document.getElementById('docsDrawer').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    function toggleDocsPopover() {
-      const p = document.getElementById('docsPopoverCard');
-      if (p) p.classList.toggle('open');
-    }
-    function toggleDocsDropdown() {
-      const d = document.getElementById('docsDropdownBox');
-      if (d) d.classList.toggle('open');
-    }
-
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeModal();
-        closeBottomSheet();
-        closeDrawer();
-        document.getElementById('docsPopoverCard')?.classList.remove('open');
-        document.getElementById('docsDropdownBox')?.classList.remove('open');
-      }
-    });
-
-    // -------------------------------------------------------------------------
-    // 7. TOKEN INSPECTOR CONTROLS
-    // -------------------------------------------------------------------------
-    function updateBrandColor(val) {
-      document.documentElement.style.setProperty('--cyn-color-brand', val);
-      document.getElementById('val-brand-hex').textContent = val;
-      refreshExportCode();
-    }
-    function updateRadius(val) {
-      const px = val + 'px';
-      document.documentElement.style.setProperty('--cyn-radius-lg', px);
-      document.getElementById('val-radius-label').textContent = px;
-      refreshExportCode();
-    }
-    function updateBlur(val) {
-      const px = val + 'px';
-      document.documentElement.style.setProperty('--cyn-glass-blur', px);
-      document.getElementById('val-blur-label').textContent = px;
-      refreshExportCode();
-    }
-    function updateShadow(val) {
-      const levels = ['none', '0 4px 12px rgba(0,0,0,0.2)', '0 10px 30px -10px rgba(0,0,0,0.5)', '0 20px 45px -10px rgba(0,0,0,0.7)', '0 30px 60px -12px rgba(0,0,0,0.85)'];
-      document.documentElement.style.setProperty('--cyn-card-shadow', levels[val] || levels[2]);
-      refreshExportCode();
-    }
-    function resetTokens() {
-      document.documentElement.style.removeProperty('--cyn-color-brand');
-      document.documentElement.style.removeProperty('--cyn-radius-lg');
-      document.documentElement.style.removeProperty('--cyn-glass-blur');
-      document.documentElement.style.removeProperty('--cyn-card-shadow');
-      refreshExportCode();
-    }
-    function refreshExportCode() {
-      const brand = getComputedStyle(document.documentElement).getPropertyValue('--cyn-color-brand').trim();
-      const radius = getComputedStyle(document.documentElement).getPropertyValue('--cyn-radius-lg').trim();
-      const blur = getComputedStyle(document.documentElement).getPropertyValue('--cyn-glass-blur').trim();
-      document.getElementById('token-export-code').textContent = `:root {\n  --cyn-color-brand: ${brand};\n  --cyn-radius-lg: ${radius};\n  --cyn-glass-blur: ${blur};\n}`;
-    }
-    function copyActiveTokens() {
-      const code = document.getElementById('token-export-code').textContent;
-      navigator.clipboard.writeText(code);
-      triggerDocsToast('Tokens Copied', 'Exported CSS custom properties.', 'success');
-    }
-
-    // -------------------------------------------------------------------------
-    // 8. MOTION PHYSICS SIMULATOR
-    // -------------------------------------------------------------------------
-    let springAnimationId = null;
-    function updateSpring() {
-      const k = parseFloat(document.querySelectorAll('#tab-motion input[type="range"]')[0].value);
-      const c = parseFloat(document.querySelectorAll('#tab-motion input[type="range"]')[1].value);
-      const m = parseFloat(document.querySelectorAll('#tab-motion input[type="range"]')[2].value);
-
-      document.getElementById('val-stiffness').textContent = k;
-      document.getElementById('val-damping').textContent = c;
-      document.getElementById('val-mass').textContent = m.toFixed(1);
-
-      const zeta = c / (2 * Math.sqrt(k * m));
-      let regime = 'Underdamped';
-      if (Math.abs(zeta - 1) < 0.05) regime = 'Critically Damped';
-      else if (zeta > 1) regime = 'Overdamped';
-
-      document.getElementById('val-zeta').textContent = `${zeta.toFixed(2)} (${regime})`;
-    }
-    function triggerSpringPulse() {
-      const bob = document.getElementById('spring-target');
-      if (!bob) return;
-      const k = parseFloat(document.querySelectorAll('#tab-motion input[type="range"]')[0].value);
-      const c = parseFloat(document.querySelectorAll('#tab-motion input[type="range"]')[1].value);
-      const m = parseFloat(document.querySelectorAll('#tab-motion input[type="range"]')[2].value);
-
-      let x = -100;
-      let v = 0;
-      let lastTime = performance.now();
-      cancelAnimationFrame(springAnimationId);
-
-      function step(now) {
-        const dt = Math.min((now - lastTime) / 1000, 0.032);
-        lastTime = now;
-        const a = (-k * x - c * v) / m;
-        v += a * dt;
-        x += v * dt;
-        bob.style.transform = `translateX(${x}px)`;
-
-        if (Math.abs(x) > 0.5 || Math.abs(v) > 0.5) {
-          springAnimationId = requestAnimationFrame(step);
-        } else {
-          bob.style.transform = `translateX(0px)`;
-        }
-      }
-      springAnimationId = requestAnimationFrame(step);
-    }
-    function presetSpring(type) {
-      const inputs = document.querySelectorAll('#tab-motion input[type="range"]');
-      if (type === 'snappy') { inputs[0].value = 320; inputs[1].value = 24; inputs[2].value = 0.8; }
-      else if (type === 'bouncy') { inputs[0].value = 160; inputs[1].value = 6; inputs[2].value = 1.0; }
-      updateSpring();
-      triggerSpringPulse();
-    }
-
-    function copyCode(btn) {
-      const pre = btn.parentElement.querySelector('code');
-      if (pre) {
-        navigator.clipboard.writeText(pre.textContent);
-        btn.textContent = 'Copied!';
-        setTimeout(() => btn.textContent = 'Copy', 2000);
-      }
-    }
-
-    // -------------------------------------------------------------------------
-    // 9. NATIVE WEB COMPONENT CUSTOM ELEMENTS & TELEMETRY
-    // -------------------------------------------------------------------------
-    function switchFramework(id) {
-      document.querySelectorAll('.framework-tab-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.getAttribute('onclick').includes(id));
-      });
-      document.querySelectorAll('.framework-snippet').forEach(snip => {
-        snip.classList.toggle('active', snip.id === 'framework-' + id);
-      });
-    }
-
-    function toggleAttr(id, attr) {
-      const el = document.getElementById(id);
-      if (!el) return;
-      if (el.hasAttribute(attr)) el.removeAttribute(attr);
-      else el.setAttribute(attr, '');
-    }
-
-    function logWcEvent(tag, name, detail) {
-      const logger = document.getElementById('wc-event-logger');
-      if (!logger) return;
-
-      const time = new Date().toTimeString().split(' ')[0];
-      const entry = document.createElement('div');
-      entry.className = 'event-log-entry';
-
-      let detailStr = '';
-      if (detail && Object.keys(detail).length > 0) {
-        detailStr = ' ' + JSON.stringify(detail);
-      }
-
-      entry.innerHTML = `
-        <span class="event-log-time">[${time}]</span>
-        <span class="event-log-tag">${tag}</span>
-        <span>→</span>
-        <span class="event-log-name">${name}</span>
-        <span style="color: #cbd5e1; font-size: 0.75rem;">${detailStr}</span>
-      `;
-
-      logger.appendChild(entry);
-      while (logger.children.length > 40) {
-        logger.removeChild(logger.firstChild);
-      }
-      logger.scrollTop = logger.scrollHeight;
-    }
-
-    function clearWcEventLogs() {
-      const logger = document.getElementById('wc-event-logger');
-      if (!logger) return;
-      logger.innerHTML = `
-        <div class="event-log-entry">
-          <span class="event-log-time">[System]</span>
-          <span class="event-log-name">Telemetry cleared. Awaiting custom element events...</span>
-        </div>
-      `;
-    }
-
-    function triggerWcToast(title, desc, variant = 'info') {
-      const container = document.getElementById('demo-wc-toast-container');
-      if (container && typeof container.pushToast === 'function') {
-        container.pushToast(title, desc, variant);
-      } else {
-        triggerDocsToast(title, desc, variant);
-      }
-    }
-
-    // --- Custom Element: <cyn-modal> ---
-    class CynModalElement extends HTMLElement {
-      static get observedAttributes() { return ['open', 'title']; }
-      connectedCallback() {
-        this.render();
-        if (this.hasAttribute('open')) this.activate();
-      }
-      attributeChangedCallback(name, oldVal, newVal) {
-        if (oldVal === newVal) return;
-        if (name === 'open') {
-          if (this.hasAttribute('open')) {
-            this.activate();
-            this.dispatchEvent(new CustomEvent('cyn-open', { bubbles: true, composed: true, detail: { open: true } }));
-          } else {
-            this.deactivate();
-            this.dispatchEvent(new CustomEvent('cyn-close', { bubbles: true, composed: true, detail: { open: false } }));
-          }
-        } else if (name === 'title' && this._titleEl) {
-          this._titleEl.textContent = newVal || '';
-        }
-      }
-      show() { this.setAttribute('open', ''); }
-      close() { this.removeAttribute('open'); }
-      toggle() { if (this.hasAttribute('open')) this.close(); else this.show(); }
-
-      render() {
-        if (this._backdrop) return;
-        this._backdrop = document.createElement('div');
-        this._backdrop.className = 'modal-backdrop';
-        this._backdrop.setAttribute('role', 'dialog');
-        this._backdrop.setAttribute('aria-modal', 'true');
-        this._backdrop.addEventListener('click', (e) => {
-          if (e.target === this._backdrop) this.close();
-        });
-
-        this._box = document.createElement('div');
-        this._box.className = 'modal-box';
-
-        const header = document.createElement('div');
-        header.className = 'flex-between';
-
-        this._titleEl = document.createElement('h3');
-        this._titleEl.style.fontSize = '1.25rem';
-        this._titleEl.style.fontWeight = '800';
-        this._titleEl.textContent = this.getAttribute('title') || '';
-
-        const closeBtn = document.createElement('button');
-        closeBtn.className = 'btn btn-secondary';
-        closeBtn.style.padding = '0.25rem 0.5rem';
-        closeBtn.textContent = '✕';
-        closeBtn.addEventListener('click', () => this.close());
-
-        header.appendChild(this._titleEl);
-        header.appendChild(closeBtn);
-        this._box.appendChild(header);
-
-        const body = document.createElement('div');
-        while (this.firstChild) {
-          body.appendChild(this.firstChild);
-        }
-        this._box.appendChild(body);
-        this._backdrop.appendChild(this._box);
-        this.appendChild(this._backdrop);
-
-        this._escListener = (e) => {
-          if (e.key === 'Escape' && this.hasAttribute('open')) this.close();
-        };
-        window.addEventListener('keydown', this._escListener);
-      }
-      activate() {
-        if (!this._backdrop) this.render();
-        if (this._backdrop) this._backdrop.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      }
-      deactivate() {
-        if (this._backdrop) this._backdrop.classList.remove('open');
-        document.body.style.overflow = '';
-      }
-    }
-
-    // --- Custom Element: <cyn-drawer> ---
-    class CynDrawerElement extends HTMLElement {
-      static get observedAttributes() { return ['open', 'title', 'placement']; }
-      connectedCallback() {
-        this.render();
-        if (this.hasAttribute('open')) this.activate();
-      }
-      attributeChangedCallback(name, oldVal, newVal) {
-        if (oldVal === newVal) return;
-        if (name === 'open') {
-          if (this.hasAttribute('open')) {
-            this.activate();
-            this.dispatchEvent(new CustomEvent('cyn-open', { bubbles: true, composed: true, detail: { open: true, placement: this.getAttribute('placement') || 'right' } }));
-          } else {
-            this.deactivate();
-            this.dispatchEvent(new CustomEvent('cyn-close', { bubbles: true, composed: true, detail: { open: false } }));
-          }
-        }
-      }
-      show() { this.setAttribute('open', ''); }
-      close() { this.removeAttribute('open'); }
-      toggle() { if (this.hasAttribute('open')) this.close(); else this.show(); }
-
-      render() {
-        if (this._backdrop) return;
-        this._backdrop = document.createElement('div');
-        this._backdrop.className = 'drawer-backdrop';
-        this._backdrop.setAttribute('role', 'dialog');
-        this._backdrop.setAttribute('aria-modal', 'true');
-        this._backdrop.addEventListener('click', (e) => {
-          if (e.target === this._backdrop) this.close();
-        });
-
-        this._box = document.createElement('div');
-        this._box.className = 'drawer-box';
-
-        const header = document.createElement('div');
-        header.className = 'flex-between';
-
-        const title = document.createElement('h3');
-        title.style.fontSize = '1.25rem';
-        title.style.fontWeight = '800';
-        title.textContent = this.getAttribute('title') || 'Drawer';
-
-        const closeBtn = document.createElement('button');
-        closeBtn.className = 'btn btn-secondary';
-        closeBtn.style.padding = '0.25rem 0.5rem';
-        closeBtn.textContent = '✕';
-        closeBtn.addEventListener('click', () => this.close());
-
-        header.appendChild(title);
-        header.appendChild(closeBtn);
-        this._box.appendChild(header);
-
-        const body = document.createElement('div');
-        body.style.display = 'flex';
-        body.style.flexDirection = 'column';
-        body.style.height = '100%';
-        while (this.firstChild) {
-          body.appendChild(this.firstChild);
-        }
-        this._box.appendChild(body);
-        this._backdrop.appendChild(this._box);
-        this.appendChild(this._backdrop);
-      }
-      activate() {
-        if (!this._backdrop) this.render();
-        if (this._backdrop) this._backdrop.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      }
-      deactivate() {
-        if (this._backdrop) this._backdrop.classList.remove('open');
-        document.body.style.overflow = '';
-      }
-    }
-
-    // --- Custom Element: <cyn-bottom-sheet> ---
-    class CynBottomSheetElement extends HTMLElement {
-      static get observedAttributes() { return ['open', 'title']; }
-      connectedCallback() {
-        this.render();
-        if (this.hasAttribute('open')) this.activate();
-      }
-      attributeChangedCallback(name, oldVal, newVal) {
-        if (oldVal === newVal) return;
-        if (name === 'open') {
-          if (this.hasAttribute('open')) {
-            this.activate();
-            this.dispatchEvent(new CustomEvent('cyn-open', { bubbles: true, composed: true, detail: { open: true } }));
-          } else {
-            this.deactivate();
-            this.dispatchEvent(new CustomEvent('cyn-close', { bubbles: true, composed: true, detail: { open: false } }));
-          }
-        }
-      }
-      show() { this.setAttribute('open', ''); }
-      close() { this.removeAttribute('open'); }
-      toggle() { if (this.hasAttribute('open')) this.close(); else this.show(); }
-
-      render() {
-        if (this._backdrop) return;
-        this._backdrop = document.createElement('div');
-        this._backdrop.className = 'bottomsheet-backdrop';
-        this._backdrop.setAttribute('role', 'dialog');
-        this._backdrop.setAttribute('aria-modal', 'true');
-        this._backdrop.addEventListener('click', (e) => {
-          if (e.target === this._backdrop) this.close();
-        });
-
-        this._box = document.createElement('div');
-        this._box.className = 'bottomsheet-box';
-
-        const grabHandle = document.createElement('div');
-        grabHandle.style.cssText = 'width: 44px; height: 5px; background: rgba(255,255,255,0.25); border-radius: 9999px; margin: 0 auto 1.25rem; cursor: grab;';
-        this._box.appendChild(grabHandle);
-
-        const header = document.createElement('div');
-        header.className = 'flex-between';
-
-        const title = document.createElement('h3');
-        title.style.fontSize = '1.25rem';
-        title.style.fontWeight = '800';
-        title.textContent = this.getAttribute('title') || 'BottomSheet';
-
-        const closeBtn = document.createElement('button');
-        closeBtn.className = 'btn btn-secondary';
-        closeBtn.style.padding = '0.25rem 0.5rem';
-        closeBtn.textContent = '✕';
-        closeBtn.addEventListener('click', () => this.close());
-
-        header.appendChild(title);
-        header.appendChild(closeBtn);
-        this._box.appendChild(header);
-
-        const body = document.createElement('div');
-        while (this.firstChild) {
-          body.appendChild(this.firstChild);
-        }
-        this._box.appendChild(body);
-        this._backdrop.appendChild(this._box);
-        this.appendChild(this._backdrop);
-      }
-      activate() {
-        if (!this._backdrop) this.render();
-        if (this._backdrop) this._backdrop.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      }
-      deactivate() {
-        if (this._backdrop) this._backdrop.classList.remove('open');
-        document.body.style.overflow = '';
-      }
-    }
-
-    // --- Custom Element: <cyn-switch> ---
-    class CynSwitchElement extends HTMLElement {
-      static get observedAttributes() { return ['checked', 'disabled', 'label']; }
-      connectedCallback() {
-        this.render();
-        this.setAttribute('role', 'switch');
-        this.setAttribute('tabindex', this.hasAttribute('disabled') ? '-1' : '0');
-        this.setAttribute('aria-checked', this.hasAttribute('checked') ? 'true' : 'false');
-
-        this.addEventListener('click', () => this.toggle());
-        this.addEventListener('keydown', (e) => {
-          if (e.key === ' ' || e.key === 'Enter') {
-            e.preventDefault();
-            this.toggle();
-          }
-        });
-      }
-      attributeChangedCallback(name, oldVal, newVal) {
-        if (oldVal === newVal) return;
-        if (name === 'checked') {
-          const isChecked = this.hasAttribute('checked');
-          this.setAttribute('aria-checked', isChecked ? 'true' : 'false');
-          this.dispatchEvent(new CustomEvent('cyn-change', {
-            bubbles: true,
-            composed: true,
-            detail: { checked: isChecked }
-          }));
-        } else if (name === 'label' && this._labelEl) {
-          this._labelEl.textContent = newVal || '';
-        }
-      }
-      toggle() {
-        if (this.hasAttribute('disabled')) return;
-        if (this.hasAttribute('checked')) this.removeAttribute('checked');
-        else this.setAttribute('checked', '');
-      }
-      render() {
-        if (this._rendered) return;
-        this._rendered = true;
-
-        const track = document.createElement('div');
-        track.className = 'cyn-switch-track';
-        const thumb = document.createElement('div');
-        thumb.className = 'cyn-switch-thumb';
-        track.appendChild(thumb);
-
-        this._labelEl = document.createElement('span');
-        this._labelEl.className = 'cyn-switch-label';
-        this._labelEl.textContent = this.getAttribute('label') || '';
-
-        this.appendChild(track);
-        this.appendChild(this._labelEl);
-      }
-    }
-
-    // --- Custom Element: <cyn-popover> ---
-    class CynPopoverElement extends HTMLElement {
-      static get observedAttributes() { return ['open']; }
-      connectedCallback() {
-        this._card = this.querySelector('.popover-card');
-        document.addEventListener('click', (e) => {
-          if (!this.contains(e.target) && this.hasAttribute('open')) {
-            this.close();
-          }
-        });
-      }
-      attributeChangedCallback(name, oldVal, newVal) {
-        if (oldVal === newVal) return;
-        if (name === 'open') {
-          const isOpen = this.hasAttribute('open');
-          if (this._card) this._card.classList.toggle('open', isOpen);
-          this.dispatchEvent(new CustomEvent(isOpen ? 'cyn-open' : 'cyn-close', {
-            bubbles: true,
-            composed: true,
-            detail: { open: isOpen }
-          }));
-        }
-      }
-      show() { this.setAttribute('open', ''); }
-      close() { this.removeAttribute('open'); }
-      toggle() { if (this.hasAttribute('open')) this.close(); else this.show(); }
-    }
-
-    // --- Custom Element: <cyn-dropdown> ---
-    class CynDropdownElement extends HTMLElement {
-      static get observedAttributes() { return ['open']; }
-      connectedCallback() {
-        this._box = this.querySelector('.dropdown-box');
-        document.addEventListener('click', (e) => {
-          if (!this.contains(e.target) && this.hasAttribute('open')) {
-            this.close();
-          }
-        });
-      }
-      attributeChangedCallback(name, oldVal, newVal) {
-        if (oldVal === newVal) return;
-        if (name === 'open') {
-          const isOpen = this.hasAttribute('open');
-          if (this._box) this._box.classList.toggle('open', isOpen);
-          this.dispatchEvent(new CustomEvent(isOpen ? 'cyn-open' : 'cyn-close', {
-            bubbles: true,
-            composed: true,
-            detail: { open: isOpen }
-          }));
-        }
-      }
-      show() { this.setAttribute('open', ''); }
-      close() { this.removeAttribute('open'); }
-      toggle() { if (this.hasAttribute('open')) this.close(); else this.show(); }
-    }
-
-    // --- Custom Element: <cyn-toast-container> ---
-    class CynToastContainerElement extends HTMLElement {
-      connectedCallback() {
-        this.className = 'toast-stack';
-      }
-      pushToast(title, desc, variant = 'info') {
-        const toast = document.createElement('div');
-        toast.className = `toast-node ${variant}`;
-
-        const icons = { success: '✓', warning: '⚠', danger: '✕', info: 'ℹ' };
-        toast.innerHTML = `
-          <span style="font-size: 1.15rem; font-weight: 700;">${icons[variant] || 'ℹ'}</span>
-          <div style="flex: 1; min-width: 0;">
-            <h4 style="font-size: 0.875rem; font-weight: 700; margin-bottom: 0.15rem;">${title}</h4>
-            <p style="font-size: 0.775rem; color: var(--cyn-color-muted); line-height: 1.4;">${desc}</p>
-          </div>
-          <button onclick="this.parentElement.remove()" style="background: none; border: none; color: var(--cyn-color-muted); cursor: pointer; padding: 0.2rem;">✕</button>
-        `;
-
-        this.appendChild(toast);
-        this.dispatchEvent(new CustomEvent('cyn-toast-added', {
-          bubbles: true,
-          composed: true,
-          detail: { title, variant }
-        }));
-
-        setTimeout(() => {
-          toast.style.opacity = '0';
-          toast.style.transform = 'translateX(100%)';
-          setTimeout(() => toast.remove(), 250);
-        }, 3500);
-      }
-    }
-
-    // Register All Custom Elements
-    if ('customElements' in window) {
-      if (!customElements.get('cyn-modal')) customElements.define('cyn-modal', CynModalElement);
-      if (!customElements.get('cyn-drawer')) customElements.define('cyn-drawer', CynDrawerElement);
-      if (!customElements.get('cyn-bottom-sheet')) customElements.define('cyn-bottom-sheet', CynBottomSheetElement);
-      if (!customElements.get('cyn-switch')) customElements.define('cyn-switch', CynSwitchElement);
-      if (!customElements.get('cyn-popover')) customElements.define('cyn-popover', CynPopoverElement);
-      if (!customElements.get('cyn-dropdown')) customElements.define('cyn-dropdown', CynDropdownElement);
-      if (!customElements.get('cyn-toast-container')) customElements.define('cyn-toast-container', CynToastContainerElement);
-    }
-
-    // Global Telemetry Event Hook
-    ['cyn-open', 'cyn-close', 'cyn-change', 'cyn-select', 'cyn-toast-added'].forEach(evtName => {
-      document.addEventListener(evtName, (e) => {
-        const tag = e.target.tagName ? `<${e.target.tagName.toLowerCase()}>` : 'element';
-        logWcEvent(tag, e.type, e.detail || {});
-      });
-    });
-
-    // Initialize REPL default on load
-    window.addEventListener('DOMContentLoaded', () => {
-      loadReplPreset('glass');
-      inspectLayer('utilities');
-    });
-  </script>
+  <script src="docs.js" defer></script>
 </body>
 </html>

@@ -32,7 +32,7 @@ export default function Home() {
           </a>
 
           <a
-            href="https://coheryntech.com/coherynui"
+            href="https://coheryntech.com/products/coheryn-ui"
             target="_blank"
             rel="noreferrer"
             style={{ textDecoration: 'none' }}

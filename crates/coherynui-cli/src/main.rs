@@ -14,7 +14,7 @@ use std::path::{Path, PathBuf};
 #[derive(Parser)]
 #[command(name = "coherynui")]
 #[command(author = "CoherynUI Tech")]
-#[command(version = "0.1.0")]
+#[command(version)]
 #[command(about = "Style the next generation. Independent Rust-native UI framework and intelligent styling platform.", long_about = None)]
 struct Cli {
     #[command(subcommand)]

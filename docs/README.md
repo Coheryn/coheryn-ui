@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/CoherynTech_Icon_Master_Gradient.svg" width="80" height="80" alt="CoherynTech Logo">
+</p>
+
 # CoherynUI — Documentation & Interactive Playground
 
 **Release Target:** Stable 1.0  

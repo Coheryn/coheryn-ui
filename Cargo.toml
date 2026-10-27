@@ -19,28 +19,28 @@ members = [
 ]
 
 [workspace.package]
-version = "0.1.0"
+version = "1.0.0"
 edition = "2024"
 license = "MIT OR Apache-2.0"
 authors = ["CoherynUI Tech <engineering@coherynui.org>"]
 repository = "https://github.com/Coheryn/coheryn-ui"
-homepage = "https://coheryntech.com/coherynui"
+homepage = "https://coheryntech.com/products/coheryn-ui"
 
 [workspace.dependencies]
 # Internal workspace crates (CoherynUI)
-coherynui-core = { path = "crates/coherynui-core", version = "0.1.0" }
-coherynui-syntax = { path = "crates/coherynui-syntax", version = "0.1.0" }
-coherynui-source = { path = "crates/coherynui-source", version = "0.1.0" }
-coherynui-compiler = { path = "crates/coherynui-compiler", version = "0.1.0" }
-coherynui-design = { path = "crates/coherynui-design", version = "0.1.0" }
-coherynui-incremental = { path = "crates/coherynui-incremental", version = "0.1.0" }
-coherynui-diagnostics = { path = "crates/coherynui-diagnostics", version = "0.1.0" }
-coherynui-class-opt = { path = "crates/coherynui-class-opt", version = "0.1.0" }
-coherynui-plugin-api = { path = "crates/coherynui-plugin-api", version = "0.1.0" }
-coherynui-plugin-host = { path = "crates/coherynui-plugin-host", version = "0.1.0" }
-coherynui-agent-api = { path = "crates/coherynui-agent-api", version = "0.1.0" }
-coherynui-registry = { path = "crates/coherynui-registry", version = "0.1.0" }
-coherynui-mcp = { path = "crates/coherynui-mcp", version = "0.1.0" }
+coherynui-core = { path = "crates/coherynui-core", version = "1.0.0" }
+coherynui-syntax = { path = "crates/coherynui-syntax", version = "1.0.0" }
+coherynui-source = { path = "crates/coherynui-source", version = "1.0.0" }
+coherynui-compiler = { path = "crates/coherynui-compiler", version = "1.0.0" }
+coherynui-design = { path = "crates/coherynui-design", version = "1.0.0" }
+coherynui-incremental = { path = "crates/coherynui-incremental", version = "1.0.0" }
+coherynui-diagnostics = { path = "crates/coherynui-diagnostics", version = "1.0.0" }
+coherynui-class-opt = { path = "crates/coherynui-class-opt", version = "1.0.0" }
+coherynui-plugin-api = { path = "crates/coherynui-plugin-api", version = "1.0.0" }
+coherynui-plugin-host = { path = "crates/coherynui-plugin-host", version = "1.0.0" }
+coherynui-agent-api = { path = "crates/coherynui-agent-api", version = "1.0.0" }
+coherynui-registry = { path = "crates/coherynui-registry", version = "1.0.0" }
+coherynui-mcp = { path = "crates/coherynui-mcp", version = "1.0.0" }
 
 # Serialization & Configuration
 serde = { version = "1.0", features = ["derive"] }

@@ -2,7 +2,7 @@
 
 Official **CoherynUI** single-page application starter featuring React 18/19, Vite, the CoherynUI CSS Engine Vite plugin, and accessible mobile ergonomics.
 
-[**Documentation & Homepage**](https://coheryntech.com/coherynui) • [**GitHub Repository**](https://github.com/Coheryn/coheryn-ui)
+[**Documentation & Homepage**](https://coheryntech.com/products/coheryn-ui) • [**GitHub Repository**](https://github.com/Coheryn/coheryn-ui)
 
 ---
 

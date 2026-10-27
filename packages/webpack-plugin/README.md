@@ -2,7 +2,7 @@
 
 Official **CoherynUI** Webpack 5 plugin and loader providing on-demand CSS compilation, virtual stylesheet resolution, and strict W3C cascade-layered output.
 
-[**Documentation & Homepage**](https://coheryntech.com/coherynui) • [**GitHub Repository**](https://github.com/Coheryn/coheryn-ui)
+[**Documentation & Homepage**](https://coheryntech.com/products/coheryn-ui) • [**GitHub Repository**](https://github.com/Coheryn/coheryn-ui)
 
 ---
 

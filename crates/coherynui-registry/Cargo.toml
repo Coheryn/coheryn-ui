@@ -1,6 +1,6 @@
 [package]
 name = "coherynui-registry"
-version = "0.1.0"
+version.workspace = true
 edition.workspace = true
 license.workspace = true
 description = "CoherynUI machine-readable Component & Recipe Registry with intent-based search"

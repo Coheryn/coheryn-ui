@@ -1,8 +1,8 @@
 {
   "name": "@coherynui/webpack-plugin",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Official Webpack 5 plugin and loader for CoherynUI CSS Engine: On-demand compilation, virtual stylesheet resolution, and W3C cascade layers",
-  "homepage": "https://coheryntech.com/coherynui",
+  "homepage": "https://coheryntech.com/products/coheryn-ui",
   "repository": {
     "type": "git",
     "url": "https://github.com/Coheryn/coheryn-ui.git",
@@ -45,5 +45,13 @@
     "nextjs"
   ],
   "author": "Coheryn Team",
-  "license": "MIT"
+  "license": "MIT OR Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "package.json"
+  ]
 }

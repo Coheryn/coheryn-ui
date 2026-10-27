@@ -1,8 +1,8 @@
 {
   "name": "@coherynui/react",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Accessible React component facade styled with CoherynUI CSS Engine recipes and tokens",
-  "homepage": "https://coheryntech.com/coherynui",
+  "homepage": "https://coheryntech.com/products/coheryn-ui",
   "repository": {
     "type": "git",
     "url": "https://github.com/Coheryn/coheryn-ui.git",
@@ -31,11 +31,20 @@
     }
   },
   "dependencies": {
-    "@coherynui/components": "workspace:*",
-    "@coherynui/motion": "workspace:*",
-    "@coherynui/tokens": "workspace:*"
+    "@coherynui/components": "^1.0.0",
+    "@coherynui/motion": "^1.0.0",
+    "@coherynui/tokens": "^1.0.0"
   },
   "scripts": {
     "build": "tsc"
-  }
+  },
+  "license": "MIT OR Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "package.json"
+  ]
 }

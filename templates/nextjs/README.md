@@ -2,7 +2,7 @@
 
 Official **CoherynUI** starter for Next.js 14/15 App Router featuring server-safe W3C cascade layers, zero FOUC, and accessible mobile touch ergonomics.
 
-[**Documentation & Homepage**](https://coheryntech.com/coherynui) • [**GitHub Repository**](https://github.com/Coheryn/coheryn-ui)
+[**Documentation & Homepage**](https://coheryntech.com/products/coheryn-ui) • [**GitHub Repository**](https://github.com/Coheryn/coheryn-ui)
 
 ---
 

@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "type": "module",
   "description": "Official CoherynUI React + Vite starter template with on-demand cascade compiler, touch ergonomics, and Liquid Glass",
-  "homepage": "https://coheryntech.com/coherynui",
+  "homepage": "https://coheryntech.com/products/coheryn-ui",
   "repository": {
     "type": "git",
     "url": "https://github.com/Coheryn/coheryn-ui.git",

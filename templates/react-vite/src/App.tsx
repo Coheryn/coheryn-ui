@@ -383,7 +383,7 @@ function ShowcaseContent() {
           </p>
           <div className="form-group">
             <Label>Engine Version</Label>
-            <Input readOnly value="CoherynUI v0.1.0-alpha.1" />
+            <Input readOnly value="CoherynUI v1.0.0" />
           </div>
           <div className="form-group">
             <Label>Compiler Mode</Label>
@@ -408,7 +408,7 @@ function ShowcaseContent() {
         <div className="app-container flex flex-col md:flex-row items-center justify-between gap-4">
           <div>© 2026 CoherynUI. Dual-licensed under MIT or Apache-2.0.</div>
           <div className="flex items-center gap-6">
-            <a href="https://coheryntech.com/coherynui" className="hover:text-white transition-colors">
+            <a href="https://coheryntech.com/products/coheryn-ui" className="hover:text-white transition-colors">
               Documentation
             </a>
             <a href="https://github.com/Coheryn/coheryn-ui" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">

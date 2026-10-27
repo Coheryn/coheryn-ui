@@ -243,7 +243,7 @@ pub fn get_client_templates(
     let universal_guidelines = format!(
         r#"# CoherynUI Project Directives
 
-This project uses **CoherynUI** (https://coheryntech.com/coherynui) for styling, components, motion, and GPU materials.
+This project uses **CoherynUI** (https://coheryntech.com/products/coheryn-ui) for styling, components, motion, and GPU materials.
 
 1. **Installed APIs Only**: Always inspect the installed version and use documented classes and components.
 2. **Deterministic Layers**: Emit styles inside @layer {lp}.reset, {lp}.tokens, {lp}.base, {lp}.recipes, {lp}.utilities;.
@@ -263,7 +263,7 @@ alwaysApply: true
 
 # CoherynUI Cursor Rules
 
-- **Framework**: CoherynUI (https://coheryntech.com/coherynui)
+- **Framework**: CoherynUI (https://coheryntech.com/products/coheryn-ui)
 - **Cascade Layer Order**: `@layer {lp}.reset, {lp}.tokens, {lp}.base, {lp}.recipes, {lp}.utilities;`
 - **Touch Target Contract**: Ensure 44×44px touch targets on buttons, switches, and interactive elements (`.touch-target`).
 - **Layout Recipes**: Prefer `.stack`, `.cluster`, `.grid-auto`, `.center`, and `.glass` over ad-hoc flex layouts.

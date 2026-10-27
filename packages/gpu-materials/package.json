@@ -1,8 +1,8 @@
 {
   "name": "@coherynui/gpu-materials",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Stable 1.0 WebGPU refraction pipeline with WebGL2 and CSS fallbacks",
-  "homepage": "https://coheryntech.com/coherynui",
+  "homepage": "https://coheryntech.com/products/coheryn-ui",
   "repository": {
     "type": "git",
     "url": "https://github.com/Coheryn/coheryn-ui.git",
@@ -20,5 +20,14 @@
   },
   "scripts": {
     "build": "tsc"
-  }
+  },
+  "license": "MIT OR Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "package.json"
+  ]
 }

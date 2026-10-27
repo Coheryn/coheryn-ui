@@ -1,0 +1,289 @@
+name: CoherynUI Release & Distribution Pipeline
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g. 1.0.0)'
+        required: true
+        default: '1.0.0'
+      dry_run:
+        description: 'Dry run (do not publish to registries)'
+        type: boolean
+        default: true
+      prerelease:
+        description: 'Mark as pre-release'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  id-token: write
+  packages: write
+
+jobs:
+  preflight-audit:
+    name: Pre-Flight Release Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run Release Readiness Audit
+        run: python3 scripts/check_release_readiness.py
+
+  build-binaries:
+    name: Compile Binary (${{ matrix.target }})
+    needs: [preflight-audit]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            binary: coherynui
+            archive_ext: tar.gz
+          - os: ubuntu-latest
+            target: aarch64-unknown-linux-gnu
+            binary: coherynui
+            archive_ext: tar.gz
+            use_cross: true
+          - os: macos-13
+            target: x86_64-apple-darwin
+            binary: coherynui
+            archive_ext: tar.gz
+          - os: macos-14
+            target: aarch64-apple-darwin
+            binary: coherynui
+            archive_ext: tar.gz
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            binary: coherynui.exe
+            archive_ext: zip
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Rust Toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Install Cross Compiler (Linux ARM64)
+        if: matrix.use_cross
+        run: cargo install cross --git https://github.com/cross-rs/cross
+
+      - name: Build coherynui CLI Binary
+        run: |
+          if [ "${{ matrix.use_cross }}" = "true" ]; then
+            cross build --release --target ${{ matrix.target }} -p coherynui-cli
+          else
+            cargo build --release --target ${{ matrix.target }} -p coherynui-cli
+          fi
+        shell: bash
+
+      - name: Strip Binary Symbols (Unix)
+        if: matrix.os != 'windows-latest'
+        run: |
+          strip target/${{ matrix.target }}/release/${{ matrix.binary }} || true
+        shell: bash
+
+      - name: Package Distribution Archive
+        id: package
+        run: |
+          VERSION="${{ github.ref_name }}"
+          if [ -z "$VERSION" ] || [ "$VERSION" = "main" ]; then
+            VERSION="v${{ inputs.version || '1.0.0' }}"
+          fi
+          ARCHIVE_NAME="coherynui-${VERSION}-${{ matrix.target }}"
+          
+          mkdir -p dist-bin
+          mkdir -p "dist-bin/${ARCHIVE_NAME}"
+          
+          cp "target/${{ matrix.target }}/release/${{ matrix.binary }}" "dist-bin/${ARCHIVE_NAME}/"
+          cp LICENSE-MIT "dist-bin/${ARCHIVE_NAME}/"
+          cp LICENSE-APACHE "dist-bin/${ARCHIVE_NAME}/"
+          cp README.md "dist-bin/${ARCHIVE_NAME}/"
+          
+          cd dist-bin
+          if [ "${{ matrix.archive_ext }}" = "zip" ]; then
+            7z a "${ARCHIVE_NAME}.zip" "${ARCHIVE_NAME}"
+            echo "archive=${ARCHIVE_NAME}.zip" >> $GITHUB_OUTPUT
+            certutil -hashfile "${ARCHIVE_NAME}.zip" SHA256 | findstr -v "hash" | findstr -v "CertUtil" > "${ARCHIVE_NAME}.zip.sha256" || true
+          else
+            tar -czf "${ARCHIVE_NAME}.tar.gz" "${ARCHIVE_NAME}"
+            echo "archive=${ARCHIVE_NAME}.tar.gz" >> $GITHUB_OUTPUT
+            shasum -a 256 "${ARCHIVE_NAME}.tar.gz" > "${ARCHIVE_NAME}.tar.gz.sha256"
+          fi
+        shell: bash
+
+      - name: Upload Binary Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: binary-${{ matrix.target }}
+          path: |
+            dist-bin/*.tar.gz
+            dist-bin/*.zip
+            dist-bin/*.sha256
+
+  build-npm-packages:
+    name: Build & Package npm Client Monorepo
+    needs: [preflight-audit]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install Monorepo Dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Build Client Packages
+        run: pnpm --filter "./packages/*" build
+
+      - name: Package npm Tarballs (.tgz)
+        run: |
+          mkdir -p npm-tarballs
+          for dir in packages/*; do
+            if [ -f "$dir/package.json" ]; then
+              echo "Packaging $dir..."
+              (cd "$dir" && pnpm pack --pack-destination "$GITHUB_WORKSPACE/npm-tarballs")
+            fi
+          done
+
+      - name: Upload npm Tarballs
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-packages
+          path: npm-tarballs/*.tgz
+
+      - name: Publish to npm Registry
+        if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.dry_run == false)
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -n "$NODE_AUTH_TOKEN" ]; then
+            pnpm --filter "./packages/*" publish --access public --no-git-checks
+          else
+            echo "NPM_TOKEN secret not configured; skipping public npm publish step."
+          fi
+
+  package-docs:
+    name: Package Standalone Documentation
+    needs: [preflight-audit]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Bundle Documentation
+        run: |
+          VERSION="${{ github.ref_name }}"
+          if [ -z "$VERSION" ] || [ "$VERSION" = "main" ]; then
+            VERSION="v${{ inputs.version || '1.0.0' }}"
+          fi
+          mkdir -p dist-docs
+          zip -r "dist-docs/coherynui-docs-${VERSION}.zip" docs/ -x "*.DS_Store"
+          (cd dist-docs && sha256sum "coherynui-docs-${VERSION}.zip" > "coherynui-docs-${VERSION}.zip.sha256")
+
+      - name: Upload Docs Bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-distribution
+          path: dist-docs/*
+
+  publish-release:
+    name: Publish GitHub Release & Checksums
+    needs: [build-binaries, build-npm-packages, package-docs]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Download All Release Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release-assets
+          merge-multiple: true
+
+      - name: Consolidate SHA-256 Checksum Manifest
+        run: |
+          cd release-assets
+          echo "# CoherynUI v1.0 SHA-256 Checksum Manifest" > SHA256SUMS.txt
+          echo "# https://coheryntech.com/products/coheryn-ui" >> SHA256SUMS.txt
+          echo "" >> SHA256SUMS.txt
+          sha256sum *.tar.gz *.zip *.tgz >> SHA256SUMS.txt 2>/dev/null || true
+          cat SHA256SUMS.txt
+
+      - name: Generate Release Notes
+        id: release_notes
+        run: |
+          VERSION="${{ github.ref_name }}"
+          if [ -z "$VERSION" ] || [ "$VERSION" = "main" ]; then
+            VERSION="v${{ inputs.version || '1.0.0' }}"
+          fi
+          cat << 'EOF' > release-notes.md
+          ## CoherynUI — Deterministic Styling & Full-Stack UI Framework
+
+          **Documentation & Guides:** [https://coheryntech.com/products/coheryn-ui](https://coheryntech.com/products/coheryn-ui)  
+          **Specification:** [Master Plan v1.1 & v1.2 Amendment](https://github.com/Coheryn/coheryn-ui)
+
+          ### Universal Single-Command Installation (Linux & macOS)
+          ```bash
+          curl -fsSL https://coheryntech.com/products/coheryn-ui/install.sh | sh
+          ```
+
+          ### Windows Installation (PowerShell)
+          ```powershell
+          iwr -useb https://coheryntech.com/products/coheryn-ui/install.ps1 | iex
+          ```
+
+          ### Node.js / npx Runner
+          ```bash
+          npx @coherynui/cli init
+          ```
+
+          ### Included Monorepo Packages
+          - `@coherynui/components` (v1.0): Headless accessible UI primitives & ARIA patterns
+          - `@coherynui/react` (v1.0): React components catalog
+          - `@coherynui/web-components` (v1.0): Universal Native W3C Custom Elements
+          - `@coherynui/motion` (v1.0): Analytical spring physics solver & gesture controller
+          - `@coherynui/gpu-materials` (v1.0): WebGPU Liquid Glass refraction with WebGL2 and CSS fallbacks
+          - `@coherynui/tokens` (v1.0): W3C Design Tokens & Dynamic Token Binding
+          - `@coherynui/vite-plugin` & `@coherynui/webpack-plugin`: Incremental compiler bundler plugins
+
+          ### Checksums
+          Verify all downloaded binaries against `SHA256SUMS.txt`.
+          EOF
+
+      - name: Create GitHub Release
+        if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.dry_run == false)
+        uses: softprops/action-gh-release@v2
+        with:
+          body_path: release-notes.md
+          prerelease: ${{ inputs.prerelease || false }}
+          files: |
+            release-assets/*.tar.gz
+            release-assets/*.zip
+            release-assets/*.tgz
+            release-assets/SHA256SUMS.txt
+            scripts/install.sh
+            scripts/install.ps1
