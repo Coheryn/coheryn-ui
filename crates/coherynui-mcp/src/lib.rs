@@ -249,10 +249,10 @@ impl McpServer {
                 code: diag.code.clone(),
                 severity: diag.severity,
                 message: diag.message.clone(),
-                location: diag.span.as_ref().map(|s| DiagnosticLocation {
-                    file: s.file.clone(),
-                    line: s.line_start,
-                    column: s.col_start,
+                location: diag.file.as_ref().map(|f| DiagnosticLocation {
+                    file: f.clone(),
+                    line: diag.line.unwrap_or(1) as usize,
+                    column: diag.column.unwrap_or(1) as usize,
                 }),
                 fix: None,
             });

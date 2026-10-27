@@ -10,6 +10,7 @@ description = "Official CoherynUI Model Context Protocol (MCP) server for coding
 [dependencies]
 coherynui-core = { workspace = true }
 coherynui-compiler = { workspace = true }
+coherynui-source = { workspace = true }
 coherynui-design = { workspace = true }
 coherynui-registry = { workspace = true }
 coherynui-agent-api = { workspace = true }

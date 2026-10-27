@@ -11,3 +11,4 @@ description = "Plugin interface and transformation traits for the CoherynUI comp
 coherynui-core.workspace = true
 serde.workspace = true
 serde_json.workspace = true
+thiserror.workspace = true

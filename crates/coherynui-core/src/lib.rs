@@ -81,7 +81,7 @@ pub enum CssValue {
 }
 
 /// Strongly typed variant identifier (e.g. "hover", "focus-visible", "sm", "cq").
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize, Deserialize)]
 pub struct VariantId(pub String);
 
 impl<T: Into<String>> From<T> for VariantId {

@@ -12,10 +12,10 @@ pub enum SyntaxError {
     EmptyClass(Option<SourceSpan>),
     #[error("Unclosed arbitrary value bracket at {0:?}")]
     UnclosedArbitraryBracket(Option<SourceSpan>),
-    #[error("Invalid variant prefix '{variant}' at {source:?}")]
+    #[error("Invalid variant prefix '{variant}' at {span:?}")]
     InvalidVariant {
         variant: String,
-        source: Option<SourceSpan>,
+        span: Option<SourceSpan>,
     },
 }
 
