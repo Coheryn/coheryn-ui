@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoherynUI — Admin Console</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="coherynui.css">
+</head>
+<body>
+
+  <div class="container">
+    <div class="header-bar">
+      <div>
+        <h1 style="font-size: 1.5rem; font-weight: 800;">Admin Console & IAM</h1>
+        <p style="color: var(--cyn-color-muted); font-size: 0.9rem; margin-top: 0.2rem;">Manage project roles and sandboxed access tokens.</p>
+      </div>
+      <button class="btn btn-primary" id="openModalBtn">+ Invite Engineer</button>
+    </div>
+
+    <!-- Roving Tabindex Tabs -->
+    <div class="tab-bar" role="tablist" aria-label="Management Tabs">
+      <button class="tab-btn" role="tab" id="tab-users" aria-selected="true" tabindex="0">Engineers & Access</button>
+      <button class="tab-btn" role="tab" id="tab-keys" aria-selected="false" tabindex="-1">API Keys</button>
+      <button class="tab-btn" role="tab" id="tab-audit" aria-selected="false" tabindex="-1">Audit Trail</button>
+    </div>
+
+    <!-- Users Table -->
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Role</th>
+            <th>MFA Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div style="font-weight: 600;">Alex Mercer</div>
+              <div style="font-size: 0.8rem; color: var(--cyn-color-muted);">alex@coherynui.dev</div>
+            </td>
+            <td><code>Owner / Admin</code></td>
+            <td><span style="color: #3fb950; font-weight: 700;">✓ Hardware Key</span></td>
+            <td><button class="btn" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">Edit</button></td>
+          </tr>
+          <tr>
+            <td>
+              <div style="font-weight: 600;">Sarah Chen</div>
+              <div style="font-size: 0.8rem; color: var(--cyn-color-muted);">sarah@coherynui.dev</div>
+            </td>
+            <td><code>Lead Architect</code></td>
+            <td><span style="color: #3fb950; font-weight: 700;">✓ Authenticator</span></td>
+            <td><button class="btn" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">Edit</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Accessible Modal -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle" id="modalContainer">
+      <h3 id="modalTitle" style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Invite Team Member</h3>
+      <p style="color: var(--cyn-color-muted); font-size: 0.85rem; margin-bottom: 1.5rem;">Provide company email address and assign initial permission profile.</p>
+
+      <form id="inviteForm">
+        <div class="form-group">
+          <label class="form-label" for="emailInput">Email Address</label>
+          <input type="email" class="form-input" id="emailInput" required placeholder="engineer@domain.com">
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.5rem;">
+          <button type="button" class="btn" id="modalCancelBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Send Invitation</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Focus Trap & Modal Management
+    const backdrop = document.getElementById('modalBackdrop');
+    const container = document.getElementById('modalContainer');
+    const openBtn = document.getElementById('openModalBtn');
+    const cancelBtn = document.getElementById('modalCancelBtn');
+    let lastActive = null;
+
+    function openModal() {
+      lastActive = document.activeElement;
+      backdrop.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('emailInput').focus();
+    }
+
+    function closeModal() {
+      backdrop.classList.remove('open');
+      document.body.style.overflow = '';
+      if (lastActive) lastActive.focus();
+    }
+
+    openBtn.addEventListener('click', openModal);
+    cancelBtn.addEventListener('click', closeModal);
+
+    window.addEventListener('keydown', (e) => {
+      if (backdrop.classList.contains('open')) {
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'Tab') {
+          const focusables = container.querySelectorAll('button, input, select, textarea');
+          const first = focusables[0];
+          const last = focusables[focusables.length - 1];
+          if (e.shiftKey && document.activeElement === first) {
+            last.focus(); e.preventDefault();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            first.focus(); e.preventDefault();
+          }
+        }
+      }
+    });
+
+    // Roving Tabindex for Tabs
+    const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
+    tabs.forEach((tab, idx) => {
+      tab.addEventListener('click', () => selectTab(idx));
+      tab.addEventListener('keydown', (e) => {
+        let next = idx;
+        if (e.key === 'ArrowRight') next = (idx + 1) % tabs.length;
+        else if (e.key === 'ArrowLeft') next = (idx - 1 + tabs.length) % tabs.length;
+        else return;
+        e.preventDefault();
+        selectTab(next);
+        tabs[next].focus();
+      });
+    });
+
+    function selectTab(target) {
+      tabs.forEach((t, i) => {
+        const sel = i === target;
+        t.setAttribute('aria-selected', sel ? 'true' : 'false');
+        t.setAttribute('tabindex', sel ? '0' : '-1');
+      });
+    }
+
+    document.getElementById('inviteForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert(`Invitation sent to ${document.getElementById('emailInput').value}`);
+      closeModal();
+    });
+  </script>
+</body>
+</html>

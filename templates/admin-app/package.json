@@ -1,0 +1,16 @@
+{
+  "name": "template-admin-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CoherynUI Accessible Admin Application Starter",
+  "scripts": {
+    "dev": "coherynui dev",
+    "build": "coherynui build --input . --output coherynui.css",
+    "check": "coherynui check"
+  },
+  "dependencies": {
+    "@coherynui/tokens": "^1.0.0",
+    "@coherynui/components": "^1.0.0",
+    "@coherynui/react": "^1.0.0"
+  }
+}

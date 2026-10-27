@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./coherynui.css">
+  <title>CoherynUI SaaS Analytics Dashboard</title>
+</head>
+<body class="bg-surface fg-primary min-h-screen">
+  <div class="sidebar min-h-screen">
+    <!-- Sidebar Navigation -->
+    <aside class="w-full md:w-[18rem] p-6 glass border-r border-subtle stack gap-6">
+      <div class="cluster items-center justify-between">
+        <div class="cluster items-center gap-3">
+          <div class="w-8 h-8 radius-lg bg-brand flex items-center justify-center weight-bold fg-primary">C</div>
+          <span class="text-xl weight-bold tracking-tight">CoherynUI</span>
+        </div>
+        <span class="text-xs px-2 py-0.5 radius-full bg-[#10b981] fg-primary weight-bold">v1.0</span>
+      </div>
+
+      <nav class="stack gap-1">
+        <a href="#overview" class="px-3.5 py-2 radius-lg bg-brand fg-primary weight-medium text-sm flex items-center gap-3">
+          <span>Overview</span>
+        </a>
+        <a href="#analytics" class="px-3.5 py-2 radius-lg fg-muted hover:bg-surface text-sm weight-medium flex items-center gap-3 transition-colors">
+          <span>Analytics</span>
+        </a>
+        <a href="#customers" class="px-3.5 py-2 radius-lg fg-muted hover:bg-surface text-sm weight-medium flex items-center gap-3 transition-colors">
+          <span>Customers</span>
+        </a>
+        <a href="#settings" class="px-3.5 py-2 radius-lg fg-muted hover:bg-surface text-sm weight-medium flex items-center gap-3 transition-colors">
+          <span>Settings</span>
+        </a>
+      </nav>
+
+      <div class="mt-auto p-4 radius-xl glass-strong border border-subtle stack gap-2">
+        <div class="text-xs weight-semibold uppercase fg-muted">Compute Usage</div>
+        <div class="w-full h-2 radius-full bg-[#334155] overflow-hidden">
+          <div class="h-full bg-brand w-[68%] radius-full"></div>
+        </div>
+        <span class="text-xs fg-muted">68% of monthly limit</span>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 p-6 sm:p-8 stack gap-8">
+      <!-- Header -->
+      <header class="cluster items-center justify-between gap-4">
+        <div class="stack gap-1">
+          <h1 class="text-3xl weight-bold tracking-tight">Performance Overview</h1>
+          <p class="text-sm fg-muted">Real-time metrics and rendering throughput across edge regions.</p>
+        </div>
+        <div class="cluster items-center gap-3">
+          <button class="px-4 py-2 radius-lg border border-subtle bg-surface text-sm weight-medium hover:lift transition-all">
+            Export Report
+          </button>
+          <button class="px-4 py-2 radius-lg bg-brand fg-primary text-sm weight-semibold shadow-md hover:lift transition-all">
+            + Deploy Service
+          </button>
+        </div>
+      </header>
+
+      <!-- Metric Cards (Container Query Grid) -->
+      <section class="cq-root">
+        <div class="grid cols-1 cq:cols-2 cq-lg:cols-4 gap-6">
+          <article class="p-6 radius-2xl bg-surface border border-subtle shadow-sm stack gap-3">
+            <span class="text-xs weight-semibold uppercase fg-muted">Total Requests</span>
+            <div class="text-3xl weight-bold">42.8M</div>
+            <span class="text-xs fg-[#10b981] weight-medium">↑ +14.2% from last week</span>
+          </article>
+          <article class="p-6 radius-2xl bg-surface border border-subtle shadow-sm stack gap-3">
+            <span class="text-xs weight-semibold uppercase fg-muted">Average Latency</span>
+            <div class="text-3xl weight-bold">18.4ms</div>
+            <span class="text-xs fg-[#10b981] weight-medium">↓ -3.1ms faster</span>
+          </article>
+          <article class="p-6 radius-2xl bg-surface border border-subtle shadow-sm stack gap-3">
+            <span class="text-xs weight-semibold uppercase fg-muted">Active Instances</span>
+            <div class="text-3xl weight-bold">1,420</div>
+            <span class="text-xs fg-muted weight-medium">Across 18 regions</span>
+          </article>
+          <article class="p-6 radius-2xl glass-edge glass-strong border border-subtle shadow-lg stack gap-3">
+            <span class="text-xs weight-semibold uppercase fg-muted">GPU Refraction Load</span>
+            <div class="text-3xl weight-bold">0.42ms</div>
+            <span class="text-xs fg-[#10b981] weight-medium">WebGPU 60fps locked</span>
+          </article>
+        </div>
+      </section>
+
+      <!-- Main Data Table Section -->
+      <section class="p-6 radius-2xl bg-surface border border-subtle shadow-sm stack gap-4">
+        <div class="cluster items-center justify-between">
+          <h2 class="text-lg weight-bold">Edge Node Deployments</h2>
+          <span class="text-xs fg-muted">Auto-refreshed 2m ago</span>
+        </div>
+        <div class="overflow-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="border-b border-subtle text-xs uppercase fg-muted">
+              <tr>
+                <th class="py-3 px-4">Cluster</th>
+                <th class="py-3 px-4">Region</th>
+                <th class="py-3 px-4">Throughput</th>
+                <th class="py-3 px-4">Status</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-subtle">
+              <tr class="hover:bg-surface transition-colors">
+                <td class="py-3.5 px-4 weight-medium">prod-us-east-1</td>
+                <td class="py-3.5 px-4 fg-muted">N. Virginia</td>
+                <td class="py-3.5 px-4">14,280 req/s</td>
+                <td class="py-3.5 px-4"><span class="px-2 py-0.5 text-xs radius-full bg-[#10b981] fg-primary weight-bold">Healthy</span></td>
+              </tr>
+              <tr class="hover:bg-surface transition-colors">
+                <td class="py-3.5 px-4 weight-medium">prod-eu-west-1</td>
+                <td class="py-3.5 px-4 fg-muted">Ireland</td>
+                <td class="py-3.5 px-4">9,410 req/s</td>
+                <td class="py-3.5 px-4"><span class="px-2 py-0.5 text-xs radius-full bg-[#10b981] fg-primary weight-bold">Healthy</span></td>
+              </tr>
+              <tr class="hover:bg-surface transition-colors">
+                <td class="py-3.5 px-4 weight-medium">prod-ap-northeast-1</td>
+                <td class="py-3.5 px-4 fg-muted">Tokyo</td>
+                <td class="py-3.5 px-4">7,890 req/s</td>
+                <td class="py-3.5 px-4"><span class="px-2 py-0.5 text-xs radius-full bg-[#10b981] fg-primary weight-bold">Healthy</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

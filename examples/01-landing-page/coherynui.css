@@ -1,0 +1,112 @@
+/* CoherynUI CSS Engine — Compiled Stylesheet */
+    @layer cyn.reset, cyn.tokens, cyn.base, cyn.recipes, cyn.utilities;
+
+    @layer cyn.reset {
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        background-color: var(--cyn-color-surface);
+        color: var(--cyn-color-foreground);
+        transition: background-color 300ms ease, color 300ms ease;
+      }
+      a { text-decoration: none; color: inherit; }
+      button { font: inherit; cursor: pointer; border: none; background: transparent; }
+    }
+
+    @layer cyn.tokens {
+      :root {
+        --cyn-color-surface: #0a0f1d;
+        --cyn-color-surface-subtle: #111827;
+        --cyn-color-foreground: #f8fafc;
+        --cyn-color-muted: #94a3b8;
+        --cyn-color-brand: #3b82f6;
+        --cyn-color-brand-glow: rgba(59, 130, 246, 0.35);
+        --cyn-border-subtle: rgba(255, 255, 255, 0.08);
+      }
+      [data-theme="light"] {
+        --cyn-color-surface: #f8fafc;
+        --cyn-color-surface-subtle: #ffffff;
+        --cyn-color-foreground: #0f172a;
+        --cyn-color-muted: #64748b;
+        --cyn-color-brand: #2563eb;
+        --cyn-color-brand-glow: rgba(37, 99, 235, 0.2);
+        --cyn-border-subtle: rgba(0, 0, 0, 0.08);
+      }
+    }
+
+    @layer cyn.recipes {
+      .glass {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--cyn-border-subtle);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      }
+      [data-theme="light"] .glass {
+        background: rgba(255, 255, 255, 0.75);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.06);
+      }
+      .glass-strong {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+      }
+      .glass-edge {
+        box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.2), 0 12px 40px rgba(0, 0, 0, 0.4);
+      }
+      .stack { display: flex; flex-direction: column; justify-content: flex-start; }
+      .cluster { display: flex; flex-wrap: wrap; align-items: center; }
+      .grid-auto { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); }
+      .center { box-sizing: content-box; margin-inline: auto; max-width: 72rem; }
+      .hover\:lift { transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 250ms ease; }
+      .hover\:lift:hover { transform: translateY(-4px); }
+    }
+
+    @layer cyn.utilities {
+      .min-h-screen { min-height: 100vh; }
+      .w-full { width: 100%; }
+      .p-4 { padding: 1rem; }
+      .p-6 { padding: 1.5rem; }
+      .p-8 { padding: 2rem; }
+      .px-4 { padding-left: 1rem; padding-right: 1rem; }
+      .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+      .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+      .gap-3 { gap: 0.75rem; }
+      .gap-4 { gap: 1rem; }
+      .gap-6 { gap: 1.5rem; }
+      .gap-8 { gap: 2rem; }
+      .gap-12 { gap: 3rem; }
+      .radius-lg { border-radius: 0.75rem; }
+      .radius-xl { border-radius: 1rem; }
+      .radius-2xl { border-radius: 1.5rem; }
+      .radius-full { border-radius: 9999px; }
+      .items-center { align-items: center; }
+      .justify-between { justify-content: space-between; }
+      .justify-center { justify-content: center; }
+      .text-center { text-align: center; }
+      .text-sm { font-size: 0.875rem; }
+      .text-base { font-size: 1rem; }
+      .text-lg { font-size: 1.125rem; }
+      .text-xl { font-size: 1.25rem; }
+      .text-2xl { font-size: 1.5rem; }
+      .text-4xl { font-size: 2.25rem; }
+      .text-6xl { font-size: 3.75rem; line-height: 1.1; }
+      .weight-medium { font-weight: 500; }
+      .weight-semibold { font-weight: 600; }
+      .weight-bold { font-weight: 700; }
+      .weight-extrabold { font-weight: 800; }
+      .tracking-tight { letter-spacing: -0.03em; }
+      .bg-brand { background-color: var(--cyn-color-brand); }
+      .fg-primary { color: var(--cyn-color-foreground); }
+      .fg-muted { color: var(--cyn-color-muted); }
+      .shadow-glow { box-shadow: 0 0 40px var(--cyn-color-brand-glow); }
+      .gradient-text {
+        background: linear-gradient(135deg, var(--cyn-color-foreground) 30%, var(--cyn-color-brand) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }

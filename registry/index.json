@@ -1,0 +1,181 @@
+{
+  "schema_version": "1.0",
+  "coheryn_version": "1.0.0",
+  "components": [
+    {
+      "schema_version": "1.0",
+      "id": "component:button",
+      "name": "Button",
+      "category": "inputs",
+      "framework": "react",
+      "package": "@coherynui/react",
+      "description": "Interactive accessible button element with keyboard activation and specular hover states",
+      "capabilities": ["keyboard-activation", "high-contrast-focus"],
+      "dependencies": ["@coherynui/react", "@coherynui/components"],
+      "props": {
+        "variant": {
+          "prop_type": "'primary' | 'secondary' | 'danger' | 'ghost'",
+          "required": false,
+          "default": "'primary'",
+          "description": "Visual surface style variant"
+        },
+        "disabled": {
+          "prop_type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Disables interaction and manages aria-disabled"
+        }
+      },
+      "accessibility": {
+        "role": "button",
+        "keyboard_navigation": ["Enter (activate)", "Space (activate)"],
+        "focus_management": "Native focus with visible 2px offset outline",
+        "aria_attributes": ["aria-disabled", "aria-busy"]
+      },
+      "examples": [
+        "<Button variant=\"primary\">Deploy Module</Button>",
+        "<Button variant=\"secondary\" disabled>Pending</Button>"
+      ],
+      "example_uri": "registry/examples/button.example.json",
+      "introduced_in": "1.0.0"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "component:dialog",
+      "name": "Dialog",
+      "category": "overlay",
+      "framework": "react",
+      "package": "@coherynui/react",
+      "description": "WAI-ARIA modal dialog featuring strict focus trapping, escape dismissal, and background scroll locking",
+      "capabilities": ["focus-trap", "dismiss-on-escape", "scroll-lock"],
+      "dependencies": ["@coherynui/react", "@coherynui/components"],
+      "props": {
+        "open": {
+          "prop_type": "boolean",
+          "required": true,
+          "default": null,
+          "description": "Controls open state of the modal dialog"
+        },
+        "onClose": {
+          "prop_type": "() => void",
+          "required": true,
+          "default": null,
+          "description": "Callback invoked on dismiss (Escape key or backdrop click)"
+        }
+      },
+      "accessibility": {
+        "role": "dialog",
+        "keyboard_navigation": ["Tab / Shift+Tab (trapped within dialog)", "Escape (dismiss)"],
+        "focus_management": "Initial focus to first interactive child; restored to invoker on dismiss",
+        "aria_attributes": ["aria-modal=\"true\"", "aria-labelledby", "aria-describedby"]
+      },
+      "examples": [
+        "<Dialog open={isOpen} onClose={() => setIsOpen(false)} title=\"Confirm Release\">...</Dialog>"
+      ],
+      "example_uri": "registry/examples/dialog.example.json",
+      "introduced_in": "1.0.0"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "component:glass-card",
+      "name": "GlassCard",
+      "category": "surfaces",
+      "framework": "react",
+      "package": "@coherynui/react",
+      "description": "Liquid Glass surface container with specular border highlights and automatic reduced-transparency fallback",
+      "capabilities": ["liquid-glass", "reduced-transparency-fallback"],
+      "dependencies": ["@coherynui/react"],
+      "props": {
+        "tier": {
+          "prop_type": "'css' | 'gpu'",
+          "required": false,
+          "default": "'css'",
+          "description": "Rendering tier: CSS native backdrop blur or WebGPU optical refraction"
+        }
+      },
+      "accessibility": {
+        "role": "region",
+        "keyboard_navigation": ["Inherits child focus"],
+        "focus_management": "Preserves internal element tab order",
+        "aria_attributes": ["aria-label"]
+      },
+      "examples": [
+        "<GlassCard tier=\"css\" className=\"p-6\"><h3>Telemetry</h3></GlassCard>"
+      ],
+      "example_uri": "registry/examples/glass.example.json",
+      "introduced_in": "1.0.0"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "component:tabs",
+      "name": "Tabs",
+      "category": "navigation",
+      "framework": "react",
+      "package": "@coherynui/react",
+      "description": "WAI-ARIA tabs with horizontal roving tabindex and arrow-key focus delegation",
+      "capabilities": ["roving-focus", "keyboard-navigation"],
+      "dependencies": ["@coherynui/react", "@coherynui/components"],
+      "props": {
+        "activeTab": {
+          "prop_type": "string",
+          "required": true,
+          "default": null,
+          "description": "Active tab identifier"
+        }
+      },
+      "accessibility": {
+        "role": "tablist",
+        "keyboard_navigation": ["ArrowRight / ArrowLeft (roving navigation)", "Home / End (boundary jump)"],
+        "focus_management": "Roving tabindex: active tab is 0, inactive are -1",
+        "aria_attributes": ["role=\"tab\"", "aria-selected", "aria-controls"]
+      },
+      "examples": [
+        "<Tabs items={tabList} activeId={tab} onChange={setTab} />"
+      ],
+      "example_uri": "registry/examples/tabs.example.json",
+      "introduced_in": "1.0.0"
+    }
+  ],
+  "recipes": [
+    {
+      "id": "recipe:stack",
+      "name": "stack",
+      "category": "adaptive-layout",
+      "description": "Vertical flex column primitive with natural flow separation",
+      "css_declarations": "display: flex; flex-direction: column; justify-content: flex-start;",
+      "variants": ["gap-2", "gap-4", "gap-6", "gap-8"],
+      "fallback": null,
+      "example_uri": "registry/examples/stack.example.json"
+    },
+    {
+      "id": "recipe:sidebar",
+      "name": "sidebar",
+      "category": "adaptive-layout",
+      "description": "Adaptive sidebar layout that wraps cleanly when viewport falls below threshold",
+      "css_declarations": "display: flex; flex-wrap: wrap; gap: var(--cyn-sidebar-gap, 1rem);",
+      "variants": ["w-64", "w-72"],
+      "fallback": null,
+      "example_uri": "registry/examples/sidebar.example.json"
+    },
+    {
+      "id": "recipe:glass",
+      "name": "glass",
+      "category": "materials",
+      "description": "Tier 1 Liquid Glass surface with backdrop blur, subtle border, and dark mode tinting",
+      "css_declarations": "background: var(--cyn-glass-bg); border: 1px solid var(--cyn-glass-border); backdrop-filter: blur(var(--cyn-glass-blur));",
+      "variants": ["glass-strong", "glass-edge"],
+      "fallback": "Opaque solid surface on prefers-reduced-transparency",
+      "example_uri": "registry/examples/glass.example.json"
+    },
+    {
+      "id": "recipe:motion-spring",
+      "name": "motion-spring",
+      "category": "motion",
+      "description": "Harmonic analytical spring physics solver with mass, stiffness, and damping parameters",
+      "css_declarations": "transition: transform var(--cyn-spring-duration, 350ms) cubic-bezier(0.16, 1, 0.3, 1);",
+      "variants": ["spring-snappy", "spring-bouncy", "spring-gentle"],
+      "fallback": "0ms instantaneous transition on prefers-reduced-motion",
+      "example_uri": "registry/examples/motion.example.json"
+    }
+  ]
+}

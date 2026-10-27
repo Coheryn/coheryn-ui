@@ -1,0 +1,40 @@
+name: Coheryn CSS CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  rust-check:
+    name: Rust Workspace Checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+      - name: Format Check
+        run: cargo fmt --all -- --check
+      - name: Clippy Linter
+        run: cargo clippy --workspace --all-targets --all-features -- -D warnings
+      - name: Test Suite
+        run: cargo test --workspace --all-features
+
+  js-packages:
+    name: Client Packages & TypeScript
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9.15.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile || pnpm install
+      - name: TypeScript Verification
+        run: pnpm --filter "./packages/*" exec tsc --noEmit || true

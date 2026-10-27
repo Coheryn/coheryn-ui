@@ -1,0 +1,31 @@
+[package]
+name = "coherynui-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "coherynui"
+path = "src/main.rs"
+
+[dependencies]
+coherynui-core.workspace = true
+coherynui-compiler.workspace = true
+coherynui-design.workspace = true
+coherynui-diagnostics.workspace = true
+coherynui-source.workspace = true
+coherynui-class-opt.workspace = true
+coherynui-incremental.workspace = true
+coherynui-plugin-api.workspace = true
+coherynui-plugin-host.workspace = true
+coherynui-agent-api.workspace = true
+coherynui-registry.workspace = true
+coherynui-mcp.workspace = true
+clap.workspace = true
+miette.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+notify.workspace = true

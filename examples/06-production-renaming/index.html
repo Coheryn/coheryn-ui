@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoherynUI Class Optimizer - Production AST Renaming & Manifest Explorer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="coherynui.css">
+</head>
+<body>
+
+  <header class="header">
+    <div style="display: flex; align-items: center;">
+      <h1 style="font-size: 1.25rem; font-weight: 800; letter-spacing: -0.02em;">CoherynUI</h1>
+      <span class="brand-badge">coherynui-class-opt</span>
+    </div>
+    <nav class="nav-links">
+      <a href="../01-landing-page/index.html">Landing Page</a>
+      <a href="../02-admin-dashboard/index.html">Dashboard</a>
+      <a href="../03-liquid-glass-showcase/index.html">Liquid Glass</a>
+      <a href="../04-motion-playground/index.html">Motion Lab</a>
+      <a href="../05-accessible-components/index.html">Components</a>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- Hero / Metrics -->
+    <div>
+      <div class="section-header">
+        <h2>⚡ Production Class Renaming & Binary AST Rewriting</h2>
+        <p>Achieve up to -76% CSS & DOM payload size reduction via deterministic frequency-ranked symbol renaming.</p>
+      </div>
+
+      <div class="stats-banner">
+        <div class="stat-card">
+          <div class="stat-label">Original Classes Size</div>
+          <div class="stat-num" style="color: var(--cyn-text-muted);">142.6 <span style="font-size: 1rem;">KB</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Optimized CSS Size</div>
+          <div class="stat-num" style="color: var(--cyn-success);">34.8 <span style="font-size: 1rem;">KB</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">DOM & Over-the-Wire Reduction</div>
+          <div class="stat-num" style="color: #818cf8;">-75.6%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Safety Contract</div>
+          <div class="stat-num" style="color: var(--cyn-secondary); font-size: 1.4rem; padding-top: 0.5rem;">Fail-Closed 🛡️</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Interactive Optimization Workbench -->
+    <section>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h3 style="font-size: 1.25rem; font-weight: 700;">Live AST Rewriter Workbench</h3>
+        <button class="btn btn-primary" id="btnOptimize">Run Optimizer</button>
+      </div>
+
+      <div class="dual-pane">
+        <!-- Input Source -->
+        <div class="code-panel">
+          <div class="panel-header">
+            <span>Development JSX / HTML Input</span>
+            <span style="color: var(--cyn-text-muted);">Editable</span>
+          </div>
+          <textarea class="code-editor" id="sourceCode" spellcheck="false">&lt;div class="cq:card p-6 bg-slate-900 border border-slate-800 rounded-2xl shadow-xl hover:border-indigo-500"&gt;
+  &lt;h3 class="text-xl font-bold tracking-tight text-white mb-2"&gt;
+    Deterministic Engine
+  &lt;/h3&gt;
+  &lt;p class="text-sm text-slate-400 leading-relaxed mb-4"&gt;
+    Zero numerical drift with real-time parametric synthesis.
+  &lt;/p&gt;
+  &lt;button class="btn-primary px-4 py-2 rounded-lg font-semibold text-white shadow-lg"&gt;
+    Deploy Module
+  &lt;/button&gt;
+&lt;/div&gt;</textarea>
+        </div>
+
+        <!-- Optimized Output -->
+        <div class="code-panel">
+          <div class="panel-header">
+            <span>Production Rewritten Output</span>
+            <span style="color: var(--cyn-success);" id="compressionTag">-68.4% Shorter</span>
+          </div>
+          <div class="code-editor" id="optimizedCode" style="user-select: all;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Manifest Explorer & Reverse Lookup -->
+    <section>
+      <div class="section-header">
+        <h2>🔍 Reverse Lookup Manifest (<code>coherynui.manifest.json</code>)</h2>
+        <p>Inspect bidirectional symbol mappings generated during production builds for sourcemaps and runtime debugging.</p>
+      </div>
+
+      <div class="lookup-bar">
+        <input type="text" class="lookup-input" id="lookupInput" placeholder="Enter compressed symbol (e.g. 'a', 'b', 'c') or original class name...">
+        <button class="btn" id="btnLookup">Query Manifest</button>
+      </div>
+
+      <div class="lookup-res" id="lookupResult">
+        Type a symbol or class above to query the AST translation table.
+      </div>
+
+      <div class="manifest-table-box" style="margin-top: 1.5rem;">
+        <table class="manifest-table">
+          <thead>
+            <tr>
+              <th>Optimized Symbol</th>
+              <th>Original Utility Class</th>
+              <th>Frequency Rank</th>
+              <th>Cascade Layer</th>
+              <th>Bytes Saved</th>
+            </tr>
+          </thead>
+          <tbody id="manifestTableBody">
+            <!-- Populated dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Mock manifestation database
+    const manifestDatabase = [
+      { opt: 'a', orig: 'text-white', rank: 1, layer: 'cyn.utilities', saved: '9 bytes' },
+      { opt: 'b', orig: 'font-bold', rank: 2, layer: 'cyn.utilities', saved: '8 bytes' },
+      { opt: 'c', orig: 'rounded-2xl', rank: 3, layer: 'cyn.utilities', saved: '10 bytes' },
+      { opt: 'd', orig: 'bg-slate-900', rank: 4, layer: 'cyn.utilities', saved: '11 bytes' },
+      { opt: 'e', orig: 'cq:card', rank: 5, layer: 'cyn.components', saved: '6 bytes' },
+      { opt: 'f', orig: 'p-6', rank: 6, layer: 'cyn.utilities', saved: '2 bytes' },
+      { opt: 'g', orig: 'border-slate-800', rank: 7, layer: 'cyn.utilities', saved: '15 bytes' },
+      { opt: 'h', orig: 'shadow-xl', rank: 8, layer: 'cyn.utilities', saved: '8 bytes' },
+      { opt: 'i', orig: 'hover:border-indigo-500', rank: 9, layer: 'cyn.utilities', saved: '23 bytes' },
+      { opt: 'j', orig: 'text-xl', rank: 10, layer: 'cyn.utilities', saved: '6 bytes' },
+      { opt: 'k', orig: 'tracking-tight', rank: 11, layer: 'cyn.utilities', saved: '13 bytes' },
+      { opt: 'l', orig: 'mb-2', rank: 12, layer: 'cyn.utilities', saved: '3 bytes' },
+      { opt: 'm', orig: 'text-sm', rank: 13, layer: 'cyn.utilities', saved: '6 bytes' },
+      { opt: 'n', orig: 'text-slate-400', rank: 14, layer: 'cyn.utilities', saved: '13 bytes' },
+      { opt: 'o', orig: 'leading-relaxed', rank: 15, layer: 'cyn.utilities', saved: '14 bytes' },
+      { opt: 'p', orig: 'mb-4', rank: 16, layer: 'cyn.utilities', saved: '3 bytes' },
+      { opt: 'q', orig: 'btn-primary', rank: 17, layer: 'cyn.components', saved: '10 bytes' },
+      { opt: 'r', orig: 'px-4', rank: 18, layer: 'cyn.utilities', saved: '3 bytes' },
+      { opt: 's', orig: 'py-2', rank: 19, layer: 'cyn.utilities', saved: '3 bytes' },
+      { opt: 't', orig: 'rounded-lg', rank: 20, layer: 'cyn.utilities', saved: '9 bytes' },
+      { opt: 'u', orig: 'font-semibold', rank: 21, layer: 'cyn.utilities', saved: '12 bytes' },
+      { opt: 'v', orig: 'shadow-lg', rank: 22, layer: 'cyn.utilities', saved: '8 bytes' },
+    ];
+
+    // Populate Manifest Table
+    const tbody = document.getElementById('manifestTableBody');
+    tbody.innerHTML = manifestDatabase.map(row => `
+      <tr>
+        <td><span class="opt-pill">.${row.opt}</span></td>
+        <td><span class="class-pill">.${row.orig}</span></td>
+        <td>#${row.rank}</td>
+        <td><code>@layer ${row.layer}</code></td>
+        <td style="color: var(--cyn-success);">${row.saved}</td>
+      </tr>
+    `).join('');
+
+    // Lookup Logic
+    function runLookup() {
+      const q = document.getElementById('lookupInput').value.trim().replace(/^\./, '');
+      const match = manifestDatabase.find(m => m.opt === q || m.orig === q);
+      const resEl = document.getElementById('lookupResult');
+
+      if (match) {
+        resEl.innerHTML = `
+          <span><b style="color: var(--cyn-success);">Match Found:</b> .${match.orig} &harr; <b>.${match.opt}</b> (Rank: #${match.rank}, Layer: ${match.layer})</span>
+        `;
+      } else {
+        resEl.innerHTML = `<span style="color: var(--cyn-accent);">No matching entry in manifest for "${q}".</span>`;
+      }
+    }
+    document.getElementById('btnLookup').addEventListener('click', runLookup);
+    document.getElementById('lookupInput').addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') runLookup();
+    });
+
+    // Optimizer Engine simulation
+    function optimizeCode() {
+      const src = document.getElementById('sourceCode').value;
+      let opt = src;
+
+      // Replace classes according to manifest
+      manifestDatabase.forEach(item => {
+        const regex = new RegExp(`(?<=class="[^"]*)\\b${item.orig.replace(':', '\\:')}\\b(?=[^"]*")`, 'g');
+        opt = opt.replace(regex, item.opt);
+      });
+
+      document.getElementById('optimizedCode').textContent = opt;
+
+      const origBytes = new Blob([src]).size;
+      const optBytes = new Blob([opt]).size;
+      const reduction = (((origBytes - optBytes) / origBytes) * 100).toFixed(1);
+      document.getElementById('compressionTag').innerText = `-${reduction}% Shorter (${origBytes}B -> ${optBytes}B)`;
+    }
+
+    document.getElementById('btnOptimize').addEventListener('click', optimizeCode);
+    optimizeCode();
+  </script>
+</body>
+</html>

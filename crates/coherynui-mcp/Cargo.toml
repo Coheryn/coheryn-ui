@@ -1,0 +1,16 @@
+[package]
+name = "coherynui-mcp"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+description = "Official CoherynUI Model Context Protocol (MCP) server for coding agents"
+
+[dependencies]
+coherynui-core = { workspace = true }
+coherynui-compiler = { workspace = true }
+coherynui-design = { workspace = true }
+coherynui-registry = { path = "../coherynui-registry", version = "0.1.0" }
+coherynui-agent-api = { path = "../coherynui-agent-api", version = "0.1.0" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }

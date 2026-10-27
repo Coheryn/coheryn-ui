@@ -1,0 +1,152 @@
+@layer cyn.reset, cyn.tokens, cyn.base, cyn.recipes, cyn.utilities;
+
+    @layer cyn.tokens {
+      :root {
+        --cyn-font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        --cyn-font-mono: 'JetBrains Mono', monospace;
+        --cyn-color-surface: #0b0f19;
+        --cyn-color-surface-elevated: #111827;
+        --cyn-color-border: rgba(255, 255, 255, 0.08);
+        --cyn-color-foreground: #f9fafb;
+        --cyn-color-muted: #94a3b8;
+        --cyn-color-brand: #6366f1;
+        --cyn-color-brand-light: #818cf8;
+        --cyn-color-success: #10b981;
+        --cyn-color-warning: #f59e0b;
+        --cyn-color-danger: #ef4444;
+      }
+      [data-theme="light"] {
+        --cyn-color-surface: #f8fafc;
+        --cyn-color-surface-elevated: #ffffff;
+        --cyn-color-border: rgba(0, 0, 0, 0.08);
+        --cyn-color-foreground: #0f172a;
+        --cyn-color-muted: #64748b;
+        --cyn-color-brand: #4f46e5;
+        --cyn-color-brand-light: #6366f1;
+      }
+    }
+
+    @layer cyn.base {
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: var(--cyn-font-sans);
+        background: var(--cyn-color-surface);
+        color: var(--cyn-color-foreground);
+        min-height: 100vh;
+        display: flex;
+      }
+    }
+
+    @layer cyn.recipes {
+      .sidebar-layout {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        min-height: 100vh;
+        width: 100%;
+      }
+      @media (max-width: 900px) {
+        .sidebar-layout { grid-template-columns: 1fr; }
+      }
+    }
+
+    @layer cyn.utilities {
+      .sidebar {
+        background: var(--cyn-color-surface-elevated);
+        border-right: 1px solid var(--cyn-color-border);
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .main-content {
+        padding: 2.5rem;
+        overflow-y: auto;
+      }
+      .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        color: var(--cyn-color-muted);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: all 0.15s ease;
+      }
+      .nav-item:hover, .nav-item.active {
+        background: rgba(99, 102, 241, 0.12);
+        color: var(--cyn-color-brand-light);
+      }
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.75rem;
+      }
+      .metric-card {
+        background: var(--cyn-color-surface-elevated);
+        border: 1px solid var(--cyn-color-border);
+        border-radius: 14px;
+        padding: 1.5rem;
+      }
+      .metric-card h4 {
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: var(--cyn-color-muted);
+        letter-spacing: 0.05em;
+      }
+      .metric-value {
+        font-size: 2.25rem;
+        font-weight: 800;
+        margin: 0.5rem 0 0.25rem 0;
+        letter-spacing: -0.03em;
+      }
+      .badge-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 0.2rem 0.6rem;
+        border-radius: 9999px;
+      }
+      .badge-success { background: rgba(16, 185, 129, 0.15); color: var(--cyn-color-success); }
+      .badge-warning { background: rgba(245, 158, 11, 0.15); color: var(--cyn-color-warning); }
+      .table-box {
+        margin-top: 2rem;
+        background: var(--cyn-color-surface-elevated);
+        border: 1px solid var(--cyn-color-border);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+        text-align: left;
+      }
+      th {
+        background: rgba(255, 255, 255, 0.02);
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid var(--cyn-color-border);
+        color: var(--cyn-color-muted);
+        font-weight: 600;
+      }
+      td {
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid var(--cyn-color-border);
+      }
+      tr:last-child td { border-bottom: none; }
+      .theme-btn {
+        background: transparent;
+        border: 1px solid var(--cyn-color-border);
+        color: var(--cyn-color-foreground);
+        padding: 0.5rem 0.85rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+    }

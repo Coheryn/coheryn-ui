@@ -1,0 +1,76 @@
+[workspace]
+resolver = "3"
+members = [
+    "crates/coherynui-core",
+    "crates/coherynui-syntax",
+    "crates/coherynui-source",
+    "crates/coherynui-compiler",
+    "crates/coherynui-design",
+    "crates/coherynui-incremental",
+    "crates/coherynui-diagnostics",
+    "crates/coherynui-class-opt",
+    "crates/coherynui-plugin-api",
+    "crates/coherynui-plugin-host",
+    "crates/coherynui-agent-api",
+    "crates/coherynui-registry",
+    "crates/coherynui-mcp",
+    "crates/coherynui-cli",
+    "tests/conformance",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+authors = ["CoherynUI Tech <engineering@coherynui.org>"]
+repository = "https://github.com/CoherynTechProjects/CoherynCSS"
+homepage = "https://coherynui.dev"
+
+[workspace.dependencies]
+# Internal workspace crates (CoherynUI)
+coherynui-core = { path = "crates/coherynui-core", version = "0.1.0" }
+coherynui-syntax = { path = "crates/coherynui-syntax", version = "0.1.0" }
+coherynui-source = { path = "crates/coherynui-source", version = "0.1.0" }
+coherynui-compiler = { path = "crates/coherynui-compiler", version = "0.1.0" }
+coherynui-design = { path = "crates/coherynui-design", version = "0.1.0" }
+coherynui-incremental = { path = "crates/coherynui-incremental", version = "0.1.0" }
+coherynui-diagnostics = { path = "crates/coherynui-diagnostics", version = "0.1.0" }
+coherynui-class-opt = { path = "crates/coherynui-class-opt", version = "0.1.0" }
+coherynui-plugin-api = { path = "crates/coherynui-plugin-api", version = "0.1.0" }
+coherynui-plugin-host = { path = "crates/coherynui-plugin-host", version = "0.1.0" }
+coherynui-agent-api = { path = "crates/coherynui-agent-api", version = "0.1.0" }
+coherynui-registry = { path = "crates/coherynui-registry", version = "0.1.0" }
+coherynui-mcp = { path = "crates/coherynui-mcp", version = "0.1.0" }
+
+# Serialization & Configuration
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+toml = "0.8"
+
+# CLI & Diagnostics
+clap = { version = "4.5", features = ["derive", "env"] }
+thiserror = "2.0"
+miette = { version = "7.4", features = ["fancy"] }
+
+# Hashing & File Watching
+blake3 = "1.5"
+notify = "8.0"
+ignore = "0.4"
+globset = "0.4"
+
+# Concurrency & Performance
+rayon = "1.10"
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# Testing & Snapshots
+insta = { version = "1.42", features = ["yaml"] }
+proptest = "1.6"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+panic = "abort"
+
+[profile.dev]
+debug = 1

@@ -1,0 +1,36 @@
+{
+  "id": "component:dialog",
+  "name": "Dialog",
+  "version": "1.0.0",
+  "category": "overlay",
+  "framework": "react",
+  "package": "@coherynui/react",
+  "dependencies": ["@coherynui/react", "@coherynui/components"],
+  "tokens_used": [
+    "--cyn-color-surface-elevated",
+    "--cyn-color-border",
+    "--cyn-color-foreground",
+    "--cyn-radius-lg",
+    "--cyn-card-shadow"
+  ],
+  "accessibility": {
+    "role": "dialog",
+    "keyboard_navigation": [
+      "Tab: Moves focus through modal focus trap",
+      "Shift+Tab: Moves backwards through focus trap",
+      "Escape: Closes dialog and returns focus to invoker"
+    ],
+    "focus_management": "Initial focus delegates to first interactive element or dialog body; returns to trigger button on dismiss",
+    "aria_attributes": ["aria-modal=\"true\"", "aria-labelledby=\"dialog-title\"", "aria-describedby=\"dialog-desc\""]
+  },
+  "snippets": {
+    "react": "import { Dialog, Button } from '@coherynui/react';\nimport { useState } from 'react';\n\nexport function ConfirmModal() {\n  const [open, setOpen] = useState(false);\n  return (\n    <>\n      <Button onClick={() => setOpen(true)}>Open Modal</Button>\n      <Dialog open={open} onClose={() => setOpen(false)} title=\"Confirm Action\">\n        <p id=\"dialog-desc\">Are you sure you want to proceed with deployment?</p>\n        <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>\n          <Button variant=\"secondary\" onClick={() => setOpen(false)}>Cancel</Button>\n          <Button variant=\"primary\" onClick={() => setOpen(false)}>Confirm</Button>\n        </div>\n      </Dialog>\n    </>\n  );\n}",
+    "html": "<div role=\"dialog\" aria-modal=\"true\" aria-labelledby=\"dialog-title\" class=\"dialog-overlay\">\n  <div class=\"dialog-panel\">\n    <h2 id=\"dialog-title\">Confirm Action</h2>\n    <p id=\"dialog-desc\">Are you sure you want to proceed?</p>\n    <div class=\"dialog-actions\">\n      <button type=\"button\" class=\"btn-secondary\">Cancel</button>\n      <button type=\"button\" class=\"btn-primary\">Confirm</button>\n    </div>\n  </div>\n</div>",
+    "css": "@layer cyn.recipes {\n  .dialog-overlay {\n    position: fixed;\n    inset: 0;\n    background: rgba(0, 0, 0, 0.7);\n    backdrop-filter: blur(4px);\n    display: grid;\n    place-items: center;\n    z-index: 50;\n  }\n  .dialog-panel {\n    background: var(--cyn-color-surface-elevated);\n    border: 1px solid var(--cyn-color-border);\n    border-radius: var(--cyn-radius-lg);\n    padding: 2rem;\n    max-width: 500px;\n    width: 90vw;\n    box-shadow: var(--cyn-card-shadow);\n  }\n}"
+  },
+  "assertions": {
+    "focus_trap_active": true,
+    "body_scroll_lock": true,
+    "compiler_diagnostics": []
+  }
+}

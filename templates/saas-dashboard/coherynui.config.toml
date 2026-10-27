@@ -1,0 +1,37 @@
+# CoherynUI Project Configuration — SaaS Dashboard Starter
+
+[compiler]
+layer_prefix = "cyn"
+variable_prefix = "cyn"
+class_prefix = ""
+
+[theme]
+default = "dark"
+available = ["dark", "light"]
+
+[tokens.radius]
+sm = "0.375rem"
+md = "0.5rem"
+lg = "0.75rem"
+xl = "1rem"
+full = "9999px"
+
+[tokens.spacing]
+"1" = "0.25rem"
+"2" = "0.5rem"
+"3" = "0.75rem"
+"4" = "1rem"
+"6" = "1.5rem"
+"8" = "2rem"
+
+[themes.dark.colors]
+surface = "#0b0f19"
+surface-elevated = "#111827"
+foreground = "#f9fafb"
+brand = "#6366f1"
+
+[themes.light.colors]
+surface = "#ffffff"
+surface-elevated = "#f3f4f6"
+foreground = "#111827"
+brand = "#4f46e5"

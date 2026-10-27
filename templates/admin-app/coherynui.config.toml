@@ -1,0 +1,33 @@
+# CoherynUI Project Configuration — Admin Application Starter
+
+[compiler]
+layer_prefix = "cyn"
+variable_prefix = "cyn"
+class_prefix = ""
+
+[theme]
+default = "dark"
+available = ["dark", "light"]
+
+[tokens.radius]
+sm = "0.375rem"
+md = "0.5rem"
+lg = "0.75rem"
+xl = "1rem"
+
+[tokens.spacing]
+"2" = "0.5rem"
+"4" = "1rem"
+"6" = "1.5rem"
+
+[themes.dark.colors]
+surface = "#0d1117"
+surface-elevated = "#161b22"
+foreground = "#e6edf3"
+brand = "#238636"
+
+[themes.light.colors]
+surface = "#ffffff"
+surface-elevated = "#f6f8fa"
+foreground = "#1f2328"
+brand = "#1f883d"

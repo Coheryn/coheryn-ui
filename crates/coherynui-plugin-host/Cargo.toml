@@ -1,0 +1,13 @@
+[package]
+name = "coherynui-plugin-host"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+
+[dependencies]
+coherynui-core.workspace = true
+coherynui-plugin-api.workspace = true
+thiserror.workspace = true
+serde.workspace = true

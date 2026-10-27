@@ -1,0 +1,117 @@
+@layer cyn.reset, cyn.tokens, cyn.base, cyn.recipes, cyn.utilities;
+
+    @layer cyn.tokens {
+      :root {
+        --cyn-font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        --cyn-font-mono: 'JetBrains Mono', monospace;
+        --cyn-color-surface: #07090e;
+        --cyn-color-foreground: #f8fafc;
+        --cyn-color-muted: #94a3b8;
+        --cyn-color-brand: #06b6d4;
+        --cyn-color-brand-light: #67e8f9;
+        --cyn-glass-blur: 16px;
+        --cyn-glass-bg: rgba(14, 19, 31, 0.7);
+        --cyn-glass-border: rgba(255, 255, 255, 0.15);
+      }
+    }
+
+    @layer cyn.base {
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: var(--cyn-font-sans);
+        background: var(--cyn-color-surface);
+        color: var(--cyn-color-foreground);
+        min-height: 100vh;
+        overflow-x: hidden;
+        padding: 3rem 2rem;
+      }
+    }
+
+    @layer cyn.recipes {
+      .glass {
+        background: var(--cyn-glass-bg);
+        border: 1px solid var(--cyn-glass-border);
+        backdrop-filter: blur(var(--cyn-glass-blur));
+        -webkit-backdrop-filter: blur(var(--cyn-glass-blur));
+        border-radius: 16px;
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+      }
+      .glass-edge {
+        position: relative;
+        overflow: hidden;
+      }
+      .glass-edge::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+        pointer-events: none;
+      }
+    }
+
+    @layer cyn.utilities {
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .header-bar {
+        text-align: center;
+        margin-bottom: 3.5rem;
+      }
+      .header-bar h1 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+      .header-bar p {
+        color: var(--cyn-color-muted);
+        margin-top: 0.5rem;
+      }
+      .grid-3col {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+      @media (max-width: 900px) {
+        .grid-3col { grid-template-columns: 1fr; }
+      }
+      .tier-card {
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 280px;
+      }
+      .tier-badge {
+        font-family: var(--cyn-font-mono);
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--cyn-color-brand-light);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.5rem;
+      }
+      .control-panel {
+        margin-top: 3rem;
+        padding: 2rem;
+        background: rgba(14, 19, 31, 0.5);
+        border: 1px solid var(--cyn-glass-border);
+        border-radius: 16px;
+      }
+      .slider-row {
+        display: grid;
+        grid-template-columns: 140px 1fr 60px;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 1rem;
+        font-family: var(--cyn-font-mono);
+        font-size: 0.85rem;
+      }
+      input[type="range"] {
+        accent-color: var(--cyn-color-brand);
+        cursor: pointer;
+      }
+    }

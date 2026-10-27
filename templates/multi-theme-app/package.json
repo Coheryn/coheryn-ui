@@ -1,0 +1,15 @@
+{
+  "name": "template-multi-theme-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CoherynUI Multi-Theme Application Starter with Dynamic Runtime Switching",
+  "scripts": {
+    "dev": "coherynui dev",
+    "build": "coherynui build --input . --output coherynui.css",
+    "check": "coherynui check"
+  },
+  "dependencies": {
+    "@coherynui/tokens": "^1.0.0",
+    "@coherynui/components": "^1.0.0"
+  }
+}

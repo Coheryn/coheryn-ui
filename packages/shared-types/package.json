@@ -1,0 +1,11 @@
+{
+  "name": "@coherynui/tokens",
+  "version": "0.1.0",
+  "description": "Shared token definitions, types, and schemas for CoherynUI",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  }
+}

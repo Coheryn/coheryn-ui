@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoherynUI — Multi-Theme Runtime Engine & Application Starter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="coherynui.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Sidebar Navigation & Theme Controller -->
+    <aside class="app-sidebar">
+      <div class="brand-badge">
+        <div class="brand-icon">C</div>
+        <span>CoherynUI Theme</span>
+      </div>
+
+      <div class="theme-picker-group">
+        <span class="theme-picker-title">Switch Active Theme</span>
+        
+        <button class="theme-option-btn active" data-set-theme="dark" onclick="selectTheme('dark')">
+          <span>Dark Mode</span>
+          <div class="swatch-group">
+            <span class="swatch" style="background: #0f172a"></span>
+            <span class="swatch" style="background: #6366f1"></span>
+          </div>
+        </button>
+
+        <button class="theme-option-btn" data-set-theme="light" onclick="selectTheme('light')">
+          <span>Light Mode</span>
+          <div class="swatch-group">
+            <span class="swatch" style="background: #ffffff; border-color: #cbd5e1;"></span>
+            <span class="swatch" style="background: #4f46e5"></span>
+          </div>
+        </button>
+
+        <button class="theme-option-btn" data-set-theme="cyberpunk" onclick="selectTheme('cyberpunk')">
+          <span>Cyberpunk</span>
+          <div class="swatch-group">
+            <span class="swatch" style="background: #0a0a12"></span>
+            <span class="swatch" style="background: #ff007f"></span>
+            <span class="swatch" style="background: #00ffcc"></span>
+          </div>
+        </button>
+
+        <button class="theme-option-btn" data-set-theme="nord" onclick="selectTheme('nord')">
+          <span>Nord Frost</span>
+          <div class="swatch-group">
+            <span class="swatch" style="background: #2e3440"></span>
+            <span class="swatch" style="background: #88c0d0"></span>
+          </div>
+        </button>
+      </div>
+
+      <div class="card" style="margin-top: auto; padding: 1rem; font-size: 0.8125rem;">
+        <div style="font-weight: 700; margin-bottom: 0.25rem;">Engine Status</div>
+        <p style="color: var(--cyn-color-muted);">Prefix: <code class="text-brand">cyn</code></p>
+        <p style="color: var(--cyn-color-muted); margin-top: 0.25rem;">Dynamic CSS variables enabled across all component scopes.</p>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="app-main">
+      <header class="flex-between">
+        <div>
+          <h1 style="font-size: 1.875rem; font-weight: 800; letter-spacing: -0.02em;">Multi-Theme Runtime Engine</h1>
+          <p style="color: var(--cyn-color-muted); margin-top: 0.25rem;">Live switching demonstrating instant variable propagation and token binding.</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <button class="btn-secondary" onclick="cycleTheme()">Cycle Next Theme</button>
+          <button class="btn-primary">Generate Spec Token</button>
+        </div>
+      </header>
+
+      <!-- Key Performance Metrics Grid -->
+      <section class="metrics-grid">
+        <div class="card metric-card">
+          <span class="metric-label">Active Theme</span>
+          <span class="metric-value" id="current-theme-name" style="text-transform: capitalize;">Dark</span>
+          <span class="metric-badge success">Zero CSS Re-parsing</span>
+        </div>
+
+        <div class="card metric-card">
+          <span class="metric-label">Theme Switch Latency</span>
+          <span class="metric-value">0.12ms</span>
+          <span class="metric-badge success">GPU Composited</span>
+        </div>
+
+        <div class="card metric-card">
+          <span class="metric-label">Token Coverage</span>
+          <span class="metric-value">100%</span>
+          <span class="metric-badge success">W3C Compliant</span>
+        </div>
+      </section>
+
+      <!-- Live Design Token Palette Inspector -->
+      <section class="card">
+        <h2 style="font-size: 1.25rem; font-weight: 700;">Live Theme Token Palette</h2>
+        <p style="color: var(--cyn-color-muted); font-size: 0.875rem; margin-top: 0.25rem;">
+          These CSS custom properties update dynamically when changing themes without touching any HTML classes.
+        </p>
+
+        <div class="token-preview-grid">
+          <div class="token-swatch-card">
+            <div class="token-color-chip" style="background: var(--cyn-color-surface);"></div>
+            <span class="token-name">--cyn-color-surface</span>
+            <span class="token-val" id="val-surface">var(...)</span>
+          </div>
+
+          <div class="token-swatch-card">
+            <div class="token-color-chip" style="background: var(--cyn-color-surface-elevated);"></div>
+            <span class="token-name">--cyn-color-surface-elevated</span>
+            <span class="token-val" id="val-elevated">var(...)</span>
+          </div>
+
+          <div class="token-swatch-card">
+            <div class="token-color-chip" style="background: var(--cyn-color-brand);"></div>
+            <span class="token-name">--cyn-color-brand</span>
+            <span class="token-val" id="val-brand">var(...)</span>
+          </div>
+
+          <div class="token-swatch-card">
+            <div class="token-color-chip" style="background: var(--cyn-color-foreground);"></div>
+            <span class="token-name">--cyn-color-foreground</span>
+            <span class="token-val" id="val-foreground">var(...)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Data Table -->
+      <section class="card">
+        <h2 style="font-size: 1.25rem; font-weight: 700;">Theme Performance Benchmarks</h2>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Theme Identifier</th>
+              <th>Surface Mode</th>
+              <th>Accent Characteristic</th>
+              <th>Variable Prefix</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>dark</code></td>
+              <td>Slate Deep (#0f172a)</td>
+              <td>Indigo 600</td>
+              <td><code>--cyn-*</code></td>
+              <td><span style="color: var(--cyn-color-success); font-weight: 600;">Active Default</span></td>
+            </tr>
+            <tr>
+              <td><code>light</code></td>
+              <td>Pure Clean (#ffffff)</td>
+              <td>Indigo 700</td>
+              <td><code>--cyn-*</code></td>
+              <td><span style="color: var(--cyn-color-muted);">Verified</span></td>
+            </tr>
+            <tr>
+              <td><code>cyberpunk</code></td>
+              <td>Obsidian Glow (#0a0a12)</td>
+              <td>Neon Hot Pink & Cyan</td>
+              <td><code>--cyn-*</code></td>
+              <td><span style="color: var(--cyn-color-muted);">Verified</span></td>
+            </tr>
+            <tr>
+              <td><code>nord</code></td>
+              <td>Arctic Polar (#2e3440)</td>
+              <td>Frost Blue (#88c0d0)</td>
+              <td><code>--cyn-*</code></td>
+              <td><span style="color: var(--cyn-color-muted);">Verified</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const themes = ['dark', 'light', 'cyberpunk', 'nord'];
+
+    function selectTheme(themeName) {
+      document.documentElement.setAttribute('data-theme', themeName);
+      
+      // Update sidebar active buttons
+      document.querySelectorAll('[data-set-theme]').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-set-theme') === themeName);
+      });
+
+      // Update name label
+      const nameEl = document.getElementById('current-theme-name');
+      if (nameEl) nameEl.textContent = themeName;
+
+      // Update token swatch text
+      setTimeout(updateTokenReadout, 50);
+    }
+
+    function cycleTheme() {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const nextIndex = (themes.indexOf(current) + 1) % themes.length;
+      selectTheme(themes[nextIndex]);
+    }
+
+    function updateTokenReadout() {
+      const styles = getComputedStyle(document.documentElement);
+      const surface = styles.getPropertyValue('--cyn-color-surface').trim();
+      const elevated = styles.getPropertyValue('--cyn-color-surface-elevated').trim();
+      const brand = styles.getPropertyValue('--cyn-color-brand').trim();
+      const foreground = styles.getPropertyValue('--cyn-color-foreground').trim();
+
+      const elSurface = document.getElementById('val-surface');
+      const elElevated = document.getElementById('val-elevated');
+      const elBrand = document.getElementById('val-brand');
+      const elForeground = document.getElementById('val-foreground');
+
+      if (elSurface) elSurface.textContent = surface || '#0f172a';
+      if (elElevated) elElevated.textContent = elevated || '#1e293b';
+      if (elBrand) elBrand.textContent = brand || '#6366f1';
+      if (elForeground) elForeground.textContent = foreground || '#f8fafc';
+    }
+
+    window.addEventListener('DOMContentLoaded', updateTokenReadout);
+  </script>
+</body>
+</html>

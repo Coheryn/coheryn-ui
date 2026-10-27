@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoherynUI Components - Headless & Styled Accessible Component Suite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="coherynui.css">
+</head>
+<body>
+
+  <header class="header">
+    <div style="display: flex; align-items: center;">
+      <h1 style="font-size: 1.25rem; font-weight: 800; letter-spacing: -0.02em;">CoherynUI</h1>
+      <span class="brand-badge">WCAG 2.2 AAA Accessible</span>
+    </div>
+    <nav class="nav-links">
+      <a href="../01-landing-page/index.html">Landing Page</a>
+      <a href="../02-admin-dashboard/index.html">Dashboard</a>
+      <a href="../03-liquid-glass-showcase/index.html">Liquid Glass</a>
+      <a href="../04-motion-playground/index.html">Motion Lab</a>
+      <a href="../06-production-renaming/index.html">Optimizer</a>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- Section 1: Modal Dialog & Focus Trap -->
+    <section>
+      <div class="section-header">
+        <h2>🛡️ Accessible Dialog & Strict Focus Trap</h2>
+        <p>Full WAI-ARIA Modal pattern featuring <code>trapFocus</code>, <code>scrollLock</code>, and <code>dismissOnEscape</code>.</p>
+      </div>
+
+      <div class="card">
+        <p style="color: var(--cyn-text-muted); margin-bottom: 1.5rem; line-height: 1.6;">
+          When opened, keyboard focus is dynamically trapped inside the dialog container. Pressing <kbd>Tab</kbd> or <kbd>Shift + Tab</kbd> cycles exclusively through interactive targets. Pressing <kbd>Escape</kbd> restores focus to the invoking button.
+        </p>
+        <button class="btn btn-primary" id="openModalBtn">Open Accessible Modal</button>
+      </div>
+    </section>
+
+    <!-- Section 2: Tabs with Roving Focus & Accordion -->
+    <section>
+      <div class="section-header">
+        <h2>⌨️ Roving Tabindex & Keyboard Navigation</h2>
+        <p>Arrow key navigation (Left/Right, Home/End) across tabs and collapsible disclosure accordion.</p>
+      </div>
+
+      <div class="grid-2col">
+        <!-- Tabs Component -->
+        <div class="card">
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem;">Roving Focus Tabs</h3>
+          <div class="tab-list" role="tablist" aria-label="Engine Features">
+            <button class="tab-trigger" role="tab" id="tab-1" aria-selected="true" aria-controls="panel-1" tabindex="0">Engine Core</button>
+            <button class="tab-trigger" role="tab" id="tab-2" aria-selected="false" aria-controls="panel-2" tabindex="-1">WASM Host</button>
+            <button class="tab-trigger" role="tab" id="tab-3" aria-selected="false" aria-controls="panel-3" tabindex="-1">GPU Shaders</button>
+          </div>
+
+          <div class="tab-panel active" id="panel-1" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
+            CoherynUI CSS Engine is written in Rust 2024. It emits spec-compliant CSS cascade layers with zero duplicate rules and instant millisecond re-compilations.
+          </div>
+          <div class="tab-panel" id="panel-2" role="tabpanel" aria-labelledby="tab-2" tabindex="0">
+            Sandboxed WebAssembly plugin host with deterministic fuel metering, bounded memory heaps, and no arbitrary host filesystem access.
+          </div>
+          <div class="tab-panel" id="panel-3" role="tabpanel" aria-labelledby="tab-3" tabindex="0">
+            Real-time WGSL optical dispersion and refractive physics shaders with automatic fallback to WebGL and standard CSS filters.
+          </div>
+        </div>
+
+        <!-- Accordion Component -->
+        <div class="card">
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem;">Accessible Accordion</h3>
+          <div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="false" aria-controls="acc-1" id="acc-btn-1">
+                <span>How does CoherynUI ensure 100% WCAG AAA contrast?</span>
+                <span class="accordion-icon">▼</span>
+              </button>
+              <div class="accordion-panel" id="acc-1" role="region" aria-labelledby="acc-btn-1">
+                The CoherynUI design token catalog evaluates APCA (Accessible Perceptual Contrast Algorithm) luminance ratios at compile-time and flags violations via CY2001 diagnostics.
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="false" aria-controls="acc-2" id="acc-btn-2">
+                <span>Does the headless core require React?</span>
+                <span class="accordion-icon">▼</span>
+              </button>
+              <div class="accordion-panel" id="acc-2" role="region" aria-labelledby="acc-btn-2">
+                No. <code>@coherynui/components</code> is 100% framework-agnostic vanilla TypeScript with zero dependencies, perfectly compatible with React, Vue, Svelte, or Solid.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: ARIA Live Validation & Switches -->
+    <section>
+      <div class="section-header">
+        <h2>🔔 Live Regions & ARIA Form Validation</h2>
+        <p>Real-time screen reader notification dispatching with <code>aria-live="polite"</code>.</p>
+      </div>
+
+      <div class="grid-2col">
+        <!-- Live Form -->
+        <div class="card">
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1.25rem;">Live Validated Form</h3>
+          <form id="accessibleForm" novalidate>
+            <div class="form-group">
+              <label class="form-label" for="emailInput">Developer Email</label>
+              <input type="email" class="input-text" id="emailInput" aria-describedby="emailError" placeholder="architect@coherynui.dev">
+              <div class="error-msg" id="emailError" role="alert">Please provide a valid company domain email.</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Validate Contract</button>
+          </form>
+        </div>
+
+        <!-- Switches & Controls -->
+        <div class="card">
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1.25rem;">ARIA Role Switches</h3>
+          
+          <div class="switch-row">
+            <div>
+              <div style="font-weight: 600; font-size: 0.95rem;">High Contrast Specular</div>
+              <div style="color: var(--cyn-text-muted); font-size: 0.8rem;">Enforce 7:1 boundary ratio</div>
+            </div>
+            <button class="switch-btn" role="switch" id="switch1" aria-checked="false" aria-label="High Contrast Specular">
+              <div class="switch-thumb"></div>
+            </button>
+          </div>
+
+          <div class="switch-row" style="margin-top: 1rem;">
+            <div>
+              <div style="font-weight: 600; font-size: 0.95rem;">Hardware Motion Assist</div>
+              <div style="color: var(--cyn-text-muted); font-size: 0.8rem;">Respect prefers-reduced-motion</div>
+            </div>
+            <button class="switch-btn" role="switch" id="switch2" aria-checked="true" aria-label="Hardware Motion Assist">
+              <div class="switch-thumb"></div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Accessible Modal -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc" id="modalContainer">
+      <h3 id="modalTitle" style="font-size: 1.35rem; font-weight: 700; margin-bottom: 0.5rem;">Production Deploy Approval</h3>
+      <p id="modalDesc" style="color: var(--cyn-text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem;">
+        You are approving the automated release of CoherynUI v1.2 with aggressive class renaming manifest <code>coherynui.manifest.json</code>.
+      </p>
+
+      <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
+        <button class="btn" id="modalCancelBtn">Cancel</button>
+        <button class="btn btn-primary" id="modalConfirmBtn">Confirm Deploy</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARIA Live Screen Reader HUD -->
+  <div class="a11y-hud">
+    <div class="a11y-hud-title">
+      <span>ARIA LIVE FEED</span>
+      <span style="color: var(--cyn-success);">POLITE</span>
+    </div>
+    <div id="ariaLiveDisplay" style="color: var(--cyn-text); line-height: 1.4;">
+      System initialized. WCAG AAA compliance active.
+    </div>
+  </div>
+
+  <!-- Hidden ARIA Live Region for actual Screen Readers -->
+  <div id="srAnnouncer" aria-live="polite" class="sr-only" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;"></div>
+
+  <script>
+    function announce(msg) {
+      document.getElementById('srAnnouncer').textContent = msg;
+      document.getElementById('ariaLiveDisplay').textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+    }
+
+    // --- Modal Focus Trap ---
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const modalContainer = document.getElementById('modalContainer');
+    const openModalBtn = document.getElementById('openModalBtn');
+    const modalCancelBtn = document.getElementById('modalCancelBtn');
+    const modalConfirmBtn = document.getElementById('modalConfirmBtn');
+    let previousActiveElement = null;
+
+    function openModal() {
+      previousActiveElement = document.activeElement;
+      modalBackdrop.classList.add('open');
+      document.body.style.overflow = 'hidden'; // scrollLock
+      modalCancelBtn.focus();
+      announce("Dialog opened: Production Deploy Approval. Focus trapped.");
+    }
+
+    function closeModal() {
+      modalBackdrop.classList.remove('open');
+      document.body.style.overflow = '';
+      if (previousActiveElement) previousActiveElement.focus();
+      announce("Dialog dismissed. Focus returned to trigger.");
+    }
+
+    openModalBtn.addEventListener('click', openModal);
+    modalCancelBtn.addEventListener('click', closeModal);
+    modalConfirmBtn.addEventListener('click', () => {
+      alert("Deployment approved successfully.");
+      closeModal();
+    });
+
+    // Dismiss on Escape
+    window.addEventListener('keydown', (e) => {
+      if (modalBackdrop.classList.contains('open')) {
+        if (e.key === 'Escape') {
+          closeModal();
+        } else if (e.key === 'Tab') {
+          // Trap Focus logic
+          const focusable = modalContainer.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+
+          if (e.shiftKey) {
+            if (document.activeElement === first) {
+              last.focus();
+              e.preventDefault();
+            }
+          } else {
+            if (document.activeElement === last) {
+              first.focus();
+              e.preventDefault();
+            }
+          }
+        }
+      }
+    });
+
+    // --- Roving Tabindex for Tabs ---
+    const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
+    const panels = Array.from(document.querySelectorAll('[role="tabpanel"]'));
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => selectTab(index));
+      tab.addEventListener('keydown', (e) => {
+        let newIndex = index;
+        if (e.key === 'ArrowRight') newIndex = (index + 1) % tabs.length;
+        else if (e.key === 'ArrowLeft') newIndex = (index - 1 + tabs.length) % tabs.length;
+        else if (e.key === 'Home') newIndex = 0;
+        else if (e.key === 'End') newIndex = tabs.length - 1;
+        else return;
+
+        e.preventDefault();
+        selectTab(newIndex);
+        tabs[newIndex].focus();
+      });
+    });
+
+    function selectTab(targetIndex) {
+      tabs.forEach((tab, i) => {
+        const selected = i === targetIndex;
+        tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+        tab.setAttribute('tabindex', selected ? '0' : '-1');
+      });
+      panels.forEach((panel, i) => {
+        panel.classList.toggle('active', i === targetIndex);
+      });
+      announce(`Selected tab: ${tabs[targetIndex].textContent}`);
+    }
+
+    // --- Accordion ---
+    document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const expanded = trigger.getAttribute('aria-expanded') === 'true';
+        trigger.setAttribute('aria-expanded', !expanded);
+        announce(`${trigger.querySelector('span').textContent} ${!expanded ? 'expanded' : 'collapsed'}`);
+      });
+    });
+
+    // --- Switches ---
+    document.querySelectorAll('.switch-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const checked = btn.getAttribute('aria-checked') === 'true';
+        btn.setAttribute('aria-checked', !checked);
+        announce(`${btn.getAttribute('aria-label')}: ${!checked ? 'enabled' : 'disabled'}`);
+      });
+    });
+
+    // --- Form Validation ---
+    const form = document.getElementById('accessibleForm');
+    const emailInput = document.getElementById('emailInput');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const val = emailInput.value.trim();
+      const valid = val.includes('@') && val.includes('.');
+      emailInput.setAttribute('aria-invalid', !valid);
+      if (!valid) {
+        announce("Validation error: Please provide a valid company domain email.");
+        emailInput.focus();
+      } else {
+        announce("Form contract validated successfully.");
+        alert("Form successfully validated with zero accessibility violations.");
+      }
+    });
+  </script>
+</body>
+</html>

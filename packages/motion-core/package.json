@@ -1,0 +1,11 @@
+{
+  "name": "@coherynui/motion",
+  "version": "0.1.0",
+  "description": "Stable 1.0 Advanced Animation Runtime: Springs, Timelines, Gestures, FLIP Layouts",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  }
+}

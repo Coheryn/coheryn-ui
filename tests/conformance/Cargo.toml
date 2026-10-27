@@ -1,0 +1,24 @@
+[package]
+name = "coherynui-conformance"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+coherynui-core = { workspace = true }
+coherynui-syntax = { workspace = true }
+coherynui-source = { workspace = true }
+coherynui-compiler = { workspace = true }
+coherynui-design = { workspace = true }
+coherynui-class-opt = { workspace = true }
+coherynui-plugin-api = { workspace = true }
+coherynui-plugin-host = { workspace = true }
+coherynui-diagnostics = { workspace = true }
+coherynui-agent-api = { workspace = true }
+coherynui-registry = { workspace = true }
+coherynui-mcp = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+proptest = { workspace = true }
+thiserror = { workspace = true }

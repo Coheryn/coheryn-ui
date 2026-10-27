@@ -1,0 +1,11 @@
+{
+  "name": "@coherynui/gpu-materials",
+  "version": "0.1.0",
+  "description": "Stable 1.0 WebGPU refraction pipeline with WebGL2 and CSS fallbacks",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  }
+}

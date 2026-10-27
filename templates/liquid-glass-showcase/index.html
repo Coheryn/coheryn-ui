@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoherynUI — Liquid Glass & GPU Refraction Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="coherynui.css">
+</head>
+<body>
+
+  <!-- Ambient background orb -->
+  <div style="position: fixed; top: 15%; left: 30%; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, #6366f1, #06b6d4); filter: blur(120px); opacity: 0.35; z-index: -1;"></div>
+
+  <div class="container">
+    <div class="header-bar">
+      <div style="font-size: 0.8rem; font-weight: 700; color: var(--cyn-color-brand-light); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.5rem;">Physical Material System</div>
+      <h1>Liquid Glass & GPU Refraction</h1>
+      <p>Multi-tier optical hierarchy with CSS native blur and WebGPU shader fallbacks.</p>
+    </div>
+
+    <!-- 3 Tier Showcase -->
+    <div class="grid-3col">
+      <!-- Tier 1 -->
+      <div class="glass tier-card" id="cardTier1">
+        <div>
+          <div class="tier-badge">Tier 1 — CSS Glass</div>
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;">Standard Translucency</h3>
+          <p style="color: var(--cyn-color-muted); font-size: 0.9rem; line-height: 1.6;">
+            Zero runtime JavaScript. Compiles directly into CSS <code>backdrop-filter: blur(...)</code> inside <code>@layer cyn.recipes</code>.
+          </p>
+        </div>
+        <div style="font-family: var(--cyn-font-mono); font-size: 0.75rem; color: var(--cyn-color-brand-light); margin-top: 1.5rem;">
+          Class: <code>.glass</code>
+        </div>
+      </div>
+
+      <!-- Tier 2 -->
+      <div class="glass glass-edge tier-card" id="cardTier2">
+        <div>
+          <div class="tier-badge">Tier 2 — Enhanced Specular</div>
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;">Rim Light Specular</h3>
+          <p style="color: var(--cyn-color-muted); font-size: 0.9rem; line-height: 1.6;">
+            Features an ultra-sharp 1px linear specular highlight edge to simulate real physical refractive glass edges.
+          </p>
+        </div>
+        <div style="font-family: var(--cyn-font-mono); font-size: 0.75rem; color: var(--cyn-color-brand-light); margin-top: 1.5rem;">
+          Class: <code>.glass .glass-edge</code>
+        </div>
+      </div>
+
+      <!-- Tier 3 -->
+      <div class="glass glass-edge tier-card" id="cardTier3" style="border-color: rgba(6, 182, 212, 0.4);">
+        <div>
+          <div class="tier-badge">Tier 3 — WebGPU Shader</div>
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;">Optical Dispersion</h3>
+          <p style="color: var(--cyn-color-muted); font-size: 0.9rem; line-height: 1.6;">
+            Full WGSL fragment pipeline calculating Snell's law refraction vectors and RGB chromatic separation.
+          </p>
+        </div>
+        <div style="font-family: var(--cyn-font-mono); font-size: 0.75rem; color: var(--cyn-color-brand-light); margin-top: 1.5rem;">
+          Shader: <code>refraction.wgsl</code>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Parameter Synthesis -->
+    <div class="control-panel">
+      <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1.25rem;">Live Optical Synthesis Controls</h3>
+
+      <div class="slider-row">
+        <span>Blur Radius</span>
+        <input type="range" id="blurSlider" min="0" max="40" value="16">
+        <span id="blurVal">16px</span>
+      </div>
+
+      <div class="slider-row">
+        <span>Opacity Tint</span>
+        <input type="range" id="opacitySlider" min="10" max="95" value="70">
+        <span id="opacityVal">70%</span>
+      </div>
+
+      <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+        <button id="toggleOpaque" style="background: var(--cyn-color-brand); color: #000; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 700; cursor: pointer;">
+          Toggle Reduced Transparency Fallback
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const blurSlider = document.getElementById('blurSlider');
+    const opacitySlider = document.getElementById('opacitySlider');
+    const blurVal = document.getElementById('blurVal');
+    const opacityVal = document.getElementById('opacityVal');
+    let fallback = false;
+
+    function update() {
+      if (fallback) {
+        document.documentElement.style.setProperty('--cyn-glass-bg', '#0e131f');
+        document.documentElement.style.setProperty('--cyn-glass-blur', '0px');
+        return;
+      }
+      const b = blurSlider.value;
+      const op = (opacitySlider.value / 100).toFixed(2);
+      blurVal.innerText = `${b}px`;
+      opacityVal.innerText = `${opacitySlider.value}%`;
+
+      document.documentElement.style.setProperty('--cyn-glass-blur', `${b}px`);
+      document.documentElement.style.setProperty('--cyn-glass-bg', `rgba(14, 19, 31, ${op})`);
+    }
+
+    blurSlider.addEventListener('input', update);
+    opacitySlider.addEventListener('input', update);
+
+    document.getElementById('toggleOpaque').addEventListener('click', () => {
+      fallback = !fallback;
+      update();
+    });
+  </script>
+</body>
+</html>

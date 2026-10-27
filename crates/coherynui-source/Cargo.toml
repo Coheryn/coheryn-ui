@@ -1,0 +1,13 @@
+[package]
+name = "coherynui-source"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+
+[dependencies]
+coherynui-core.workspace = true
+ignore.workspace = true
+globset.workspace = true
+thiserror.workspace = true

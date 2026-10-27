@@ -1,0 +1,11 @@
+{
+  "name": "@coherynui/components",
+  "version": "0.1.0",
+  "description": "Headless accessible UI primitives, ARIA patterns, focus management for CoherynUI Components",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  }
+}

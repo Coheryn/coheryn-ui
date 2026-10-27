@@ -1,0 +1,15 @@
+{
+  "name": "template-marketing-landing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CoherynUI Next-Gen SaaS Landing Page Starter",
+  "scripts": {
+    "dev": "coherynui dev",
+    "build": "coherynui build --input . --output coherynui.css",
+    "check": "coherynui check"
+  },
+  "dependencies": {
+    "@coherynui/tokens": "^1.0.0",
+    "@coherynui/components": "^1.0.0"
+  }
+}

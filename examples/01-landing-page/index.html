@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CoherynUI — Style the Next Generation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="coherynui.css">
+</head>
+<body class="min-h-screen stack">
+  <!-- Glowing Background Orbs -->
+  <div style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); width: 600px; height: 350px; background: radial-gradient(circle, var(--cyn-color-brand-glow) 0%, transparent 70%); filter: blur(60px); pointer-events: none; z-index: -1;"></div>
+
+  <!-- Floating Liquid Glass Navbar -->
+  <header style="position: sticky; top: 1.5rem; z-index: 50; width: 100%; padding: 0 1.5rem;">
+    <div class="center glass glass-edge radius-full px-6 py-3 cluster items-center justify-between" style="max-width: 60rem;">
+      <a href="#" class="cluster items-center gap-3">
+        <div class="w-8 h-8 radius-lg bg-brand flex items-center justify-center weight-bold fg-primary" style="width: 2rem; height: 2rem; display: flex;">C</div>
+        <span class="text-xl weight-bold tracking-tight">CoherynUI<span style="color: var(--cyn-color-brand)">UI</span></span>
+      </a>
+
+      <nav class="cluster items-center gap-6 text-sm weight-medium" style="display: none; @media(min-width: 768px) { display: flex; }">
+        <a href="#features" class="fg-muted hover:fg-primary transition-colors">Features</a>
+        <a href="#architecture" class="fg-muted hover:fg-primary transition-colors">Architecture</a>
+        <a href="#showcase" class="fg-muted hover:fg-primary transition-colors">Materials</a>
+        <a href="#docs" class="fg-muted hover:fg-primary transition-colors">Docs</a>
+      </nav>
+
+      <div class="cluster items-center gap-3">
+        <!-- Theme Switcher -->
+        <button id="themeToggle" class="p-2 radius-full glass hover:lift text-sm" aria-label="Toggle light/dark theme" style="display: flex; align-items: center; justify-content: center; width: 2.25rem; height: 2.25rem;">
+          <span id="themeIcon">☀️</span>
+        </button>
+        <a href="https://github.com/CoherynTechProjects/CoherynCSS" target="_blank" class="px-4 py-2 radius-full bg-brand fg-primary text-sm weight-semibold shadow-glow hover:lift transition-all">
+          Get Started →
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="center p-6 stack items-center text-center gap-8" style="padding-top: 6rem; padding-bottom: 6rem;">
+    <!-- Pill Badge -->
+    <div class="cluster items-center gap-3 px-4 py-1.5 radius-full glass border text-sm weight-medium shadow-sm">
+      <span class="px-2 py-0.5 text-xs radius-full bg-brand fg-primary weight-bold">v1.2</span>
+      <span class="fg-muted">Independent Rust-Native Styling Platform</span>
+    </div>
+
+    <!-- Main Headline -->
+    <h1 class="text-6xl weight-extrabold tracking-tight" style="max-width: 52rem;">
+      Style the <span class="gradient-text">Next Generation</span> of User Interfaces.
+    </h1>
+
+    <p class="text-xl fg-muted weight-medium" style="max-width: 40rem;">
+      Compile deterministic CSS with zero mandatory runtime JavaScript. Experience real WebGPU Liquid Glass refraction, analytical physics motion, and aggressive production class optimization.
+    </p>
+
+    <!-- Call to Actions -->
+    <div class="cluster items-center justify-center gap-4" style="margin-top: 1rem;">
+      <a href="#features" class="px-6 py-3 radius-xl bg-brand fg-primary text-base weight-bold shadow-glow hover:lift">
+        Explore Components
+      </a>
+      <a href="#docs" class="px-6 py-3 radius-xl glass glass-edge text-base weight-semibold hover:lift">
+        Read Master Plan
+      </a>
+    </div>
+
+    <!-- Quick Terminal Snippet -->
+    <div class="glass glass-edge radius-xl p-4 stack gap-2 text-sm" style="font-family: 'JetBrains Mono', monospace; max-width: 32rem; width: 100%; margin-top: 2rem; text-align: left;">
+      <div class="cluster items-center gap-2" style="margin-bottom: 0.25rem;">
+        <span style="width: 10px; height: 10px; border-radius: 50%; background: #ef4444; display: inline-block;"></span>
+        <span style="width: 10px; height: 10px; border-radius: 50%; background: #f59e0b; display: inline-block;"></span>
+        <span style="width: 10px; height: 10px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
+      </div>
+      <div style="color: var(--cyn-color-muted);">$ npx coherynui init</div>
+      <div style="color: #10b981;">✓ Initialized coherynui.config.toml</div>
+      <div style="color: var(--cyn-color-muted);">$ coherynui build --class-renaming aggressive</div>
+      <div style="color: var(--cyn-color-foreground);">✨ Built 48 classes (42% size reduction) -> coherynui.css</div>
+    </div>
+  </main>
+
+  <!-- Feature Grid -->
+  <section id="features" class="center p-6 stack gap-8" style="padding-bottom: 8rem;">
+    <div class="stack items-center text-center gap-2">
+      <h2 class="text-4xl weight-bold tracking-tight">Engineered for Excellence</h2>
+      <p class="text-base fg-muted">Five official Stable 1.0 subsystems built without compromise.</p>
+    </div>
+
+    <div class="grid-auto gap-6">
+      <div class="glass glass-edge p-8 radius-2xl stack gap-4 hover:lift">
+        <div style="font-size: 2rem;">💎</div>
+        <h3 class="text-xl weight-bold">Liquid Glass Materials</h3>
+        <p class="text-sm fg-muted">
+          Real WGSL shader refraction over WebGPU with graceful WebGL2 and CSS-native Tier 1 fallbacks. Respects reduced transparency preferences.
+        </p>
+      </div>
+
+      <div class="glass glass-edge p-8 radius-2xl stack gap-4 hover:lift">
+        <div style="font-size: 2rem;">⚡</div>
+        <h3 class="text-xl weight-bold">CoherynUI Motion</h3>
+        <p class="text-sm fg-muted">
+          Analytical spring physics solver with zero velocity snapping under interruptions, FLIP layout transitions, and sequential timelines.
+        </p>
+      </div>
+
+      <div class="glass glass-edge p-8 radius-2xl stack gap-4 hover:lift">
+        <div style="font-size: 2rem;">🛡️</div>
+        <h3 class="text-xl weight-bold">Sandboxed WASM Host</h3>
+        <p class="text-sm fg-muted">
+          Public WIT interface with zero ambient authority. Plugins run isolated with instruction fuel metering and 32MB linear memory boundaries.
+        </p>
+      </div>
+
+      <div class="glass glass-edge p-8 radius-2xl stack gap-4 hover:lift">
+        <div style="font-size: 2rem;">📦</div>
+        <h3 class="text-xl weight-bold">CoherynUI Components</h3>
+        <p class="text-sm fg-muted">
+          48 accessible component patterns across 8 families. Complete focus traps, roving tabindex, and WCAG 2.2 AA interaction contracts.
+        </p>
+      </div>
+
+      <div class="glass glass-edge p-8 radius-2xl stack gap-4 hover:lift">
+        <div style="font-size: 2rem;">✂️</div>
+        <h3 class="text-xl weight-bold">Class Optimizer</h3>
+        <p class="text-sm fg-muted">
+          Aggressive whole-graph class renaming with deterministic manifests and fail-closed dynamic checking for production byte savings.
+        </p>
+      </div>
+
+      <div class="glass glass-edge p-8 radius-2xl stack gap-4 hover:lift">
+        <div style="font-size: 2rem;">🦀</div>
+        <h3 class="text-xl weight-bold">Rust 2024 Engine</h3>
+        <p class="text-sm fg-muted">
+          Independent compiler built from scratch with blake3 incremental caching, cascade layers (@layer), and sub-millisecond rebuilds.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="center p-8 cluster items-center justify-between border-t border-subtle text-sm fg-muted" style="margin-top: auto;">
+    <div>© 2026 CoherynUI Tech. Dual-licensed under MIT or Apache-2.0.</div>
+    <div class="cluster gap-6">
+      <a href="https://github.com/CoherynTechProjects/CoherynCSS" class="hover:fg-primary">GitHub</a>
+      <a href="../../docs/spec/language.md" class="hover:fg-primary">Language Spec</a>
+      <a href="../../resources/Coheryn_UI_Amendment_v1.2.md" class="hover:fg-primary">v1.2 Amendment</a>
+    </div>
+  </footer>
+
+  <script>
+    // Theme Switcher Logic
+    const toggle = document.getElementById('themeToggle');
+    const icon = document.getElementById('themeIcon');
+    const html = document.documentElement;
+
+    toggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      icon.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+  </script>
+</body>
+</html>

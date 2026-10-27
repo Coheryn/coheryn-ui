@@ -1,0 +1,26 @@
+# CoherynUI — Style the next generation.
+
+> CoherynUI is an independent, Rust-native, agent-native UI framework and intelligent styling platform. Its Coheryn CSS Engine produces deterministic, cascade-layered standards-compliant CSS with zero mandatory browser JavaScript.
+
+## Quick Reference
+- Official Website: https://coherynui.dev
+- CLI Binary: `coherynui`
+- Cascade Layers: `@layer cyn.reset, cyn.tokens, cyn.base, cyn.recipes, cyn.utilities;`
+- Token Prefix: `--cyn-*` (configurable in `coherynui.config.toml`)
+- MCP Server: `coherynui mcp serve` (stdio JSON-RPC transport)
+- Validation: `coherynui check --format json`
+
+## Key Capabilities (Stable 1.0 Release Blockers)
+1. Coheryn Components: Headless and React component suite with strict WAI-ARIA 1.2 compliance (`@coherynui/components`, `@coherynui/react`).
+2. Coheryn Motion: Analytical harmonic spring solver ($m \cdot x'' + c \cdot x' + k \cdot x = 0$) and FLIP layout transitions (`@coherynui/motion`).
+3. Coheryn GPU Materials: 3-tier optical refraction shaders with WebGPU WGSL, WebGL2, and CSS Liquid Glass fallbacks (`@coherynui/gpu-materials`).
+4. Coheryn Class Optimizer: Whole-project production AST renaming with `coherynui.manifest.json` bidirectional verification.
+5. Coheryn Plugin Host: Sandboxed WebAssembly Component Model plugin runtime with fuel metering.
+6. Coheryn MCP Server & Agent Skills: 10 read-only discovery & validation tools with 7 official versioned skills.
+
+## Core Documentation Links
+- [Language Specification](docs/spec/language.md): Grammar and canonical utility syntax.
+- [Cascade Layers](docs/spec/cascade.md): @layer cyn.* precedence and prefix customization.
+- [Component Catalog](docs/ui/component-catalog.md): Accessibility contracts and component families.
+- [Agent Guide](docs/agent-guide/overview.md): Guidelines for coding assistants and LLMs.
+- [Component Registry](registry/index.json): Machine-readable component schemas and APIs.

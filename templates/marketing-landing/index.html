@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoherynUI — Style the Next Generation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="coherynui.css">
+</head>
+<body>
+
+  <!-- Floating Liquid Glass Navigation Dock -->
+  <header class="glass-dock">
+    <div style="display: flex; align-items: center; gap: 0.6rem;">
+      <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--cyn-color-brand); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #fff; font-size: 0.8rem;">C</div>
+      <span style="font-weight: 800; font-size: 1rem;">CoherynUI</span>
+    </div>
+
+    <nav style="display: flex; gap: 1.5rem; font-size: 0.85rem; font-weight: 600;">
+      <a href="#features" style="color: var(--cyn-color-muted); text-decoration: none;">Features</a>
+      <a href="#benchmarks" style="color: var(--cyn-color-muted); text-decoration: none;">Benchmarks</a>
+      <a href="#docs" style="color: var(--cyn-color-muted); text-decoration: none;">Docs</a>
+    </nav>
+
+    <button id="themeBtn" style="background: transparent; border: 1px solid var(--cyn-color-border); color: var(--cyn-color-foreground); padding: 0.4rem 0.8rem; border-radius: 9999px; cursor: pointer; font-size: 0.75rem; font-weight: 600;">Theme</button>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="hero-section">
+    <div style="display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.8rem; border-radius: 9999px; background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.3); color: var(--cyn-color-brand-light); margin-bottom: 1.5rem;">
+      ✨ Agent-Native & Rust-Powered UI Engine
+    </div>
+
+    <h1 class="gradient-headline">Style the next generation.</h1>
+    <p class="subhead">
+      High-performance cascade-layered styling engine, physical Liquid Glass refraction, analytical spring mechanics, and MCP tooling built for developers and coding assistants.
+    </p>
+
+    <div class="cta-group">
+      <a href="#" class="btn btn-brand">Get Started in 60s</a>
+      <a href="#" class="btn btn-outline">Explore Registry</a>
+    </div>
+  </main>
+
+  <!-- Feature Grid -->
+  <section class="feature-grid" id="features">
+    <div class="feature-card">
+      <h3>⚡ Coheryn CSS Engine</h3>
+      <p>Written in Rust 2024. Compiles deterministic cascade layers with zero runtime JS overhead and sub-50ms cold rebuilds.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🧊 Liquid Glass & WebGPU</h3>
+      <p>3-tier rendering hierarchy with genuine per-pixel optical refraction and automatic accessible opaque fallbacks.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🤖 First-Party MCP Server</h3>
+      <p>Offline stdio tool execution with machine-readable schemas, structured validation, and automated diagnostic repair.</p>
+    </div>
+  </section>
+
+  <script>
+    document.getElementById('themeBtn').addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      document.documentElement.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+    });
+  </script>
+</body>
+</html>

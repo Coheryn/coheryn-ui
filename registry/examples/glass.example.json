@@ -1,0 +1,30 @@
+{
+  "id": "recipe:glass",
+  "name": "Liquid Glass Surface",
+  "version": "1.0.0",
+  "category": "materials",
+  "framework": "agnostic",
+  "package": "@coherynui/tokens",
+  "dependencies": ["@coherynui/tokens"],
+  "tokens_used": [
+    "--cyn-glass-bg",
+    "--cyn-glass-border",
+    "--cyn-glass-blur",
+    "--cyn-glass-specular",
+    "--cyn-radius-lg"
+  ],
+  "accessibility": {
+    "contrast_ratio": "4.5:1 minimum on backdrop text",
+    "prefers_reduced_transparency": "Automatically degrades to opaque solid surface",
+    "prefers_reduced_motion": "Preserves static optical geometry without dynamic shimmer"
+  },
+  "snippets": {
+    "html": "<div class=\"glass glass-edge\">\n  <h3>Optical Telemetry</h3>\n  <p>GPU-accelerated refractive surface with CSS backdrop blur fallback.</p>\n</div>",
+    "css": "@layer cyn.recipes {\n  .glass {\n    background: var(--cyn-glass-bg);\n    border: 1px solid var(--cyn-glass-border);\n    backdrop-filter: blur(var(--cyn-glass-blur));\n    -webkit-backdrop-filter: blur(var(--cyn-glass-blur));\n    border-radius: var(--cyn-radius-lg);\n    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);\n  }\n  .glass-edge {\n    position: relative;\n    overflow: hidden;\n  }\n  .glass-edge::before {\n    content: '';\n    position: absolute;\n    top: 0; left: 0; right: 0;\n    height: 1px;\n    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);\n  }\n  @media (prefers-reduced-transparency: reduce) {\n    .glass {\n      background: var(--cyn-color-surface-elevated);\n      backdrop-filter: none;\n      -webkit-backdrop-filter: none;\n    }\n  }\n}"
+  },
+  "assertions": {
+    "tier_fallback_verified": true,
+    "reduced_transparency_handled": true,
+    "compiler_diagnostics": []
+  }
+}

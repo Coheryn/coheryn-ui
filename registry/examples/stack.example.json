@@ -1,0 +1,24 @@
+{
+  "id": "recipe:stack",
+  "name": "Stack Layout Primitive",
+  "version": "1.0.0",
+  "category": "adaptive-layout",
+  "framework": "agnostic",
+  "package": "@coherynui/tokens",
+  "dependencies": ["@coherynui/tokens"],
+  "tokens_used": [
+    "--cyn-space-4",
+    "--cyn-space-6"
+  ],
+  "accessibility": {
+    "semantic_flow": "Preserves natural document flow and screen reader reading order",
+    "reading_order": "Top-to-bottom vertical progression"
+  },
+  "snippets": {
+    "html": "<div class=\"stack gap-4\">\n  <h2>Section Heading</h2>\n  <p>Body paragraph content with automatic spacing.</p>\n  <button type=\"button\" class=\"btn-primary\">Action</button>\n</div>",
+    "css": "@layer cyn.recipes {\n  .stack {\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n  }\n  .stack.gap-2 { gap: 0.5rem; }\n  .stack.gap-4 { gap: 1rem; }\n  .stack.gap-6 { gap: 1.5rem; }\n  .stack.gap-8 { gap: 2rem; }\n}"
+  },
+  "assertions": {
+    "compiler_diagnostics": []
+  }
+}

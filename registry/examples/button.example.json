@@ -1,0 +1,35 @@
+{
+  "id": "component:button",
+  "name": "Button",
+  "version": "1.0.0",
+  "category": "inputs",
+  "framework": "react",
+  "package": "@coherynui/react",
+  "dependencies": ["@coherynui/react", "@coherynui/components"],
+  "tokens_used": [
+    "--cyn-color-brand",
+    "--cyn-color-brand-hover",
+    "--cyn-color-brand-contrast",
+    "--cyn-radius-md",
+    "--cyn-glow"
+  ],
+  "accessibility": {
+    "role": "button",
+    "keyboard_navigation": [
+      "Enter: Activates button",
+      "Space: Activates button"
+    ],
+    "focus_management": "Visible 2px offset outline using --cyn-color-brand",
+    "aria_attributes": ["aria-disabled", "aria-busy"]
+  },
+  "snippets": {
+    "react": "import { Button } from '@coherynui/react';\n\nexport function DeployAction() {\n  return (\n    <Button variant=\"primary\" onClick={() => console.log('Deploying...')}>\n      Deploy Service\n    </Button>\n  );\n}",
+    "html": "<button type=\"button\" class=\"btn-primary\">\n  Deploy Service\n</button>",
+    "css": "@layer cyn.recipes {\n  .btn-primary {\n    background: var(--cyn-color-brand);\n    color: var(--cyn-color-brand-contrast);\n    padding: 0.625rem 1.25rem;\n    border-radius: var(--cyn-radius-md);\n    border: none;\n    font-weight: 700;\n    font-family: inherit;\n    cursor: pointer;\n    box-shadow: var(--cyn-glow);\n    transition: background-color 0.2s ease, transform 0.15s ease;\n  }\n  .btn-primary:hover {\n    background: var(--cyn-color-brand-hover);\n    transform: translateY(-1px);\n  }\n  .btn-primary:focus-visible {\n    outline: 2px solid var(--cyn-color-brand);\n    outline-offset: 2px;\n  }\n}"
+  },
+  "assertions": {
+    "compiler_diagnostics": [],
+    "aria_role_present": true,
+    "keyboard_accessible": true
+  }
+}

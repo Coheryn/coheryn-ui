@@ -1,0 +1,15 @@
+{
+  "name": "template-liquid-glass-showcase",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CoherynUI 3-Tier Liquid Glass & WebGPU Refraction Showcase",
+  "scripts": {
+    "dev": "coherynui dev",
+    "build": "coherynui build --input . --output coherynui.css",
+    "check": "coherynui check"
+  },
+  "dependencies": {
+    "@coherynui/tokens": "^1.0.0",
+    "@coherynui/gpu-materials": "^1.0.0"
+  }
+}

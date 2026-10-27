@@ -1,0 +1,20 @@
+[package]
+name = "coherynui-compiler"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+
+[dependencies]
+coherynui-core.workspace = true
+coherynui-syntax.workspace = true
+coherynui-source.workspace = true
+coherynui-design.workspace = true
+coherynui-diagnostics.workspace = true
+coherynui-incremental.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+rayon.workspace = true
+tracing.workspace = true

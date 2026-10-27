@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CoherynUIComponentEntry",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "name",
+    "category",
+    "framework",
+    "package",
+    "description",
+    "capabilities",
+    "dependencies",
+    "props",
+    "accessibility",
+    "examples",
+    "introduced_in"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "category": { "type": "string" },
+    "framework": { "type": "string" },
+    "package": { "type": "string" },
+    "description": { "type": "string" },
+    "capabilities": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "dependencies": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "props": { "type": "object" },
+    "accessibility": {
+      "type": "object",
+      "required": ["role", "keyboard_navigation", "focus_management", "aria_attributes"],
+      "properties": {
+        "role": { "type": "string" },
+        "keyboard_navigation": { "type": "array", "items": { "type": "string" } },
+        "focus_management": { "type": "string" },
+        "aria_attributes": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "examples": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "introduced_in": { "type": "string" }
+  }
+}

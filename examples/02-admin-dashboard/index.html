@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CoherynUI — Cloud Infrastructure Analytics Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="coherynui.css">
+</head>
+<body class="min-h-screen">
+  <div class="sidebar min-h-screen">
+    <!-- Collapsible Sidebar -->
+    <aside class="w-full glass stack gap-6 p-6" style="flex: 0 0 16rem; border-right: 1px solid var(--cyn-border);">
+      <div class="cluster items-center justify-between">
+        <div class="cluster items-center gap-3">
+          <div class="radius-lg bg-brand fg-primary weight-bold" style="width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center;">C</div>
+          <span class="text-lg weight-bold">CloudEdge</span>
+        </div>
+        <button id="themeBtn" class="text-sm p-1 radius-lg hover:lift" title="Toggle Theme">🌓</button>
+      </div>
+
+      <nav class="stack gap-1">
+        <a href="#" class="px-4 py-2 radius-lg bg-brand fg-primary text-sm weight-medium">Overview</a>
+        <a href="#" class="px-4 py-2 radius-lg fg-muted text-sm weight-medium hover:lift">Clusters</a>
+        <a href="#" class="px-4 py-2 radius-lg fg-muted text-sm weight-medium hover:lift">Load Balancers</a>
+        <a href="#" class="px-4 py-2 radius-lg fg-muted text-sm weight-medium hover:lift">Telemetry</a>
+        <a href="#" class="px-4 py-2 radius-lg fg-muted text-sm weight-medium hover:lift">Billing</a>
+      </nav>
+
+      <div style="margin-top: auto;" class="glass p-4 radius-xl stack gap-2">
+        <span class="text-xs weight-bold fg-muted uppercase">Global Health</span>
+        <div class="cluster items-center gap-2">
+          <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--cyn-color-success); display: inline-block;"></span>
+          <span class="text-xs weight-medium">All 24 Zones Operational</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8 stack gap-8">
+      <header class="cluster items-center justify-between gap-4">
+        <div>
+          <h1 class="text-3xl weight-bold">Edge Telemetry Cluster</h1>
+          <p class="text-sm fg-muted">Aggregated throughput and compute capacity across active points of presence.</p>
+        </div>
+        <div class="cluster gap-3">
+          <button id="openDeployModal" class="px-4 py-2 radius-lg bg-brand fg-primary text-sm weight-semibold hover:lift">
+            + Provision Node
+          </button>
+        </div>
+      </header>
+
+      <!-- Container Query Metric Grid -->
+      <section class="cq-root">
+        <div class="metric-grid" style="display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 1.5rem;">
+          <div class="card hover:lift stack gap-2">
+            <span class="text-xs fg-muted uppercase weight-semibold">Network Requests</span>
+            <div class="text-3xl weight-bold">128.4 Gbps</div>
+            <span class="text-xs" style="color: var(--cyn-color-success);">↑ +18.2% vs last hour</span>
+          </div>
+
+          <div class="card hover:lift stack gap-2">
+            <span class="text-xs fg-muted uppercase weight-semibold">Median RTT</span>
+            <div class="text-3xl weight-bold">14.2 ms</div>
+            <span class="text-xs" style="color: var(--cyn-color-success);">↓ -2.4 ms improvement</span>
+          </div>
+
+          <div class="card hover:lift stack gap-2">
+            <span class="text-xs fg-muted uppercase weight-semibold">Edge Workers</span>
+            <div class="text-3xl weight-bold">8,420</div>
+            <span class="text-xs fg-muted">Active across 128 nodes</span>
+          </div>
+
+          <div class="card hover:lift stack gap-2">
+            <span class="text-xs fg-muted uppercase weight-semibold">Error Rate</span>
+            <div class="text-3xl weight-bold">0.0012%</div>
+            <span class="text-xs" style="color: var(--cyn-color-success);">Within SLA tolerance</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Nodes Table -->
+      <section class="card stack gap-4">
+        <div class="cluster items-center justify-between">
+          <h2 class="text-lg weight-bold">Active Edge Nodes</h2>
+          <input type="text" placeholder="Filter nodes..." class="px-3 py-1.5 radius-lg text-sm" style="background: rgba(255,255,255,0.05); border: 1px solid var(--cyn-border); color: inherit;" />
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.875rem;">
+            <thead>
+              <tr style="border-bottom: 1px solid var(--cyn-border); color: var(--cyn-color-muted); font-size: 0.75rem; text-transform: uppercase;">
+                <th style="padding: 0.75rem 1rem;">Node ID</th>
+                <th style="padding: 0.75rem 1rem;">Region</th>
+                <th style="padding: 0.75rem 1rem;">CPU Load</th>
+                <th style="padding: 0.75rem 1rem;">Memory</th>
+                <th style="padding: 0.75rem 1rem;">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid var(--cyn-border);">
+                <td style="padding: 1rem; font-family: monospace; font-weight: 600;">node-va-01</td>
+                <td style="padding: 1rem; color: var(--cyn-color-muted);">us-east (Ashburn)</td>
+                <td style="padding: 1rem;">34%</td>
+                <td style="padding: 1rem;">4.2 / 16 GB</td>
+                <td style="padding: 1rem;"><span class="px-2 py-0.5 text-xs radius-full weight-bold" style="background: rgba(16, 185, 129, 0.2); color: #10b981;">Online</span></td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--cyn-border);">
+                <td style="padding: 1rem; font-family: monospace; font-weight: 600;">node-fra-04</td>
+                <td style="padding: 1rem; color: var(--cyn-color-muted);">eu-central (Frankfurt)</td>
+                <td style="padding: 1rem;">58%</td>
+                <td style="padding: 1rem;">9.8 / 16 GB</td>
+                <td style="padding: 1rem;"><span class="px-2 py-0.5 text-xs radius-full weight-bold" style="background: rgba(16, 185, 129, 0.2); color: #10b981;">Online</span></td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--cyn-border);">
+                <td style="padding: 1rem; font-family: monospace; font-weight: 600;">node-sin-02</td>
+                <td style="padding: 1rem; color: var(--cyn-color-muted);">ap-southeast (Singapore)</td>
+                <td style="padding: 1rem;">82%</td>
+                <td style="padding: 1rem;">13.4 / 16 GB</td>
+                <td style="padding: 1rem;"><span class="px-2 py-0.5 text-xs radius-full weight-bold" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b;">High Load</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Interactive Provisioning Modal (CoherynUI Components ARIA Focus Trap) -->
+  <div id="modalBackdrop" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 100; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div id="modalDialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle" class="card stack gap-4" style="width: 100%; max-width: 28rem; background: var(--cyn-color-surface-card);">
+      <div class="cluster items-center justify-between">
+        <h3 id="modalTitle" class="text-lg weight-bold">Provision New Edge Node</h3>
+        <button id="closeModal" aria-label="Close modal" style="font-size: 1.25rem;">✕</button>
+      </div>
+      <p class="text-sm fg-muted">Allocate a high-throughput edge worker with automated WebGPU acceleration.</p>
+      
+      <div class="stack gap-3">
+        <label class="text-xs weight-bold fg-muted uppercase">Region</label>
+        <select class="px-3 py-2 radius-lg text-sm" style="background: rgba(255,255,255,0.05); border: 1px solid var(--cyn-border); color: inherit;">
+          <option>US East (N. Virginia)</option>
+          <option>Europe West (London)</option>
+          <option>Asia Pacific (Tokyo)</option>
+        </select>
+      </div>
+
+      <div class="cluster justify-between" style="margin-top: 1rem;">
+        <button id="cancelModal" class="px-4 py-2 radius-lg text-sm weight-medium hover:lift">Cancel</button>
+        <button id="confirmDeploy" class="px-4 py-2 radius-lg bg-brand fg-primary text-sm weight-semibold hover:lift">Deploy Instance</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Theme Switcher
+    const themeBtn = document.getElementById('themeBtn');
+    themeBtn.addEventListener('click', () => {
+      const cur = document.documentElement.getAttribute('data-theme');
+      document.documentElement.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+    });
+
+    // Modal Interaction with Focus Trap
+    const openBtn = document.getElementById('openDeployModal');
+    const closeBtn = document.getElementById('closeModal');
+    const cancelBtn = document.getElementById('cancelModal');
+    const backdrop = document.getElementById('modalBackdrop');
+    const dialog = document.getElementById('modalDialog');
+
+    function openModal() {
+      backdrop.style.display = 'flex';
+      closeBtn.focus();
+    }
+    function closeModal() {
+      backdrop.style.display = 'none';
+      openBtn.focus();
+    }
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    cancelBtn.addEventListener('click', closeModal);
+    backdrop.addEventListener('click', (e) => {
+      if (e.target === backdrop) closeModal();
+    });
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && backdrop.style.display === 'flex') closeModal();
+    });
+  </script>
+</body>
+</html>

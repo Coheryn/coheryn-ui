@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoherynUI — SaaS Infrastructure Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="coherynui.css">
+</head>
+<body>
+
+  <div class="sidebar-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div>
+        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 2rem;">
+          <div style="width: 32px; height: 32px; border-radius: 8px; background: var(--cyn-color-brand); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #fff;">C</div>
+          <span style="font-weight: 800; font-size: 1.15rem;">CoherynUI</span>
+        </div>
+
+        <nav style="display: flex; flex-direction: column; gap: 0.4rem;">
+          <a href="#" class="nav-item active">📊 Telemetry</a>
+          <a href="#" class="nav-item">⚡ Edge Nodes</a>
+          <a href="#" class="nav-item">🛡️ Security Sandboxes</a>
+          <a href="#" class="nav-item">⚙️ Config & Prefixes</a>
+        </nav>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1.5rem; border-top: 1px solid var(--cyn-color-border);">
+        <span style="font-size: 0.8rem; color: var(--cyn-color-muted);">Prefix: <code>cyn</code></span>
+        <button class="theme-btn" id="themeToggle">Toggle Theme</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <h1 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em;">SaaS Cloud Telemetry</h1>
+          <p style="color: var(--cyn-color-muted); margin-top: 0.25rem;">Real-time infrastructure metrics compiled with CoherynUI CSS Engine.</p>
+        </div>
+        <span class="badge-pill badge-success">● Global Mesh Normal</span>
+      </header>
+
+      <!-- Metric Cards -->
+      <div class="card-grid">
+        <div class="metric-card">
+          <h4>Edge Requests (24h)</h4>
+          <div class="metric-value">4.28M</div>
+          <span class="badge-pill badge-success">+14.2% from yesterday</span>
+        </div>
+        <div class="metric-card">
+          <h4>P99 Global Latency</h4>
+          <div class="metric-value">8.4 ms</div>
+          <span class="badge-pill badge-success">Fast & Stable</span>
+        </div>
+        <div class="metric-card">
+          <h4>CSS Bundle Size</h4>
+          <div class="metric-value">12.4 KB</div>
+          <span class="badge-pill badge-success">-74.2% Optimized</span>
+        </div>
+      </div>
+
+      <!-- Edge Nodes Table -->
+      <div class="table-box">
+        <table>
+          <thead>
+            <tr>
+              <th>Node Location</th>
+              <th>Status</th>
+              <th>Active Sandboxes</th>
+              <th>Uptime</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>us-east-1</b> (Virginia)</td>
+              <td><span class="badge-pill badge-success">Healthy</span></td>
+              <td>1,248 WASM Guests</td>
+              <td>99.99%</td>
+            </tr>
+            <tr>
+              <td><b>eu-central-1</b> (Frankfurt)</td>
+              <td><span class="badge-pill badge-success">Healthy</span></td>
+              <td>892 WASM Guests</td>
+              <td>99.99%</td>
+            </tr>
+            <tr>
+              <td><b>ap-northeast-1</b> (Tokyo)</td>
+              <td><span class="badge-pill badge-warning">High Load</span></td>
+              <td>1,504 WASM Guests</td>
+              <td>99.95%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const btn = document.getElementById('themeToggle');
+    btn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+    });
+  </script>
+</body>
+</html>

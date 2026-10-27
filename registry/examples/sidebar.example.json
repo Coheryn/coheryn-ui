@@ -1,0 +1,26 @@
+{
+  "id": "recipe:sidebar",
+  "name": "Adaptive Sidebar",
+  "version": "1.0.0",
+  "category": "adaptive-layout",
+  "framework": "agnostic",
+  "package": "@coherynui/tokens",
+  "dependencies": ["@coherynui/tokens"],
+  "tokens_used": [
+    "--cyn-sidebar-width",
+    "--cyn-sidebar-gap",
+    "--cyn-color-surface-elevated",
+    "--cyn-color-border"
+  ],
+  "accessibility": {
+    "landmark_role": "<aside> or <nav> with aria-label",
+    "mobile_collapse": "Collapses to vertical stack when viewport drops below content minimum"
+  },
+  "snippets": {
+    "html": "<div class=\"with-sidebar\">\n  <aside class=\"sidebar w-64\">\n    <nav aria-label=\"Primary\">\n      <a href=\"#\">Overview</a>\n      <a href=\"#\">Settings</a>\n    </nav>\n  </aside>\n  <main class=\"main-content\">\n    <h1>Dashboard</h1>\n  </main>\n</div>",
+    "css": "@layer cyn.recipes {\n  .with-sidebar {\n    display: flex;\n    flex-wrap: wrap;\n    gap: var(--cyn-sidebar-gap, 1.5rem);\n  }\n  .sidebar {\n    flex-basis: var(--cyn-sidebar-width, 16rem);\n    flex-grow: 1;\n  }\n  .main-content {\n    flex-basis: 0;\n    flex-grow: 999;\n    min-inline-size: 50%;\n  }\n}"
+  },
+  "assertions": {
+    "compiler_diagnostics": []
+  }
+}

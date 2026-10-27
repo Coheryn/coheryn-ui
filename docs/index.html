@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoherynUI — Interactive Documentation & Component Playground</title>
+  <meta name="description" content="Official interactive documentation, live token inspector, spring physics workbench, and component playground for CoherynUI.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="coherynui.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="brand-lockup">
+      <div class="brand-icon">C</div>
+      <span>CoherynUI Docs</span>
+      <span class="badge badge-brand">v1.0.0 Stable</span>
+    </div>
+
+    <nav aria-label="Documentation Sections">
+      <ul class="nav-links">
+        <li><button class="nav-btn active" onclick="switchTab('overview')">Overview</button></li>
+        <li><button class="nav-btn" onclick="switchTab('tokens')">Token Inspector</button></li>
+        <li><button class="nav-btn" onclick="switchTab('components')">Components</button></li>
+        <li><button class="nav-btn" onclick="switchTab('motion')">Motion Physics</button></li>
+        <li><button class="nav-btn" onclick="switchTab('gpu')">GPU Refractor</button></li>
+        <li><button class="nav-btn" onclick="switchTab('agent')">Agent Portal</button></li>
+      </ul>
+    </nav>
+
+    <!-- Theme Switcher -->
+    <div class="theme-switch-pills" role="radiogroup" aria-label="Select Theme">
+      <button class="theme-pill-btn active" onclick="applyTheme('dark')">Dark</button>
+      <button class="theme-pill-btn" onclick="applyTheme('light')">Light</button>
+      <button class="theme-pill-btn" onclick="applyTheme('cyberpunk')">Cyber</button>
+      <button class="theme-pill-btn" onclick="applyTheme('nord')">Nord</button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="app-container">
+
+    <!-- TAB 1: OVERVIEW -->
+    <section id="tab-overview" class="tab-panel active">
+      <div class="glass-card" style="margin-bottom: 2rem; padding: 3rem 2.5rem;">
+        <span class="badge badge-success" style="margin-bottom: 1rem;">Zero Mandatory Browser JavaScript</span>
+        <h1 style="font-size: 2.75rem; font-weight: 800; line-height: 1.15; letter-spacing: -0.03em;">
+          Style the next generation with <span class="text-brand">CoherynUI</span>.
+        </h1>
+        <p style="color: var(--cyn-color-muted); font-size: 1.125rem; max-width: 680px; margin-top: 1rem;">
+          Independent, Rust-native, agent-native UI framework and intelligent styling platform. Produces deterministic, standards-based CSS with 5 first-party advanced subsystems.
+        </p>
+
+        <div style="display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
+          <button class="btn btn-primary" onclick="switchTab('tokens')">Explore Live Tokens</button>
+          <button class="btn btn-secondary" onclick="switchTab('motion')">Motion Physics Solver</button>
+          <a href="../llms-full.txt" class="btn btn-secondary" target="_blank">llms-full.txt Reference</a>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">⚡</div>
+          <h3 style="font-size: 1.125rem; font-weight: 700;">Coheryn CSS Engine</h3>
+          <p class="text-muted" style="font-size: 0.875rem; margin-top: 0.5rem;">
+            Incremental blake3 compiler producing strict <code>@layer cyn.*</code> cascades with zero browser JavaScript required.
+          </p>
+        </div>
+
+        <div class="card">
+          <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">💎</div>
+          <h3 style="font-size: 1.125rem; font-weight: 700;">GPU Materials & Liquid Glass</h3>
+          <p class="text-muted" style="font-size: 0.875rem; margin-top: 0.5rem;">
+            3-tier optical hierarchy: WebGPU WGSL shaders, WebGL2 fragment pipelines, and CSS backdrop-blur fallback.
+          </p>
+        </div>
+
+        <div class="card">
+          <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🤖</div>
+          <h3 style="font-size: 1.125rem; font-weight: 700;">Agent-Native MCP Server</h3>
+          <p class="text-muted" style="font-size: 0.875rem; margin-top: 0.5rem;">
+            Built-in Model Context Protocol server exposing 10 read-only inspection, search, and validation tools for coding agents.
+          </p>
+        </div>
+      </div>
+
+      <div class="card mt-6">
+        <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.75rem;">Cascade Layer Ordering Contract</h3>
+        <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 1rem;">
+          All CoherynUI stylesheets enforce deterministic precedence across five layers. Configurable via <code>coherynui.config.toml</code>:
+        </p>
+        <div class="code-view">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <pre><code>@layer cyn.reset, cyn.tokens, cyn.base, cyn.recipes, cyn.utilities;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: LIVE TOKEN INSPECTOR & PLAYGROUND -->
+    <section id="tab-tokens" class="tab-panel">
+      <div class="flex-between" style="margin-bottom: 1.5rem;">
+        <div>
+          <h2 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em;">Live Design Token Inspector</h2>
+          <p class="text-muted" style="font-size: 0.875rem;">Modify CSS custom properties in real time to observe instant live cascade propagation.</p>
+        </div>
+        <button class="btn btn-secondary" onclick="resetTokens()">Reset Defaults</button>
+      </div>
+
+      <div class="grid-2">
+        <!-- Controls Column -->
+        <div class="card">
+          <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 1.25rem;">Token Overrides</h3>
+
+          <div class="control-row">
+            <div class="control-label">
+              <span>Brand Color (<code id="val-brand-hex">#6366f1</code>)</span>
+              <span><code>--cyn-color-brand</code></span>
+            </div>
+            <input type="color" id="input-brand-color" value="#6366f1" onchange="updateBrandColor(this.value)">
+          </div>
+
+          <div class="control-row">
+            <div class="control-label">
+              <span>Border Radius (<span id="val-radius-label">12px</span>)</span>
+              <span><code>--cyn-radius-lg</code></span>
+            </div>
+            <input type="range" min="0" max="32" value="12" oninput="updateRadius(this.value)">
+          </div>
+
+          <div class="control-row">
+            <div class="control-label">
+              <span>Glass Backdrop Blur (<span id="val-blur-label">16px</span>)</span>
+              <span><code>--cyn-glass-blur</code></span>
+            </div>
+            <input type="range" min="0" max="40" value="16" oninput="updateBlur(this.value)">
+          </div>
+
+          <div class="control-row">
+            <div class="control-label">
+              <span>Card Shadow Elevation</span>
+              <span><code>--cyn-card-shadow</code></span>
+            </div>
+            <input type="range" min="0" max="4" value="2" oninput="updateShadow(this.value)">
+          </div>
+        </div>
+
+        <!-- Preview Column -->
+        <div class="flex-col">
+          <div class="glass-card" id="token-preview-target">
+            <div class="flex-between">
+              <span class="badge badge-brand">Real-Time Component</span>
+              <span class="text-muted" style="font-size: 0.75rem;">Live Preview</span>
+            </div>
+            <h4 style="font-size: 1.25rem; font-weight: 700; margin-top: 1rem;">Dynamic Surface Token Binding</h4>
+            <p class="text-muted" style="font-size: 0.875rem; margin-top: 0.5rem;">
+              This container responds instantly to custom property mutations without re-rendering DOM elements or reloading stylesheets.
+            </p>
+            <div style="display: flex; gap: 0.75rem; margin-top: 1.5rem;">
+              <button class="btn btn-primary">Primary Action</button>
+              <button class="btn btn-secondary">Secondary</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="flex-between" style="margin-bottom: 0.5rem;">
+              <span style="font-weight: 700; font-size: 0.8125rem;">Active CSS Token Export</span>
+              <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="copyActiveTokens()">Copy CSS</button>
+            </div>
+            <div class="code-view">
+              <pre><code id="token-export-code">:root {
+  --cyn-color-brand: #6366f1;
+  --cyn-radius-lg: 12px;
+  --cyn-glass-blur: 16px;
+}</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: ACCESSIBLE COMPONENTS -->
+    <section id="tab-components" class="tab-panel">
+      <div style="margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em;">Accessible Component Workbench</h2>
+        <p class="text-muted" style="font-size: 0.875rem;">WCAG 2.2 AA compliant headless primitives and interactive components.</p>
+      </div>
+
+      <div class="grid-2">
+        <!-- Dialog Modal Demo -->
+        <div class="card">
+          <span class="badge badge-brand">component:dialog</span>
+          <h3 style="font-size: 1.125rem; font-weight: 700; margin-top: 0.5rem;">WAI-ARIA Modal Dialog</h3>
+          <p class="text-muted" style="font-size: 0.875rem; margin-top: 0.25rem;">
+            Features strict focus trapping, escape key dismissal, and background scroll locking.
+          </p>
+          <div style="margin-top: 1.5rem;">
+            <button class="btn btn-primary" onclick="openModal()">Open Accessible Modal</button>
+          </div>
+        </div>
+
+        <!-- Roving Tabs Demo -->
+        <div class="card">
+          <span class="badge badge-brand">component:tabs</span>
+          <h3 style="font-size: 1.125rem; font-weight: 700; margin-top: 0.5rem;">Roving Tabindex Navigation</h3>
+          <p class="text-muted" style="font-size: 0.875rem; margin-top: 0.25rem;">
+            Use <kbd>ArrowLeft</kbd> and <kbd>ArrowRight</kbd> to cycle between tabs with automatic focus delegation.
+          </p>
+          <div style="margin-top: 1.25rem;" role="tablist" aria-label="Demo Tabs">
+            <button role="tab" id="demo-tab-1" aria-selected="true" aria-controls="demo-panel-1" tabindex="0" class="btn btn-primary" onclick="selectDemoTab(1)">Telemetry</button>
+            <button role="tab" id="demo-tab-2" aria-selected="false" aria-controls="demo-panel-2" tabindex="-1" class="btn btn-secondary" onclick="selectDemoTab(2)">Security</button>
+            <button role="tab" id="demo-tab-3" aria-selected="false" aria-controls="demo-panel-3" tabindex="-1" class="btn btn-secondary" onclick="selectDemoTab(3)">Audit Log</button>
+          </div>
+          <div id="demo-panel-1" role="tabpanel" aria-labelledby="demo-tab-1" class="card mt-4" style="background: var(--cyn-color-surface);">
+            <p style="font-size: 0.875rem;">Telemetry cluster operational: 99.98% uptime across edge nodes.</p>
+          </div>
+          <div id="demo-panel-2" role="tabpanel" aria-labelledby="demo-tab-2" class="card mt-4" style="background: var(--cyn-color-surface); display: none;">
+            <p style="font-size: 0.875rem;">Zero open CVE alerts. Mutual TLS 1.3 certificate status: Valid.</p>
+          </div>
+          <div id="demo-panel-3" role="tabpanel" aria-labelledby="demo-tab-3" class="card mt-4" style="background: var(--cyn-color-surface); display: none;">
+            <p style="font-size: 0.875rem;">Audit record: 14 changes signed by cryptographic key agent.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: MOTION PHYSICS SOLVER -->
+    <section id="tab-motion" class="tab-panel">
+      <div style="margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em;">Analytical Spring Dynamics Laboratory</h2>
+        <p class="text-muted" style="font-size: 0.875rem;">
+          Second-order unforced damped harmonic oscillator: <code>m·x'' + c·x' + k·x = 0</code>.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 1.25rem;">Spring Parameters</h3>
+
+          <div class="control-row">
+            <div class="control-label">
+              <span>Stiffness (k): <b id="val-stiffness">180</b> N/m</span>
+            </div>
+            <input type="range" min="20" max="400" value="180" oninput="updateSpring()">
+          </div>
+
+          <div class="control-row">
+            <div class="control-label">
+              <span>Damping (c): <b id="val-damping">14</b> N·s/m</span>
+            </div>
+            <input type="range" min="1" max="40" value="14" oninput="updateSpring()">
+          </div>
+
+          <div class="control-row">
+            <div class="control-label">
+              <span>Mass (m): <b id="val-mass">1.0</b> kg</span>
+            </div>
+            <input type="range" min="0.2" max="5.0" step="0.1" value="1.0" oninput="updateSpring()">
+          </div>
+
+          <div style="background: var(--cyn-color-surface); padding: 1rem; border-radius: var(--cyn-radius-md); margin-top: 1rem;">
+            <div class="flex-between" style="font-size: 0.8125rem;">
+              <span class="text-muted">Damping Ratio (ζ):</span>
+              <b id="val-zeta">0.52 (Underdamped)</b>
+            </div>
+            <div class="flex-between" style="font-size: 0.8125rem; margin-top: 0.25rem;">
+              <span class="text-muted">Settling Time (2% threshold):</span>
+              <b id="val-settling">570ms</b>
+            </div>
+          </div>
+
+          <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem;">
+            <button class="btn btn-primary" onclick="triggerSpringPulse()">Trigger Impulse</button>
+            <button class="btn btn-secondary" onclick="presetSpring('snappy')">Snappy</button>
+            <button class="btn btn-secondary" onclick="presetSpring('bouncy')">Bouncy</button>
+          </div>
+        </div>
+
+        <!-- Simulation Viewport -->
+        <div class="card flex-col">
+          <div class="physics-viewport" id="physics-stage">
+            <div class="spring-bob" id="spring-target"></div>
+          </div>
+          <p class="text-muted" style="font-size: 0.75rem; text-align: center;">
+            Click 'Trigger Impulse' or drag the element to evaluate spring equilibrium restoration.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: GPU REFRACTOR -->
+    <section id="tab-gpu" class="tab-panel">
+      <div style="margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em;">GPU Materials & Liquid Glass</h2>
+        <p class="text-muted" style="font-size: 0.875rem;">
+          3-tier optical hierarchy with automatic fallback to CSS Liquid Glass and reduced-transparency safety.
+        </p>
+      </div>
+
+      <div class="card">
+        <div style="position: relative; height: 340px; border-radius: var(--cyn-radius-lg); overflow: hidden; background: linear-gradient(45deg, #1e1b4b, #312e81, #065f46); display: flex; align-items: center; justify-content: center;">
+          <!-- Moving background patterns -->
+          <div style="position: absolute; width: 180px; height: 180px; background: #ec4899; filter: blur(40px); border-radius: 50%; top: 20px; left: 60px;"></div>
+          <div style="position: absolute; width: 220px; height: 220px; background: #06b6d4; filter: blur(50px); border-radius: 50%; bottom: 20px; right: 80px;"></div>
+
+          <!-- Glass Refractor Overlay -->
+          <div class="glass-card" style="width: 80%; max-width: 540px; text-align: center; z-index: 10;">
+            <span class="badge badge-brand" style="margin-bottom: 0.75rem;">Tier 1 CSS / Tier 3 WebGPU Pipeline</span>
+            <h3 style="font-size: 1.5rem; font-weight: 800;">Liquid Glass Refraction</h3>
+            <p style="color: var(--cyn-color-muted); font-size: 0.875rem; margin-top: 0.5rem;">
+              Specular chromatic border with dual-pass blur and dynamic normal-map displacement.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 0.75rem; margin-top: 1.25rem;">
+              <button class="btn btn-primary" onclick="toggleShaderTier()">Toggle Optical Tier</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: AGENT & MCP PORTAL -->
+    <section id="tab-agent" class="tab-panel">
+      <div style="margin-bottom: 1.5rem;">
+        <h2 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em;">Agent & MCP Integration Portal</h2>
+        <p class="text-muted" style="font-size: 0.875rem;">
+          Machine-readable registry APIs and official Model Context Protocol tools.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.75rem;">10 MCP Server Tools</h3>
+          <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 1rem;">
+            Run <code>coherynui mcp serve</code> over stdio to enable AI pair programmers to inspect projects safely:
+          </p>
+          <ul style="font-size: 0.8125rem; color: var(--cyn-color-muted); padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.35rem;">
+            <li><code>project_inspect</code>: Identify compiler, config, and theme profiles</li>
+            <li><code>docs_search</code>: Semantic search across versioned documentation</li>
+            <li><code>components_search</code>: Query components by intent and capability</li>
+            <li><code>components_get</code>: Retrieve props, accessibility, and examples</li>
+            <li><code>recipes_search</code>: Search layout and material recipes</li>
+            <li><code>themes_list</code>: Enumerate tokens and customization hooks</li>
+            <li><code>styles_explain</code>: Explain classes and cascade layer resolution</li>
+            <li><code>code_validate</code>: Return structured compiler diagnostics</li>
+            <li><code>project_plan</code>: Propose implementation steps safely</li>
+            <li><code>migration_analyze</code>: Plan migrations from legacy CSS engines</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 0.75rem;">Frontier Discovery Files</h3>
+          <div class="code-view" style="margin-bottom: 1rem;">
+            <pre><code>/llms.txt       # High-level discovery overview
+/llms-full.txt  # Comprehensive 1M+ token spec
+/registry/      # Machine-verifiable JSON schemas</code></pre>
+          </div>
+          <div style="display: flex; gap: 0.75rem;">
+            <a href="../llms-full.txt" target="_blank" class="btn btn-primary">Open llms-full.txt</a>
+            <a href="../registry/index.json" target="_blank" class="btn btn-secondary">Open Registry JSON</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Interactive Modal Dialog -->
+  <div class="modal-backdrop" id="demo-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-box">
+      <div class="flex-between">
+        <h3 id="modal-title" style="font-size: 1.25rem; font-weight: 800;">Focus-Trapped Modal</h3>
+        <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem;" onclick="closeModal()">✕</button>
+      </div>
+      <p style="color: var(--cyn-color-muted); margin-top: 0.75rem; font-size: 0.875rem;">
+        Focus is trapped within this dialog. Press <kbd>Tab</kbd> to cycle between interactive elements, or press <kbd>Escape</kbd> to dismiss and return focus to the invoker.
+      </p>
+      <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 0.75rem;">
+        <button class="btn btn-secondary" onclick="closeModal()">Dismiss</button>
+        <button class="btn btn-primary" onclick="closeModal()">Confirm Action</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Tab Switching
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+      const target = document.getElementById('tab-' + tabId);
+      if (target) target.classList.add('active');
+
+      const btn = Array.from(document.querySelectorAll('.nav-btn')).find(b => b.getAttribute('onclick').includes(tabId));
+      if (btn) btn.classList.add('active');
+    }
+
+    // Theme Application
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      document.querySelectorAll('.theme-pill-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.toLowerCase().includes(theme.slice(0, 4)));
+      });
+    }
+
+    // Token Inspector Live Updaters
+    function updateBrandColor(val) {
+      document.documentElement.style.setProperty('--cyn-color-brand', val);
+      document.getElementById('val-brand-hex').textContent = val;
+      refreshExportCode();
+    }
+
+    function updateRadius(val) {
+      const px = val + 'px';
+      document.documentElement.style.setProperty('--cyn-radius-lg', px);
+      document.getElementById('val-radius-label').textContent = px;
+      refreshExportCode();
+    }
+
+    function updateBlur(val) {
+      const px = val + 'px';
+      document.documentElement.style.setProperty('--cyn-glass-blur', px);
+      document.getElementById('val-blur-label').textContent = px;
+      refreshExportCode();
+    }
+
+    function updateShadow(val) {
+      const levels = [
+        'none',
+        '0 4px 12px rgba(0,0,0,0.2)',
+        '0 10px 30px -10px rgba(0,0,0,0.5)',
+        '0 20px 45px -10px rgba(0,0,0,0.7)',
+        '0 30px 60px -12px rgba(0,0,0,0.85)'
+      ];
+      document.documentElement.style.setProperty('--cyn-card-shadow', levels[val] || levels[2]);
+      refreshExportCode();
+    }
+
+    function resetTokens() {
+      document.documentElement.style.removeProperty('--cyn-color-brand');
+      document.documentElement.style.removeProperty('--cyn-radius-lg');
+      document.documentElement.style.removeProperty('--cyn-glass-blur');
+      document.documentElement.style.removeProperty('--cyn-card-shadow');
+      refreshExportCode();
+    }
+
+    function refreshExportCode() {
+      const brand = getComputedStyle(document.documentElement).getPropertyValue('--cyn-color-brand').trim();
+      const radius = getComputedStyle(document.documentElement).getPropertyValue('--cyn-radius-lg').trim();
+      const blur = getComputedStyle(document.documentElement).getPropertyValue('--cyn-glass-blur').trim();
+      const code = `:root {\n  --cyn-color-brand: ${brand};\n  --cyn-radius-lg: ${radius};\n  --cyn-glass-blur: ${blur};\n}`;
+      document.getElementById('token-export-code').textContent = code;
+    }
+
+    function copyActiveTokens() {
+      const code = document.getElementById('token-export-code').textContent;
+      navigator.clipboard.writeText(code);
+      alert('Copied active design tokens to clipboard!');
+    }
+
+    // Accessible Modal Demo
+    let lastActiveElement = null;
+    function openModal() {
+      lastActiveElement = document.activeElement;
+      const modal = document.getElementById('demo-modal');
+      modal.classList.add('open');
+      const firstBtn = modal.querySelector('button');
+      if (firstBtn) firstBtn.focus();
+    }
+
+    function closeModal() {
+      document.getElementById('demo-modal').classList.remove('open');
+      if (lastActiveElement) lastActiveElement.focus();
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.getElementById('demo-modal').classList.contains('open')) {
+        closeModal();
+      }
+    });
+
+    // Roving Tab Demo
+    function selectDemoTab(idx) {
+      for (let i = 1; i <= 3; i++) {
+        const tab = document.getElementById('demo-tab-' + i);
+        const panel = document.getElementById('demo-panel-' + i);
+        if (i === idx) {
+          tab.classList.add('btn-primary');
+          tab.classList.remove('btn-secondary');
+          tab.setAttribute('aria-selected', 'true');
+          tab.setAttribute('tabindex', '0');
+          panel.style.display = 'block';
+        } else {
+          tab.classList.remove('btn-primary');
+          tab.classList.add('btn-secondary');
+          tab.setAttribute('aria-selected', 'false');
+          tab.setAttribute('tabindex', '-1');
+          panel.style.display = 'none';
+        }
+      }
+    }
+
+    // Motion Physics Simulation
+    let springAnimationId = null;
+    function updateSpring() {
+      const k = parseFloat(document.querySelectorAll('#tab-motion input[type="range"]')[0].value);
+      const c = parseFloat(document.querySelectorAll('#tab-motion input[type="range"]')[1].value);
+      const m = parseFloat(document.querySelectorAll('#tab-motion input[type="range"]')[2].value);
+
+      document.getElementById('val-stiffness').textContent = k;
+      document.getElementById('val-damping').textContent = c;
+      document.getElementById('val-mass').textContent = m.toFixed(1);
+
+      // Compute damping ratio zeta = c / (2 * sqrt(k * m))
+      const zeta = c / (2 * Math.sqrt(k * m));
+      let regime = 'Underdamped';
+      if (Math.abs(zeta - 1) < 0.05) regime = 'Critically Damped';
+      else if (zeta > 1) regime = 'Overdamped';
+
+      document.getElementById('val-zeta').textContent = `${zeta.toFixed(2)} (${regime})`;
+    }
+
+    function triggerSpringPulse() {
+      const bob = document.getElementById('spring-target');
+      if (!bob) return;
+      
+      const k = parseFloat(document.querySelectorAll('#tab-motion input[type="range"]')[0].value);
+      const c = parseFloat(document.querySelectorAll('#tab-motion input[type="range"]')[1].value);
+      const m = parseFloat(document.querySelectorAll('#tab-motion input[type="range"]')[2].value);
+
+      let x = -100; // initial displacement
+      let v = 0;    // initial velocity
+      let lastTime = performance.now();
+
+      cancelAnimationFrame(springAnimationId);
+
+      function step(now) {
+        const dt = Math.min((now - lastTime) / 1000, 0.032);
+        lastTime = now;
+
+        const a = (-k * x - c * v) / m;
+        v += a * dt;
+        x += v * dt;
+
+        bob.style.transform = `translateX(${x}px)`;
+
+        if (Math.abs(x) > 0.5 || Math.abs(v) > 0.5) {
+          springAnimationId = requestAnimationFrame(step);
+        } else {
+          bob.style.transform = `translateX(0px)`;
+        }
+      }
+      springAnimationId = requestAnimationFrame(step);
+    }
+
+    function presetSpring(type) {
+      const inputs = document.querySelectorAll('#tab-motion input[type="range"]');
+      if (type === 'snappy') {
+        inputs[0].value = 320;
+        inputs[1].value = 24;
+        inputs[2].value = 0.8;
+      } else if (type === 'bouncy') {
+        inputs[0].value = 160;
+        inputs[1].value = 6;
+        inputs[2].value = 1.0;
+      }
+      updateSpring();
+      triggerSpringPulse();
+    }
+
+    function toggleShaderTier() {
+      alert('Toggled optical refraction tier between WebGPU shader and CSS Liquid Glass fallback.');
+    }
+
+    function copyCode(btn) {
+      const pre = btn.parentElement.querySelector('code');
+      if (pre) {
+        navigator.clipboard.writeText(pre.textContent);
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2000);
+      }
+    }
+  </script>
+</body>
+</html>

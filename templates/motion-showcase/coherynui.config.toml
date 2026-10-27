@@ -1,0 +1,21 @@
+# CoherynUI Project Configuration — Motion Showcase
+
+[compiler]
+layer_prefix = "cyn"
+variable_prefix = "cyn"
+class_prefix = ""
+
+[theme]
+default = "dark"
+available = ["dark"]
+
+[tokens.radius]
+md = "0.5rem"
+lg = "0.75rem"
+xl = "1rem"
+
+[themes.dark.colors]
+surface = "#07090e"
+surface-elevated = "#0f1420"
+foreground = "#f8fafc"
+brand = "#6366f1"

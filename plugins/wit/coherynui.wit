@@ -1,0 +1,59 @@
+package coherynui:plugin@1.0.0;
+
+/// Core interface for custom utility and variant registration.
+interface compiler {
+    record source-span {
+        file: string,
+        line: u32,
+        column: u32,
+    }
+
+    record css-declaration {
+        property: string,
+        value: string,
+        important: bool,
+    }
+
+    enum diagnostic-severity {
+        error,
+        warning,
+        information,
+    }
+
+    record plugin-diagnostic {
+        code: string,
+        severity: diagnostic-severity,
+        message: string,
+        span: option<source-span>,
+    }
+
+    /// Emits a structured diagnostic from the plugin to the compiler host.
+    emit-diagnostic: func(diag: plugin-diagnostic);
+
+    /// Registers a custom atomic utility rule.
+    register-utility: func(name: string, declarations: list<css-declaration>) -> result<_, string>;
+}
+
+/// Host capability model exposed to sandboxed guest plugins.
+interface capabilities {
+    record permissions {
+        can-register-utilities: bool,
+        can-register-variants: bool,
+        can-read-tokens: bool,
+        can-emit-diagnostics: bool,
+    }
+
+    get-permissions: func() -> permissions;
+}
+
+/// World definition that guest plugins implement.
+world coherynui-plugin {
+    import compiler;
+    import capabilities;
+
+    /// Invoked by the compiler host during initialization.
+    export init: func() -> result<_, string>;
+
+    /// Hook invoked for each candidate class to allow custom plugin expansion.
+    export resolve-class: func(class-name: string) -> option<list<compiler.css-declaration>>;
+}

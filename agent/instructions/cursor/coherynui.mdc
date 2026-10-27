@@ -1,0 +1,12 @@
+---
+description: CoherynUI Coding Rules for Cursor AI
+globs: ["**/*.{tsx,jsx,html,vue,svelte,css}"]
+alwaysApply: true
+---
+
+# CoherynUI Cursor Rules
+
+- Always verify classes against CoherynUI canonical grammar before outputting.
+- Use canonical layout recipes (`stack`, `cluster`, `sidebar`, `grid-auto`).
+- Use `.glass` and `.glass-edge` for Liquid Glass surfaces.
+- Check generated classes with `coherynui check --format json`.
