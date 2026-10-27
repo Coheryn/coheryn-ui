@@ -29,6 +29,7 @@
         <li><button class="nav-btn" onclick="switchTab('layers')">Cascade Layers</button></li>
         <li><button class="nav-btn" onclick="switchTab('tokens')">Token Inspector</button></li>
         <li><button class="nav-btn" onclick="switchTab('components')">Components</button></li>
+        <li><button class="nav-btn" onclick="switchTab('web-components')">Web Components</button></li>
         <li><button class="nav-btn" onclick="switchTab('motion')">Motion Physics</button></li>
         <li><button class="nav-btn" onclick="switchTab('gpu')">GPU Materials</button></li>
         <li><button class="nav-btn" onclick="switchTab('agent')">Agent Portal</button></li>
@@ -452,6 +453,256 @@ coherynui agent init --client all</code></pre>
     </section>
 
     <!-- ======================================================================= -->
+    <!-- TAB: NATIVE WEB COMPONENT CUSTOM ELEMENTS                               -->
+    <!-- ======================================================================= -->
+    <section id="tab-web-components" class="tab-panel">
+      <div style="margin-bottom: 2rem;">
+        <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap;">
+          <span class="badge badge-brand">W3C Custom Elements v1</span>
+          <span class="badge badge-success">Zero Framework Dependencies</span>
+          <span class="badge badge-subtle">@coherynui/web-components</span>
+        </div>
+        <h2 style="font-size: 2rem; font-weight: 800; letter-spacing: -0.02em;">Native Web Component Custom Elements</h2>
+        <p class="text-muted" style="font-size: 0.95rem; max-width: 800px; margin-top: 0.5rem; line-height: 1.6;">
+          Standardized, zero-runtime-overhead custom elements powered by <code>@coherynui/web-components</code>.
+          Operates universally across Vanilla HTML/JS, Vue, Svelte, Angular, Solid, PHP, Django, and Rails without requiring React or any external build dependencies.
+          Features full attribute synchronization, two-way state reflection, and real-time custom events.
+        </p>
+      </div>
+
+      <!-- Live Custom Elements Grid -->
+      <div class="grid-3" style="margin-bottom: 2rem;">
+        <!-- 1. cyn-modal -->
+        <div class="card">
+          <span class="badge badge-brand">&lt;cyn-modal&gt;</span>
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 0.5rem;">Dialog Custom Element</h3>
+          <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem; line-height: 1.5;">
+            Native dialog with focus trapping, scroll locking, and Escape/backdrop dismissal.
+          </p>
+          <div style="margin-top: 1.25rem; display: flex; gap: 0.5rem;">
+            <button class="btn btn-primary" style="flex: 1;" onclick="document.getElementById('demo-wc-modal').show()">Open Modal</button>
+            <button class="btn btn-secondary" onclick="toggleAttr('demo-wc-modal', 'open')">Toggle</button>
+          </div>
+        </div>
+
+        <!-- 2. cyn-drawer -->
+        <div class="card">
+          <span class="badge badge-brand">&lt;cyn-drawer&gt;</span>
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 0.5rem;">Slide-In Drawer Element</h3>
+          <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem; line-height: 1.5;">
+            Slide-in side navigation panel with smooth transitions and scroll locking.
+          </p>
+          <div style="margin-top: 1.25rem; display: flex; gap: 0.5rem;">
+            <button class="btn btn-glass" style="flex: 1;" onclick="document.getElementById('demo-wc-drawer').show()">Open Drawer →</button>
+            <button class="btn btn-secondary" onclick="toggleAttr('demo-wc-drawer', 'open')">Toggle</button>
+          </div>
+        </div>
+
+        <!-- 3. cyn-bottom-sheet -->
+        <div class="card">
+          <span class="badge badge-brand">&lt;cyn-bottom-sheet&gt;</span>
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 0.5rem;">BottomSheet Element</h3>
+          <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem; line-height: 1.5;">
+            Mobile-first pull-down sheet with tactile drag handle and touch target sizing.
+          </p>
+          <div style="margin-top: 1.25rem; display: flex; gap: 0.5rem;">
+            <button class="btn btn-secondary" style="flex: 1;" onclick="document.getElementById('demo-wc-bottom-sheet').show()">Open Sheet</button>
+            <button class="btn btn-secondary" onclick="toggleAttr('demo-wc-bottom-sheet', 'open')">Toggle</button>
+          </div>
+        </div>
+
+        <!-- 4. cyn-switch -->
+        <div class="card">
+          <span class="badge badge-brand">&lt;cyn-switch&gt;</span>
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 0.5rem;">Accessible Switch Element</h3>
+          <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem; line-height: 1.5;">
+            ARIA role="switch", keyboard spacebar toggle, and <code>cyn-change</code> custom event.
+          </p>
+          <div style="margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem;">
+            <cyn-switch id="demo-wc-switch-gpu" label="GPU Shader Pipeline" checked></cyn-switch>
+            <cyn-switch id="demo-wc-switch-audio" label="Sound Effects"></cyn-switch>
+          </div>
+        </div>
+
+        <!-- 5. cyn-dropdown & cyn-popover -->
+        <div class="card">
+          <span class="badge badge-brand">&lt;cyn-dropdown&gt; &amp; &lt;cyn-popover&gt;</span>
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 0.5rem;">Floating Primitives</h3>
+          <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem; line-height: 1.5;">
+            Contextual floating menus and popovers with automated outside-click dismissal.
+          </p>
+          <div style="margin-top: 1.25rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <cyn-dropdown id="demo-wc-dropdown">
+              <button class="btn btn-primary" onclick="this.closest('cyn-dropdown').toggle()">Actions Menu ▼</button>
+              <div class="dropdown-box">
+                <button class="dropdown-item" onclick="logWcEvent('&lt;cyn-dropdown&gt;', 'cyn-select', { action: 'view-profile' }); this.closest('cyn-dropdown').close();">👤 View Profile</button>
+                <button class="dropdown-item" onclick="logWcEvent('&lt;cyn-dropdown&gt;', 'cyn-select', { action: 'refresh-tokens' }); this.closest('cyn-dropdown').close();">🔑 API Tokens</button>
+                <button class="dropdown-item danger" onclick="logWcEvent('&lt;cyn-dropdown&gt;', 'cyn-select', { action: 'revoke' }); this.closest('cyn-dropdown').close();">⚠️ Revoke Access</button>
+              </div>
+            </cyn-dropdown>
+
+            <cyn-popover id="demo-wc-popover">
+              <button class="btn btn-secondary" onclick="this.closest('cyn-popover').toggle()">Popover Info</button>
+              <div class="popover-card">
+                <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem;">Custom Element Info</h4>
+                <p style="font-size: 0.8rem; color: var(--cyn-color-muted); line-height: 1.4;">
+                  Anchored floating card managing outside-click dismissal automatically.
+                </p>
+              </div>
+            </cyn-popover>
+          </div>
+        </div>
+
+        <!-- 6. cyn-toast-container -->
+        <div class="card">
+          <span class="badge badge-brand">&lt;cyn-toast-container&gt;</span>
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 0.5rem;">Toast Custom Element</h3>
+          <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem; line-height: 1.5;">
+            Declarative notification stack responding to element pushToast API calls.
+          </p>
+          <div style="margin-top: 1.25rem; display: flex; gap: 0.5rem;">
+            <button class="btn btn-success" style="flex: 1; padding: 0.4rem;" onclick="triggerWcToast('Native Element Success', 'Dispatched from custom element container.', 'success')">✓ Success</button>
+            <button class="btn btn-danger" style="flex: 1; padding: 0.4rem;" onclick="triggerWcToast('Native Element Warning', 'High memory usage detected.', 'warning')">⚠ Warning</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Event Telemetry Console -->
+      <div class="glass-card" style="padding: 1.5rem; margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div>
+            <h3 style="font-size: 1.15rem; font-weight: 700;">📡 Live Custom Element Event Telemetry</h3>
+            <p class="text-muted" style="font-size: 0.8rem; margin-top: 0.25rem;">
+              Observes <code>cyn-open</code>, <code>cyn-close</code>, <code>cyn-change</code>, and <code>cyn-select</code> events dispatched by custom elements in real-time.
+            </p>
+          </div>
+          <button class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.35rem 0.75rem;" onclick="clearWcEventLogs()">Clear Telemetry</button>
+        </div>
+
+        <div class="event-logger" id="wc-event-logger" role="log" aria-live="polite">
+          <div class="event-log-entry">
+            <span class="event-log-time">[System]</span>
+            <span class="event-log-name">Telemetry listener initialized. Ready for custom element events.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Framework Integration Guides -->
+      <div class="glass-card" style="padding: 2rem;">
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">📦 Framework Integration Guides</h3>
+        <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 1.5rem;">
+          Use CoherynUI Custom Elements in any modern JavaScript framework or server-rendered architecture with standard HTML syntax.
+        </p>
+
+        <div class="framework-tabs" role="tablist">
+          <button class="framework-tab-btn active" onclick="switchFramework('vanilla')">Vanilla HTML/JS</button>
+          <button class="framework-tab-btn" onclick="switchFramework('vue')">Vue 3</button>
+          <button class="framework-tab-btn" onclick="switchFramework('angular')">Angular</button>
+          <button class="framework-tab-btn" onclick="switchFramework('svelte')">Svelte</button>
+        </div>
+
+        <div id="framework-vanilla" class="framework-snippet active">
+          <div class="code-preview" style="position: relative;">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre><code>&lt;!-- 1. Include CoherynUI CSS &amp; Web Components --&gt;
+&lt;link rel="stylesheet" href="https://cdn.coheryntech.com/coherynui/v1/coherynui.css"&gt;
+&lt;script type="module" src="https://cdn.coheryntech.com/coherynui/v1/web-components.js"&gt;&lt;/script&gt;
+
+&lt;!-- 2. Use directly in HTML --&gt;
+&lt;cyn-modal id="myModal" title="System Confirmation"&gt;
+  &lt;p&gt;Zero-runtime overhead modal dialog with automatic focus trap.&lt;/p&gt;
+  &lt;button class="btn btn-primary" onclick="document.getElementById('myModal').close()"&gt;Confirm&lt;/button&gt;
+&lt;/cyn-modal&gt;
+
+&lt;button class="btn btn-primary" onclick="document.getElementById('myModal').show()"&gt;Open Modal&lt;/button&gt;
+
+&lt;script&gt;
+  document.getElementById('myModal').addEventListener('cyn-open', () =&gt; {
+    console.log('Modal opened!');
+  });
+&lt;/script&gt;</code></pre>
+          </div>
+        </div>
+
+        <div id="framework-vue" class="framework-snippet">
+          <div class="code-preview" style="position: relative;">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre><code>// vite.config.ts - Allow cyn-* custom elements
+export default defineConfig({
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) =&gt; tag.startsWith('cyn-')
+        }
+      }
+    })
+  ]
+})
+
+&lt;!-- App.vue --&gt;
+&lt;script setup&gt;
+import '@coherynui/web-components';
+import { ref } from 'vue';
+
+const isGpuActive = ref(true);
+function onSwitchChange(event) {
+  isGpuActive.value = event.detail.checked;
+}
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;cyn-switch label="Hardware Acceleration" :checked="isGpuActive" @cyn-change="onSwitchChange" /&gt;
+&lt;/template&gt;</code></pre>
+          </div>
+        </div>
+
+        <div id="framework-angular" class="framework-snippet">
+          <div class="code-preview" style="position: relative;">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre><code>// app.module.ts - Enable CUSTOM_ELEMENTS_SCHEMA
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import '@coherynui/web-components';
+
+@NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+export class AppModule {}
+
+&lt;!-- app.component.html --&gt;
+&lt;cyn-modal #modal title="Angular Security Dialog"&gt;
+  &lt;p&gt;Seamlessly integrated with Angular template reference variables.&lt;/p&gt;
+  &lt;button class="btn btn-primary" (click)="modal.close()"&gt;Save&lt;/button&gt;
+&lt;/cyn-modal&gt;
+
+&lt;button class="btn btn-primary" (click)="modal.show()"&gt;Open Modal&lt;/button&gt;</code></pre>
+          </div>
+        </div>
+
+        <div id="framework-svelte" class="framework-snippet">
+          <div class="code-preview" style="position: relative;">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre><code>&lt;!-- App.svelte --&gt;
+&lt;script&gt;
+  import '@coherynui/web-components';
+  let isChecked = true;
+
+  function handleChange(e) {
+    isChecked = e.detail.checked;
+  }
+&lt;/script&gt;
+
+&lt;cyn-switch label="Dark Theme" checked={isChecked} on:cyn-change={handleChange} /&gt;
+
+&lt;cyn-modal id="svelteModal" title="Svelte Dialog"&gt;
+  &lt;p&gt;Native W3C Custom Element running in Svelte 5.&lt;/p&gt;
+&lt;/cyn-modal&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================= -->
     <!-- TAB 6: MOTION PHYSICS SOLVER                                            -->
     <!-- ======================================================================= -->
     <section id="tab-motion" class="tab-panel">
@@ -654,6 +905,39 @@ coherynui agent skills install</code></pre>
       </div>
     </div>
   </div>
+
+  <!-- ========================================================================= -->
+  <!-- NATIVE WEB COMPONENT DOM INSTANCES                                        -->
+  <!-- ========================================================================= -->
+  <cyn-modal id="demo-wc-modal" title="🛡️ Native cyn-modal Custom Element">
+    <p style="color: var(--cyn-color-muted); margin-top: 0.75rem; font-size: 0.875rem; line-height: 1.5;">
+      Traps focus using standard accessibility keyboard cycles, locks body scrolling, and emits native custom events (<code>cyn-open</code> and <code>cyn-close</code>).
+    </p>
+    <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 0.75rem;">
+      <button class="btn btn-secondary" onclick="document.getElementById('demo-wc-modal').close()">Dismiss</button>
+      <button class="btn btn-primary" onclick="document.getElementById('demo-wc-modal').close(); triggerWcToast('Action Confirmed', 'Custom element modal closed successfully.', 'success');">Confirm Action</button>
+    </div>
+  </cyn-modal>
+
+  <cyn-drawer id="demo-wc-drawer" title="⚙️ Native cyn-drawer Custom Element" placement="right">
+    <p style="color: var(--cyn-color-muted); margin-top: 0.75rem; font-size: 0.875rem; line-height: 1.5;">
+      Custom element side drawer with smooth transition physics. Emits <code>cyn-open</code> and <code>cyn-close</code>.
+    </p>
+    <div style="margin-top: 2rem;">
+      <button class="btn btn-primary" style="width: 100%;" onclick="document.getElementById('demo-wc-drawer').close()">Close Side Drawer</button>
+    </div>
+  </cyn-drawer>
+
+  <cyn-bottom-sheet id="demo-wc-bottom-sheet" title="📱 Native cyn-bottom-sheet Custom Element">
+    <p style="color: var(--cyn-color-muted); margin-top: 0.75rem; font-size: 0.875rem; line-height: 1.5;">
+      Tactile mobile drawer custom element with pull-down dismissal and touch-target optimization.
+    </p>
+    <div style="margin-top: 1.5rem;">
+      <button class="btn btn-primary" style="width: 100%;" onclick="document.getElementById('demo-wc-bottom-sheet').close()">Done</button>
+    </div>
+  </cyn-bottom-sheet>
+
+  <cyn-toast-container id="demo-wc-toast-container"></cyn-toast-container>
 
   <!-- ========================================================================= -->
   <!-- JAVASCRIPT LOGIC (ROUTER, REPL, TOKENS, CASCADE, MOTION)                  -->
@@ -1072,6 +1356,470 @@ coherynui agent skills install</code></pre>
         setTimeout(() => btn.textContent = 'Copy', 2000);
       }
     }
+
+    // -------------------------------------------------------------------------
+    // 9. NATIVE WEB COMPONENT CUSTOM ELEMENTS & TELEMETRY
+    // -------------------------------------------------------------------------
+    function switchFramework(id) {
+      document.querySelectorAll('.framework-tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('onclick').includes(id));
+      });
+      document.querySelectorAll('.framework-snippet').forEach(snip => {
+        snip.classList.toggle('active', snip.id === 'framework-' + id);
+      });
+    }
+
+    function toggleAttr(id, attr) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (el.hasAttribute(attr)) el.removeAttribute(attr);
+      else el.setAttribute(attr, '');
+    }
+
+    function logWcEvent(tag, name, detail) {
+      const logger = document.getElementById('wc-event-logger');
+      if (!logger) return;
+
+      const time = new Date().toTimeString().split(' ')[0];
+      const entry = document.createElement('div');
+      entry.className = 'event-log-entry';
+
+      let detailStr = '';
+      if (detail && Object.keys(detail).length > 0) {
+        detailStr = ' ' + JSON.stringify(detail);
+      }
+
+      entry.innerHTML = `
+        <span class="event-log-time">[${time}]</span>
+        <span class="event-log-tag">${tag}</span>
+        <span>→</span>
+        <span class="event-log-name">${name}</span>
+        <span style="color: #cbd5e1; font-size: 0.75rem;">${detailStr}</span>
+      `;
+
+      logger.appendChild(entry);
+      while (logger.children.length > 40) {
+        logger.removeChild(logger.firstChild);
+      }
+      logger.scrollTop = logger.scrollHeight;
+    }
+
+    function clearWcEventLogs() {
+      const logger = document.getElementById('wc-event-logger');
+      if (!logger) return;
+      logger.innerHTML = `
+        <div class="event-log-entry">
+          <span class="event-log-time">[System]</span>
+          <span class="event-log-name">Telemetry cleared. Awaiting custom element events...</span>
+        </div>
+      `;
+    }
+
+    function triggerWcToast(title, desc, variant = 'info') {
+      const container = document.getElementById('demo-wc-toast-container');
+      if (container && typeof container.pushToast === 'function') {
+        container.pushToast(title, desc, variant);
+      } else {
+        triggerDocsToast(title, desc, variant);
+      }
+    }
+
+    // --- Custom Element: <cyn-modal> ---
+    class CynModalElement extends HTMLElement {
+      static get observedAttributes() { return ['open', 'title']; }
+      connectedCallback() {
+        this.render();
+        if (this.hasAttribute('open')) this.activate();
+      }
+      attributeChangedCallback(name, oldVal, newVal) {
+        if (oldVal === newVal) return;
+        if (name === 'open') {
+          if (this.hasAttribute('open')) {
+            this.activate();
+            this.dispatchEvent(new CustomEvent('cyn-open', { bubbles: true, composed: true, detail: { open: true } }));
+          } else {
+            this.deactivate();
+            this.dispatchEvent(new CustomEvent('cyn-close', { bubbles: true, composed: true, detail: { open: false } }));
+          }
+        } else if (name === 'title' && this._titleEl) {
+          this._titleEl.textContent = newVal || '';
+        }
+      }
+      show() { this.setAttribute('open', ''); }
+      close() { this.removeAttribute('open'); }
+      toggle() { if (this.hasAttribute('open')) this.close(); else this.show(); }
+
+      render() {
+        if (this._backdrop) return;
+        this._backdrop = document.createElement('div');
+        this._backdrop.className = 'modal-backdrop';
+        this._backdrop.setAttribute('role', 'dialog');
+        this._backdrop.setAttribute('aria-modal', 'true');
+        this._backdrop.addEventListener('click', (e) => {
+          if (e.target === this._backdrop) this.close();
+        });
+
+        this._box = document.createElement('div');
+        this._box.className = 'modal-box';
+
+        const header = document.createElement('div');
+        header.className = 'flex-between';
+
+        this._titleEl = document.createElement('h3');
+        this._titleEl.style.fontSize = '1.25rem';
+        this._titleEl.style.fontWeight = '800';
+        this._titleEl.textContent = this.getAttribute('title') || '';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'btn btn-secondary';
+        closeBtn.style.padding = '0.25rem 0.5rem';
+        closeBtn.textContent = '✕';
+        closeBtn.addEventListener('click', () => this.close());
+
+        header.appendChild(this._titleEl);
+        header.appendChild(closeBtn);
+        this._box.appendChild(header);
+
+        const body = document.createElement('div');
+        while (this.firstChild) {
+          body.appendChild(this.firstChild);
+        }
+        this._box.appendChild(body);
+        this._backdrop.appendChild(this._box);
+        this.appendChild(this._backdrop);
+
+        this._escListener = (e) => {
+          if (e.key === 'Escape' && this.hasAttribute('open')) this.close();
+        };
+        window.addEventListener('keydown', this._escListener);
+      }
+      activate() {
+        if (!this._backdrop) this.render();
+        if (this._backdrop) this._backdrop.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      deactivate() {
+        if (this._backdrop) this._backdrop.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+
+    // --- Custom Element: <cyn-drawer> ---
+    class CynDrawerElement extends HTMLElement {
+      static get observedAttributes() { return ['open', 'title', 'placement']; }
+      connectedCallback() {
+        this.render();
+        if (this.hasAttribute('open')) this.activate();
+      }
+      attributeChangedCallback(name, oldVal, newVal) {
+        if (oldVal === newVal) return;
+        if (name === 'open') {
+          if (this.hasAttribute('open')) {
+            this.activate();
+            this.dispatchEvent(new CustomEvent('cyn-open', { bubbles: true, composed: true, detail: { open: true, placement: this.getAttribute('placement') || 'right' } }));
+          } else {
+            this.deactivate();
+            this.dispatchEvent(new CustomEvent('cyn-close', { bubbles: true, composed: true, detail: { open: false } }));
+          }
+        }
+      }
+      show() { this.setAttribute('open', ''); }
+      close() { this.removeAttribute('open'); }
+      toggle() { if (this.hasAttribute('open')) this.close(); else this.show(); }
+
+      render() {
+        if (this._backdrop) return;
+        this._backdrop = document.createElement('div');
+        this._backdrop.className = 'drawer-backdrop';
+        this._backdrop.setAttribute('role', 'dialog');
+        this._backdrop.setAttribute('aria-modal', 'true');
+        this._backdrop.addEventListener('click', (e) => {
+          if (e.target === this._backdrop) this.close();
+        });
+
+        this._box = document.createElement('div');
+        this._box.className = 'drawer-box';
+
+        const header = document.createElement('div');
+        header.className = 'flex-between';
+
+        const title = document.createElement('h3');
+        title.style.fontSize = '1.25rem';
+        title.style.fontWeight = '800';
+        title.textContent = this.getAttribute('title') || 'Drawer';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'btn btn-secondary';
+        closeBtn.style.padding = '0.25rem 0.5rem';
+        closeBtn.textContent = '✕';
+        closeBtn.addEventListener('click', () => this.close());
+
+        header.appendChild(title);
+        header.appendChild(closeBtn);
+        this._box.appendChild(header);
+
+        const body = document.createElement('div');
+        body.style.display = 'flex';
+        body.style.flexDirection = 'column';
+        body.style.height = '100%';
+        while (this.firstChild) {
+          body.appendChild(this.firstChild);
+        }
+        this._box.appendChild(body);
+        this._backdrop.appendChild(this._box);
+        this.appendChild(this._backdrop);
+      }
+      activate() {
+        if (!this._backdrop) this.render();
+        if (this._backdrop) this._backdrop.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      deactivate() {
+        if (this._backdrop) this._backdrop.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+
+    // --- Custom Element: <cyn-bottom-sheet> ---
+    class CynBottomSheetElement extends HTMLElement {
+      static get observedAttributes() { return ['open', 'title']; }
+      connectedCallback() {
+        this.render();
+        if (this.hasAttribute('open')) this.activate();
+      }
+      attributeChangedCallback(name, oldVal, newVal) {
+        if (oldVal === newVal) return;
+        if (name === 'open') {
+          if (this.hasAttribute('open')) {
+            this.activate();
+            this.dispatchEvent(new CustomEvent('cyn-open', { bubbles: true, composed: true, detail: { open: true } }));
+          } else {
+            this.deactivate();
+            this.dispatchEvent(new CustomEvent('cyn-close', { bubbles: true, composed: true, detail: { open: false } }));
+          }
+        }
+      }
+      show() { this.setAttribute('open', ''); }
+      close() { this.removeAttribute('open'); }
+      toggle() { if (this.hasAttribute('open')) this.close(); else this.show(); }
+
+      render() {
+        if (this._backdrop) return;
+        this._backdrop = document.createElement('div');
+        this._backdrop.className = 'bottomsheet-backdrop';
+        this._backdrop.setAttribute('role', 'dialog');
+        this._backdrop.setAttribute('aria-modal', 'true');
+        this._backdrop.addEventListener('click', (e) => {
+          if (e.target === this._backdrop) this.close();
+        });
+
+        this._box = document.createElement('div');
+        this._box.className = 'bottomsheet-box';
+
+        const grabHandle = document.createElement('div');
+        grabHandle.style.cssText = 'width: 44px; height: 5px; background: rgba(255,255,255,0.25); border-radius: 9999px; margin: 0 auto 1.25rem; cursor: grab;';
+        this._box.appendChild(grabHandle);
+
+        const header = document.createElement('div');
+        header.className = 'flex-between';
+
+        const title = document.createElement('h3');
+        title.style.fontSize = '1.25rem';
+        title.style.fontWeight = '800';
+        title.textContent = this.getAttribute('title') || 'BottomSheet';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'btn btn-secondary';
+        closeBtn.style.padding = '0.25rem 0.5rem';
+        closeBtn.textContent = '✕';
+        closeBtn.addEventListener('click', () => this.close());
+
+        header.appendChild(title);
+        header.appendChild(closeBtn);
+        this._box.appendChild(header);
+
+        const body = document.createElement('div');
+        while (this.firstChild) {
+          body.appendChild(this.firstChild);
+        }
+        this._box.appendChild(body);
+        this._backdrop.appendChild(this._box);
+        this.appendChild(this._backdrop);
+      }
+      activate() {
+        if (!this._backdrop) this.render();
+        if (this._backdrop) this._backdrop.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      deactivate() {
+        if (this._backdrop) this._backdrop.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+
+    // --- Custom Element: <cyn-switch> ---
+    class CynSwitchElement extends HTMLElement {
+      static get observedAttributes() { return ['checked', 'disabled', 'label']; }
+      connectedCallback() {
+        this.render();
+        this.setAttribute('role', 'switch');
+        this.setAttribute('tabindex', this.hasAttribute('disabled') ? '-1' : '0');
+        this.setAttribute('aria-checked', this.hasAttribute('checked') ? 'true' : 'false');
+
+        this.addEventListener('click', () => this.toggle());
+        this.addEventListener('keydown', (e) => {
+          if (e.key === ' ' || e.key === 'Enter') {
+            e.preventDefault();
+            this.toggle();
+          }
+        });
+      }
+      attributeChangedCallback(name, oldVal, newVal) {
+        if (oldVal === newVal) return;
+        if (name === 'checked') {
+          const isChecked = this.hasAttribute('checked');
+          this.setAttribute('aria-checked', isChecked ? 'true' : 'false');
+          this.dispatchEvent(new CustomEvent('cyn-change', {
+            bubbles: true,
+            composed: true,
+            detail: { checked: isChecked }
+          }));
+        } else if (name === 'label' && this._labelEl) {
+          this._labelEl.textContent = newVal || '';
+        }
+      }
+      toggle() {
+        if (this.hasAttribute('disabled')) return;
+        if (this.hasAttribute('checked')) this.removeAttribute('checked');
+        else this.setAttribute('checked', '');
+      }
+      render() {
+        if (this._rendered) return;
+        this._rendered = true;
+
+        const track = document.createElement('div');
+        track.className = 'cyn-switch-track';
+        const thumb = document.createElement('div');
+        thumb.className = 'cyn-switch-thumb';
+        track.appendChild(thumb);
+
+        this._labelEl = document.createElement('span');
+        this._labelEl.className = 'cyn-switch-label';
+        this._labelEl.textContent = this.getAttribute('label') || '';
+
+        this.appendChild(track);
+        this.appendChild(this._labelEl);
+      }
+    }
+
+    // --- Custom Element: <cyn-popover> ---
+    class CynPopoverElement extends HTMLElement {
+      static get observedAttributes() { return ['open']; }
+      connectedCallback() {
+        this._card = this.querySelector('.popover-card');
+        document.addEventListener('click', (e) => {
+          if (!this.contains(e.target) && this.hasAttribute('open')) {
+            this.close();
+          }
+        });
+      }
+      attributeChangedCallback(name, oldVal, newVal) {
+        if (oldVal === newVal) return;
+        if (name === 'open') {
+          const isOpen = this.hasAttribute('open');
+          if (this._card) this._card.classList.toggle('open', isOpen);
+          this.dispatchEvent(new CustomEvent(isOpen ? 'cyn-open' : 'cyn-close', {
+            bubbles: true,
+            composed: true,
+            detail: { open: isOpen }
+          }));
+        }
+      }
+      show() { this.setAttribute('open', ''); }
+      close() { this.removeAttribute('open'); }
+      toggle() { if (this.hasAttribute('open')) this.close(); else this.show(); }
+    }
+
+    // --- Custom Element: <cyn-dropdown> ---
+    class CynDropdownElement extends HTMLElement {
+      static get observedAttributes() { return ['open']; }
+      connectedCallback() {
+        this._box = this.querySelector('.dropdown-box');
+        document.addEventListener('click', (e) => {
+          if (!this.contains(e.target) && this.hasAttribute('open')) {
+            this.close();
+          }
+        });
+      }
+      attributeChangedCallback(name, oldVal, newVal) {
+        if (oldVal === newVal) return;
+        if (name === 'open') {
+          const isOpen = this.hasAttribute('open');
+          if (this._box) this._box.classList.toggle('open', isOpen);
+          this.dispatchEvent(new CustomEvent(isOpen ? 'cyn-open' : 'cyn-close', {
+            bubbles: true,
+            composed: true,
+            detail: { open: isOpen }
+          }));
+        }
+      }
+      show() { this.setAttribute('open', ''); }
+      close() { this.removeAttribute('open'); }
+      toggle() { if (this.hasAttribute('open')) this.close(); else this.show(); }
+    }
+
+    // --- Custom Element: <cyn-toast-container> ---
+    class CynToastContainerElement extends HTMLElement {
+      connectedCallback() {
+        this.className = 'toast-stack';
+      }
+      pushToast(title, desc, variant = 'info') {
+        const toast = document.createElement('div');
+        toast.className = `toast-node ${variant}`;
+
+        const icons = { success: '✓', warning: '⚠', danger: '✕', info: 'ℹ' };
+        toast.innerHTML = `
+          <span style="font-size: 1.15rem; font-weight: 700;">${icons[variant] || 'ℹ'}</span>
+          <div style="flex: 1; min-width: 0;">
+            <h4 style="font-size: 0.875rem; font-weight: 700; margin-bottom: 0.15rem;">${title}</h4>
+            <p style="font-size: 0.775rem; color: var(--cyn-color-muted); line-height: 1.4;">${desc}</p>
+          </div>
+          <button onclick="this.parentElement.remove()" style="background: none; border: none; color: var(--cyn-color-muted); cursor: pointer; padding: 0.2rem;">✕</button>
+        `;
+
+        this.appendChild(toast);
+        this.dispatchEvent(new CustomEvent('cyn-toast-added', {
+          bubbles: true,
+          composed: true,
+          detail: { title, variant }
+        }));
+
+        setTimeout(() => {
+          toast.style.opacity = '0';
+          toast.style.transform = 'translateX(100%)';
+          setTimeout(() => toast.remove(), 250);
+        }, 3500);
+      }
+    }
+
+    // Register All Custom Elements
+    if ('customElements' in window) {
+      if (!customElements.get('cyn-modal')) customElements.define('cyn-modal', CynModalElement);
+      if (!customElements.get('cyn-drawer')) customElements.define('cyn-drawer', CynDrawerElement);
+      if (!customElements.get('cyn-bottom-sheet')) customElements.define('cyn-bottom-sheet', CynBottomSheetElement);
+      if (!customElements.get('cyn-switch')) customElements.define('cyn-switch', CynSwitchElement);
+      if (!customElements.get('cyn-popover')) customElements.define('cyn-popover', CynPopoverElement);
+      if (!customElements.get('cyn-dropdown')) customElements.define('cyn-dropdown', CynDropdownElement);
+      if (!customElements.get('cyn-toast-container')) customElements.define('cyn-toast-container', CynToastContainerElement);
+    }
+
+    // Global Telemetry Event Hook
+    ['cyn-open', 'cyn-close', 'cyn-change', 'cyn-select', 'cyn-toast-added'].forEach(evtName => {
+      document.addEventListener(evtName, (e) => {
+        const tag = e.target.tagName ? `<${e.target.tagName.toLowerCase()}>` : 'element';
+        logWcEvent(tag, e.type, e.detail || {});
+      });
+    });
 
     // Initialize REPL default on load
     window.addEventListener('DOMContentLoaded', () => {
