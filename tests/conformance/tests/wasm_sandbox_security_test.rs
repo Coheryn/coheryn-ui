@@ -30,10 +30,12 @@ fn test_wasm_binary_magic_header_validation() {
 #[test]
 fn test_wasm_sandbox_fuel_exhaustion_defense() {
     let metadata = PluginMetadata {
+        id: "test-plugin".to_string(),
         name: "test-plugin".to_string(),
         version: "1.0.0".to_string(),
-        author: "Adversary".to_string(),
-        description: "Infinite loop simulation".to_string(),
+        author: Some("Adversary".to_string()),
+        description: Some("Infinite loop simulation".to_string()),
+        requested_capabilities: PluginCapabilities::default(),
     };
 
     let limits = HostSandboxLimits {
@@ -62,10 +64,12 @@ fn test_wasm_sandbox_fuel_exhaustion_defense() {
 #[test]
 fn test_wasm_sandbox_zero_ambient_authority_and_capability_isolation() {
     let metadata = PluginMetadata {
+        id: "unprivileged-plugin".to_string(),
         name: "unprivileged-plugin".to_string(),
         version: "1.0.0".to_string(),
-        author: "Untrusted".to_string(),
-        description: "Plugin with zero granted capabilities".to_string(),
+        author: Some("Untrusted".to_string()),
+        description: Some("Plugin with zero granted capabilities".to_string()),
+        requested_capabilities: PluginCapabilities::default(),
     };
 
     // Deny all capabilities
@@ -94,10 +98,12 @@ fn test_wasm_sandbox_zero_ambient_authority_and_capability_isolation() {
 #[test]
 fn test_wasm_sandbox_timeout_budget_enforcement() {
     let metadata = PluginMetadata {
+        id: "slow-plugin".to_string(),
         name: "slow-plugin".to_string(),
         version: "1.0.0".to_string(),
-        author: "Laggy".to_string(),
-        description: "Simulating slow CPU work".to_string(),
+        author: Some("Laggy".to_string()),
+        description: Some("Simulating slow CPU work".to_string()),
+        requested_capabilities: PluginCapabilities::default(),
     };
 
     let limits = HostSandboxLimits {
