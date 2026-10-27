@@ -170,7 +170,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 return Ok(());
             }
 
-            let default_toml = r#"# CoherynUI Configuration
+            let default_toml = r##"# CoherynUI Configuration
 
 [compiler]
 layer_prefix = "cyn"       # Cascade layer namespace: @layer cyn.reset, cyn.tokens...
@@ -199,7 +199,7 @@ brand = "#3b82f6"
 surface = "#101827"
 foreground = "#f5f7fb"
 brand = "#60a5fa"
-"#;
+"##;
             fs::write(&config, default_toml)?;
             println!("Initialized CoherynUI configuration at '{}'.", config.display());
         }

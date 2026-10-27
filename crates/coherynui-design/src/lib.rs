@@ -228,7 +228,7 @@ mod tests {
 
     #[test]
     fn test_custom_prefixes_in_config() {
-        let toml_str = r#"
+        let toml_str = r##"
 [compiler]
 layer_prefix = "acme"
 variable_prefix = "acme"
@@ -240,7 +240,7 @@ available = ["dark"]
 
 [themes.dark.colors]
 surface = "#000000"
-"#;
+"##;
         let config = CoherynConfig::parse(toml_str).expect("Valid config");
         assert_eq!(config.compiler.layer_prefix, "acme");
         assert_eq!(config.compiler.variable_prefix, "acme");
