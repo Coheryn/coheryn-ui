@@ -31,9 +31,9 @@
     }
   },
   "dependencies": {
-    "@coherynui/components": "^1.0.0",
-    "@coherynui/motion": "^1.0.0",
-    "@coherynui/tokens": "^1.0.0"
+    "@coherynui/components": "workspace:^",
+    "@coherynui/motion": "workspace:^",
+    "@coherynui/tokens": "workspace:^"
   },
   "scripts": {
     "build": "tsc"

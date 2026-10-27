@@ -9,7 +9,7 @@
     "check": "coherynui check"
   },
   "dependencies": {
-    "@coherynui/tokens": "^1.0.0",
-    "@coherynui/gpu-materials": "^1.0.0"
+    "@coherynui/tokens": "workspace:*",
+    "@coherynui/gpu-materials": "workspace:*"
   }
 }

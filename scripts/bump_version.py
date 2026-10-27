@@ -64,7 +64,7 @@ def bump_packages(new_version):
                 if dep_field in data:
                     for dep_name in list(data[dep_field].keys()):
                         if dep_name.startswith("@coherynui/"):
-                            data[dep_field][dep_name] = f"^{new_version}"
+                            data[dep_field][dep_name] = "workspace:^"
 
             with open(p_path, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2)
