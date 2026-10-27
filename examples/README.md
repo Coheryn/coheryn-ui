@@ -14,6 +14,7 @@ Welcome to the **CoherynUI** examples catalog. These standalone examples demonst
 | **[04-motion-playground/](./04-motion-playground/index.html)** | **Interactive Motion & Spring Physics Lab** | Analytical spring solver with live stiffness/damping tuning, FLIP layout grid reordering, and timeline sequence animations. |
 | **[05-accessible-components/](./05-accessible-components/index.html)** | **Complete Accessible UI Component Suite** | Focus-trapped Dialogs, Roving Tabindex Tabs, Switches, Form validation inputs, Badges, Accordions, and Spinners. |
 | **[06-production-renaming/](./06-production-renaming/index.html)** | **Aggressive Class Renaming Demonstration** | Demonstrates before-and-after production minification, AST class rewriting, and bidirectional `coherynui.manifest.json` verification. |
+| **[07-complete-ui-showcase/](./07-complete-ui-showcase/index.html)** | **All-Inclusive Interactive UI Showcase** | Comprehensive demonstration of Modals, Drawers, BottomSheets, Popovers, Dropdowns, Toast Notifications, Haptics, and Touch Ergonomics. |
 
 ---
 

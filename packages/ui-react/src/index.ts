@@ -452,4 +452,382 @@ export function useHaptic() {
   return { trigger };
 }
 
+/* -------------------------------------------------------------------------- */
+/*                                    MODAL                                   */
+/* -------------------------------------------------------------------------- */
+
+export const Modal = Dialog;
+export type ModalProps = DialogProps;
+
+/* -------------------------------------------------------------------------- */
+/*                                   DRAWER                                   */
+/* -------------------------------------------------------------------------- */
+
+export interface DrawerProps {
+  isOpen: boolean;
+  onClose: () => void;
+  title?: string;
+  placement?: 'left' | 'right';
+  children: React.ReactNode;
+}
+
+export const Drawer: React.FC<DrawerProps> = ({
+  isOpen,
+  onClose,
+  title,
+  placement = 'right',
+  children,
+}) => {
+  const drawerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const unlock = scrollLock();
+    const unbindEsc = dismissOnEscape(onClose);
+    const trap = drawerRef.current ? trapFocus(drawerRef.current) : null;
+
+    return () => {
+      unlock();
+      unbindEsc();
+      trap?.release();
+    };
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+
+  const isLeft = placement === 'left';
+
+  return (
+    <div
+      role="presentation"
+      className="fixed inset-0 z-50 flex bg-[rgba(0,0,0,0.6)] backdrop-blur-sm transition-opacity"
+      style={{ justifyContent: isLeft ? 'flex-start' : 'flex-end' }}
+      onClick={onClose}
+    >
+      <div
+        ref={drawerRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label={title || 'Drawer'}
+        onClick={(e) => e.stopPropagation()}
+        className="w-full max-w-md h-full bg-surface border shadow-2xl p-6 flex flex-col transition-transform"
+        style={{
+          borderLeftWidth: isLeft ? 0 : '1px',
+          borderRightWidth: isLeft ? '1px' : 0,
+        }}
+      >
+        <div className="flex items-center justify-between mb-4 pb-3 border-b border-subtle">
+          {title ? (
+            <h3 className="text-xl weight-bold fg-primary">{title}</h3>
+          ) : (
+            <div />
+          )}
+          <button
+            onClick={onClose}
+            aria-label="Close drawer"
+            className="p-1.5 radius-md fg-muted hover:fg-primary transition-colors touch-target"
+          >
+            ✕
+          </button>
+        </div>
+        <div className="flex-1 overflow-y-auto">{children}</div>
+      </div>
+    </div>
+  );
+};
+
+/* -------------------------------------------------------------------------- */
+/*                                   POPOVER                                  */
+/* -------------------------------------------------------------------------- */
+
+export interface PopoverProps {
+  trigger: React.ReactNode;
+  content: React.ReactNode;
+  isOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  placement?: 'top' | 'bottom' | 'left' | 'right';
+  className?: string;
+}
+
+export const Popover: React.FC<PopoverProps> = ({
+  trigger,
+  content,
+  isOpen: controlledOpen,
+  onOpenChange,
+  placement = 'bottom',
+  className = '',
+}) => {
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
+  const isOpen = controlledOpen !== undefined ? controlledOpen : uncontrolledOpen;
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const toggle = () => {
+    const next = !isOpen;
+    if (controlledOpen === undefined) setUncontrolledOpen(next);
+    onOpenChange?.(next);
+  };
+
+  const close = () => {
+    if (controlledOpen === undefined) setUncontrolledOpen(false);
+    onOpenChange?.(false);
+  };
+
+  useEffect(() => {
+    if (!isOpen || !containerRef.current) return;
+    const unbindClick = dismissOnOutsideClick(containerRef.current, close);
+    const unbindEsc = dismissOnEscape(close);
+    return () => {
+      unbindClick();
+      unbindEsc();
+    };
+  }, [isOpen]);
+
+  const placementClass =
+    placement === 'top'
+      ? 'bottom-full mb-2'
+      : placement === 'left'
+      ? 'right-full mr-2 top-0'
+      : placement === 'right'
+      ? 'left-full ml-2 top-0'
+      : 'top-full mt-2';
+
+  return (
+    <div ref={containerRef} className="relative inline-block">
+      <div onClick={toggle} className="cursor-pointer inline-block">
+        {trigger}
+      </div>
+      {isOpen && (
+        <div
+          role="dialog"
+          className={`absolute z-50 ${placementClass} w-64 p-4 radius-xl bg-surface border shadow-xl ${className}`.trim()}
+        >
+          {content}
+        </div>
+      )}
+    </div>
+  );
+};
+
+/* -------------------------------------------------------------------------- */
+/*                                DROPDOWN MENU                               */
+/* -------------------------------------------------------------------------- */
+
+export interface DropdownMenuItem {
+  id: string;
+  label: string;
+  icon?: React.ReactNode;
+  danger?: boolean;
+  disabled?: boolean;
+  onClick?: () => void;
+}
+
+export interface DropdownMenuProps {
+  trigger: React.ReactNode;
+  items: DropdownMenuItem[];
+  placement?: 'bottom-left' | 'bottom-right';
+  className?: string;
+}
+
+export const DropdownMenu: React.FC<DropdownMenuProps> = ({
+  trigger,
+  items,
+  placement = 'bottom-left',
+  className = '',
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const close = () => setIsOpen(false);
+
+  useEffect(() => {
+    if (!isOpen || !containerRef.current) return;
+    const unbindClick = dismissOnOutsideClick(containerRef.current, close);
+    const unbindEsc = dismissOnEscape(close);
+    return () => {
+      unbindClick();
+      unbindEsc();
+    };
+  }, [isOpen]);
+
+  const alignClass = placement === 'bottom-right' ? 'right-0' : 'left-0';
+
+  return (
+    <div ref={containerRef} className="relative inline-block">
+      <div
+        role="button"
+        tabIndex={0}
+        aria-haspopup="menu"
+        aria-expanded={isOpen}
+        onClick={() => setIsOpen(!isOpen)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            setIsOpen(true);
+          }
+        }}
+        className="cursor-pointer inline-block"
+      >
+        {trigger}
+      </div>
+
+      {isOpen && (
+        <div
+          role="menu"
+          aria-orientation="vertical"
+          className={`absolute top-full mt-2 z-50 ${alignClass} min-w-[180px] p-1.5 radius-xl bg-surface border shadow-xl ${className}`.trim()}
+        >
+          {items.map((item) => (
+            <button
+              key={item.id}
+              role="menuitem"
+              disabled={item.disabled}
+              onClick={() => {
+                if (item.disabled) return;
+                item.onClick?.();
+                close();
+              }}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 radius-lg text-sm weight-medium transition-colors text-left touch-target tap-transparent ${
+                item.disabled
+                  ? 'opacity-40 cursor-not-allowed'
+                  : item.danger
+                  ? 'fg-[#ef4444] hover:bg-[#ef4444]/10'
+                  : 'fg-primary hover:bg-surface'
+              }`.trim()}
+            >
+              {item.icon && <span className="text-base">{item.icon}</span>}
+              <span className="flex-1">{item.label}</span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+export const Dropdown = DropdownMenu;
+
+/* -------------------------------------------------------------------------- */
+/*                                    TOAST                                   */
+/* -------------------------------------------------------------------------- */
+
+export interface ToastItem {
+  id: string;
+  title: string;
+  description?: string;
+  variant?: 'info' | 'success' | 'warning' | 'danger';
+  duration?: number;
+}
+
+export interface ToastContextValue {
+  show: (toast: Omit<ToastItem, 'id'>) => string;
+  dismiss: (id: string) => void;
+  success: (title: string, description?: string) => string;
+  warning: (title: string, description?: string) => string;
+  error: (title: string, description?: string) => string;
+  info: (title: string, description?: string) => string;
+}
+
+const ToastContext = React.createContext<ToastContextValue | null>(null);
+
+export interface ToastProviderProps {
+  children: React.ReactNode;
+  position?: 'top-right' | 'bottom-right' | 'bottom-center';
+}
+
+export const ToastProvider: React.FC<ToastProviderProps> = ({
+  children,
+  position = 'top-right',
+}) => {
+  const [toasts, setToasts] = useState<ToastItem[]>([]);
+
+  const dismiss = (id: string) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  };
+
+  const show = (toast: Omit<ToastItem, 'id'>) => {
+    const id = `toast-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+    const newItem: ToastItem = { ...toast, id };
+    setToasts((prev) => [...prev, newItem]);
+
+    const duration = toast.duration ?? 4000;
+    if (duration > 0) {
+      setTimeout(() => dismiss(id), duration);
+    }
+    return id;
+  };
+
+  const success = (title: string, description?: string) => show({ title, description, variant: 'success' });
+  const warning = (title: string, description?: string) => show({ title, description, variant: 'warning' });
+  const error = (title: string, description?: string) => show({ title, description, variant: 'danger' });
+  const info = (title: string, description?: string) => show({ title, description, variant: 'info' });
+
+  const posClass =
+    position === 'bottom-center'
+      ? 'bottom-4 left-1/2 -translate-x-1/2'
+      : position === 'bottom-right'
+      ? 'bottom-4 right-4'
+      : 'top-4 right-4';
+
+  return (
+    <ToastContext.Provider value={{ show, dismiss, success, warning, error, info }}>
+      {children}
+      <div
+        role="region"
+        aria-live="polite"
+        aria-label="Notifications"
+        className={`fixed z-50 pointer-events-none flex flex-col gap-2.5 max-w-sm w-full ${posClass}`}
+      >
+        {toasts.map((t) => {
+          const borderVariant =
+            t.variant === 'success'
+              ? 'border-l-4 border-l-[#10b981]'
+              : t.variant === 'warning'
+              ? 'border-l-4 border-l-[#f59e0b]'
+              : t.variant === 'danger'
+              ? 'border-l-4 border-l-[#ef4444]'
+              : 'border-l-4 border-l-brand';
+
+          const icon =
+            t.variant === 'success' ? '✓' : t.variant === 'warning' ? '⚠' : t.variant === 'danger' ? '✕' : 'ℹ';
+
+          return (
+            <div
+              key={t.id}
+              role="status"
+              className={`pointer-events-auto p-4 radius-xl bg-surface border shadow-2xl flex items-start gap-3 transition-all ${borderVariant}`}
+            >
+              <span className="text-lg leading-none mt-0.5">{icon}</span>
+              <div className="flex-1 min-w-0">
+                <h4 className="text-sm weight-bold fg-primary leading-tight">{t.title}</h4>
+                {t.description && <p className="text-xs fg-muted mt-1 leading-snug">{t.description}</p>}
+              </div>
+              <button
+                onClick={() => dismiss(t.id)}
+                aria-label="Dismiss notification"
+                className="fg-muted hover:fg-primary p-1 text-xs radius-md transition-colors"
+              >
+                ✕
+              </button>
+            </div>
+          );
+        })}
+      </div>
+    </ToastContext.Provider>
+  );
+};
+
+export function useToast(): ToastContextValue {
+  const ctx = React.useContext(ToastContext);
+  if (!ctx) {
+    return {
+      show: () => '',
+      dismiss: () => {},
+      success: () => '',
+      warning: () => '',
+      error: () => '',
+      info: () => '',
+    };
+  }
+  return ctx;
+}
+
 

@@ -2,18 +2,38 @@ import React, { useState } from 'react';
 import {
   Button,
   IconButton,
+  ButtonGroup,
+  Dialog,
+  Modal,
   BottomSheet,
+  Drawer,
+  Popover,
+  Dropdown,
+  ToastProvider,
+  useToast,
+  Tabs,
+  Input,
+  Label,
+  Switch,
+  Spinner,
+  Badge,
+  Card,
   GlassCard,
   Stack,
   Cluster,
-  Badge,
   useHaptic,
 } from '@coherynui/react';
 
-export default function App() {
+function ShowcaseContent() {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const [modalOpen, setModalOpen] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [gpuActive, setGpuActive] = useState(true);
+  const [workspaceName, setWorkspaceName] = useState('Production Cluster Alpha');
   const [hapticTriggered, setHapticTriggered] = useState(false);
+
+  const toast = useToast();
   const { trigger: triggerHaptic } = useHaptic();
 
   const toggleTheme = () => {
@@ -22,11 +42,48 @@ export default function App() {
     document.documentElement.setAttribute('data-theme', next);
   };
 
-  const handleHapticTest = () => {
-    triggerHaptic('medium');
+  const handleHapticTest = (type: 'light' | 'medium' | 'heavy' = 'medium') => {
+    triggerHaptic(type);
     setHapticTriggered(true);
+    toast.info('Haptic Triggered', `Tactile ${type} vibration simulated.`);
     setTimeout(() => setHapticTriggered(false), 1200);
   };
+
+  const menuItems = [
+    { id: '1', label: 'Edit Workspace', icon: '✏️', onClick: () => toast.info('Edit Clicked', 'Opened workspace editor.') },
+    { id: '2', label: 'API Keys', icon: '🔑', onClick: () => toast.success('API Keys', 'Navigated to API key credentials.') },
+    { id: '3', label: 'Purge Cache', icon: '🗑️', danger: true, onClick: () => toast.error('Cache Purged', 'Cleared local CSS token cache.') },
+  ];
+
+  const tabItems = [
+    {
+      id: 'cascade',
+      label: 'Cascade Layers',
+      content: (
+        <p className="text-sm fg-muted leading-relaxed">
+          W3C <code>@layer cyn.*</code> enforces zero specificity leaks across resets, tokens, base styles, component recipes, and atomic utility rules.
+        </p>
+      ),
+    },
+    {
+      id: 'touch',
+      label: 'Touch Ergonomics',
+      content: (
+        <p className="text-sm fg-muted leading-relaxed">
+          Every interactive primitive guarantees WCAG 2.2 SC 2.5.8 compliance with 44×44px minimum tap boundaries, touch-action containment, and spring drag thresholds.
+        </p>
+      ),
+    },
+    {
+      id: 'agent',
+      label: 'Agent Skills',
+      content: (
+        <p className="text-sm fg-muted leading-relaxed">
+          Embeds 7 canonical offline skills and multi-client configuration generators for Claude Code, Cursor, Copilot, and Codex via <code>coherynui agent init</code>.
+        </p>
+      ),
+    },
+  ];
 
   return (
     <div className="min-h-screen flex flex-col bg-surface fg-primary">
@@ -42,12 +99,22 @@ export default function App() {
             <div>
               <span className="text-lg weight-bold tracking-tight">CoherynUI</span>
               <span className="ml-2 text-xs weight-medium px-2 py-0.5 radius-full bg-brand/20 fg-brand">
-                Starter
+                Complete UI Suite
               </span>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
+            <Dropdown
+              trigger={
+                <Button variant="subtle" size="sm">
+                  <span>Workspace Actions ▼</span>
+                </Button>
+              }
+              items={menuItems}
+              placement="bottom-right"
+            />
+
             <IconButton
               aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
               onClick={toggleTheme}
@@ -57,14 +124,13 @@ export default function App() {
               <span>{theme === 'dark' ? '☀️' : '🌙'}</span>
             </IconButton>
 
-            <a
-              href="https://github.com/Coheryn/coheryn-ui"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center justify-center px-4 py-2 radius-lg text-sm weight-semibold bg-brand fg-primary hover:opacity-90 transition-opacity touch-target tap-transparent"
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={() => setDrawerOpen(true)}
             >
-              GitHub →
-            </a>
+              Settings Drawer →
+            </Button>
           </div>
         </div>
       </header>
@@ -72,8 +138,8 @@ export default function App() {
       {/* -------------------------------------------------------------------------- */}
       {/*                                HERO SECTION                                */}
       {/* -------------------------------------------------------------------------- */}
-      <main className="flex-1 app-container py-12 md:py-20">
-        <Stack gap="8" className="items-center text-center max-w-3xl mx-auto">
+      <main className="flex-1 app-container py-12 md:py-16">
+        <Stack gap="8" className="items-center text-center max-w-3xl mx-auto mb-16">
           <Cluster gap="2" className="justify-center">
             <Badge variant="brand">W3C 5-Layer Cascade</Badge>
             <Badge variant="success">WCAG 2.2 Touch Target</Badge>
@@ -81,119 +147,259 @@ export default function App() {
           </Cluster>
 
           <h1 className="text-4xl md:text-6xl weight-bold tracking-tight leading-tight">
-            Style the Next Generation with{' '}
+            Every UI Primitive, Built Native with{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
               CoherynUI
             </span>
           </h1>
 
           <p className="text-lg md:text-xl fg-muted leading-relaxed">
-            Independent, Rust-native, agent-native styling engine with sub-5ms Vite HMR,
-            declarative mobile touch ergonomics, and progressive GPU materials.
+            Modals, popovers, drawers, mobile bottom sheets, dropdown menus, and stackable live notifications — 100% unified with zero third-party fragmentation.
           </p>
 
-          <Cluster gap="4" className="justify-center pt-2">
+          <Cluster gap="3" className="justify-center pt-2 flex-wrap">
             <Button
               variant="primary"
               size="lg"
-              onClick={() => setSheetOpen(true)}
+              onClick={() => setModalOpen(true)}
               className="shadow-lg shadow-brand/25"
             >
-              <span>📱 Open Bottom Sheet</span>
+              <span>🛡️ Open Dialog Modal</span>
+            </Button>
+
+            <Button
+              variant="secondary"
+              size="lg"
+              onClick={() => setSheetOpen(true)}
+            >
+              <span>📱 Open BottomSheet</span>
             </Button>
 
             <Button
               variant="glass"
               size="lg"
-              onClick={handleHapticTest}
+              onClick={() => handleHapticTest('medium')}
             >
-              <span>{hapticTriggered ? '✓ Vibrate Triggered' : '⚡ Test Haptic Feedback'}</span>
+              <span>{hapticTriggered ? '✓ Vibrate Active' : '⚡ Simulate Haptics'}</span>
             </Button>
           </Cluster>
         </Stack>
 
         {/* -------------------------------------------------------------------------- */}
-        {/*                              FEATURE SHOWCASE                              */}
+        {/*                           NOTIFICATION TRIGGERS                            */}
         {/* -------------------------------------------------------------------------- */}
-        <section className="mt-20">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Feature 1 */}
-            <GlassCard className="flex flex-col justify-between">
-              <div>
-                <div className="text-2xl mb-3">⚡</div>
-                <h3 className="text-xl weight-bold mb-2">Instant Vite HMR</h3>
-                <p className="text-sm fg-muted leading-relaxed">
-                  Compiles utility tokens on demand via virtual module resolution (<code>virtual:coherynui.css</code>)
-                  with zero full-page reload flashes.
-                </p>
-              </div>
-              <div className="mt-6 pt-4 border-t border-subtle text-xs font-mono fg-muted">
-                @layer cyn.utilities
-              </div>
-            </GlassCard>
+        <section className="mb-12">
+          <Card className="p-6">
+            <h3 className="text-xl weight-bold mb-2">Live Stackable Toast Notifications</h3>
+            <p className="text-sm fg-muted mb-4">
+              Trigger real-time floating notifications with automatic timers, accessible status roles, and smooth spring dismiss:
+            </p>
+            <Cluster gap="3" className="flex-wrap">
+              <Button
+                variant="primary"
+                size="md"
+                onClick={() => toast.success('Compilation Succeeded', 'Rust compiler emitted @layer cyn.utilities in 3.1ms.')}
+              >
+                ✓ Success Toast
+              </Button>
+              <Button
+                variant="secondary"
+                size="md"
+                onClick={() => toast.warning('Touch Target Notice', 'CY2004: Element padded to 44px minimum target.')}
+              >
+                ⚠ Warning Toast
+              </Button>
+              <Button
+                variant="danger"
+                size="md"
+                onClick={() => toast.error('Connection Dropped', 'Failed to reach cloud worker node.')}
+              >
+                ✕ Error Toast
+              </Button>
+              <Button
+                variant="subtle"
+                size="md"
+                onClick={() => toast.info('Agent Sync', 'Initialized 7 canonical skills.')}
+              >
+                ℹ Info Toast
+              </Button>
+            </Cluster>
+          </Card>
+        </section>
 
-            {/* Feature 2 */}
-            <GlassCard className="flex flex-col justify-between">
-              <div>
-                <div className="text-2xl mb-3">📱</div>
-                <h3 className="text-xl weight-bold mb-2">Touch Ergonomics</h3>
-                <p className="text-sm fg-muted leading-relaxed">
-                  Compliant with WCAG 2.2 SC 2.5.8 (44×44px min tap targets). Built-in support for
-                  touch-action, overscroll containment, and velocity-tracked gestures.
-                </p>
-              </div>
-              <div className="mt-6 pt-4 border-t border-subtle text-xs font-mono fg-muted">
-                COH-AMD-1.4 Specification
-              </div>
-            </GlassCard>
+        {/* -------------------------------------------------------------------------- */}
+        {/*                         POPOVERS & FORMS SHOWCASE                          */}
+        {/* -------------------------------------------------------------------------- */}
+        <section className="mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card className="p-6">
+              <h3 className="text-xl weight-bold mb-4">Contextual Popovers & Dropdowns</h3>
+              <p className="text-sm fg-muted mb-4">
+                Anchored floating containers with automated outside click detection and escape key handling:
+              </p>
+              <Cluster gap="4" className="items-center">
+                <Popover
+                  trigger={
+                    <Button variant="secondary" size="md">
+                      ℹ️ Engine Specification
+                    </Button>
+                  }
+                  content={
+                    <div>
+                      <h4 className="text-sm weight-bold fg-primary mb-1">Zero Ambient Authority</h4>
+                      <p className="text-xs fg-muted leading-relaxed">
+                        Wasm plugin sandboxes execute with zero host filesystem access and deterministic fuel metering.
+                      </p>
+                    </div>
+                  }
+                  placement="top"
+                />
 
-            {/* Feature 3 */}
-            <GlassCard className="flex flex-col justify-between">
-              <div>
-                <div className="text-2xl mb-3">💎</div>
-                <h3 className="text-xl weight-bold mb-2">Liquid Glass Materials</h3>
-                <p className="text-sm fg-muted leading-relaxed">
-                  3-tier progressive optical refraction pipeline spanning WebGPU (WGSL),
-                  WebGL2 fallbacks, and CSS-native Liquid Glass recipes.
-                </p>
-              </div>
-              <div className="mt-6 pt-4 border-t border-subtle text-xs font-mono fg-muted">
-                @coherynui/gpu-materials
-              </div>
-            </GlassCard>
+                <Dropdown
+                  trigger={
+                    <Button variant="glass" size="md">
+                      ⚙️ Quick Options ▼
+                    </Button>
+                  }
+                  items={menuItems}
+                  placement="bottom-left"
+                />
+              </Cluster>
+            </Card>
+
+            <Card className="p-6">
+              <h3 className="text-xl weight-bold mb-4">Form Primitives & Switch</h3>
+              <Stack gap="3">
+                <div>
+                  <Label htmlFor="ws-name">Workspace Identifier</Label>
+                  <Input
+                    id="ws-name"
+                    value={workspaceName}
+                    onChange={(e) => setWorkspaceName(e.target.value)}
+                  />
+                </div>
+                <div className="pt-2">
+                  <Switch
+                    checked={gpuActive}
+                    onChange={setGpuActive}
+                    label={gpuActive ? 'Hardware WebGPU Refraction Enabled' : 'Fallback CSS Filter Active'}
+                  />
+                </div>
+              </Stack>
+            </Card>
           </div>
+        </section>
+
+        {/* -------------------------------------------------------------------------- */}
+        {/*                        ROVING TABS & ACCORDIONS                            */}
+        {/* -------------------------------------------------------------------------- */}
+        <section className="mb-12">
+          <GlassCard className="p-6">
+            <h3 className="text-xl weight-bold mb-3">WAI-ARIA Roving Tabindex Navigation</h3>
+            <p className="text-sm fg-muted mb-4">
+              Navigate tabs using keyboard arrow keys (<kbd>←</kbd> / <kbd>→</kbd>) or <kbd>Home</kbd> / <kbd>End</kbd>:
+            </p>
+            <Tabs tabs={tabItems} defaultTab="cascade" />
+          </GlassCard>
         </section>
       </main>
 
       {/* -------------------------------------------------------------------------- */}
-      {/*                        MOBILE TOUCH BOTTOM SHEET (COH-AMD-1.4)             */}
+      {/*                               MODAL DIALOG                                 */}
+      {/* -------------------------------------------------------------------------- */}
+      <Dialog
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        title="Accessible Modal Dialog"
+        description="Keyboard focus is strictly trapped inside this dialog. Pressing Tab loops within targets; pressing Escape dismisses."
+      >
+        <Stack gap="4">
+          <div>
+            <Label htmlFor="cluster-tag">Cluster Tag</Label>
+            <Input id="cluster-tag" defaultValue="production-v2.4" />
+          </div>
+          <Cluster gap="3" className="justify-end pt-2">
+            <Button variant="subtle" onClick={() => setModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button
+              variant="primary"
+              onClick={() => {
+                setModalOpen(false);
+                toast.success('Saved', 'Cluster tag updated successfully.');
+              }}
+            >
+              Confirm
+            </Button>
+          </Cluster>
+        </Stack>
+      </Dialog>
+
+      {/* -------------------------------------------------------------------------- */}
+      {/*                             BOTTOM SHEET DRAWER                            */}
       {/* -------------------------------------------------------------------------- */}
       <BottomSheet
         isOpen={sheetOpen}
         onClose={() => setSheetOpen(false)}
-        title="Touch Ergonomics & Physics Drawer"
+        title="Tactile BottomSheet Drawer"
       >
         <Stack gap="4" className="pt-2 pb-4">
           <p className="text-sm fg-muted leading-relaxed">
-            This drawer is driven by real-time pointer capture, touch-action isolation,
-            and pull-to-dismiss dynamics. Drag downward on the handle or backdrop to dismiss.
+            Drag downward on the handle bar to dismiss, or tap outside the backdrop.
           </p>
-
-          <div className="p-4 radius-lg bg-surface border border-subtle">
-            <div className="text-xs font-mono fg-brand mb-1">WCAG 2.2 SC 2.5.8 Contract</div>
+          <div className="p-3 radius-lg bg-surface border border-subtle">
+            <div className="text-xs font-mono fg-brand">WCAG 2.2 SC 2.5.8</div>
             <div className="text-sm weight-semibold">--cyn-touch-min: 44px;</div>
           </div>
-
-          <Cluster gap="3" className="pt-2 justify-end">
-            <Button variant="subtle" size="md" onClick={() => setSheetOpen(false)}>
-              Cancel
+          <Cluster gap="3" className="justify-end pt-2">
+            <Button variant="subtle" onClick={() => setSheetOpen(false)}>
+              Close
             </Button>
-            <Button variant="primary" size="md" onClick={() => setSheetOpen(false)}>
-              Confirm Action
+            <Button
+              variant="primary"
+              onClick={() => {
+                setSheetOpen(false);
+                toast.info('Applied', 'BottomSheet selection confirmed.');
+              }}
+            >
+              Apply Filter
             </Button>
           </Cluster>
         </Stack>
       </BottomSheet>
+
+      {/* -------------------------------------------------------------------------- */}
+      {/*                              SIDE DOCKED DRAWER                            */}
+      {/* -------------------------------------------------------------------------- */}
+      <Drawer
+        isOpen={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        title="System Settings"
+        placement="right"
+      >
+        <Stack gap="4">
+          <p className="text-sm fg-muted">
+            Side navigation and administrative configuration drawer with scroll locking and escape key dismissal.
+          </p>
+          <div className="form-group">
+            <Label>Engine Version</Label>
+            <Input readOnly value="CoherynUI v0.1.0-alpha.1" />
+          </div>
+          <div className="form-group">
+            <Label>Compiler Mode</Label>
+            <Input readOnly value="Incremental Sub-5ms HMR" />
+          </div>
+          <Button
+            variant="primary"
+            onClick={() => {
+              setDrawerOpen(false);
+              toast.success('Settings Saved', 'Applied configuration changes.');
+            }}
+          >
+            Save Settings
+          </Button>
+        </Stack>
+      </Drawer>
 
       {/* -------------------------------------------------------------------------- */}
       {/*                                   FOOTER                                   */}
@@ -202,23 +408,23 @@ export default function App() {
         <div className="app-container flex flex-col md:flex-row items-center justify-between gap-4">
           <div>© 2026 CoherynUI. Dual-licensed under MIT or Apache-2.0.</div>
           <div className="flex items-center gap-6">
-            <a
-              href="https://coheryntech.com/coherynui"
-              className="hover:text-white transition-colors"
-            >
+            <a href="https://coheryntech.com/coherynui" className="hover:text-white transition-colors">
               Documentation
             </a>
-            <a
-              href="https://github.com/Coheryn/coheryn-ui"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-white transition-colors"
-            >
+            <a href="https://github.com/Coheryn/coheryn-ui" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
               GitHub
             </a>
           </div>
         </div>
       </footer>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <ToastProvider position="top-right">
+      <ShowcaseContent />
+    </ToastProvider>
   );
 }

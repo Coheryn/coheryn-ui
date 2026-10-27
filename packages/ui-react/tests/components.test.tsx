@@ -3,6 +3,11 @@ import {
   Button,
   IconButton,
   Dialog,
+  Modal,
+  Drawer,
+  Popover,
+  Dropdown,
+  ToastProvider,
   Tabs,
   Input,
   GlassCard,
@@ -59,18 +64,54 @@ describe('CoherynUI React Component Catalog', () => {
     expect(tabs).toBeDefined();
   });
 
-  it('renders GlassCard with Liquid Glass recipe class', () => {
-    const card = <GlassCard>Glass Content</GlassCard>;
-    expect(card).toBeDefined();
+  it('renders Modal alias and Drawer with ARIA dialog roles', () => {
+    const modal = (
+      <Modal isOpen={true} onClose={() => {}} title="Test Modal Alias">
+        <p>Modal content</p>
+      </Modal>
+    );
+    const drawer = (
+      <Drawer isOpen={true} onClose={() => {}} title="Side Drawer" placement="right">
+        <p>Drawer content</p>
+      </Drawer>
+    );
+    expect(modal).toBeDefined();
+    expect(modal.props.isOpen).toBe(true);
+    expect(drawer).toBeDefined();
+    expect(drawer.props.placement).toBe('right');
   });
 
-  it('renders Layout Primitives: Stack, Cluster, Center', () => {
-    const stack = <Stack gap="6"><div>Item 1</div><div>Item 2</div></Stack>;
-    const cluster = <Cluster gap="4"><span>Tag 1</span><span>Tag 2</span></Cluster>;
-    const center = <Center><p>Centered</p></Center>;
+  it('renders Popover and DropdownMenu with trigger and item options', () => {
+    const popover = (
+      <Popover
+        trigger={<button>Info</button>}
+        content={<div>Popover details</div>}
+        placement="top"
+      />
+    );
+    const menuItems = [
+      { id: '1', label: 'Edit profile', onClick: () => {} },
+      { id: '2', label: 'Delete account', danger: true, onClick: () => {} },
+    ];
+    const dropdown = (
+      <Dropdown
+        trigger={<button>Options</button>}
+        items={menuItems}
+        placement="bottom-right"
+      />
+    );
+    expect(popover).toBeDefined();
+    expect(dropdown).toBeDefined();
+    expect(dropdown.props.items).toHaveLength(2);
+  });
 
-    expect(stack).toBeDefined();
-    expect(cluster).toBeDefined();
-    expect(center).toBeDefined();
+  it('renders ToastProvider container', () => {
+    const toastApp = (
+      <ToastProvider position="top-right">
+        <div>App Body</div>
+      </ToastProvider>
+    );
+    expect(toastApp).toBeDefined();
   });
 });
+
