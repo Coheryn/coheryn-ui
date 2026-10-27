@@ -10,6 +10,8 @@ This directory contains six production-grade, build-tested starter templates des
 
 | Template | Scope & Demonstrated Features | Primary Recipe & Primitives |
 |---|---|---|
+| **[react-vite/](./react-vite/)** | Modern React + Vite SPA, @coherynui/vite-plugin, HMR, touch BottomSheet | `@coherynui/react`, `@coherynui/motion`, `BottomSheet` |
+| **[nextjs/](./nextjs/)** | Next.js 14/15 App Router, zero-FOUC server-safe cascade layers | Next.js App Router, `@coherynui/react` |
 | **[saas-dashboard/](./saas-dashboard/)** | Server telemetry, edge node monitoring, responsive sidebar navigation | `sidebar`, `cluster`, `cq:card` |
 | **[admin-app/](./admin-app/)** | Data tables, form validation, focus-trapped dialogs, roving tabs | `Dialog`, `Tabs`, `Table` |
 | **[marketing-landing/](./marketing-landing/)** | Gradient hero typography, floating Liquid Glass dock, adaptive grid | `glass`, `stack`, `switcher` |

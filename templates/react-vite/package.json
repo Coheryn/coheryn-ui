@@ -1,0 +1,33 @@
+{
+  "name": "coherynui-react-vite-starter",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Official CoherynUI React + Vite starter template with on-demand cascade compiler, touch ergonomics, and Liquid Glass",
+  "homepage": "https://coheryntech.com/coherynui",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Coheryn/coheryn-ui.git",
+    "directory": "templates/react-vite"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "@coherynui/react": "workspace:*",
+    "@coherynui/motion": "workspace:*",
+    "@coherynui/tokens": "workspace:*"
+  },
+  "devDependencies": {
+    "@coherynui/vite-plugin": "workspace:*",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.7"
+  }
+}

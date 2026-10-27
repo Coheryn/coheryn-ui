@@ -1,0 +1,73 @@
+/* CoherynUI W3C 5-Cascade Layer Root Hierarchy */
+@layer cyn.reset, cyn.tokens, cyn.base, cyn.recipes, cyn.utilities;
+
+@layer cyn.reset {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer cyn.tokens {
+  :root {
+    --cyn-touch-min: 44px;
+    --cyn-touch-comfortable: 48px;
+    --cyn-space-4: 1rem;
+    --cyn-space-6: 1.5rem;
+    --cyn-space-8: 2rem;
+    --cyn-radius-lg: 0.75rem;
+    --cyn-radius-xl: 1rem;
+    --cyn-color-surface: #0f172a;
+    --cyn-color-foreground: #f8fafc;
+    --cyn-color-brand: #3b82f6;
+  }
+
+  [data-theme="light"] {
+    --cyn-color-surface: #ffffff;
+    --cyn-color-foreground: #0f172a;
+    --cyn-color-brand: #2563eb;
+  }
+}
+
+@layer cyn.base {
+  body {
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--cyn-color-surface);
+    color: var(--cyn-color-foreground);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer cyn.recipes {
+  .stack {
+    display: flex;
+    flex-direction: column;
+  }
+  .cluster {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .glass {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+}
+
+@layer cyn.utilities {
+  .touch-target {
+    min-inline-size: var(--cyn-touch-min, 44px);
+    min-block-size: var(--cyn-touch-min, 44px);
+  }
+  .tap-transparent {
+    -webkit-tap-highlight-color: transparent;
+  }
+  .select-none {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+}
