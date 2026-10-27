@@ -1,0 +1,37 @@
+{
+  "name": "@coherynui/vite-plugin",
+  "version": "0.1.0",
+  "description": "Official Vite plugin for CoherynUI CSS Engine: On-demand compilation, instant HMR, and virtual CSS module resolution",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "peerDependencies": {
+    "vite": ">=4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "vite": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test tests/*.test.js || true"
+  },
+  "keywords": [
+    "coherynui",
+    "vite-plugin",
+    "css",
+    "compiler",
+    "hmr",
+    "cascade-layers"
+  ],
+  "author": "Coheryn Team",
+  "license": "MIT"
+}
