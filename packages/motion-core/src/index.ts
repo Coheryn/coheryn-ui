@@ -265,3 +265,207 @@ export class FlipTransition {
     }
   }
 }
+
+/* -------------------------------------------------------------------------- */
+/*                 TOUCH & GESTURE RECOGNITION (COH-AMD-1.4)                  */
+/* -------------------------------------------------------------------------- */
+
+export type HapticPattern = 'light' | 'medium' | 'heavy' | 'selection' | 'success';
+
+/**
+ * Triggers safe, feature-detected tactile haptic feedback.
+ */
+export function triggerHaptic(pattern: HapticPattern = 'selection'): boolean {
+  if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+    const timings: Record<HapticPattern, number | number[]> = {
+      light: 10,
+      medium: 25,
+      heavy: 45,
+      selection: 8,
+      success: [15, 40, 20],
+    };
+    try {
+      return navigator.vibrate(timings[pattern]);
+    } catch {
+      return false;
+    }
+  }
+  return false;
+}
+
+/**
+ * Global coordinator resolving conflicts between nested gesture recognizers.
+ */
+export class GestureCoordinator {
+  private static activeClaimant: string | null = null;
+  private static claimants = new Map<string, () => void>();
+
+  public static register(id: string, onCancel: () => void): () => void {
+    this.claimants.set(id, onCancel);
+    return () => this.claimants.delete(id);
+  }
+
+  public static claim(id: string): boolean {
+    if (this.activeClaimant && this.activeClaimant !== id) {
+      const cancelFn = this.claimants.get(this.activeClaimant);
+      if (cancelFn) cancelFn();
+    }
+    this.activeClaimant = id;
+    return true;
+  }
+
+  public static release(id: string): void {
+    if (this.activeClaimant === id) {
+      this.activeClaimant = null;
+    }
+  }
+
+  public static isClaimed(id: string): boolean {
+    return this.activeClaimant === id;
+  }
+}
+
+export interface PanGestureConfig {
+  lockAxis?: 'x' | 'y';
+  bounds?: { minX?: number; maxX?: number; minY?: number; maxY?: number };
+  onPanStart?: (e: PointerEvent) => void;
+  onPan?: (dx: number, dy: number, vx: number, vy: number) => void;
+  onPanEnd?: (vx: number, vy: number) => void;
+}
+
+/**
+ * Pan / Drag Gesture Controller with real-time velocity and spring integration.
+ */
+export function createPanGesture(element: HTMLElement, config: PanGestureConfig = {}): () => void {
+  let isTracking = false;
+  let startX = 0;
+  let startY = 0;
+  let lastX = 0;
+  let lastY = 0;
+  let lastTime = 0;
+  let vx = 0;
+  let vy = 0;
+  const gestureId = `pan-${Math.random().toString(36).slice(2, 9)}`;
+
+  const unregister = GestureCoordinator.register(gestureId, () => {
+    if (isTracking) {
+      isTracking = false;
+      element.releasePointerCapture?.(pointerId);
+      if (config.onPanEnd) config.onPanEnd(0, 0);
+    }
+  });
+
+  let pointerId = 0;
+
+  function onPointerDown(e: PointerEvent) {
+    isTracking = true;
+    pointerId = e.pointerId;
+    startX = e.clientX;
+    startY = e.clientY;
+    lastX = e.clientX;
+    lastY = e.clientY;
+    lastTime = performance.now();
+    vx = 0;
+    vy = 0;
+
+    element.setPointerCapture?.(e.pointerId);
+    GestureCoordinator.claim(gestureId);
+    if (config.onPanStart) config.onPanStart(e);
+  }
+
+  function onPointerMove(e: PointerEvent) {
+    if (!isTracking) return;
+
+    const now = performance.now();
+    const dt = Math.max((now - lastTime) / 1000, 0.001);
+
+    // Exponentially smoothed velocity tracking (px/ms)
+    const currentVx = (e.clientX - lastX) / dt;
+    const currentVy = (e.clientY - lastY) / dt;
+    vx = 0.8 * currentVx + 0.2 * vx;
+    vy = 0.8 * currentVy + 0.2 * vy;
+
+    lastX = e.clientX;
+    lastY = e.clientY;
+    lastTime = now;
+
+    let dx = e.clientX - startX;
+    let dy = e.clientY - startY;
+
+    if (config.lockAxis === 'x') dy = 0;
+    if (config.lockAxis === 'y') dx = 0;
+
+    if (config.bounds) {
+      if (config.bounds.minX !== undefined) dx = Math.max(dx, config.bounds.minX);
+      if (config.bounds.maxX !== undefined) dx = Math.min(dx, config.bounds.maxX);
+      if (config.bounds.minY !== undefined) dy = Math.max(dy, config.bounds.minY);
+      if (config.bounds.maxY !== undefined) dy = Math.min(dy, config.bounds.maxY);
+    }
+
+    if (config.onPan) config.onPan(dx, dy, vx, vy);
+  }
+
+  function onPointerUp(e: PointerEvent) {
+    if (!isTracking) return;
+    isTracking = false;
+    element.releasePointerCapture?.(e.pointerId);
+    GestureCoordinator.release(gestureId);
+    if (config.onPanEnd) config.onPanEnd(vx, vy);
+  }
+
+  element.addEventListener('pointerdown', onPointerDown);
+  element.addEventListener('pointermove', onPointerMove);
+  element.addEventListener('pointerup', onPointerUp);
+  element.addEventListener('pointercancel', onPointerUp);
+
+  return () => {
+    unregister();
+    element.removeEventListener('pointerdown', onPointerDown);
+    element.removeEventListener('pointermove', onPointerMove);
+    element.removeEventListener('pointerup', onPointerUp);
+    element.removeEventListener('pointercancel', onPointerUp);
+  };
+}
+
+export interface SwipeGestureConfig {
+  thresholdDistance?: number;
+  thresholdVelocity?: number; // px/ms
+  onSwipeLeft?: () => void;
+  onSwipeRight?: () => void;
+  onSwipeUp?: () => void;
+  onSwipeDown?: () => void;
+}
+
+/**
+ * Directional Swipe Recognizer.
+ */
+export function createSwipeGesture(element: HTMLElement, config: SwipeGestureConfig = {}): () => void {
+  const distThreshold = config.thresholdDistance ?? 40;
+  const velThreshold = config.thresholdVelocity ?? 0.3;
+
+  return createPanGesture(element, {
+    onPanEnd: (vx, vy) => {
+      const absVx = Math.abs(vx);
+      const absVy = Math.abs(vy);
+
+      if (absVx > absVy && absVx > velThreshold) {
+        if (vx > 0 && config.onSwipeRight) {
+          triggerHaptic('light');
+          config.onSwipeRight();
+        } else if (vx < 0 && config.onSwipeLeft) {
+          triggerHaptic('light');
+          config.onSwipeLeft();
+        }
+      } else if (absVy > absVx && absVy > velThreshold) {
+        if (vy > 0 && config.onSwipeDown) {
+          triggerHaptic('light');
+          config.onSwipeDown();
+        } else if (vy < 0 && config.onSwipeUp) {
+          triggerHaptic('light');
+          config.onSwipeUp();
+        }
+      }
+    },
+  });
+}
+

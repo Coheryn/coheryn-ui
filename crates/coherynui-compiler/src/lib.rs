@@ -463,6 +463,28 @@ impl CoherynCompiler {
             }
             ("fg", Some("muted")) => decl("color", "rgba(100, 116, 139, 1)", token.important),
 
+            // Touch & Gesture Ergonomics (COH-AMD-1.4)
+            ("touch-auto", None) => decl("touch-action", "auto", token.important),
+            ("touch-none", None) => decl("touch-action", "none", token.important),
+            ("touch-pan-x", None) => decl("touch-action", "pan-x", token.important),
+            ("touch-pan-y", None) => decl("touch-action", "pan-y", token.important),
+            ("touch-pinch", None) => decl("touch-action", "pinch-zoom", token.important),
+            ("touch-manipulation", None) => decl("touch-action", "manipulation", token.important),
+            ("overscroll-contain", None) => decl("overscroll-behavior", "contain", token.important),
+            ("overscroll-none", None) => decl("overscroll-behavior", "none", token.important),
+            ("tap-transparent", None) => decl("-webkit-tap-highlight-color", "transparent", token.important),
+            ("select-none", None) => decl2("user-select", "none", "-webkit-user-select", "none", token.important),
+            ("touch-target", None) => {
+                let vp = &self.config.compiler.variable_prefix;
+                decl2(
+                    "min-inline-size",
+                    &format!("var(--{}-touch-min, 44px)", vp),
+                    "min-block-size",
+                    &format!("var(--{}-touch-min, 44px)", vp),
+                    token.important,
+                )
+            }
+
             _ => None,
         }
     }
@@ -571,6 +593,7 @@ fn emit_coheryn_reset(var_prefix: &str) -> String {
 r#"  *, *::before, *::after {{
     box-sizing: border-box;
     margin: 0;
+    -webkit-tap-highlight-color: transparent;
   }}
   body {{
     line-height: 1.5;
@@ -684,5 +707,23 @@ mod tests {
         assert!(!result.generated_classes.contains("p-4"));
         assert!(result.generated_classes.contains("co-flex"));
         assert!(result.generated_classes.contains("co-bg-surface"));
+    }
+
+    #[test]
+    fn test_touch_action_and_ergonomics_utilities() {
+        let compiler = CoherynCompiler::new(CoherynConfig::default());
+        let candidates = vec![
+            SourceCandidate { value: "touch-none".into(), span: SourceSpan::dummy() },
+            SourceCandidate { value: "touch-pan-y".into(), span: SourceSpan::dummy() },
+            SourceCandidate { value: "overscroll-contain".into(), span: SourceSpan::dummy() },
+            SourceCandidate { value: "touch-target".into(), span: SourceSpan::dummy() },
+        ];
+
+        let result = compiler.compile_candidates(&candidates);
+        assert!(result.css.contains(".touch-none {\n    touch-action: none;\n  }"));
+        assert!(result.css.contains(".touch-pan-y {\n    touch-action: pan-y;\n  }"));
+        assert!(result.css.contains(".overscroll-contain {\n    overscroll-behavior: contain;\n  }"));
+        assert!(result.css.contains("var(--cyn-touch-min, 44px)"));
+        assert!(result.css.contains("-webkit-tap-highlight-color: transparent;"));
     }
 }

@@ -120,6 +120,43 @@ def check_registry_schemas_and_examples():
             assert "accessibility" in data or "tokens_used" in data, f"Missing contract in {ex}"
     print(f"  ✓ Verified {len(examples)} machine-readable examples in registry/examples/.")
 
+def check_touch_ergonomics_and_gestures():
+    print("[6/6] Testing Touch-First Ergonomics, Gestures & Mobile Contracts (COH-AMD-1.4)...")
+    
+    # 1. Verify touch utilities in compiler source
+    with open('crates/coherynui-compiler/src/lib.rs') as fp:
+        compiler_code = fp.read()
+        touch_utils = ['touch-none', 'touch-pan-x', 'touch-pan-y', 'touch-pinch', 'overscroll-contain', 'touch-target']
+        for u in touch_utils:
+            assert f'("{u}"' in compiler_code, f"Missing touch utility '{u}' in compiler"
+
+    # 2. Verify touch design tokens
+    with open('crates/coherynui-design/src/lib.rs') as fp:
+        design_code = fp.read()
+        assert 'touch-min: 44px' in design_code, "Missing --cyn-touch-min design token"
+        assert 'touch-comfortable: 48px' in design_code, "Missing --cyn-touch-comfortable design token"
+
+    # 3. Verify CY2004 diagnostic
+    with open('crates/coherynui-diagnostics/src/lib.rs') as fp:
+        diag_code = fp.read()
+        assert 'TOUCH_TARGET_UNDER_44PX' in diag_code, "Missing CY2004 constant"
+        assert 'CY2004' in diag_code, "Missing CY2004 code definition"
+
+    # 4. Verify motion gesture exports
+    with open('packages/motion-core/src/index.ts') as fp:
+        motion_code = fp.read()
+        assert 'createPanGesture' in motion_code, "Missing createPanGesture export"
+        assert 'createSwipeGesture' in motion_code, "Missing createSwipeGesture export"
+        assert 'GestureCoordinator' in motion_code, "Missing GestureCoordinator export"
+        assert 'triggerHaptic' in motion_code, "Missing triggerHaptic export"
+
+    # 5. Verify BottomSheet component
+    with open('packages/ui-react/src/index.ts') as fp:
+        react_code = fp.read()
+        assert 'export const BottomSheet' in react_code, "Missing BottomSheet component in ui-react"
+
+    print("  ✓ Verified touch-action utilities, 44px target tokens, gesture recognizers, and BottomSheet.")
+
 def main():
     start = time.time()
     print("==================================================================")
@@ -131,6 +168,7 @@ def main():
     check_wasm_sandbox_security()
     check_diagnostics_conformance()
     check_registry_schemas_and_examples()
+    check_touch_ergonomics_and_gestures()
 
     elapsed = time.time() - start
     print("==================================================================")
@@ -139,3 +177,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

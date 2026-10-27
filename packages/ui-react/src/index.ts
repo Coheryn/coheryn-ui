@@ -269,3 +269,99 @@ export const GlassCard: React.FC<{ children: React.ReactNode; className?: string
     {children}
   </div>
 );
+
+/* -------------------------------------------------------------------------- */
+/*                 TOUCH-FIRST MOBILE COMPONENTS (COH-AMD-1.4)                */
+/* -------------------------------------------------------------------------- */
+
+export interface BottomSheetProps {
+  isOpen: boolean;
+  onClose: () => void;
+  title?: string;
+  children: React.ReactNode;
+  dismissThreshold?: number; // px downward drag before dismiss
+}
+
+export const BottomSheet: React.FC<BottomSheetProps> = ({
+  isOpen,
+  onClose,
+  title,
+  children,
+  dismissThreshold = 100,
+}) => {
+  const [dragY, setDragY] = useState(0);
+  const isDraggingRef = useRef(false);
+  const startYRef = useRef(0);
+  const sheetRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      const unlock = scrollLock();
+      const unescape = dismissOnEscape(onClose);
+      return () => {
+        unlock();
+        unescape();
+      };
+    }
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+
+  function onPointerDown(e: React.PointerEvent) {
+    isDraggingRef.current = true;
+    startYRef.current = e.clientY;
+    (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
+  }
+
+  function onPointerMove(e: React.PointerEvent) {
+    if (!isDraggingRef.current) return;
+    const dy = Math.max(0, e.clientY - startYRef.current);
+    setDragY(dy);
+  }
+
+  function onPointerUp(e: React.PointerEvent) {
+    if (!isDraggingRef.current) return;
+    isDraggingRef.current = false;
+    (e.target as HTMLElement).releasePointerCapture?.(e.pointerId);
+
+    if (dragY > dismissThreshold) {
+      onClose();
+    }
+    setDragY(0);
+  }
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={title || 'Bottom Sheet'}
+      className="fixed inset-0 z-50 flex flex-col justify-end bg-black/60 backdrop-blur-sm transition-opacity overscroll-none"
+      onClick={onClose}
+    >
+      <div
+        ref={sheetRef}
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          transform: `translateY(${dragY}px)`,
+          transition: isDraggingRef.current ? 'none' : 'transform 250ms cubic-bezier(0.16, 1, 0.3, 1)',
+        }}
+        className="w-full max-w-lg mx-auto bg-surface border-t radius-xl shadow-2xl p-6 overscroll-contain"
+      >
+        {/* Tactile Drag Affordance Handle */}
+        <div
+          className="flex justify-center py-2 cursor-grab touch-none select-none"
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={onPointerUp}
+          onPointerCancel={onPointerUp}
+        >
+          <div className="w-12 h-1.5 radius-full bg-white/20" />
+        </div>
+
+        {title && <h3 className="text-xl weight-bold fg-primary mb-3">{title}</h3>}
+        <div className="mt-2">{children}</div>
+      </div>
+    </div>
+  );
+};
+

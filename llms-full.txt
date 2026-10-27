@@ -121,6 +121,10 @@ coherynui mcp doctor
 - `--cyn-glass-blur`: `16px`
 - `--cyn-glass-specular`: `linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent)`
 
+### Touch Ergonomics Tokens (COH-AMD-1.4)
+- `--cyn-touch-min`: `44px` (WCAG 2.2 Level AA target size)
+- `--cyn-touch-comfortable`: `48px` (Ergonomic mobile target size)
+
 ---
 
 ## 5. Layout Recipes Reference
@@ -262,6 +266,7 @@ All `@coherynui/motion` animations must respect `prefers-reduced-motion: reduce`
 | `CY2001` | Error | MissingAriaContract | Interactive component lacks required ARIA attribute (`aria-labelledby`, `role`, etc.). |
 | `CY2002` | Warning | LowContrastRatio | Foreground-to-background contrast is under WCAG 2.2 AA threshold (4.5:1 text, 3.0:1 UI). |
 | `CY2003` | Error | FocusTrapMissing | Modal overlay lacks roving tabindex or focus trap boundary. |
+| `CY2004` | Warning | TouchTargetUnder44px | Interactive element size is under 44px. Apply `.touch-target` to satisfy WCAG 2.2 SC 2.5.8. |
 | `CY3001` | Error | MissingShaderFallback | WebGPU shader material lacks Tier 1 CSS Liquid Glass fallback. |
 | `CY3002` | Warning | MissingReducedMotion | Keyframe animation or spring transition lacks `prefers-reduced-motion` override. |
 

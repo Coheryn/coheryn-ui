@@ -78,3 +78,31 @@ impl DiagnosticReport {
         serde_json::to_string_pretty(self)
     }
 }
+
+pub mod codes {
+    pub const UNKNOWN_UTILITY: &str = "CY1001";
+    pub const DEPRECATED_TOKEN: &str = "CY1002";
+    pub const MISSING_ARIA_CONTRACT: &str = "CY2001";
+    pub const LOW_CONTRAST_RATIO: &str = "CY2002";
+    pub const FOCUS_TRAP_MISSING: &str = "CY2003";
+    pub const TOUCH_TARGET_UNDER_44PX: &str = "CY2004";
+    pub const MISSING_SHADER_FALLBACK: &str = "CY3001";
+    pub const MISSING_REDUCED_MOTION: &str = "CY3002";
+}
+
+impl CompilerDiagnostic {
+    /// Helper to create a touch target ergonomic warning (WCAG 2.2 SC 2.5.8).
+    pub fn touch_target_warning(element_desc: &str, size_px: u32, span: Option<&SourceSpan>) -> Self {
+        Self::new(
+            codes::TOUCH_TARGET_UNDER_44PX,
+            DiagnosticSeverity::Warning,
+            format!(
+                "Interactive element '{}' has size {}px, which is under the 44px minimum touch target threshold (WCAG 2.2 SC 2.5.8).",
+                element_desc, size_px
+            ),
+            span,
+        )
+        .with_suggestion("Apply '.touch-target' or increase padding to guarantee at least 44x44px touch area.")
+    }
+}
+

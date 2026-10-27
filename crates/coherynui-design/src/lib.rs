@@ -138,6 +138,10 @@ impl CoherynConfig {
             out.push_str(&format!("  --{}-radius-{}: {};\n", p, k, v));
         }
 
+        // Emit touch target ergonomics (COH-AMD-1.4)
+        out.push_str(&format!("  --{}-touch-min: 44px;\n", p));
+        out.push_str(&format!("  --{}-touch-comfortable: 48px;\n", p));
+
         // Emit default theme colors
         if let Some(default_theme) = self.themes.get(&self.theme.default) {
             for (k, v) in &default_theme.colors {
