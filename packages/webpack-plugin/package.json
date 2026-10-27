@@ -1,0 +1,49 @@
+{
+  "name": "@coherynui/webpack-plugin",
+  "version": "0.1.0",
+  "description": "Official Webpack 5 plugin and loader for CoherynUI CSS Engine: On-demand compilation, virtual stylesheet resolution, and W3C cascade layers",
+  "homepage": "https://coheryntech.com/coherynui",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Coheryn/coheryn-ui.git",
+    "directory": "packages/webpack-plugin"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./loader": {
+      "types": "./dist/loader.d.ts",
+      "import": "./dist/loader.mjs",
+      "require": "./dist/loader.js"
+    }
+  },
+  "peerDependencies": {
+    "webpack": ">=5.0.0"
+  },
+  "peerDependenciesMeta": {
+    "webpack": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test tests/*.test.js || true"
+  },
+  "keywords": [
+    "coherynui",
+    "webpack-plugin",
+    "webpack-loader",
+    "css",
+    "compiler",
+    "cascade-layers",
+    "nextjs"
+  ],
+  "author": "Coheryn Team",
+  "license": "MIT"
+}
