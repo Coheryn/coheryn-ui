@@ -23,8 +23,8 @@ version = "0.1.0"
 edition = "2024"
 license = "MIT OR Apache-2.0"
 authors = ["CoherynUI Tech <engineering@coherynui.org>"]
-repository = "https://github.com/CoherynTechProjects/CoherynCSS"
-homepage = "https://coherynui.dev"
+repository = "https://github.com/Coheryn/coheryn-ui"
+homepage = "https://coheryntech.com/coherynui"
 
 [workspace.dependencies]
 # Internal workspace crates (CoherynUI)

@@ -1,4 +1,10 @@
-import { SpringSolver, spring } from '../src/index';
+import {
+  SpringSolver,
+  spring,
+  GestureCoordinator,
+  createPanGesture,
+  createSwipeGesture,
+} from '../src/index';
 
 describe('SpringSolver Analytical Physics', () => {
   it('correctly calculates initial displacement and decay over time', () => {
@@ -20,11 +26,26 @@ describe('SpringSolver Analytical Physics', () => {
   });
 
   it('handles critically damped springs without oscillation', () => {
-    // Critical damping: zeta = 1 (c = 2 * sqrt(k * m))
-    // k = 100, m = 1 -> c = 20
     const solver = new SpringSolver({ stiffness: 100, damping: 20, mass: 1 });
     const state = solver.evaluate(0.5, 50, 0);
     expect(state.position).toBeGreaterThan(0);
     expect(state.position).toBeLessThan(50);
+  });
+});
+
+describe('GestureCoordinator & Touch Ergonomics', () => {
+  it('arbitrates gesture claims without conflict', () => {
+    const claimed1 = GestureCoordinator.claim('drag-1');
+    expect(claimed1).toBe(true);
+
+    // Second claim should be rejected or wait until first is released
+    const claimed2 = GestureCoordinator.claim('drag-2');
+    expect(claimed2).toBe(false);
+
+    GestureCoordinator.release('drag-1');
+    const claimed3 = GestureCoordinator.claim('drag-2');
+    expect(claimed3).toBe(true);
+
+    GestureCoordinator.release('drag-2');
   });
 });

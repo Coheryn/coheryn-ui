@@ -5,12 +5,29 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
   },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
   "dependencies": {
-    "@coherynui/components": "workspace:*"
+    "@coherynui/components": "workspace:*",
+    "@coherynui/motion": "workspace:*",
+    "@coherynui/tokens": "workspace:*"
   },
   "scripts": {
     "build": "tsc"

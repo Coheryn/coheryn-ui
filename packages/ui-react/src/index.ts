@@ -35,7 +35,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         disabled={disabled || isLoading}
-        className={`inline-flex items-center justify-center weight-medium transition-colors ${sizeClass} ${variantClass} ${className}`.trim()}
+        className={`inline-flex items-center justify-center weight-medium transition-colors touch-target tap-transparent select-none ${sizeClass} ${variantClass} ${className}`.trim()}
         {...props}
       >
         {isLoading && <span className="mr-2 inline-block"><Spinner size="sm" /></span>}
@@ -45,6 +45,48 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   }
 );
 Button.displayName = 'Button';
+
+export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  'aria-label': string;
+  variant?: 'primary' | 'secondary' | 'glass' | 'subtle' | 'danger';
+  size?: 'sm' | 'md' | 'lg';
+  isLoading?: boolean;
+}
+
+export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
+  ({ children, variant = 'subtle', size = 'md', isLoading = false, className = '', disabled, 'aria-label': ariaLabel, ...props }, ref) => {
+    const variantClass =
+      variant === 'glass'
+        ? 'glass hover:lift'
+        : variant === 'primary'
+        ? 'bg-brand fg-primary'
+        : variant === 'danger'
+        ? 'bg-[#ef4444] fg-primary'
+        : variant === 'subtle'
+        ? 'border-subtle fg-muted hover:bg-surface'
+        : 'bg-surface border fg-primary';
+
+    const sizeClass =
+      size === 'sm'
+        ? 'p-2 text-sm radius-md'
+        : size === 'lg'
+        ? 'p-3.5 text-lg radius-xl'
+        : 'p-2.5 text-base radius-lg';
+
+    return (
+      <button
+        ref={ref}
+        aria-label={ariaLabel}
+        disabled={disabled || isLoading}
+        className={`inline-flex items-center justify-center weight-medium transition-colors touch-target tap-transparent select-none ${sizeClass} ${variantClass} ${className}`.trim()}
+        {...props}
+      >
+        {isLoading ? <Spinner size="sm" /> : children}
+      </button>
+    );
+  }
+);
+IconButton.displayName = 'IconButton';
 
 export const ButtonGroup: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
   <div className={`cluster gap-1 p-1 radius-lg bg-surface border-subtle ${className}`.trim()}>
@@ -364,4 +406,50 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
     </div>
   );
 };
+
+/* -------------------------------------------------------------------------- */
+/*                               LAYOUT RECIPES                               */
+/* -------------------------------------------------------------------------- */
+
+export interface LayoutProps extends React.HTMLAttributes<HTMLDivElement> {
+  gap?: '1' | '2' | '3' | '4' | '6' | '8';
+  children: React.ReactNode;
+}
+
+export const Stack: React.FC<LayoutProps> = ({ children, gap = '4', className = '', ...props }) => (
+  <div className={`stack gap-${gap} ${className}`.trim()} {...props}>
+    {children}
+  </div>
+);
+
+export const Cluster: React.FC<LayoutProps> = ({ children, gap = '4', className = '', ...props }) => (
+  <div className={`cluster gap-${gap} ${className}`.trim()} {...props}>
+    {children}
+  </div>
+);
+
+export const Center: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, className = '', ...props }) => (
+  <div className={`center ${className}`.trim()} {...props}>
+    {children}
+  </div>
+);
+
+/* -------------------------------------------------------------------------- */
+/*                              TOUCH & HAPTICS                               */
+/* -------------------------------------------------------------------------- */
+
+export function useHaptic() {
+  const trigger = (type: 'light' | 'medium' | 'heavy' = 'light') => {
+    if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+      const duration = type === 'light' ? 10 : type === 'medium' ? 25 : 50;
+      try {
+        navigator.vibrate(duration);
+      } catch {
+        // Safe no-op on unsupported environments
+      }
+    }
+  };
+  return { trigger };
+}
+
 
