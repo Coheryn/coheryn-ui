@@ -5,6 +5,7 @@ edition.workspace = true
 license.workspace = true
 authors.workspace = true
 repository.workspace = true
+description = "Plugin interface and transformation traits for the CoherynUI compiler"
 
 [dependencies]
 coherynui-core.workspace = true

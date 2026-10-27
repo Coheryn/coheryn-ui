@@ -5,6 +5,7 @@ edition.workspace = true
 license.workspace = true
 authors.workspace = true
 repository.workspace = true
+description = "CoherynUI CLI — Incremental styling compiler, development server, and agent orchestration"
 
 [[bin]]
 name = "coherynui"

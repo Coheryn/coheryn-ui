@@ -5,6 +5,7 @@ edition.workspace = true
 license.workspace = true
 authors.workspace = true
 repository.workspace = true
+description = "Source file loading, span tracking, and line index utilities for CoherynUI"
 
 [dependencies]
 coherynui-core.workspace = true

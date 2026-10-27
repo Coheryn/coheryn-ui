@@ -5,6 +5,7 @@ edition.workspace = true
 license.workspace = true
 authors.workspace = true
 repository.workspace = true
+description = "Core data structures and runtime for CoherynUI CSS Engine"
 
 [dependencies]
 serde.workspace = true

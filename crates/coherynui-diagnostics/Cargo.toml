@@ -5,6 +5,7 @@ edition.workspace = true
 license.workspace = true
 authors.workspace = true
 repository.workspace = true
+description = "Structured compiler error diagnostic schemas (CY1001-CY3002) for CoherynUI"
 
 [dependencies]
 coherynui-core.workspace = true

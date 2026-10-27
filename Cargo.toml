@@ -25,6 +25,7 @@ license = "MIT OR Apache-2.0"
 authors = ["CoherynUI Tech <engineering@coherynui.org>"]
 repository = "https://github.com/Coheryn/coheryn-ui"
 homepage = "https://coheryntech.com/products/coheryn-ui"
+description = "CoherynUI — Deterministic Styling Engine, W3C Cascade Layers, and Accessible UI Architecture"
 
 [workspace.dependencies]
 # Internal workspace crates (CoherynUI)

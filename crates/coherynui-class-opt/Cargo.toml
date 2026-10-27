@@ -5,6 +5,7 @@ edition.workspace = true
 license.workspace = true
 authors.workspace = true
 repository.workspace = true
+description = "Deterministic class name optimizer, mangler, and reverse explain lookup for CoherynUI"
 
 [dependencies]
 coherynui-core.workspace = true

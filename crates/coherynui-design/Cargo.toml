@@ -5,6 +5,7 @@ edition.workspace = true
 license.workspace = true
 authors.workspace = true
 repository.workspace = true
+description = "Design token models, typography scales, and theme definitions for CoherynUI"
 
 [dependencies]
 coherynui-core.workspace = true
