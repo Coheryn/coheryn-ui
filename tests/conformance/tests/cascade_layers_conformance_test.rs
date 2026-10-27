@@ -6,18 +6,8 @@ use coherynui_source::SourceCandidate;
 fn test_canonical_cascade_layer_order() {
     let compiler = CoherynCompiler::new(CoherynConfig::default());
     let candidates = vec![
-        SourceCandidate {
-            value: "stack".to_string(),
-            file: "test.html".to_string(),
-            line: 1,
-            column: 1,
-        },
-        SourceCandidate {
-            value: "text-brand".to_string(),
-            file: "test.html".to_string(),
-            line: 2,
-            column: 1,
-        },
+        SourceCandidate::from_value("stack"),
+        SourceCandidate::from_value("text-brand"),
     ];
 
     let result = compiler.compile_candidates(&candidates);
@@ -50,12 +40,7 @@ fn test_custom_layer_prefix_configuration() {
     config.compiler.variable_prefix = "customui".to_string();
 
     let compiler = CoherynCompiler::new(config);
-    let candidates = vec![SourceCandidate {
-        value: "stack".to_string(),
-        file: "test.html".to_string(),
-        line: 1,
-        column: 1,
-    }];
+    let candidates = vec![SourceCandidate::from_value("stack")];
 
     let result = compiler.compile_candidates(&candidates);
 
@@ -73,18 +58,8 @@ fn test_custom_layer_prefix_configuration() {
 fn test_utility_layer_precedence_over_recipes() {
     let compiler = CoherynCompiler::new(CoherynConfig::default());
     let candidates = vec![
-        SourceCandidate {
-            value: "sidebar".to_string(),
-            file: "test.html".to_string(),
-            line: 1,
-            column: 1,
-        },
-        SourceCandidate {
-            value: "p-4".to_string(),
-            file: "test.html".to_string(),
-            line: 2,
-            column: 1,
-        },
+        SourceCandidate::from_value("sidebar"),
+        SourceCandidate::from_value("p-4"),
     ];
 
     let result = compiler.compile_candidates(&candidates);

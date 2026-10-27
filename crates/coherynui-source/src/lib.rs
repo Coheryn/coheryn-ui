@@ -17,12 +17,7 @@ pub enum SourceError {
     },
 }
 
-/// Extracted candidate class token with its exact source span.
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub struct SourceCandidate {
-    pub value: String,
-    pub span: SourceSpan,
-}
+pub use coherynui_core::SourceCandidate;
 
 /// Extract class name candidates from text (HTML, JSX, TSX, template markup).
 pub fn extract_candidates_from_str(content: &str, file_name: &str) -> Vec<SourceCandidate> {

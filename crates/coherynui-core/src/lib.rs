@@ -25,6 +25,39 @@ impl SourceSpan {
             end_col,
         }
     }
+
+    pub fn dummy() -> Self {
+        Self {
+            file: "dummy".to_string(),
+            start_line: 1,
+            start_col: 1,
+            end_line: 1,
+            end_col: 1,
+        }
+    }
+}
+
+/// Extracted candidate class token with its exact source span.
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct SourceCandidate {
+    pub value: String,
+    pub span: SourceSpan,
+}
+
+impl SourceCandidate {
+    pub fn new(value: impl Into<String>, span: SourceSpan) -> Self {
+        Self {
+            value: value.into(),
+            span,
+        }
+    }
+
+    pub fn from_value(value: impl Into<String>) -> Self {
+        Self {
+            value: value.into(),
+            span: SourceSpan::dummy(),
+        }
+    }
 }
 
 /// Strongly typed property identifier.

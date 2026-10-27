@@ -7,66 +7,16 @@ use coherynui_source::SourceCandidate;
 fn test_touch_action_and_overscroll_utilities_conformance() {
     let compiler = CoherynCompiler::new(CoherynConfig::default());
     let candidates = vec![
-        SourceCandidate {
-            value: "touch-none".into(),
-            file: "test.html".into(),
-            line: 1,
-            column: 1,
-        },
-        SourceCandidate {
-            value: "touch-pan-x".into(),
-            file: "test.html".into(),
-            line: 2,
-            column: 1,
-        },
-        SourceCandidate {
-            value: "touch-pan-y".into(),
-            file: "test.html".into(),
-            line: 3,
-            column: 1,
-        },
-        SourceCandidate {
-            value: "touch-pinch".into(),
-            file: "test.html".into(),
-            line: 4,
-            column: 1,
-        },
-        SourceCandidate {
-            value: "touch-manipulation".into(),
-            file: "test.html".into(),
-            line: 5,
-            column: 1,
-        },
-        SourceCandidate {
-            value: "overscroll-contain".into(),
-            file: "test.html".into(),
-            line: 6,
-            column: 1,
-        },
-        SourceCandidate {
-            value: "overscroll-none".into(),
-            file: "test.html".into(),
-            line: 7,
-            column: 1,
-        },
-        SourceCandidate {
-            value: "tap-transparent".into(),
-            file: "test.html".into(),
-            line: 8,
-            column: 1,
-        },
-        SourceCandidate {
-            value: "select-none".into(),
-            file: "test.html".into(),
-            line: 9,
-            column: 1,
-        },
-        SourceCandidate {
-            value: "touch-target".into(),
-            file: "test.html".into(),
-            line: 10,
-            column: 1,
-        },
+        SourceCandidate::from_value("touch-none"),
+        SourceCandidate::from_value("touch-pan-x"),
+        SourceCandidate::from_value("touch-pan-y"),
+        SourceCandidate::from_value("touch-pinch"),
+        SourceCandidate::from_value("touch-manipulation"),
+        SourceCandidate::from_value("overscroll-contain"),
+        SourceCandidate::from_value("overscroll-none"),
+        SourceCandidate::from_value("tap-transparent"),
+        SourceCandidate::from_value("select-none"),
+        SourceCandidate::from_value("touch-target"),
     ];
 
     let result = compiler.compile_candidates(&candidates);

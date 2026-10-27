@@ -1,4 +1,5 @@
 use coherynui_compiler::CoherynCompiler;
+use coherynui_core::SourceSpan;
 use coherynui_design::CoherynConfig;
 use coherynui_diagnostics::{CompilerDiagnostic, DiagnosticSeverity};
 use coherynui_source::SourceCandidate;
@@ -6,12 +7,10 @@ use coherynui_source::SourceCandidate;
 #[test]
 fn test_compiler_unknown_utility_diagnostic_cy1001() {
     let compiler = CoherynCompiler::new(CoherynConfig::default());
-    let candidates = vec![SourceCandidate {
-        value: "nonexistent-utility-token-xyz".to_string(),
-        file: "index.html".to_string(),
-        line: 42,
-        column: 15,
-    }];
+    let candidates = vec![SourceCandidate::new(
+        "nonexistent-utility-token-xyz",
+        SourceSpan::new("index.html", 42, 15, 42, 44),
+    )];
 
     let result = compiler.compile_candidates(&candidates);
 

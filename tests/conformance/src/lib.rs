@@ -13,12 +13,7 @@ pub mod harness {
         let compiler = CoherynCompiler::new(CoherynConfig::default());
         let candidates: Vec<SourceCandidate> = classes
             .iter()
-            .map(|&c| SourceCandidate {
-                value: c.to_string(),
-                file: "test.html".to_string(),
-                line: 1,
-                column: 1,
-            })
+            .map(|&c| SourceCandidate::from_value(c))
             .collect();
         let result = compiler.compile_candidates(&candidates);
         result.css
