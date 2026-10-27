@@ -464,17 +464,17 @@ impl CoherynCompiler {
             ("fg", Some("muted")) => decl("color", "rgba(100, 116, 139, 1)", token.important),
 
             // Touch & Gesture Ergonomics (COH-AMD-1.4)
-            ("touch-auto", None) => decl("touch-action", "auto", token.important),
-            ("touch-none", None) => decl("touch-action", "none", token.important),
-            ("touch-pan-x", None) => decl("touch-action", "pan-x", token.important),
-            ("touch-pan-y", None) => decl("touch-action", "pan-y", token.important),
-            ("touch-pinch", None) => decl("touch-action", "pinch-zoom", token.important),
-            ("touch-manipulation", None) => decl("touch-action", "manipulation", token.important),
-            ("overscroll-contain", None) => decl("overscroll-behavior", "contain", token.important),
-            ("overscroll-none", None) => decl("overscroll-behavior", "none", token.important),
-            ("tap-transparent", None) => decl("-webkit-tap-highlight-color", "transparent", token.important),
-            ("select-none", None) => decl2("user-select", "none", "-webkit-user-select", "none", token.important),
-            ("touch-target", None) => {
+            ("touch", Some("auto")) | ("touch-auto", None) => decl("touch-action", "auto", token.important),
+            ("touch", Some("none")) | ("touch-none", None) => decl("touch-action", "none", token.important),
+            ("touch-pan", Some("x")) | ("touch-pan-x", None) => decl("touch-action", "pan-x", token.important),
+            ("touch-pan", Some("y")) | ("touch-pan-y", None) => decl("touch-action", "pan-y", token.important),
+            ("touch", Some("pinch")) | ("touch-pinch", None) => decl("touch-action", "pinch-zoom", token.important),
+            ("touch", Some("manipulation")) | ("touch-manipulation", None) => decl("touch-action", "manipulation", token.important),
+            ("overscroll", Some("contain")) | ("overscroll-contain", None) => decl("overscroll-behavior", "contain", token.important),
+            ("overscroll", Some("none")) | ("overscroll-none", None) => decl("overscroll-behavior", "none", token.important),
+            ("tap", Some("transparent")) | ("tap-transparent", None) => decl("-webkit-tap-highlight-color", "transparent", token.important),
+            ("select", Some("none")) | ("select-none", None) => decl2("user-select", "none", "-webkit-user-select", "none", token.important),
+            ("touch", Some("target")) | ("touch-target", None) => {
                 let vp = &self.config.compiler.variable_prefix;
                 decl2(
                     "min-inline-size",
