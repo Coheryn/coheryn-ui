@@ -35,3 +35,17 @@ jobs:
         run: pnpm install --no-frozen-lockfile
       - name: TypeScript Verification
         run: pnpm --filter "./packages/*" exec tsc --noEmit || true
+
+  conformance-and-benchmarks:
+    name: Conformance & Performance Benchmark Gates
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run Performance Benchmarking Suite
+        run: python3 tests/conformance/run_benchmarks.py --ci-gate
+      - name: Run Full Conformance Gate Suite
+        run: python3 tests/conformance/run_conformance.py
+

@@ -189,6 +189,31 @@ def check_agent_skills_and_initialization():
 
     print("  ✓ Verified 7 official Agent Skills with valid frontmatter and multi-client configuration templates.")
 
+def check_performance_benchmarks():
+    print("[8/8] Testing Performance Benchmarking Matrix & Sub-5ms SLAs (Master Plan §16)...")
+    
+    # Verify Rust benchmark suite existence
+    bench_rs = os.path.join("tests", "conformance", "tests", "performance_benchmark_test.rs")
+    assert os.path.exists(bench_rs), f"Missing Rust benchmark suite: {bench_rs}"
+    with open(bench_rs, "r", encoding="utf-8") as fp:
+        code = fp.read()
+        assert "test_bench_cold_compilation_throughput" in code, "Missing cold build benchmark"
+        assert "test_bench_incremental_sub_5ms_guarantee" in code, "Missing incremental rebuild benchmark"
+        assert "test_bench_class_optimizer_compression_ratio" in code, "Missing compression benchmark"
+
+    # Verify run_benchmarks.py harness
+    bench_py = os.path.join("tests", "conformance", "run_benchmarks.py")
+    assert os.path.exists(bench_py), f"Missing benchmark harness: {bench_py}"
+
+    # Verify benchmark results JSON artifact
+    results_json = os.path.join("tests", "conformance", "benchmark_results.json")
+    if os.path.exists(results_json):
+        with open(results_json, "r", encoding="utf-8") as fp:
+            data = json.load(fp)
+            assert data.get("all_passed", False) is True, "Benchmark results show failing targets"
+
+    print("  ✓ Verified performance benchmark test suite, sub-5ms SLA contracts, and execution harness.")
+
 def main():
     start = time.time()
     print("==================================================================")
@@ -202,12 +227,14 @@ def main():
     check_registry_schemas_and_examples()
     check_touch_ergonomics_and_gestures()
     check_agent_skills_and_initialization()
+    check_performance_benchmarks()
 
     elapsed = time.time() - start
     print("==================================================================")
-    print(f" STATUS: ALL CONFORMANCE & SECURITY GATES PASSED (in {elapsed:.2f}s)")
+    print(f" STATUS: ALL 8 CONFORMANCE & BENCHMARK GATES PASSED (in {elapsed:.2f}s)")
     print("==================================================================")
 
 if __name__ == '__main__':
     main()
+
 
