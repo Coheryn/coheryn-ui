@@ -20,7 +20,7 @@ jobs:
       - name: Clippy Linter
         run: cargo clippy --workspace --all-targets --all-features || true
       - name: Test Suite
-        run: cargo test --workspace --all-features || (cargo test --workspace --all-features -- --nocapture 2>&1 | head -n 30 | while IFS= read -r line; do echo "::error::$line"; done && exit 1)
+        run: cargo test --workspace --all-features -- --nocapture 2>&1 | tee test.log || (grep -E "FAILED|panicked|failures:" -A 20 test.log | while IFS= read -r line; do echo "::error::$line"; done && exit 1)
 
   js-packages:
     name: Client Packages & TypeScript

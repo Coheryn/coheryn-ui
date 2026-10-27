@@ -3,7 +3,6 @@
 //! Tracks file hashes, config hashes, and intermediate rules using blake3.
 //! Guarantees: clean build ≡ cached build.
 
-use coherynui_core::CssRule;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::fs;
