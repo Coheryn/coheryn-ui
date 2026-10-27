@@ -16,7 +16,7 @@ Add `coherynui-agent-api` to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-coherynui-agent-api = "1.0.0"
+coherynui-agent-api = "1.0.1"
 ```
 
 Or via `cargo`:

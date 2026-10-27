@@ -3,7 +3,7 @@
 //! Maps extracted tokens through syntax and registry resolution to generate
 //! deterministic, cascade-layered standards-based CSS.
 
-use coherynui_core::{Declaration, SourceSpan};
+use coherynui_core::Declaration;
 use coherynui_design::CoherynConfig;
 use coherynui_diagnostics::{CompilerDiagnostic, DiagnosticSeverity};
 use coherynui_source::SourceCandidate;
@@ -62,12 +62,18 @@ impl CoherynCompiler {
 
             match parse_class(class_to_parse, Some(candidate.span.clone())) {
                 Ok(token) => {
+                    let full_name = if let Some(v) = &token.value_part {
+                        format!("{}-{}", token.base_utility, v)
+                    } else {
+                        token.base_utility.clone()
+                    };
+
                     if let Some(css_decl) = self.resolve_token(&token) {
                         generated_classes.insert(candidate.value.clone());
                         let selector_str = format!(".{}", escape_selector(&candidate.value));
                         let key = (token.variants.clone(), selector_str.clone());
                         recognized_rules.entry(key).or_insert((token, css_decl));
-                    } else if is_recipe_or_material(&token.base_utility) {
+                    } else if is_recipe_or_material(&token.base_utility) || is_recipe_or_material(&full_name) {
                         // Handled in recipes layer
                         generated_classes.insert(candidate.value.clone());
                     } else {
@@ -227,6 +233,27 @@ impl CoherynCompiler {
         }
 
         // 2. Canonical Registry Mapping
+        if let Some(decl) = self.resolve_canonical(token) {
+            return Some(decl);
+        }
+
+        // 3. Fallback: try compound utility if val_opt was split by rfind('-') (e.g. justify-between, items-center)
+        if let Some(val) = val_opt {
+            let mut compound_token = token.clone();
+            compound_token.base_utility = format!("{}-{}", base, val);
+            compound_token.value_part = None;
+            if let Some(decl) = self.resolve_canonical(&compound_token) {
+                return Some(decl);
+            }
+        }
+
+        None
+    }
+
+    fn resolve_canonical(&self, token: &ParsedClassToken) -> Option<Vec<Declaration>> {
+        let base = token.base_utility.as_str();
+        let val_opt = token.value_part.as_deref();
+
         match (base, val_opt) {
             // Display
             ("flex", None) => decl("display", "flex", token.important),

@@ -1,6 +1,6 @@
 {
   "name": "@coherynui/vite-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Official Vite plugin for CoherynUI CSS Engine: On-demand compilation, instant HMR, and virtual CSS module resolution",
   "homepage": "https://coheryntech.com/products/coheryn-ui",
   "repository": {

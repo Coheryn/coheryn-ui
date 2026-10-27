@@ -16,7 +16,7 @@ Add `coherynui-class-opt` to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-coherynui-class-opt = "1.0.0"
+coherynui-class-opt = "1.0.1"
 ```
 
 Or via `cargo`:

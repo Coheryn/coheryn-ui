@@ -1,6 +1,6 @@
 {
   "name": "coherynui-workspace",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "CoherynUI \u2014 Independent Rust-native UI framework, client packages, motion runtime, and GPU materials",
   "homepage": "https://coheryntech.com/products/coheryn-ui",

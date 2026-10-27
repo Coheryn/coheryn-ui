@@ -1,21 +1,21 @@
 {
-  "timestamp": 1793111719.58562,
+  "timestamp": 1793125142.4527118,
   "all_passed": true,
   "benchmarks": [
     {
       "id": "BM-01",
       "name": "Candidate Extraction Throughput",
-      "measured": "2,984,953 tokens/sec",
+      "measured": "1,958,277 tokens/sec",
       "target": ">= 20,000 tokens/sec",
-      "latency_ms": 1.0050410055555403,
+      "latency_ms": 1.5319589874707162,
       "passed": true
     },
     {
       "id": "BM-02",
       "name": "Incremental Rebuild Latency",
-      "measured": "0.028 ms",
+      "measured": "0.025 ms",
       "target": "< 5.000 ms (HMR SLA)",
-      "latency_ms": 0.027708010748028755,
+      "latency_ms": 0.02458301605656743,
       "passed": true
     },
     {
@@ -23,7 +23,7 @@
       "name": "Deduplication Efficiency",
       "measured": "98.0% reduction (100/5000 unique)",
       "target": "100% Unique Rules",
-      "latency_ms": 0.1155420031864196,
+      "latency_ms": 0.23858301574364305,
       "passed": true
     },
     {
@@ -31,23 +31,23 @@
       "name": "Class Mangler Compression",
       "measured": "96.3% reduction (105690 -> 3938 B)",
       "target": ">= 40.0% reduction",
-      "latency_ms": 1.2540419993456453,
+      "latency_ms": 2.669541980139911,
       "passed": true
     },
     {
       "id": "BM-05",
       "name": "Agent Skills Offline Retrieval",
-      "measured": "0.643 ms (7 skills)",
+      "measured": "3.889 ms (7 skills)",
       "target": "< 10.000 ms (Disk I/O)",
-      "latency_ms": 0.6427920015994459,
+      "latency_ms": 3.8886250113137066,
       "passed": true
     },
     {
       "id": "BM-06",
       "name": "Watch Cycle Latency",
-      "measured": "0.022 ms/cycle",
+      "measured": "0.046 ms/cycle",
       "target": "< 1.000 ms/cycle",
-      "latency_ms": 0.022105829848442227,
+      "latency_ms": 0.04570666991639882,
       "passed": true
     }
   ]

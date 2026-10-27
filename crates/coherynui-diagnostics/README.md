@@ -16,7 +16,7 @@ Add `coherynui-diagnostics` to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-coherynui-diagnostics = "1.0.0"
+coherynui-diagnostics = "1.0.1"
 ```
 
 Or via `cargo`:

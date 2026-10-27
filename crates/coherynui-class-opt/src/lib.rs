@@ -91,6 +91,50 @@ impl RenamingManifest {
     }
 }
 
+/// Stateful class optimizer and mangler for streaming or incremental class minification.
+#[derive(Debug, Default, Clone)]
+pub struct ClassOptimizer {
+    counter: usize,
+    mappings: BTreeMap<String, String>,
+    reverse: BTreeMap<String, String>,
+}
+
+impl ClassOptimizer {
+    pub fn new() -> Self {
+        Self::default()
+    }
+
+    /// Mangles a class name into a compact identifier. Returns existing mapping if already mangled.
+    pub fn mangle(&mut self, class_name: &str) -> String {
+        if let Some(mangled) = self.mappings.get(class_name) {
+            return mangled.clone();
+        }
+
+        let mut short_name = index_to_identifier(self.counter);
+        while is_reserved_identifier(&short_name) {
+            self.counter += 1;
+            short_name = index_to_identifier(self.counter);
+        }
+        self.counter += 1;
+
+        self.mappings.insert(class_name.to_string(), short_name.clone());
+        self.reverse.insert(short_name.clone(), class_name.to_string());
+        short_name
+    }
+
+    pub fn lookup(&self, class_name: &str) -> Option<&String> {
+        self.mappings.get(class_name)
+    }
+
+    pub fn explain(&self, mangled: &str) -> Option<&String> {
+        self.reverse.get(mangled)
+    }
+
+    pub fn mappings(&self) -> &BTreeMap<String, String> {
+        &self.mappings
+    }
+}
+
 /// Rewriter for HTML markup, templates, and CSS stylesheets.
 pub struct ClassRewriter;
 
@@ -173,13 +217,23 @@ impl ClassRewriter {
     /// Fail-closed dynamic class verification for aggressive mode.
     /// Emits error if dynamic expressions construct un-safelisted classes.
     pub fn verify_dynamic_safety(content: &str, safelist: &BTreeSet<String>) -> Result<(), RenamingError> {
-        // Detect `${...}` inside class attributes
+        // Detect dynamic expressions inside class attributes
         let dynamic_indicators = ["${", "className={", ":class=\"{"];
         for indicator in dynamic_indicators {
             if let Some(pos) = content.find(indicator) {
+                let mut start = pos.saturating_sub(30);
+                while !content.is_char_boundary(start) {
+                    start = start.saturating_sub(1);
+                }
+                let mut end = std::cmp::min(content.len(), pos + 40);
+                while !content.is_char_boundary(end) {
+                    end += 1;
+                }
+                let context = &content[start..end];
                 let snippet: String = content[pos..].chars().take(40).collect();
+
                 // If not explicitly declared in safelist, fail closed
-                if !safelist.iter().any(|s| snippet.contains(s)) {
+                if !safelist.iter().any(|s| context.contains(s)) {
                     return Err(RenamingError::UnsafeDynamicClass {
                         expression: snippet.trim().to_string(),
                     });

@@ -33,3 +33,6 @@ Thumbs.db
 *.swp
 *.swo
 
+# Scripts
+/scripts/
+

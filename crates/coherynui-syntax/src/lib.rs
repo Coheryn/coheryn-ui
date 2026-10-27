@@ -149,7 +149,8 @@ mod tests {
     #[test]
     fn parses_important() {
         let parsed = parse_class("!items-center", None).unwrap();
-        assert_eq!(parsed.base_utility, "items-center");
+        assert_eq!(parsed.base_utility, "items");
+        assert_eq!(parsed.value_part, Some("center".to_string()));
         assert!(parsed.important);
     }
 }

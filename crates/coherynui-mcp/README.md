@@ -16,7 +16,7 @@ Add `coherynui-mcp` to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-coherynui-mcp = "1.0.0"
+coherynui-mcp = "1.0.1"
 ```
 
 Or via `cargo`:

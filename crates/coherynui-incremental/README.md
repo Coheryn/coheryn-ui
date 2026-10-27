@@ -16,7 +16,7 @@ Add `coherynui-incremental` to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-coherynui-incremental = "1.0.0"
+coherynui-incremental = "1.0.1"
 ```
 
 Or via `cargo`:

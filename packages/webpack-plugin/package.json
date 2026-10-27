@@ -1,6 +1,6 @@
 {
   "name": "@coherynui/webpack-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Official Webpack 5 plugin and loader for CoherynUI CSS Engine: On-demand compilation, virtual stylesheet resolution, and W3C cascade layers",
   "homepage": "https://coheryntech.com/products/coheryn-ui",
   "repository": {

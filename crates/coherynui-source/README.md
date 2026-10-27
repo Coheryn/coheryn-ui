@@ -16,7 +16,7 @@ Add `coherynui-source` to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-coherynui-source = "1.0.0"
+coherynui-source = "1.0.1"
 ```
 
 Or via `cargo`:
