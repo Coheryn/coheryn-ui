@@ -155,3 +155,161 @@ pub struct MigrationAnalysis {
     pub estimated_coverage: f32,
     pub guidance: Vec<String>,
 }
+
+/// An official versioned Agent Skill (COH-AMD-1.3 §4).
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AgentSkill {
+    pub id: String,
+    pub name: String,
+    pub description: String,
+    pub content: String,
+}
+
+/// Supported agent client families (COH-AMD-1.3 §5.2).
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+pub enum AgentClientFamily {
+    Codex,
+    Claude,
+    Cursor,
+    Copilot,
+    All,
+}
+
+/// Proposed configuration template for a specific agent client family.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AgentConfigTemplate {
+    pub client: String,
+    pub relative_path: PathBuf,
+    pub description: String,
+    pub content: String,
+}
+
+/// Returns the 7 official versioned Agent Skills defined by COH-AMD-1.3 §4.
+pub fn get_official_skills() -> Vec<AgentSkill> {
+    vec![
+        AgentSkill {
+            id: "coherynui".to_string(),
+            name: "coherynui".to_string(),
+            description: "Detect, install, configure, build, check, and explain core CoherynUI styling and compiler workflows.".to_string(),
+            content: include_str!("../../../agent/skills/coherynui/SKILL.md").to_string(),
+        },
+        AgentSkill {
+            id: "coherynui-components".to_string(),
+            name: "coherynui-components".to_string(),
+            description: "Search, select, and compose accessible CoherynUI components with strict focus and keyboard management.".to_string(),
+            content: include_str!("../../../agent/skills/coherynui-components/SKILL.md").to_string(),
+        },
+        AgentSkill {
+            id: "coherynui-liquid-glass".to_string(),
+            name: "coherynui-liquid-glass".to_string(),
+            description: "Select CSS and GPU Liquid Glass material tiers, apply fallbacks, and validate optical refraction effects.".to_string(),
+            content: include_str!("../../../agent/skills/coherynui-liquid-glass/SKILL.md").to_string(),
+        },
+        AgentSkill {
+            id: "coherynui-motion".to_string(),
+            name: "coherynui-motion".to_string(),
+            description: "Implement physics-driven spring animations, FLIP layout morphing, and reduced-motion interactions with CoherynUI Motion.".to_string(),
+            content: include_str!("../../../agent/skills/coherynui-motion/SKILL.md").to_string(),
+        },
+        AgentSkill {
+            id: "coherynui-design-system".to_string(),
+            name: "coherynui-design-system".to_string(),
+            description: "Configure tokens, themes, semantic recipes, and design system invariants in coherynui.config.toml.".to_string(),
+            content: include_str!("../../../agent/skills/coherynui-design-system/SKILL.md").to_string(),
+        },
+        AgentSkill {
+            id: "coherynui-migration".to_string(),
+            name: "coherynui-migration".to_string(),
+            description: "Safely analyze and migrate codebases from legacy utility CSS to CoherynUI.".to_string(),
+            content: include_str!("../../../agent/skills/coherynui-migration/SKILL.md").to_string(),
+        },
+        AgentSkill {
+            id: "coherynui-audit".to_string(),
+            name: "coherynui-audit".to_string(),
+            description: "Validate generated code, parse structured compiler diagnostics (CYxxxx), and verify UI quality.".to_string(),
+            content: include_str!("../../../agent/skills/coherynui-audit/SKILL.md").to_string(),
+        },
+    ]
+}
+
+/// Generates client-specific configuration templates for supported AI coding assistants.
+pub fn get_client_templates(
+    _root: &Path,
+    inspection: &ProjectInspection,
+) -> Vec<AgentConfigTemplate> {
+    let lp = &inspection.layer_prefix;
+    let vp = &inspection.variable_prefix;
+
+    let universal_guidelines = format!(
+        r#"# CoherynUI Project Directives
+
+This project uses **CoherynUI** (https://coheryntech.com/coherynui) for styling, components, motion, and GPU materials.
+
+1. **Installed APIs Only**: Always inspect the installed version and use documented classes and components.
+2. **Deterministic Layers**: Emit styles inside @layer {lp}.reset, {lp}.tokens, {lp}.base, {lp}.recipes, {lp}.utilities;.
+3. **Variable Prefix**: Use CSS variables with prefix '--{vp}-*' (e.g. --{vp}-color-surface, --{vp}-space-4).
+4. **Touch Ergonomics (COH-AMD-1.4)**: Enforce WCAG 2.2 SC 2.5.8 (min 44×44px hit bounds) using '--{vp}-touch-min', '.touch-target', and '.tap-transparent'.
+5. **No Competitor Frameworks**: Never import or generate competitor framework utility classes or dependencies.
+6. **Validation**: Run `coherynui check --format json` after generating or modifying styling code.
+"#
+    );
+
+    let cursor_mdc = format!(
+        r#"---
+description: CoherynUI styling, component composition, touch ergonomics, and cascade layer rules
+globs: ["**/*.tsx", "**/*.jsx", "**/*.html", "**/*.vue", "**/*.svelte", "**/*.css"]
+alwaysApply: true
+---
+
+# CoherynUI Cursor Rules
+
+- **Framework**: CoherynUI (https://coheryntech.com/coherynui)
+- **Cascade Layer Order**: `@layer {lp}.reset, {lp}.tokens, {lp}.base, {lp}.recipes, {lp}.utilities;`
+- **Touch Target Contract**: Ensure 44×44px touch targets on buttons, switches, and interactive elements (`.touch-target`).
+- **Layout Recipes**: Prefer `.stack`, `.cluster`, `.grid-auto`, `.center`, and `.glass` over ad-hoc flex layouts.
+- **Validation**: Validate classes using `coherynui check --format json`.
+"#
+    );
+
+    vec![
+        AgentConfigTemplate {
+            client: "Codex / Universal".to_string(),
+            relative_path: PathBuf::from("AGENTS.md"),
+            description: "Standard repository-level instructions for coding agents".to_string(),
+            content: universal_guidelines.clone(),
+        },
+        AgentConfigTemplate {
+            client: "Claude Code".to_string(),
+            relative_path: PathBuf::from("CLAUDE.md"),
+            description: "Project context and guidelines for Claude Code".to_string(),
+            content: format!(
+                r#"# Claude Code Instructions — CoherynUI
+
+{universal_guidelines}
+## Common Commands
+- Build CSS: `coherynui build --input . --output coherynui.css`
+- Check Diagnostics: `coherynui check --format json`
+- Explain Classes: `coherynui explain "<classes>"`
+"#
+            ),
+        },
+        AgentConfigTemplate {
+            client: "Cursor".to_string(),
+            relative_path: PathBuf::from(".cursor/rules/coherynui.mdc"),
+            description: "Cursor AI editor rules file".to_string(),
+            content: cursor_mdc,
+        },
+        AgentConfigTemplate {
+            client: "GitHub Copilot".to_string(),
+            relative_path: PathBuf::from(".github/copilot-instructions.md"),
+            description: "GitHub Copilot workspace instructions".to_string(),
+            content: format!(
+                r#"# GitHub Copilot Instructions — CoherynUI
+
+{universal_guidelines}
+"#
+            ),
+        },
+    ]
+}
+

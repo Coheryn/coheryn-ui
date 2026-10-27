@@ -157,6 +157,38 @@ def check_touch_ergonomics_and_gestures():
 
     print("  ✓ Verified touch-action utilities, 44px target tokens, gesture recognizers, and BottomSheet.")
 
+def check_agent_skills_and_initialization():
+    print("[7/7] Testing Agent Skills & Multi-Client Initialization (COH-AMD-1.3 §4 & §5)...")
+    expected_skills = [
+        "coherynui",
+        "coherynui-components",
+        "coherynui-liquid-glass",
+        "coherynui-motion",
+        "coherynui-design-system",
+        "coherynui-migration",
+        "coherynui-audit",
+    ]
+
+    for skill in expected_skills:
+        skill_path = os.path.join("agent", "skills", skill, "SKILL.md")
+        assert os.path.exists(skill_path), f"Missing official skill file: {skill_path}"
+        with open(skill_path, "r", encoding="utf-8") as fp:
+            content = fp.read()
+            assert content.startswith("---"), f"Skill {skill} missing YAML frontmatter opening"
+            assert f"name: {skill}" in content, f"Skill {skill} missing name attribute"
+            assert "description:" in content, f"Skill {skill} missing description attribute"
+
+    # Verify coherynui-agent-api exposes all 7 skills and templates
+    with open("crates/coherynui-agent-api/src/lib.rs", "r", encoding="utf-8") as fp:
+        api_code = fp.read()
+        assert "get_official_skills" in api_code, "Missing get_official_skills in agent-api"
+        assert "get_client_templates" in api_code, "Missing get_client_templates in agent-api"
+        assert "CLAUDE.md" in api_code, "Missing CLAUDE.md template"
+        assert ".cursor/rules/coherynui.mdc" in api_code, "Missing Cursor template"
+        assert ".github/copilot-instructions.md" in api_code, "Missing Copilot template"
+
+    print("  ✓ Verified 7 official Agent Skills with valid frontmatter and multi-client configuration templates.")
+
 def main():
     start = time.time()
     print("==================================================================")
@@ -169,6 +201,7 @@ def main():
     check_diagnostics_conformance()
     check_registry_schemas_and_examples()
     check_touch_ergonomics_and_gestures()
+    check_agent_skills_and_initialization()
 
     elapsed = time.time() - start
     print("==================================================================")

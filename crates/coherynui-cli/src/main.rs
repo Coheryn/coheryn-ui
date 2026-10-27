@@ -92,6 +92,9 @@ enum McpAction {
 enum AgentAction {
     /// Propose or initialize opt-in configuration for supported coding agents
     Init {
+        /// Target agent client (all, codex, claude, cursor, copilot)
+        #[arg(long, default_value = "all")]
+        client: String,
         /// Display proposed files and rules without writing to disk
         #[arg(long)]
         dry_run: bool,
@@ -422,48 +425,74 @@ brand = "#60a5fa"
                     if has_copilot { "Found" } else { "Missing" }
                 );
             }
-            AgentAction::Init { dry_run } => {
+            AgentAction::Init { client, dry_run } => {
                 let root = std::env::current_dir()?;
-                let agents_md_path = root.join("AGENTS.md");
-                let content = r#"# CoherynUI Agent Guidelines
+                let inspection = coherynui_agent_api::ProjectInspection::inspect(&root);
+                let templates = coherynui_agent_api::get_client_templates(&root, &inspection);
 
-This project uses CoherynUI (https://coheryntech.com/coherynui) for styling, components, motion, and GPU materials.
+                let client_filter = client.to_lowercase();
+                let selected: Vec<_> = templates
+                    .into_iter()
+                    .filter(|t| {
+                        if client_filter == "all" {
+                            true
+                        } else if client_filter == "codex" {
+                            t.relative_path == Path::new("AGENTS.md")
+                        } else if client_filter == "claude" {
+                            t.relative_path == Path::new("CLAUDE.md")
+                        } else if client_filter == "cursor" {
+                            t.relative_path.starts_with(".cursor")
+                        } else if client_filter == "copilot" {
+                            t.relative_path.starts_with(".github")
+                        } else {
+                            t.client.to_lowercase().contains(&client_filter)
+                        }
+                    })
+                    .collect();
 
-1. **Installed APIs Only**: Always inspect the installed version and use documented classes and components.
-2. **Deterministic Layers**: Use standard cascade layers (@layer cyn.reset, cyn.tokens, cyn.recipes, cyn.utilities).
-3. **No Unapproved Dependencies**: Reuse @coherynui/components, @coherynui/react, and @coherynui/motion before adding third-party packages.
-4. **Validation**: Run `coherynui check --format json` to verify classes after generating code.
-"#;
-                if dry_run {
-                    println!(
-                        "[Dry Run] Would generate '{}' with contents:\n{}",
-                        agents_md_path.display(),
-                        content
-                    );
-                } else if agents_md_path.exists() {
-                    println!(
-                        "'{}' already exists. Preserving existing instructions without overwriting.",
-                        agents_md_path.display()
-                    );
-                } else {
-                    fs::write(&agents_md_path, content)?;
-                    println!("Created '{}' for coding agents.", agents_md_path.display());
+                println!("CoherynUI Agent Initialization (COH-AMD-1.3 §5):");
+                for tmpl in selected {
+                    let dest = root.join(&tmpl.relative_path);
+                    if dry_run {
+                        println!(
+                            "  [Dry Run] Proposed '{}' ({}):\n{}",
+                            dest.display(),
+                            tmpl.description,
+                            tmpl.content
+                        );
+                    } else if dest.exists() {
+                        println!(
+                            "  • '{}' already exists. Preserving existing instructions without overwriting.",
+                            dest.display()
+                        );
+                    } else {
+                        if let Some(parent) = dest.parent() {
+                            fs::create_dir_all(parent)?;
+                        }
+                        fs::write(&dest, &tmpl.content)?;
+                        println!("  ✓ Created '{}' ({})", dest.display(), tmpl.description);
+                    }
                 }
             }
             AgentAction::Skills { subaction } => match subaction {
                 SkillsAction::List => {
+                    let skills = coherynui_agent_api::get_official_skills();
                     println!("Official CoherynUI Agent Skills (v1.3):");
-                    println!("  1. coherynui                - Core build, check, and diagnostics");
-                    println!("  2. coherynui-components     - Search and compose accessible UI components");
-                    println!("  3. coherynui-liquid-glass   - CSS/GPU Liquid Glass materials & fallbacks");
-                    println!("  4. coherynui-motion         - Analytical spring physics and FLIP transitions");
-                    println!("  5. coherynui-design-system  - Tokens, themes, and semantic recipes");
-                    println!("  6. coherynui-migration      - Safe migration from legacy CSS frameworks");
-                    println!("  7. coherynui-audit          - Diagnostic inspection and UI validation");
+                    for (i, skill) in skills.iter().enumerate() {
+                        println!("  {}. {:<25} - {}", i + 1, skill.id, skill.description);
+                    }
                 }
                 SkillsAction::Install { target_dir } => {
-                    fs::create_dir_all(&target_dir)?;
-                    println!("Installed 7 official CoherynUI skills to '{}'.", target_dir.display());
+                    let skills = coherynui_agent_api::get_official_skills();
+                    println!("Installing {} official CoherynUI skills to '{}'...", skills.len(), target_dir.display());
+                    for skill in &skills {
+                        let skill_dir = target_dir.join(&skill.id);
+                        fs::create_dir_all(&skill_dir)?;
+                        let skill_file = skill_dir.join("SKILL.md");
+                        fs::write(&skill_file, &skill.content)?;
+                        println!("  ✓ Installed skill '{}' -> {}", skill.name, skill_file.display());
+                    }
+                    println!("Done. All 7 skills installed successfully.");
                 }
             },
         },
