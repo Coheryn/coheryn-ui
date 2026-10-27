@@ -713,10 +713,22 @@ mod tests {
     fn test_touch_action_and_ergonomics_utilities() {
         let compiler = CoherynCompiler::new(CoherynConfig::default());
         let candidates = vec![
-            SourceCandidate { value: "touch-none".into(), span: SourceSpan::dummy() },
-            SourceCandidate { value: "touch-pan-y".into(), span: SourceSpan::dummy() },
-            SourceCandidate { value: "overscroll-contain".into(), span: SourceSpan::dummy() },
-            SourceCandidate { value: "touch-target".into(), span: SourceSpan::dummy() },
+            SourceCandidate {
+                value: "touch-none".into(),
+                span: SourceSpan::dummy(),
+            },
+            SourceCandidate {
+                value: "touch-pan-y".into(),
+                span: SourceSpan::dummy(),
+            },
+            SourceCandidate {
+                value: "overscroll-contain".into(),
+                span: SourceSpan::dummy(),
+            },
+            SourceCandidate {
+                value: "touch-target".into(),
+                span: SourceSpan::dummy(),
+            },
         ];
 
         let result = compiler.compile_candidates(&candidates);
