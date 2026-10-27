@@ -34,9 +34,12 @@ coherynui/
 │   ├── shared-types/          # @coherynui/tokens
 │   ├── ui-core/               # @coherynui/components
 │   ├── ui-react/              # @coherynui/react
+│   ├── web-components/        # @coherynui/web-components
 │   ├── motion-core/           # @coherynui/motion
-│   └── gpu-materials/         # @coherynui/gpu-materials
-└── tests/fixtures/            # Acceptance test suites
+│   ├── gpu-materials/         # @coherynui/gpu-materials
+│   ├── vite-plugin/           # @coherynui/vite-plugin
+│   └── webpack-plugin/        # @coherynui/webpack-plugin
+└── tests/                     # Acceptance & conformance test suites
 ```
 
 ## Quick Start

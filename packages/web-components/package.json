@@ -1,0 +1,27 @@
+{
+  "name": "@coherynui/web-components",
+  "version": "0.1.0",
+  "description": "Native Web Component Custom Elements for CoherynUI — Zero-framework accessible UI primitives",
+  "homepage": "https://coheryntech.com/coherynui",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Coheryn/coheryn-ui.git",
+    "directory": "packages/web-components"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "dependencies": {
+    "@coherynui/components": "workspace:*"
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}
