@@ -2,7 +2,7 @@
   "name": "coherynui-workspace",
   "version": "1.0.1",
   "private": true,
-  "description": "CoherynUI \u2014 Independent Rust-native UI framework, client packages, motion runtime, and GPU materials",
+  "description": "CoherynUI — Independent Rust-native UI framework, client packages, motion runtime, and GPU materials",
   "homepage": "https://coheryntech.com/products/coheryn-ui",
   "repository": {
     "type": "git",
@@ -16,6 +16,8 @@
   },
   "packageManager": "pnpm@9.15.0",
   "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "typescript": "^5.7.3"
   }
 }

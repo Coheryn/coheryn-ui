@@ -87,7 +87,7 @@ export const MOTION_PRESETS: MotionSpringPresets = {
   default: { stiffness: 280, damping: 24, mass: 1 },
   gentle: { stiffness: 170, damping: 26, mass: 1 },
   wobbly: { stiffness: 180, damping: 12, mass: 1 },
-  stiff: { stiffness: 400, damping: 30; mass: 1 },
+  stiff: { stiffness: 400, damping: 30, mass: 1 },
 };
 
 export interface RenamingManifestJSON {

@@ -43,9 +43,10 @@ export async function createRefractiveMaterial(
   }
 
   // Capability Detection: WebGPU
-  if (typeof navigator !== 'undefined' && 'gpu' in navigator) {
+  const nav = typeof navigator !== 'undefined' ? (navigator as any) : null;
+  if (nav && nav.gpu) {
     try {
-      const adapter = await navigator.gpu.requestAdapter();
+      const adapter = await nav.gpu.requestAdapter();
       if (adapter) {
         const device = await adapter.requestDevice();
         return initWebGPUPipeline(element, device, options);
@@ -73,7 +74,7 @@ export async function createRefractiveMaterial(
 
 function initWebGPUPipeline(
   element: HTMLElement,
-  device: GPUDevice,
+  device: any,
   options: RefractiveMaterialOptions
 ): RefractiveMaterialInstance {
   const canvas = document.createElement('canvas');
@@ -87,12 +88,13 @@ function initWebGPUPipeline(
   element.style.position = element.style.position || 'relative';
   element.prepend(canvas);
 
-  const context = canvas.getContext('webgpu');
+  const context = (canvas as any).getContext('webgpu');
   if (!context) {
     return createCssFallbackInstance(element);
   }
 
-  const format = navigator.gpu.getPreferredCanvasFormat();
+  const nav = navigator as any;
+  const format = nav.gpu.getPreferredCanvasFormat();
   context.configure({
     device,
     format,
@@ -103,9 +105,9 @@ function initWebGPUPipeline(
   let animationFrameId = 0;
 
   // Device-loss recovery listener
-  device.lost.then((info) => {
+  device.lost.then((info: any) => {
     if (!isDestroyed) {
-      console.warn(`[CoherynUI GPU Materials] WebGPU device was lost: ${info.message}. Falling back to CSS.`);
+      console.warn(`[CoherynUI GPU Materials] WebGPU device was lost: ${info?.message}. Falling back to CSS.`);
       canvas.remove();
       element.classList.add('glass');
     }
