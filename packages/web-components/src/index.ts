@@ -1,5 +1,5 @@
 /**
- * @coherynui/web-components
+ * @coheryn/coherynui-web-components
  *
  * Official Native Web Component Custom Elements for CoherynUI.
  * Delivers zero-framework, accessible UI elements compliant with W3C Custom Elements v1.
@@ -13,7 +13,7 @@ import {
   dismissOnOutsideClick,
   scrollLock,
   FocusTrapController,
-} from '@coherynui/components';
+} from '@coheryn/coherynui-components';
 
 /* -------------------------------------------------------------------------- */
 /*                                BASE HELPERS                                */

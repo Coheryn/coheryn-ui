@@ -12,8 +12,8 @@ CSS frameworks often offer either styling-only snippet showcases or unmaintained
 
 ## Decision
 1. **Two-Tier Architecture:**
-   - **Headless Behavioral Engine (`@coherynui/components`):** Zero-CSS framework-neutral interaction logic: focus trapping, roving tabindex, keyboard navigation, outside click dismissal, and scroll locking.
-   - **Facaded Implementation (`@coherynui/react`):** Production-ready React components styled with CoherynUI CSS Engine design tokens, recipes, and utilities.
+   - **Headless Behavioral Engine (`@coheryn/coherynui-components`):** Zero-CSS framework-neutral interaction logic: focus trapping, roving tabindex, keyboard navigation, outside click dismissal, and scroll locking.
+   - **Facaded Implementation (`@coheryn/coherynui-react`):** Production-ready React components styled with CoherynUI CSS Engine design tokens, recipes, and utilities.
 2. **Strict WCAG 2.2 AA Compliance:**
    - All interactive components support keyboard navigation, ARIA 1.2 roles, and contrast requirements.
 3. **SSR & Hydration Parity:**

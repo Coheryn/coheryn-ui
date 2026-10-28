@@ -9,4 +9,4 @@
 ## Architecture Rules
 - Use `@layer cyn.*` and `--cyn-*` design token conventions.
 - Never invent unlisted classes. Consult `registry/index.json` or run `coherynui explain "<classes>"`.
-- Use `@coherynui/motion` for analytical spring mechanics and `@coherynui/gpu-materials` for optical glass refraction.
+- Use `@coheryn/coherynui-motion` for analytical spring mechanics and `@coheryn/coherynui-gpu-materials` for optical glass refraction.

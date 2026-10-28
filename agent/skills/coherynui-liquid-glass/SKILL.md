@@ -11,7 +11,7 @@ This skill guides assistants to implement multi-tier translucent glass surfaces 
 Select the appropriate tier based on requirements:
 - **Tier 1 (CSS Liquid Glass)**: Use `.glass` or `.glass-strong`. Uses `backdrop-filter: blur(16px)` with zero JS overhead.
 - **Tier 2 (Enhanced Edge Highlight)**: Add `.glass-edge` for 1px specular light rim on top edge.
-- **Tier 3 (WebGPU Shader Refraction)**: Opt-in `@coherynui/gpu-materials` with `shaders/wgsl/refraction.wgsl` for per-pixel optical distortion and chromatic dispersion.
+- **Tier 3 (WebGPU Shader Refraction)**: Opt-in `@coheryn/coherynui-gpu-materials` with `shaders/wgsl/refraction.wgsl` for per-pixel optical distortion and chromatic dispersion.
 
 ## 2. Invariants & Accessibility Fallbacks
 - **High Contrast Resets**:

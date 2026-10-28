@@ -1,4 +1,4 @@
-# @coherynui/web-components
+# @coheryn/coherynui-web-components
 
 > **Native W3C Custom Elements for CoherynUI**  
 > Zero-framework, fully accessible custom elements with focus trapping, touch ergonomics, and cascade layer styling.
@@ -12,7 +12,7 @@
 
 ## Overview
 
-`@coherynui/web-components` provides official native browser custom elements powered by the CoherynUI CSS Engine and `@coherynui/components` headless primitives.
+`@coheryn/coherynui-web-components` provides official native browser custom elements powered by the CoherynUI CSS Engine and `@coheryn/coherynui-components` headless primitives.
 
 These custom elements run in **any web environment without React**:
 - **Vanilla HTML / JS** (Zero dependencies, pure browser standards)
@@ -28,10 +28,10 @@ These custom elements run in **any web environment without React**:
 
 ```bash
 # Using npm
-npm install @coherynui/web-components @coherynui/components
+npm install @coheryn/coherynui-web-components @coheryn/coherynui-components
 
 # Using pnpm
-pnpm add @coherynui/web-components @coherynui/components
+pnpm add @coheryn/coherynui-web-components @coheryn/coherynui-components
 ```
 
 ---
@@ -75,7 +75,7 @@ pnpm add @coherynui/web-components @coherynui/components
 </cyn-modal>
 
 <script type="module">
-  import '@coherynui/web-components';
+  import '@coheryn/coherynui-web-components';
 </script>
 ```
 
@@ -106,7 +106,7 @@ pnpm add @coherynui/web-components @coherynui/components
 </button>
 
 <script type="module">
-  import '@coherynui/web-components';
+  import '@coheryn/coherynui-web-components';
 
   window.triggerToast = () => {
     document.getElementById('toasts').show({

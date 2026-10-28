@@ -6,7 +6,7 @@ import { CoherynWebpackPlugin, withCoheryn } from '../src/index';
 import { extractCandidates, shouldScanFile } from '../src/scanner';
 import { compileCoherynCss } from '../src/compiler';
 
-describe('@coherynui/webpack-plugin', () => {
+describe('@coheryn/coherynui-webpack-plugin', () => {
   it('initializes with default options and singleton access', () => {
     const plugin = new CoherynWebpackPlugin();
     expect(CoherynWebpackPlugin.pluginName).toBe('CoherynWebpackPlugin');

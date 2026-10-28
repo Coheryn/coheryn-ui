@@ -38,7 +38,7 @@ export interface VitePluginInstance {
  * ```ts
  * // vite.config.ts
  * import { defineConfig } from 'vite';
- * import coherynui from '@coherynui/vite-plugin';
+ * import coherynui from '@coheryn/coherynui-vite-plugin';
  *
  * export default defineConfig({
  *   plugins: [coherynui()],

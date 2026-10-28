@@ -8,7 +8,7 @@ Official **CoherynUI** single-page application starter featuring React 18/19, Vi
 
 ## What's Included
 
-- ⚡ **`@coherynui/vite-plugin`**: Instant on-demand compilation with sub-5ms HMR and virtual module resolution (`virtual:coherynui.css`).
+- ⚡ **`@coheryn/coherynui-vite-plugin`**: Instant on-demand compilation with sub-5ms HMR and virtual module resolution (`virtual:coherynui.css`).
 - 🎨 **W3C 5-Layer Cascade**: Strict cascade layer separation:
   `@layer cyn.reset, cyn.tokens, cyn.base, cyn.recipes, cyn.utilities;`
 - 📱 **Touch Ergonomics & Gestures (COH-AMD-1.4)**:

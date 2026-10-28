@@ -1,6 +1,6 @@
 /**
  * CoherynUI — Interactive Documentation, Cascade Layers & Live REPL Playground Runtime
- * @package @coherynui/docs
+ * @package @coheryn/coherynui-docs
  * Zero-runtime-overhead interactive engine for docs/index.html
  */
 

@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "category": "navigation",
   "framework": "react",
-  "package": "@coherynui/react",
-  "dependencies": ["@coherynui/react", "@coherynui/components"],
+  "package": "@coheryn/coherynui-react",
+  "dependencies": ["@coheryn/coherynui-react", "@coheryn/coherynui-components"],
   "tokens_used": [
     "--cyn-color-surface-subtle",
     "--cyn-color-brand",
@@ -26,7 +26,7 @@
     "aria_attributes": ["role=\"tab\"", "aria-selected", "aria-controls", "tabindex"]
   },
   "snippets": {
-    "react": "import { Tabs } from '@coherynui/react';\nimport { useState } from 'react';\n\nexport function SettingsTabs() {\n  const [tab, setTab] = useState('account');\n  return (\n    <Tabs\n      items={[\n        { id: 'account', label: 'Account' },\n        { id: 'security', label: 'Security' },\n        { id: 'billing', label: 'Billing' }\n      ]}\n      activeId={tab}\n      onChange={setTab}\n    />\n  );\n}",
+    "react": "import { Tabs } from '@coheryn/coherynui-react';\nimport { useState } from 'react';\n\nexport function SettingsTabs() {\n  const [tab, setTab] = useState('account');\n  return (\n    <Tabs\n      items={[\n        { id: 'account', label: 'Account' },\n        { id: 'security', label: 'Security' },\n        { id: 'billing', label: 'Billing' }\n      ]}\n      activeId={tab}\n      onChange={setTab}\n    />\n  );\n}",
     "html": "<div role=\"tablist\" aria-label=\"Account Sections\" class=\"tabs-container\">\n  <button role=\"tab\" aria-selected=\"true\" id=\"tab-1\" aria-controls=\"panel-1\" tabindex=\"0\" class=\"tab-item active\">Account</button>\n  <button role=\"tab\" aria-selected=\"false\" id=\"tab-2\" aria-controls=\"panel-2\" tabindex=\"-1\" class=\"tab-item\">Security</button>\n  <button role=\"tab\" aria-selected=\"false\" id=\"tab-3\" aria-controls=\"panel-3\" tabindex=\"-1\" class=\"tab-item\">Billing</button>\n</div>",
     "css": "@layer cyn.recipes {\n  .tabs-container {\n    display: inline-flex;\n    padding: 0.25rem;\n    background: var(--cyn-color-surface-subtle);\n    border-radius: var(--cyn-radius-md);\n    gap: 0.25rem;\n  }\n  .tab-item {\n    padding: 0.5rem 1rem;\n    border-radius: calc(var(--cyn-radius-md) - 2px);\n    border: none;\n    background: transparent;\n    color: var(--cyn-color-muted);\n    font-weight: 600;\n    font-family: inherit;\n    cursor: pointer;\n    transition: all 0.2s ease;\n  }\n  .tab-item.active {\n    background: var(--cyn-color-surface);\n    color: var(--cyn-color-foreground);\n    box-shadow: 0 1px 3px rgba(0,0,0,0.1);\n  }\n}"
   },

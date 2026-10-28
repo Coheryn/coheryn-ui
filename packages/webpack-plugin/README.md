@@ -1,4 +1,4 @@
-# @coherynui/webpack-plugin
+# @coheryn/coherynui-webpack-plugin
 
 Official **CoherynUI** Webpack 5 plugin and loader providing on-demand CSS compilation, virtual stylesheet resolution, and strict W3C cascade-layered output.
 
@@ -21,10 +21,10 @@ Official **CoherynUI** Webpack 5 plugin and loader providing on-demand CSS compi
 
 ```bash
 # pnpm
-pnpm add -D @coherynui/webpack-plugin
+pnpm add -D @coheryn/coherynui-webpack-plugin
 
 # npm
-npm install -D @coherynui/webpack-plugin
+npm install -D @coheryn/coherynui-webpack-plugin
 ```
 
 ---
@@ -34,7 +34,7 @@ npm install -D @coherynui/webpack-plugin
 ### 1. Webpack 5 (`webpack.config.js`)
 
 ```js
-const { CoherynWebpackPlugin } = require('@coherynui/webpack-plugin');
+const { CoherynWebpackPlugin } = require('@coheryn/coherynui-webpack-plugin');
 
 module.exports = {
   plugins: [
@@ -57,7 +57,7 @@ import 'coherynui.css';
 ### 2. Next.js (`next.config.js`)
 
 ```js
-const { withCoheryn } = require('@coherynui/webpack-plugin');
+const { withCoheryn } = require('@coheryn/coherynui-webpack-plugin');
 
 const nextConfig = {
   reactStrictMode: true,

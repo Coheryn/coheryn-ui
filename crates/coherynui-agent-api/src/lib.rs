@@ -57,21 +57,21 @@ impl ProjectInspection {
         let pkg_json = root.join("package.json");
         if pkg_json.exists() {
             if let Ok(content) = std::fs::read_to_string(&pkg_json) {
-                if content.contains("@coherynui/react") {
-                    installed_modules.push("@coherynui/react".to_string());
+                if content.contains("@coheryn/coherynui-react") {
+                    installed_modules.push("@coheryn/coherynui-react".to_string());
                     framework = Some("react".to_string());
                 }
-                if content.contains("@coherynui/components") {
-                    installed_modules.push("@coherynui/components".to_string());
+                if content.contains("@coheryn/coherynui-components") {
+                    installed_modules.push("@coheryn/coherynui-components".to_string());
                 }
-                if content.contains("@coherynui/motion") {
-                    installed_modules.push("@coherynui/motion".to_string());
+                if content.contains("@coheryn/coherynui-motion") {
+                    installed_modules.push("@coheryn/coherynui-motion".to_string());
                 }
-                if content.contains("@coherynui/gpu-materials") {
-                    installed_modules.push("@coherynui/gpu-materials".to_string());
+                if content.contains("@coheryn/coherynui-gpu-materials") {
+                    installed_modules.push("@coheryn/coherynui-gpu-materials".to_string());
                 }
-                if content.contains("@coherynui/tokens") {
-                    installed_modules.push("@coherynui/tokens".to_string());
+                if content.contains("@coheryn/coherynui-tokens") {
+                    installed_modules.push("@coheryn/coherynui-tokens".to_string());
                 }
             }
         }

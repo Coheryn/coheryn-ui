@@ -1,5 +1,5 @@
 {
-  "name": "@coherynui/gpu-materials",
+  "name": "@coheryn/coherynui-gpu-materials",
   "version": "1.0.1",
   "description": "Stable 1.0 WebGPU refraction pipeline with WebGL2 and CSS fallbacks",
   "homepage": "https://coheryntech.com/products/coheryn-ui",

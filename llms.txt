@@ -12,9 +12,9 @@
 - Validation: `coherynui check --format json`
 
 ## Key Capabilities (Stable 1.0 Release Blockers)
-1. Coheryn Components: Headless and React component suite with strict WAI-ARIA 1.2 compliance (`@coherynui/components`, `@coherynui/react`).
-2. Coheryn Motion: Analytical harmonic spring solver ($m \cdot x'' + c \cdot x' + k \cdot x = 0$) and FLIP layout transitions (`@coherynui/motion`).
-3. Coheryn GPU Materials: 3-tier optical refraction shaders with WebGPU WGSL, WebGL2, and CSS Liquid Glass fallbacks (`@coherynui/gpu-materials`).
+1. Coheryn Components: Headless and React component suite with strict WAI-ARIA 1.2 compliance (`@coheryn/coherynui-components`, `@coheryn/coherynui-react`).
+2. Coheryn Motion: Analytical harmonic spring solver ($m \cdot x'' + c \cdot x' + k \cdot x = 0$) and FLIP layout transitions (`@coheryn/coherynui-motion`).
+3. Coheryn GPU Materials: 3-tier optical refraction shaders with WebGPU WGSL, WebGL2, and CSS Liquid Glass fallbacks (`@coheryn/coherynui-gpu-materials`).
 4. Coheryn Class Optimizer: Whole-project production AST renaming with `coherynui.manifest.json` bidirectional verification.
 5. Coheryn Plugin Host: Sandboxed WebAssembly Component Model plugin runtime with fuel metering.
 6. Coheryn MCP Server & Agent Skills: 10 read-only discovery & validation tools with 7 official versioned skills.

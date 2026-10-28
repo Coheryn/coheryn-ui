@@ -36,10 +36,10 @@ All five mandatory advanced subsystems and the core Rust-native compiler have be
    - Container Queries (`cq-root`, `cq:`, `cq-sm:`, `cq-md:`, `cq-lg:`).
    - Adaptive Layout Primitives (`stack`, `cluster`, `grid-auto`, `center`, `sidebar`, `flow`, `cover`, `switcher`).
 2. **CoherynUI Components:**
-   - 8 component families, 48 patterns ([@coherynui/components](../../packages/ui-core), [@coherynui/react](../../packages/ui-react)).
+   - 8 component families, 48 patterns ([@coheryn/coherynui-components](../../packages/ui-core), [@coheryn/coherynui-react](../../packages/ui-react)).
    - Focus trapping, roving tabindex, escape dismissal, and scroll lock.
 3. **CoherynUI Motion:**
-   - Analytical harmonic oscillator spring physics ($m \cdot x'' + c \cdot x' + k \cdot x = 0$) ([@coherynui/motion](../../packages/motion-core)).
+   - Analytical harmonic oscillator spring physics ($m \cdot x'' + c \cdot x' + k \cdot x = 0$) ([@coheryn/coherynui-motion](../../packages/motion-core)).
    - Interruptible retargeting without velocity snaps, sequential timelines, FLIP layout transitions.
 4. **CoherynUI GPU Materials:**
    - Real WGSL optical refraction shader ([shaders/wgsl/refraction.wgsl](../../shaders/wgsl/refraction.wgsl)).

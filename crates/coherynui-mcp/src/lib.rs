@@ -285,14 +285,14 @@ impl McpServer {
 
         if requirement.contains("modal") || requirement.contains("dialog") {
             recommended.push("component:dialog".to_string());
-            required_pkgs.push("@coherynui/react".to_string());
+            required_pkgs.push("@coheryn/coherynui-react".to_string());
         }
         if requirement.contains("glass") || requirement.contains("liquid") {
             recommended.push("component:glass-card".to_string());
-            optional_pkgs.push("@coherynui/gpu-materials".to_string());
+            optional_pkgs.push("@coheryn/coherynui-gpu-materials".to_string());
         }
         if requirement.contains("animation") || requirement.contains("spring") {
-            optional_pkgs.push("@coherynui/motion".to_string());
+            optional_pkgs.push("@coheryn/coherynui-motion".to_string());
         }
         if requirement.contains("tab") {
             recommended.push("component:tabs".to_string());

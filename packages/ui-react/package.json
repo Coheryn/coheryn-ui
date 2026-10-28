@@ -1,5 +1,5 @@
 {
-  "name": "@coherynui/react",
+  "name": "@coheryn/coherynui-react",
   "version": "1.0.1",
   "description": "Accessible React component facade styled with CoherynUI CSS Engine recipes and tokens",
   "homepage": "https://coheryntech.com/products/coheryn-ui",
@@ -31,9 +31,9 @@
     }
   },
   "dependencies": {
-    "@coherynui/components": "workspace:^",
-    "@coherynui/motion": "workspace:^",
-    "@coherynui/tokens": "workspace:^"
+    "@coheryn/coherynui-components": "workspace:^",
+    "@coheryn/coherynui-motion": "workspace:^",
+    "@coheryn/coherynui-tokens": "workspace:^"
   },
   "scripts": {
     "build": "tsc"

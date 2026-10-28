@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { trapFocus, dismissOnEscape, dismissOnOutsideClick, scrollLock, rovingFocus } from '@coherynui/components';
+import { trapFocus, dismissOnEscape, dismissOnOutsideClick, scrollLock, rovingFocus } from '@coheryn/coherynui-components';
 
 /* -------------------------------------------------------------------------- */
 /*                                   ACTIONS                                  */

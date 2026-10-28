@@ -14,11 +14,11 @@
 - **CLI Binary**: `coherynui`.
 - **Runtime Model**: Zero mandatory browser JavaScript for styling. All layout, design tokens, color modes, and container queries compile to standards-compliant, W3C-layered CSS.
 - **Optional Client Runtimes**: Tree-shakeable, opt-in packages:
-  - `@coherynui/react`: Accessible WAI-ARIA React components.
-  - `@coherynui/components`: Headless UI logic & state machines.
-  - `@coherynui/motion`: Analytical spring dynamics and FLIP transitions.
-  - `@coherynui/gpu-materials`: WebGPU WGSL optical refraction shaders.
-  - `@coherynui/tokens`: Design tokens and theme custom properties.
+  - `@coheryn/coherynui-react`: Accessible WAI-ARIA React components.
+  - `@coheryn/coherynui-components`: Headless UI logic & state machines.
+  - `@coheryn/coherynui-motion`: Analytical spring dynamics and FLIP transitions.
+  - `@coheryn/coherynui-gpu-materials`: WebGPU WGSL optical refraction shaders.
+  - `@coheryn/coherynui-tokens`: Design tokens and theme custom properties.
 
 ---
 
@@ -214,7 +214,7 @@ Multi-tier optical glass recipe:
 
 ---
 
-## 7. Motion & Physics Subsystem (`@coherynui/motion`)
+## 7. Motion & Physics Subsystem (`@coheryn/coherynui-motion`)
 
 ### Analytical Harmonic Spring Solver
 The spring engine implements the unforced second-order damped harmonic oscillator differential equation:
@@ -234,7 +234,7 @@ Where:
 Layout transitions compute bounding client rect differences between pre-mutation (`First`) and post-mutation (`Last`), apply negative transform offsets (`Invert`), and animate to zero using the spring solver (`Play`).
 
 ### Accessibility Contract
-All `@coherynui/motion` animations must respect `prefers-reduced-motion: reduce`:
+All `@coheryn/coherynui-motion` animations must respect `prefers-reduced-motion: reduce`:
 ```css
 @media (prefers-reduced-motion: reduce) {
   * {

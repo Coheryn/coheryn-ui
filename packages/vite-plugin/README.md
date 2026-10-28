@@ -1,4 +1,4 @@
-# @coherynui/vite-plugin
+# @coheryn/coherynui-vite-plugin
 
 Official **CoherynUI** Vite plugin providing on-demand CSS compilation, instant sub-5ms Hot Module Replacement (HMR), and virtual cascade-layered stylesheet resolution.
 
@@ -22,13 +22,13 @@ Official **CoherynUI** Vite plugin providing on-demand CSS compilation, instant 
 
 ```bash
 # pnpm
-pnpm add -D @coherynui/vite-plugin
+pnpm add -D @coheryn/coherynui-vite-plugin
 
 # npm
-npm install -D @coherynui/vite-plugin
+npm install -D @coheryn/coherynui-vite-plugin
 
 # bun
-bun add -d @coherynui/vite-plugin
+bun add -d @coheryn/coherynui-vite-plugin
 ```
 
 ---
@@ -42,7 +42,7 @@ Add the `coherynui` plugin to your `vite.config.ts`:
 ```ts
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import coherynui from '@coherynui/vite-plugin';
+import coherynui from '@coheryn/coherynui-vite-plugin';
 
 export default defineConfig({
   plugins: [

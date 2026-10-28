@@ -11,8 +11,8 @@
 CoherynUI is an independent, Rust-native UI framework and intelligent styling platform. Its CoherynUI CSS Engine produces deterministic, cascade-layered standards-compliant CSS without mandatory browser JavaScript, while delivering five first-party advanced capabilities for Stable 1.0:
 
 1. **CoherynUI Components:** Complete accessible UI component library (WCAG 2.2 AA target, headless primitives, React & Web Component facades).
-2. **CoherynUI Motion:** Advanced animation runtime with analytical spring solver, gestures, timelines, and FLIP layout transitions (`@coherynui/motion`).
-3. **CoherynUI GPU Materials:** True shader-driven optical refraction with WebGPU/WGSL, WebGL2, and CSS fallbacks (`@coherynui/gpu-materials`).
+2. **CoherynUI Motion:** Advanced animation runtime with analytical spring solver, gestures, timelines, and FLIP layout transitions (`@coheryn/coherynui-motion`).
+3. **CoherynUI GPU Materials:** True shader-driven optical refraction with WebGPU/WGSL, WebGL2, and CSS fallbacks (`@coheryn/coherynui-gpu-materials`).
 4. **CoherynUI Class Optimizer:** Guarded, aggressive production class renaming with AST rewriting and deterministic manifests.
 5. **CoherynUI Plugin Host:** Public sandboxed WebAssembly Component Model runtime with zero ambient authority.
 
@@ -35,14 +35,14 @@ coherynui/
 │   ├── coherynui-plugin-host/ # Sandboxed Wasmtime host
 │   └── coherynui-cli/         # coherynui executable
 ├── packages/                  # Client packages (opt-in)
-│   ├── shared-types/          # @coherynui/tokens
-│   ├── ui-core/               # @coherynui/components
-│   ├── ui-react/              # @coherynui/react
-│   ├── web-components/        # @coherynui/web-components
-│   ├── motion-core/           # @coherynui/motion
-│   ├── gpu-materials/         # @coherynui/gpu-materials
-│   ├── vite-plugin/           # @coherynui/vite-plugin
-│   └── webpack-plugin/        # @coherynui/webpack-plugin
+│   ├── shared-types/          # @coheryn/coherynui-tokens
+│   ├── ui-core/               # @coheryn/coherynui-components
+│   ├── ui-react/              # @coheryn/coherynui-react
+│   ├── web-components/        # @coheryn/coherynui-web-components
+│   ├── motion-core/           # @coheryn/coherynui-motion
+│   ├── gpu-materials/         # @coheryn/coherynui-gpu-materials
+│   ├── vite-plugin/           # @coheryn/coherynui-vite-plugin
+│   └── webpack-plugin/        # @coheryn/coherynui-webpack-plugin
 └── tests/                     # Acceptance & conformance test suites
 ```
 

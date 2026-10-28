@@ -306,17 +306,17 @@ jobs:
 
           ### Node.js / npx Runner
           ```bash
-          npx @coherynui/cli init
+          npx @coheryn/coherynui-cli init
           ```
 
           ### Included Monorepo Packages
-          - `@coherynui/components` (v1.0): Headless accessible UI primitives & ARIA patterns
-          - `@coherynui/react` (v1.0): React components catalog
-          - `@coherynui/web-components` (v1.0): Universal Native W3C Custom Elements
-          - `@coherynui/motion` (v1.0): Analytical spring physics solver & gesture controller
-          - `@coherynui/gpu-materials` (v1.0): WebGPU Liquid Glass refraction with WebGL2 and CSS fallbacks
-          - `@coherynui/tokens` (v1.0): W3C Design Tokens & Dynamic Token Binding
-          - `@coherynui/vite-plugin` & `@coherynui/webpack-plugin`: Incremental compiler bundler plugins
+          - `@coheryn/coherynui-components` (v1.0): Headless accessible UI primitives & ARIA patterns
+          - `@coheryn/coherynui-react` (v1.0): React components catalog
+          - `@coheryn/coherynui-web-components` (v1.0): Universal Native W3C Custom Elements
+          - `@coheryn/coherynui-motion` (v1.0): Analytical spring physics solver & gesture controller
+          - `@coheryn/coherynui-gpu-materials` (v1.0): WebGPU Liquid Glass refraction with WebGL2 and CSS fallbacks
+          - `@coheryn/coherynui-tokens` (v1.0): W3C Design Tokens & Dynamic Token Binding
+          - `@coheryn/coherynui-vite-plugin` & `@coheryn/coherynui-webpack-plugin`: Incremental compiler bundler plugins
 
           ### Checksums
           Verify all downloaded binaries against `SHA256SUMS.txt`.

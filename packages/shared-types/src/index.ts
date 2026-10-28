@@ -1,5 +1,5 @@
 /**
- * CoherynUI Design Tokens & Shared Types (@coherynui/tokens)
+ * CoherynUI Design Tokens & Shared Types (@coheryn/coherynui-tokens)
  *
  * Authoritative TypeScript definitions, schemas, and token dictionaries
  * for the Coheryn CSS Engine, bundler plugins, and runtime libraries.

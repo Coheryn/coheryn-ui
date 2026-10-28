@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, GlassCard, Stack, Cluster, Badge } from '@coherynui/react';
+import { Button, GlassCard, Stack, Cluster, Badge } from '@coheryn/coherynui-react';
 
 export default function Home() {
   return (

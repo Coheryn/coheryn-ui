@@ -18,12 +18,12 @@
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "@coherynui/react": "workspace:*",
-    "@coherynui/motion": "workspace:*",
-    "@coherynui/tokens": "workspace:*"
+    "@coheryn/coherynui-react": "workspace:*",
+    "@coheryn/coherynui-motion": "workspace:*",
+    "@coheryn/coherynui-tokens": "workspace:*"
   },
   "devDependencies": {
-    "@coherynui/vite-plugin": "workspace:*",
+    "@coheryn/coherynui-vite-plugin": "workspace:*",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",

@@ -1,4 +1,4 @@
-# @coherynui/cli
+# @coheryn/coherynui-cli
 
 > Official Node.js / npx CLI distribution runner for **CoherynUI**.
 
@@ -10,13 +10,13 @@
 You can run the CoherynUI CLI without installing globally:
 
 ```bash
-npx @coherynui/cli init
+npx @coheryn/coherynui-cli init
 ```
 
 Or install globally via npm:
 
 ```bash
-npm install -g @coherynui/cli
+npm install -g @coheryn/coherynui-cli
 coherynui --help
 ```
 

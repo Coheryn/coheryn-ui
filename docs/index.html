@@ -83,8 +83,8 @@
           <button class="btn btn-secondary" data-tab="web-components" onclick="switchTab('web-components')">Web Components</button>
           <div class="cli-bar">
             <span class="cli-prompt">$</span>
-            <span>pnpm add @coherynui/react @coherynui/components</span>
-            <button class="cli-copy-btn" onclick="navigator.clipboard.writeText('pnpm add @coherynui/react @coherynui/components'); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy', 2000);">Copy</button>
+            <span>pnpm add @coheryn/coherynui-react @coheryn/coherynui-components</span>
+            <button class="cli-copy-btn" onclick="navigator.clipboard.writeText('pnpm add @coheryn/coherynui-react @coheryn/coherynui-components'); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy', 2000);">Copy</button>
           </div>
         </div>
 
@@ -171,8 +171,8 @@
               <span class="terminal-title">pnpm — bash</span>
             </div>
             <div class="terminal-code-row">
-              <code><span class="code-prompt">$</span> pnpm add @coherynui/react @coherynui/components</code>
-              <button class="cli-copy-btn" onclick="navigator.clipboard.writeText('pnpm add @coherynui/react @coherynui/components'); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy', 2000);">Copy</button>
+              <code><span class="code-prompt">$</span> pnpm add @coheryn/coherynui-react @coheryn/coherynui-components</code>
+              <button class="cli-copy-btn" onclick="navigator.clipboard.writeText('pnpm add @coheryn/coherynui-react @coheryn/coherynui-components'); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy', 2000);">Copy</button>
             </div>
           </div>
 
@@ -531,7 +531,7 @@
         <div class="hero-eyebrow">Custom Elements v1 // Universal Runtime</div>
         <h2 class="section-title">Native Web Component Custom Elements</h2>
         <p class="section-desc">
-          Standardized, zero-runtime-overhead custom elements powered by <code>@coherynui/web-components</code>.
+          Standardized, zero-runtime-overhead custom elements powered by <code>@coheryn/coherynui-web-components</code>.
           Operates universally across Vanilla HTML/JS, Vue, Svelte, Angular, Solid, PHP, Django, and Rails without requiring React or any external build dependencies.
           Features full attribute synchronization, two-way state reflection, and real-time custom events.
         </p>
@@ -730,7 +730,7 @@ export default defineConfig({
 
 &lt;!-- App.vue --&gt;
 &lt;script setup&gt;
-import '@coherynui/web-components';
+import '@coheryn/coherynui-web-components';
 import { ref } from 'vue';
 
 const isGpuActive = ref(true);
@@ -750,7 +750,7 @@ function onSwitchChange(event) {
             <button class="btn btn-secondary copy-btn" onclick="copyCode(this)">Copy</button>
             <pre><code>// app.module.ts - Enable CUSTOM_ELEMENTS_SCHEMA
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import '@coherynui/web-components';
+import '@coheryn/coherynui-web-components';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -772,7 +772,7 @@ export class AppModule {}
             <button class="btn btn-secondary copy-btn" onclick="copyCode(this)">Copy</button>
             <pre><code>&lt;!-- App.svelte --&gt;
 &lt;script&gt;
-  import '@coherynui/web-components';
+  import '@coheryn/coherynui-web-components';
   let isChecked = true;
 
   function handleChange(e) {

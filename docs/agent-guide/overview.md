@@ -11,7 +11,7 @@ When developing inside a CoherynUI codebase:
 1. **Never Hallucinate Utilities**: CoherynUI uses canonical utility tokens. Unrecognized classes will be flagged as `CY1001` warnings by the compiler.
 2. **Leverage Machine-Readable Metadata**: Query the MCP server or read `registry/index.json` to inspect component props, accessibility invariants, and dependencies.
 3. **Always Validate Code Changes**: Run `coherynui check --format json` after code mutations. Parse the structured output to auto-correct any diagnostic errors.
-4. **Respect Framework Agnosticism**: Pure CSS styling does not require runtime JavaScript. Do not add `@coherynui/react`, `@coherynui/motion`, or `@coherynui/gpu-materials` unless interactive React components, physics springs, or WebGPU shaders are specifically requested.
+4. **Respect Framework Agnosticism**: Pure CSS styling does not require runtime JavaScript. Do not add `@coheryn/coherynui-react`, `@coheryn/coherynui-motion`, or `@coheryn/coherynui-gpu-materials` unless interactive React components, physics springs, or WebGPU shaders are specifically requested.
 
 ---
 

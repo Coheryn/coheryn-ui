@@ -9,7 +9,7 @@
 
 ## 1. Overview
 
-**CoherynUI Components** is the official, first-party accessible UI library of CoherynUI. It delivers complete headless behavioral primitives via `@coherynui/components` and a production-ready React component facade via `@coherynui/react`, styled natively using the CoherynUI CSS Engine.
+**CoherynUI Components** is the official, first-party accessible UI library of CoherynUI. It delivers complete headless behavioral primitives via `@coheryn/coherynui-components` and a production-ready React component facade via `@coheryn/coherynui-react`, styled natively using the CoherynUI CSS Engine.
 
 ---
 
@@ -24,4 +24,4 @@
 | **Feedback** | `Alert`, `Toast`, `Progress`, `Spinner`, `Skeleton`, `StatusBadge`, `EmptyState` | ARIA live regions, progress bars with percentage indicators, accessible skeleton loaders. |
 | **Data Display** | `Table`, `DataTable`, `Card`, `Avatar`, `Accordion`, `TreeView`, `List`, `Timeline`, `Stats` | Composable compound cards, multi-level accordions, semantic tables with sortable column headers. |
 | **Layout** | `Container`, `Stack`, `Cluster`, `Grid`, `SplitPane`, `ResizablePanels`, `Separator`, `AspectRatio` | Adaptive layout primitives from the CoherynUI CSS Engine recipe layer. |
-| **Media & Materials** | `Image`, `Carousel`, `GlassCard`, `GlassToolbar`, `FloatingDock`, `RefractivePanel` | Integrated with Tier 1 CSS Liquid Glass and Tier 3 WebGPU refraction (`@coherynui/gpu-materials`). |
+| **Media & Materials** | `Image`, `Carousel`, `GlassCard`, `GlassToolbar`, `FloatingDock`, `RefractivePanel` | Integrated with Tier 1 CSS Liquid Glass and Tier 3 WebGPU refraction (`@coheryn/coherynui-gpu-materials`). |

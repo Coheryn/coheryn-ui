@@ -5,7 +5,7 @@ description: Search, select, and compose accessible CoherynUI components with st
 
 # CoherynUI Accessible Components Workflow
 
-Use this skill when composing UI components with `@coherynui/components` (headless) and `@coherynui/react` (styled).
+Use this skill when composing UI components with `@coheryn/coherynui-components` (headless) and `@coheryn/coherynui-react` (styled).
 
 ## 1. Discover Components via Registry
 Query the registry for matching components:
@@ -26,7 +26,7 @@ Query the registry for matching components:
 
 ## 3. Code Example
 ```tsx
-import { Dialog, Button, Tabs } from '@coherynui/react';
+import { Dialog, Button, Tabs } from '@coheryn/coherynui-react';
 import { useState } from 'react';
 
 export function ConfirmDeploy() {

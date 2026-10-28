@@ -8,7 +8,7 @@
 
 ## 1. Overview & Core Philosophy
 
-CoherynUI Motion ([@coherynui/motion](../../packages/motion-core/src/index.ts)) is a production-grade browser animation engine built on analytical spring mechanics. It operates independently of the native Rust compiler and is strictly opt-in.
+CoherynUI Motion ([@coheryn/coherynui-motion](../../packages/motion-core/src/index.ts)) is a production-grade browser animation engine built on analytical spring mechanics. It operates independently of the native Rust compiler and is strictly opt-in.
 
 ---
 
@@ -32,7 +32,7 @@ When an in-flight animation is interrupted or retargeted, the current position a
 
 ### 3.1 `animate()`
 ```ts
-import { animate, spring } from '@coherynui/motion';
+import { animate, spring } from '@coheryn/coherynui-motion';
 
 const control = animate('.card', {
   x: [0, 100],
@@ -50,7 +50,7 @@ await control.finished;
 
 ### 3.2 `timeline()`
 ```ts
-import { timeline } from '@coherynui/motion';
+import { timeline } from '@coheryn/coherynui-motion';
 
 const seq = timeline()
   .add('.title', { opacity: [0, 1] })
@@ -62,7 +62,7 @@ seq.destroy();
 
 ### 3.3 FLIP Layout Transitions
 ```ts
-import { FlipTransition } from '@coherynui/motion';
+import { FlipTransition } from '@coheryn/coherynui-motion';
 
 const flip = new FlipTransition();
 flip.read(cards);

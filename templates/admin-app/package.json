@@ -9,8 +9,8 @@
     "check": "coherynui check"
   },
   "dependencies": {
-    "@coherynui/tokens": "workspace:*",
-    "@coherynui/components": "workspace:*",
-    "@coherynui/react": "workspace:*"
+    "@coheryn/coherynui-tokens": "workspace:*",
+    "@coheryn/coherynui-components": "workspace:*",
+    "@coheryn/coherynui-react": "workspace:*"
   }
 }

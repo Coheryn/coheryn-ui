@@ -9,7 +9,7 @@
     "check": "coherynui check"
   },
   "dependencies": {
-    "@coherynui/tokens": "workspace:*",
-    "@coherynui/motion": "workspace:*"
+    "@coheryn/coherynui-tokens": "workspace:*",
+    "@coheryn/coherynui-motion": "workspace:*"
   }
 }

@@ -5,7 +5,7 @@ description: Implement physics-driven spring animations, FLIP layout morphing, a
 
 # CoherynUI Motion Workflow
 
-This skill guides coding assistants to compose physics-based browser animations using `@coherynui/motion`.
+This skill guides coding assistants to compose physics-based browser animations using `@coheryn/coherynui-motion`.
 
 ## 1. Principles
 - **Analytical Spring Mechanics**: CoherynUI Motion solves damped harmonic equations ($m \cdot x'' + c \cdot x' + k \cdot x = 0$) in closed form with zero numerical drift.
@@ -14,7 +14,7 @@ This skill guides coding assistants to compose physics-based browser animations 
 
 ## 2. Using Springs & Timelines
 ```typescript
-import { SpringSolver, animate, FlipTransition } from '@coherynui/motion';
+import { SpringSolver, animate, FlipTransition } from '@coheryn/coherynui-motion';
 
 // 1. Analytical Spring
 const solver = new SpringSolver({ stiffness: 180, damping: 18, mass: 1.0 });

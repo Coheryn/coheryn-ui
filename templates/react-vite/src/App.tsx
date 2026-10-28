@@ -22,7 +22,7 @@ import {
   Stack,
   Cluster,
   useHaptic,
-} from '@coherynui/react';
+} from '@coheryn/coherynui-react';
 
 function ShowcaseContent() {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');

@@ -1,5 +1,5 @@
 /**
- * CoherynUI Components — Framework-Neutral Accessible Primitives (@coherynui/components)
+ * CoherynUI Components — Framework-Neutral Accessible Primitives (@coheryn/coherynui-components)
  *
  * Implements WAI-ARIA 1.2 / WCAG 2.2 AA compliant headless behaviors:
  * focus trapping, roving tabindex, keyboard interaction models, outside click dismissal,

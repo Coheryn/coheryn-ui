@@ -53,7 +53,7 @@ export const SCENARIOS: BenchmarkScenario[] = [
     id: "scen-04-motion",
     title: "Analytical Spring Reordering Grid",
     prompt: "Implement a dynamic card grid with FLIP layout morphing and analytical harmonic spring dynamics.",
-    expectedComponents: ["@coherynui/motion"],
+    expectedComponents: ["@coheryn/coherynui-motion"],
     expectedClasses: ["grid-auto", "radius-lg", "p-4"],
     maxAllowedDiagnostics: 0,
   },

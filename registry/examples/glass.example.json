@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "category": "materials",
   "framework": "agnostic",
-  "package": "@coherynui/tokens",
-  "dependencies": ["@coherynui/tokens"],
+  "package": "@coheryn/coherynui-tokens",
+  "dependencies": ["@coheryn/coherynui-tokens"],
   "tokens_used": [
     "--cyn-glass-bg",
     "--cyn-glass-border",

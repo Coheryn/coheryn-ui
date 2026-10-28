@@ -1,5 +1,5 @@
 {
-  "name": "@coherynui/cli",
+  "name": "@coheryn/coherynui-cli",
   "version": "1.0.1",
   "description": "CoherynUI CLI \u2014 Native runner for the incremental styling compiler, component generator, and agent API",
   "license": "MIT OR Apache-2.0",
@@ -17,7 +17,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "echo \"@coherynui/cli ready\""
+    "build": "echo \"@coheryn/coherynui-cli ready\""
   },
   "publishConfig": {
     "access": "public"

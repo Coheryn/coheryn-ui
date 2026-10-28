@@ -7,7 +7,7 @@ import { extractCandidates, shouldScanFile } from '../src/scanner';
 import { compileCoherynCss } from '../src/compiler';
 import { isVirtualModuleId, toResolvedVirtualId } from '../src/virtual-module';
 
-describe('@coherynui/vite-plugin', () => {
+describe('@coheryn/coherynui-vite-plugin', () => {
   it('initializes with default settings and correct plugin name', () => {
     const plugin = coherynui();
     expect(plugin.name).toBe('coherynui:vite-plugin');

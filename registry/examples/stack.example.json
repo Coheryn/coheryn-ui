@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "category": "adaptive-layout",
   "framework": "agnostic",
-  "package": "@coherynui/tokens",
-  "dependencies": ["@coherynui/tokens"],
+  "package": "@coheryn/coherynui-tokens",
+  "dependencies": ["@coheryn/coherynui-tokens"],
   "tokens_used": [
     "--cyn-space-4",
     "--cyn-space-6"

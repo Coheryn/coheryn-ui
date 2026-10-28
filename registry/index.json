@@ -8,10 +8,10 @@
       "name": "Button",
       "category": "inputs",
       "framework": "react",
-      "package": "@coherynui/react",
+      "package": "@coheryn/coherynui-react",
       "description": "Interactive accessible button element with keyboard activation and specular hover states",
       "capabilities": ["keyboard-activation", "high-contrast-focus"],
-      "dependencies": ["@coherynui/react", "@coherynui/components"],
+      "dependencies": ["@coheryn/coherynui-react", "@coheryn/coherynui-components"],
       "props": {
         "variant": {
           "prop_type": "'primary' | 'secondary' | 'danger' | 'ghost'",
@@ -45,10 +45,10 @@
       "name": "Dialog",
       "category": "overlay",
       "framework": "react",
-      "package": "@coherynui/react",
+      "package": "@coheryn/coherynui-react",
       "description": "WAI-ARIA modal dialog featuring strict focus trapping, escape dismissal, and background scroll locking",
       "capabilities": ["focus-trap", "dismiss-on-escape", "scroll-lock"],
-      "dependencies": ["@coherynui/react", "@coherynui/components"],
+      "dependencies": ["@coheryn/coherynui-react", "@coheryn/coherynui-components"],
       "props": {
         "open": {
           "prop_type": "boolean",
@@ -81,10 +81,10 @@
       "name": "GlassCard",
       "category": "surfaces",
       "framework": "react",
-      "package": "@coherynui/react",
+      "package": "@coheryn/coherynui-react",
       "description": "Liquid Glass surface container with specular border highlights and automatic reduced-transparency fallback",
       "capabilities": ["liquid-glass", "reduced-transparency-fallback"],
-      "dependencies": ["@coherynui/react"],
+      "dependencies": ["@coheryn/coherynui-react"],
       "props": {
         "tier": {
           "prop_type": "'css' | 'gpu'",
@@ -111,10 +111,10 @@
       "name": "Tabs",
       "category": "navigation",
       "framework": "react",
-      "package": "@coherynui/react",
+      "package": "@coheryn/coherynui-react",
       "description": "WAI-ARIA tabs with horizontal roving tabindex and arrow-key focus delegation",
       "capabilities": ["roving-focus", "keyboard-navigation"],
-      "dependencies": ["@coherynui/react", "@coherynui/components"],
+      "dependencies": ["@coheryn/coherynui-react", "@coheryn/coherynui-components"],
       "props": {
         "activeTab": {
           "prop_type": "string",

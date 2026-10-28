@@ -19,7 +19,7 @@ CSS transitions and basic keyframe animations are inadequate for complex interac
 3. **Accessibility First:**
    - When `prefers-reduced-motion` is detected, animations immediately complete at their destination position and resolve their promises synchronously without intermediate ticks.
 4. **Separation from Compiler:**
-   - CoherynUI Motion is an optional TypeScript package (`@coherynui/motion`) that does not add any binary overhead to `coherynui` CLI compilation.
+   - CoherynUI Motion is an optional TypeScript package (`@coheryn/coherynui-motion`) that does not add any binary overhead to `coherynui` CLI compilation.
 
 ## Consequences
 * **Positive:** Physically accurate, interruptible interactive UI animations; zero jitter across variable refresh rate displays (60Hz, 120Hz ProMotion); strict WCAG compliance.
