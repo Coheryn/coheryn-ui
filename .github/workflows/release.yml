@@ -37,8 +37,10 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Run Release Readiness Audit
-        run: python3 scripts/check_release_readiness.py
+      - name: Run Conformance & Benchmark Gates
+        run: |
+          python3 tests/conformance/run_benchmarks.py --ci-gate
+          python3 tests/conformance/run_conformance.py
 
   build-binaries:
     name: Compile Binary (${{ matrix.target }})
@@ -181,6 +183,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           if [ -n "$NODE_AUTH_TOKEN" ]; then
+            echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
             pnpm --filter "./packages/*" publish --access public --no-git-checks
           else
             echo "NPM_TOKEN secret not configured; skipping public npm publish step."
@@ -330,5 +333,3 @@ jobs:
             release-assets/*.zip
             release-assets/*.tgz
             release-assets/SHA256SUMS.txt
-            scripts/install.sh
-            scripts/install.ps1
