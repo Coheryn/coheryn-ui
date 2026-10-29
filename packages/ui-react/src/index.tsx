@@ -223,9 +223,11 @@ export const Dialog: React.FC<DialogProps> = ({ isOpen, onClose, title, descript
 export interface TabsProps {
   tabs: { id: string; label: string; content: React.ReactNode }[];
   defaultTab?: string;
+  variant?: 'pills' | 'lifted' | 'bordered' | 'line';
+  className?: string;
 }
 
-export const Tabs: React.FC<TabsProps> = ({ tabs, defaultTab }) => {
+export const Tabs: React.FC<TabsProps> = ({ tabs, defaultTab, variant = 'pills', className = '' }) => {
   const [activeTab, setActiveTab] = useState(defaultTab || tabs[0]?.id);
   const tabListRef = useRef<HTMLDivElement>(null);
 
@@ -238,9 +240,11 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, defaultTab }) => {
     return () => controller.unbind();
   }, [tabs]);
 
+  const variantClass = variant === 'lifted' || variant === 'bordered' ? 'cyn-tabs-lifted' : variant === 'line' ? 'cyn-tabs-line' : 'cyn-tabs-pills';
+
   return (
-    <div className="w-full">
-      <div ref={tabListRef} role="tablist" aria-orientation="horizontal" className="cluster gap-2 border-b pb-2 mb-4">
+    <div className={`cyn-tabs ${variantClass} w-full ${className}`}>
+      <div ref={tabListRef} role="tablist" aria-orientation="horizontal" className="cyn-tablist">
         {tabs.map((tab) => {
           const isSelected = tab.id === activeTab;
           return (
@@ -251,9 +255,7 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, defaultTab }) => {
               aria-selected={isSelected}
               aria-controls={`panel-${tab.id}`}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-4 py-2 radius-lg text-sm weight-semibold transition-colors ${
-                isSelected ? 'bg-brand fg-primary' : 'fg-muted hover:bg-surface'
-              }`}
+              className={`cyn-tab-btn ${isSelected ? 'active' : ''}`}
             >
               {tab.label}
             </button>
@@ -263,7 +265,7 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, defaultTab }) => {
       {tabs.map((tab) => {
         if (tab.id !== activeTab) return null;
         return (
-          <div key={tab.id} role="tabpanel" id={`panel-${tab.id}`} aria-labelledby={`tab-${tab.id}`}>
+          <div key={tab.id} role="tabpanel" id={`panel-${tab.id}`} aria-labelledby={`tab-${tab.id}`} className="cyn-tabpanel active">
             {tab.content}
           </div>
         );
@@ -674,7 +676,9 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
         <div
           role="menu"
           aria-orientation="vertical"
-          className={`absolute top-full mt-2 z-50 ${alignClass} min-w-[180px] p-1.5 radius-xl bg-surface border shadow-xl ${className}`.trim()}
+          className={`absolute top-full mt-2 z-50 ${alignClass} min-w-[180px] p-1.5 radius-xl bg-surface border shadow-xl cyn-transition-scale ${
+            placement === 'bottom-right' ? 'cyn-origin-top-right' : 'cyn-origin-top-left'
+          } ${className}`.trim()}
         >
           {items.map((item) => (
             <button
@@ -704,6 +708,50 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   );
 };
 export const Dropdown = DropdownMenu;
+
+/* -------------------------------------------------------------------------- */
+/*                                   NAVBAR                                   */
+/* -------------------------------------------------------------------------- */
+
+export interface NavbarProps {
+  pattern?: 'drawer' | 'ribbon' | 'bottom' | 'stacked';
+  brand?: React.ReactNode;
+  children?: React.ReactNode;
+  className?: string;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({
+  pattern = 'ribbon',
+  brand,
+  children,
+  className = '',
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const patternClass = `cyn-nav-${pattern}`;
+
+  return (
+    <header className={`cyn-navbar ${patternClass} ${isOpen ? 'is-open' : ''} ${className}`.trim()}>
+      {brand && <div className="cyn-brand-lockup">{brand}</div>}
+      <button
+        className={`cyn-hamburger-btn ${isOpen ? 'is-open' : ''}`}
+        aria-label="Toggle navigation menu"
+        aria-expanded={isOpen}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span className="cyn-hamburger-line" />
+        <span className="cyn-hamburger-line" />
+        <span className="cyn-hamburger-line" />
+      </button>
+      <div
+        className={`cyn-nav-backdrop ${isOpen ? 'is-open' : ''}`}
+        onClick={() => setIsOpen(false)}
+      />
+      <nav className="cyn-nav-container">
+        {children}
+      </nav>
+    </header>
+  );
+};
 
 /* -------------------------------------------------------------------------- */
 /*                                    TOAST                                   */

@@ -1,6 +1,6 @@
 {
   "name": "@coheryn/coherynui-components",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Headless accessible UI primitives, ARIA patterns, focus management for CoherynUI Components",
   "homepage": "https://coheryntech.com/products/coheryn-ui",
   "repository": {

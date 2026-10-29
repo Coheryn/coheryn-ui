@@ -26,3 +26,23 @@ You can copy any template directory into a new project or compile it directly wi
 ```bash
 coherynui build --input templates/saas-dashboard --output templates/saas-dashboard/coherynui.css
 ```
+
+---
+
+## Responsive Navigation & Motion Personalities in Templates
+
+All starter templates inherit CoherynUI's unified motion and navigation engine:
+
+### 1. The 4 Navigation Patterns (Class Selection)
+Apply a single pattern class to your `<header class="cyn-navbar ...">`:
+* `.cyn-nav-drawer`: Off-canvas drawer on mobile with morphing animated hamburger (`3 bars → X`).
+* `.cyn-nav-ribbon`: Swipeable horizontal touch ribbon with edge gradient masks and momentum scrolling.
+* `.cyn-nav-bottom`: Mobile bottom app dock fixed at `bottom: 0` respecting `env(safe-area-inset-bottom)`.
+* `.cyn-nav-stacked`: Responsive auto-fitted multi-column grid.
+
+### 2. Global Motion Personalities (Body Class)
+Apply a motion personality to `<body>` to re-theme animations across all dialogs, dropdowns, and overlays:
+* `<body class="cyn-motion-spring">`: 300ms spring physics with micro-overshoot (`cubic-bezier(0.34, 1.56, 0.64, 1)`).
+* `<body class="cyn-motion-smooth">`: 220ms silky decelerated curves (`cubic-bezier(0.16, 1, 0.3, 1)`).
+* `<body class="cyn-motion-subtle">`: 120ms minimal micro-fades.
+* `<body class="cyn-motion-none">`: 0ms instant swaps, automatically activated on `prefers-reduced-motion`.

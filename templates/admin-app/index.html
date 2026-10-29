@@ -14,11 +14,11 @@
 
   <div class="container">
     <div class="header-bar">
-      <div style="display: flex; align-items: center; gap: 0.85rem;">
-        <img src="../assets/CoherynTech_Icon_Master_Gradient.svg" alt="CoherynTech Logo" style="width: 36px; height: 36px; display: block;">
+      <div class="d-flex items-center gap-3">
+        <img class="brand-logo" src="../assets/CoherynTech_Icon_Master_Gradient.svg" alt="CoherynTech Logo">
         <div>
-          <h1 style="font-size: 1.5rem; font-weight: 800;">Admin Console & IAM</h1>
-          <p style="color: var(--cyn-color-muted); font-size: 0.9rem; margin-top: 0.2rem;">Manage project roles and sandboxed access tokens.</p>
+          <h1 class="text-xl font-bold">Admin Console & IAM</h1>
+          <p class="text-muted text-sm mt-1">Manage project roles and sandboxed access tokens.</p>
         </div>
       </div>
       <button class="btn btn-primary" id="openModalBtn">+ Invite Engineer</button>
@@ -45,21 +45,21 @@
         <tbody>
           <tr>
             <td>
-              <div style="font-weight: 600;">Alex Mercer</div>
-              <div style="font-size: 0.8rem; color: var(--cyn-color-muted);">alex@coheryntech.com</div>
+              <div class="font-semibold">Alex Mercer</div>
+              <div class="text-xs text-muted">alex@coheryntech.com</div>
             </td>
             <td><code>Owner / Admin</code></td>
-            <td><span style="color: #3fb950; font-weight: 700;">✓ Hardware Key</span></td>
-            <td><button class="btn" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">Edit</button></td>
+            <td><span class="badge badge-success">✓ Hardware Key</span></td>
+            <td><button class="btn btn-secondary btn-xs">Edit</button></td>
           </tr>
           <tr>
             <td>
-              <div style="font-weight: 600;">Sarah Chen</div>
-              <div style="font-size: 0.8rem; color: var(--cyn-color-muted);">sarah@coheryntech.com</div>
+              <div class="font-semibold">Sarah Chen</div>
+              <div class="text-xs text-muted">sarah@coheryntech.com</div>
             </td>
             <td><code>Lead Architect</code></td>
-            <td><span style="color: #3fb950; font-weight: 700;">✓ Authenticator</span></td>
-            <td><button class="btn" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">Edit</button></td>
+            <td><span class="badge badge-success">✓ Authenticator</span></td>
+            <td><button class="btn btn-secondary btn-xs">Edit</button></td>
           </tr>
         </tbody>
       </table>
@@ -69,8 +69,8 @@
   <!-- Accessible Modal -->
   <div class="modal-backdrop" id="modalBackdrop">
     <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle" id="modalContainer">
-      <h3 id="modalTitle" style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Invite Team Member</h3>
-      <p style="color: var(--cyn-color-muted); font-size: 0.85rem; margin-bottom: 1.5rem;">Provide company email address and assign initial permission profile.</p>
+      <h3 id="modalTitle" class="card-title-lg mb-2">Invite Team Member</h3>
+      <p class="modal-desc mb-6">Provide company email address and assign initial permission profile.</p>
 
       <form id="inviteForm">
         <div class="form-group">
@@ -78,8 +78,8 @@
           <input type="email" class="form-input" id="emailInput" required placeholder="engineer@domain.com">
         </div>
 
-        <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.5rem;">
-          <button type="button" class="btn" id="modalCancelBtn">Cancel</button>
+        <div class="card-actions justify-end mt-6">
+          <button type="button" class="btn btn-secondary" id="modalCancelBtn">Cancel</button>
           <button type="submit" class="btn btn-primary">Send Invitation</button>
         </div>
       </form>

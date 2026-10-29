@@ -13,24 +13,26 @@
 <body>
 
   <!-- Floating Liquid Glass Navigation Dock -->
-  <header class="glass-dock">
-    <div style="display: flex; align-items: center; gap: 0.6rem;">
-      <img src="../assets/CoherynTech_Icon_Master_Gradient.svg" alt="CoherynTech Logo" style="width: 28px; height: 28px; display: block;">
-      <span style="font-weight: 800; font-size: 1rem;">CoherynUI</span>
+  <header class="navbar cyn-navbar cyn-glass mb-8">
+    <div class="brand-lockup">
+      <div class="brand-icon">
+        <img class="brand-logo" src="../assets/CoherynTech_Icon_Master_Gradient.svg" alt="CoherynTech Logo">
+      </div>
+      <span class="font-bold text-base">CoherynUI</span>
     </div>
 
-    <nav style="display: flex; gap: 1.5rem; font-size: 0.85rem; font-weight: 600;">
-      <a href="#features" style="color: var(--cyn-color-muted); text-decoration: none;">Features</a>
-      <a href="#benchmarks" style="color: var(--cyn-color-muted); text-decoration: none;">Benchmarks</a>
-      <a href="#docs" style="color: var(--cyn-color-muted); text-decoration: none;">Docs</a>
+    <nav class="d-flex gap-4 font-semibold text-sm">
+      <a href="#features" class="text-muted text-no-underline">Features</a>
+      <a href="#benchmarks" class="text-muted text-no-underline">Benchmarks</a>
+      <a href="#docs" class="text-muted text-no-underline">Docs</a>
     </nav>
 
-    <button id="themeBtn" style="background: transparent; border: 1px solid var(--cyn-color-border); color: var(--cyn-color-foreground); padding: 0.4rem 0.8rem; border-radius: 9999px; cursor: pointer; font-size: 0.75rem; font-weight: 600;">Theme</button>
+    <button id="themeBtn" class="btn btn-secondary btn-sm radius-full">Theme</button>
   </header>
 
   <!-- Hero Section -->
-  <main class="hero-section">
-    <div style="display: inline-block; font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.8rem; border-radius: 9999px; background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.3); color: var(--cyn-color-brand-light); margin-bottom: 1.5rem;">
+  <main class="hero-section text-center p-8 max-w-prose mx-auto">
+    <div class="badge badge-brand mb-6 radius-full p-2">
       ✨ Agent-Native & Rust-Powered UI Engine
     </div>
 

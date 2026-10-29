@@ -13,30 +13,30 @@
 
   <div class="container">
     <div>
-      <h1 style="font-size: 2rem; font-weight: 800; letter-spacing: -0.02em;">CoherynUI Motion Laboratory</h1>
-      <p style="color: var(--cyn-color-muted); margin-top: 0.25rem;">Analytical harmonic spring dynamics & FLIP layout transitions.</p>
+      <h1 class="text-xl font-bold">CoherynUI Motion Laboratory</h1>
+      <p class="text-muted text-sm mt-1">Analytical harmonic spring dynamics & FLIP layout transitions.</p>
     </div>
 
     <!-- Section 1: Spring Solver -->
     <div class="card">
-      <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Analytical Spring Dynamics</h3>
+      <h3 class="card-title-lg mb-4">Analytical Spring Dynamics</h3>
       <div class="stage">
         <div class="spring-puck" id="puck">⚡</div>
       </div>
 
-      <div style="display: flex; gap: 0.75rem; margin-top: 1.25rem;">
+      <div class="d-flex gap-3 mt-5">
         <button class="btn btn-brand" id="triggerSpring">Animate (Target: 300px)</button>
-        <button class="btn" id="resetSpring">Reset Position</button>
+        <button class="btn btn-secondary" id="resetSpring">Reset Position</button>
       </div>
     </div>
 
     <!-- Section 2: FLIP Transitions -->
     <div class="card">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <h3 style="font-size: 1.25rem; font-weight: 700;">FLIP Layout Reordering</h3>
-        <div style="display: flex; gap: 0.5rem;">
+      <div class="flex-between">
+        <h3 class="card-title-lg">FLIP Layout Reordering</h3>
+        <div class="d-flex gap-2">
           <button class="btn btn-brand" id="shuffleBtn">Shuffle Grid</button>
-          <button class="btn" id="sortBtn">Sort Ascending</button>
+          <button class="btn btn-secondary" id="sortBtn">Sort Ascending</button>
         </div>
       </div>
 
@@ -89,8 +89,8 @@
     function renderItems() {
       grid.innerHTML = items.map((it, i) => `
         <div class="flip-item" data-id="${it}">
-          <div style="font-size: 0.8rem; color: var(--cyn-color-muted);">ID: ${i + 1}</div>
-          <div style="font-weight: 700; margin-top: 0.25rem;">${it}</div>
+          <div class="text-xs text-muted">ID: ${i + 1}</div>
+          <div class="font-bold mt-1">${it}</div>
         </div>
       `).join('');
     }

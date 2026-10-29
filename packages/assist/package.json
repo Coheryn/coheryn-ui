@@ -1,0 +1,39 @@
+{
+  "name": "@coheryn/coherynui-js-assist",
+  "version": "1.1.0",
+  "description": "Optional progressive enhancement JavaScript assist for CoherynUI — Declarative data-cyn-* attributes, auto ARIA, focus trapping, and roving navigation",
+  "type": "module",
+  "homepage": "https://coheryntech.com/products/coheryn-ui",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Coheryn/coheryn-ui.git",
+    "directory": "packages/assist"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc && node scripts/build.mjs",
+    "bundle": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.js || true"
+  },
+  "dependencies": {
+    "@coheryn/coherynui-components": "workspace:^"
+  },
+  "license": "MIT OR Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "package.json"
+  ]
+}

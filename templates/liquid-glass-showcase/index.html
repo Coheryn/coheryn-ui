@@ -12,11 +12,11 @@
 <body>
 
   <!-- Ambient background orb -->
-  <div style="position: fixed; top: 15%; left: 30%; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, #6366f1, #06b6d4); filter: blur(120px); opacity: 0.35; z-index: -1;"></div>
+  <div class="ambient-orb"></div>
 
   <div class="container">
     <div class="header-bar">
-      <div style="font-size: 0.8rem; font-weight: 700; color: var(--cyn-color-brand-light); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.5rem;">Physical Material System</div>
+      <div class="badge badge-brand mb-2">Physical Material System</div>
       <h1>Liquid Glass & GPU Refraction</h1>
       <p>Multi-tier optical hierarchy with CSS native blur and WebGPU shader fallbacks.</p>
     </div>
@@ -27,12 +27,12 @@
       <div class="glass tier-card" id="cardTier1">
         <div>
           <div class="tier-badge">Tier 1 — CSS Glass</div>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;">Standard Translucency</h3>
-          <p style="color: var(--cyn-color-muted); font-size: 0.9rem; line-height: 1.6;">
+          <h3 class="card-title-lg mb-2">Standard Translucency</h3>
+          <p class="text-muted text-sm">
             Zero runtime JavaScript. Compiles directly into CSS <code>backdrop-filter: blur(...)</code> inside <code>@layer cyn.recipes</code>.
           </p>
         </div>
-        <div style="font-family: var(--cyn-font-mono); font-size: 0.75rem; color: var(--cyn-color-brand-light); margin-top: 1.5rem;">
+        <div class="font-mono text-xs text-brand mt-4">
           Class: <code>.glass</code>
         </div>
       </div>
@@ -41,26 +41,26 @@
       <div class="glass glass-edge tier-card" id="cardTier2">
         <div>
           <div class="tier-badge">Tier 2 — Enhanced Specular</div>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;">Rim Light Specular</h3>
-          <p style="color: var(--cyn-color-muted); font-size: 0.9rem; line-height: 1.6;">
+          <h3 class="card-title-lg mb-2">Rim Light Specular</h3>
+          <p class="text-muted text-sm">
             Features an ultra-sharp 1px linear specular highlight edge to simulate real physical refractive glass edges.
           </p>
         </div>
-        <div style="font-family: var(--cyn-font-mono); font-size: 0.75rem; color: var(--cyn-color-brand-light); margin-top: 1.5rem;">
+        <div class="font-mono text-xs text-brand mt-4">
           Class: <code>.glass .glass-edge</code>
         </div>
       </div>
 
       <!-- Tier 3 -->
-      <div class="glass glass-edge tier-card" id="cardTier3" style="border-color: rgba(6, 182, 212, 0.4);">
+      <div class="glass glass-edge tier-card tier-card-cyan" id="cardTier3">
         <div>
           <div class="tier-badge">Tier 3 — WebGPU Shader</div>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;">Optical Dispersion</h3>
-          <p style="color: var(--cyn-color-muted); font-size: 0.9rem; line-height: 1.6;">
+          <h3 class="card-title-lg mb-2">Optical Dispersion</h3>
+          <p class="text-muted text-sm">
             Full WGSL fragment pipeline calculating Snell's law refraction vectors and RGB chromatic separation.
           </p>
         </div>
-        <div style="font-family: var(--cyn-font-mono); font-size: 0.75rem; color: var(--cyn-color-brand-light); margin-top: 1.5rem;">
+        <div class="font-mono text-xs text-brand mt-4">
           Shader: <code>refraction.wgsl</code>
         </div>
       </div>
@@ -68,7 +68,7 @@
 
     <!-- Live Parameter Synthesis -->
     <div class="control-panel">
-      <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1.25rem;">Live Optical Synthesis Controls</h3>
+      <h3 class="card-title-lg mb-4">Live Optical Synthesis Controls</h3>
 
       <div class="slider-row">
         <span>Blur Radius</span>
@@ -82,8 +82,8 @@
         <span id="opacityVal">70%</span>
       </div>
 
-      <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-        <button id="toggleOpaque" style="background: var(--cyn-color-brand); color: #000; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 700; cursor: pointer;">
+      <div class="d-flex gap-4 mt-6">
+        <button id="toggleOpaque" class="btn btn-primary">
           Toggle Reduced Transparency Fallback
         </button>
       </div>

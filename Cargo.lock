@@ -265,7 +265,7 @@ checksum = "1c133bc6a41be0d194c306b5506d15e6feeea7b1d6604bd3f8310dfb2ca96486"
 
 [[package]]
 name = "coherynui-agent-api"
-version = "1.0.1"
+version = "1.1.0"
 dependencies = [
  "coherynui-core",
  "coherynui-design",
@@ -277,7 +277,7 @@ dependencies = [
 
 [[package]]
 name = "coherynui-class-opt"
-version = "1.0.1"
+version = "1.1.0"
 dependencies = [
  "coherynui-core",
  "serde",
@@ -287,7 +287,7 @@ dependencies = [
 
 [[package]]
 name = "coherynui-cli"
-version = "1.0.1"
+version = "1.1.0"
 dependencies = [
  "clap",
  "coherynui-agent-api",
@@ -311,7 +311,7 @@ dependencies = [
 
 [[package]]
 name = "coherynui-compiler"
-version = "1.0.1"
+version = "1.1.0"
 dependencies = [
  "coherynui-class-opt",
  "coherynui-core",
@@ -329,7 +329,7 @@ dependencies = [
 
 [[package]]
 name = "coherynui-conformance"
-version = "1.0.1"
+version = "1.1.0"
 dependencies = [
  "coherynui-agent-api",
  "coherynui-class-opt",
@@ -351,7 +351,7 @@ dependencies = [
 
 [[package]]
 name = "coherynui-core"
-version = "1.0.1"
+version = "1.1.0"
 dependencies = [
  "serde",
  "serde_json",
@@ -359,7 +359,7 @@ dependencies = [
 
 [[package]]
 name = "coherynui-design"
-version = "1.0.1"
+version = "1.1.0"
 dependencies = [
  "coherynui-core",
  "serde",
@@ -370,7 +370,7 @@ dependencies = [
 
 [[package]]
 name = "coherynui-diagnostics"
-version = "1.0.1"
+version = "1.1.0"
 dependencies = [
  "coherynui-core",
  "miette",
@@ -381,7 +381,7 @@ dependencies = [
 
 [[package]]
 name = "coherynui-incremental"
-version = "1.0.1"
+version = "1.1.0"
 dependencies = [
  "blake3",
  "coherynui-core",
@@ -391,7 +391,7 @@ dependencies = [
 
 [[package]]
 name = "coherynui-mcp"
-version = "1.0.1"
+version = "1.1.0"
 dependencies = [
  "coherynui-agent-api",
  "coherynui-compiler",
@@ -406,7 +406,7 @@ dependencies = [
 
 [[package]]
 name = "coherynui-plugin-api"
-version = "1.0.1"
+version = "1.1.0"
 dependencies = [
  "coherynui-core",
  "serde",
@@ -416,7 +416,7 @@ dependencies = [
 
 [[package]]
 name = "coherynui-plugin-host"
-version = "1.0.1"
+version = "1.1.0"
 dependencies = [
  "coherynui-core",
  "coherynui-plugin-api",
@@ -426,7 +426,7 @@ dependencies = [
 
 [[package]]
 name = "coherynui-registry"
-version = "1.0.1"
+version = "1.1.0"
 dependencies = [
  "coherynui-core",
  "serde",
@@ -436,7 +436,7 @@ dependencies = [
 
 [[package]]
 name = "coherynui-source"
-version = "1.0.1"
+version = "1.1.0"
 dependencies = [
  "coherynui-core",
  "globset",
@@ -446,7 +446,7 @@ dependencies = [
 
 [[package]]
 name = "coherynui-syntax"
-version = "1.0.1"
+version = "1.1.0"
 dependencies = [
  "coherynui-core",
  "serde",

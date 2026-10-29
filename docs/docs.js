@@ -8,26 +8,126 @@
   'use strict';
 
   // ---------------------------------------------------------------------------
-  // 1. TAB ROUTING & CONTROLLER
+  // 1. TAB ROUTING & CONTROLLER (WITH NESTED SECTION TARGETING)
   // ---------------------------------------------------------------------------
-  function switchTab(tabId) {
+  function switchTab(tabId, sectionId) {
     if (!tabId) return;
     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.sidebar-link, .nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.sidebar-sublink').forEach(b => b.classList.remove('active'));
 
     const target = document.getElementById('tab-' + tabId);
     if (target) {
       target.classList.add('active');
     }
 
-    const btn = document.querySelector(`.nav-btn[data-tab="${tabId}"]`) ||
-      Array.from(document.querySelectorAll('.nav-btn')).find(b => b.getAttribute('onclick')?.includes(tabId));
+    const btn = document.querySelector(`.sidebar-link[data-tab="${tabId}"]`) ||
+      document.querySelector(`.nav-btn[data-tab="${tabId}"]`);
     if (btn) {
       btn.classList.add('active');
     }
 
+    if (sectionId) {
+      const subLink = document.querySelector(`.sidebar-sublink[data-target="${sectionId}"]`);
+      if (subLink) subLink.classList.add('active');
+
+      setTimeout(() => {
+        const sec = document.getElementById(sectionId);
+        if (sec) {
+          sec.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          sec.classList.remove('cyn-target-highlight');
+          void sec.offsetWidth; // trigger reflow
+          sec.classList.add('cyn-target-highlight');
+        }
+      }, 100);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Auto close mobile drawer if open
+    toggleDocsNavDrawer(false);
+
     if (tabId === 'repl') {
       runReplCompiler();
+    }
+  }
+
+  function filterSidebarMenu(query) {
+    const q = (query || '').toLowerCase().trim();
+    const items = document.querySelectorAll('.sidebar-nav-list > li');
+    items.forEach(li => {
+      const text = li.textContent.toLowerCase();
+      const match = !q || text.includes(q);
+      li.style.display = match ? '' : 'none';
+    });
+  }
+
+  // ---------------------------------------------------------------------------
+  // 1b. GLOBAL MOTION PERSONALITY CONTROLLER
+  // ---------------------------------------------------------------------------
+  function applyGlobalMotion(motionName) {
+    if (!motionName) return;
+    const body = document.body;
+    body.classList.remove('cyn-motion-spring', 'cyn-motion-smooth', 'cyn-motion-subtle', 'cyn-motion-none',
+                           'motion-spring', 'motion-smooth', 'motion-subtle', 'motion-none');
+    body.classList.add(`cyn-motion-${motionName}`);
+
+    document.querySelectorAll('.motion-control-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.motion === motionName);
+    });
+
+    const label = document.getElementById('activeMotionClassLabel');
+    if (label) label.textContent = `body.cyn-motion-${motionName}`;
+
+    triggerDocsToast('Motion Profile', `Activated ${motionName.toUpperCase()} motion personality.`, 'info');
+  }
+
+  // ---------------------------------------------------------------------------
+  // 1c. NAVIGATION PATTERN CONTROLLER
+  // ---------------------------------------------------------------------------
+  function applyNavPattern(patternName) {
+    if (!patternName) return;
+    const navbar = document.getElementById('appNavbar') || document.querySelector('.navbar');
+    if (!navbar) return;
+
+    navbar.classList.remove('nav-pattern-ribbon', 'nav-pattern-drawer', 'nav-pattern-bottom', 'nav-pattern-stacked',
+                           'cyn-nav-ribbon', 'cyn-nav-drawer', 'cyn-nav-bottom', 'cyn-nav-stacked');
+    navbar.classList.add(`nav-pattern-${patternName}`);
+
+    document.querySelectorAll('.nav-pattern-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.pattern === patternName);
+    });
+
+    const label = document.getElementById('activeNavPatternLabel');
+    if (label) label.textContent = `.nav-pattern-${patternName}`;
+
+    toggleDocsNavDrawer(false);
+
+    triggerDocsToast('Navigation Pattern', `Switched layout mode to ${patternName.toUpperCase()}.`, 'success');
+  }
+
+  // ---------------------------------------------------------------------------
+  // 1d. ANIMATED HAMBURGER & SIDEBAR DRAWER CONTROLLER
+  // ---------------------------------------------------------------------------
+  function toggleDocsNavDrawer(forceState) {
+    const sidebar = document.getElementById('docsSidebar');
+    const navbar = document.getElementById('appNavbar') || document.querySelector('.navbar');
+    const btn = document.getElementById('docsHamburgerBtn') || document.querySelector('.nav-hamburger-btn');
+    const backdrop = document.getElementById('docsSidebarBackdrop') || document.getElementById('docsNavBackdrop');
+    if (!sidebar && !navbar) return;
+
+    const isCurrentlyOpen = sidebar ? sidebar.classList.contains('is-open') : (navbar && navbar.classList.contains('is-open'));
+    const shouldOpen = typeof forceState === 'boolean' ? forceState : !isCurrentlyOpen;
+
+    if (sidebar) sidebar.classList.toggle('is-open', shouldOpen);
+    if (navbar) navbar.classList.toggle('is-open', shouldOpen);
+    if (btn) {
+      btn.classList.toggle('is-open', shouldOpen);
+      btn.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+    }
+    if (backdrop) backdrop.classList.toggle('is-open', shouldOpen);
+    if (window.innerWidth <= 1024) {
+      document.body.style.overflow = shouldOpen ? 'hidden' : '';
     }
   }
 
@@ -152,10 +252,20 @@
     cssOutput.textContent = generatedCss;
   }
 
-  function copyReplCss() {
+  function copyReplCss(btn) {
     const el = document.getElementById('replCssOutput');
     if (!el) return;
-    navigator.clipboard.writeText(el.textContent);
+    navigator.clipboard.writeText(el.textContent.trim());
+    if (btn) {
+      const label = btn.querySelector('span') || btn;
+      const oldText = label.textContent;
+      label.textContent = 'Copied!';
+      btn.classList.add('copy-success');
+      setTimeout(() => {
+        label.textContent = oldText;
+        btn.classList.remove('copy-success');
+      }, 2000);
+    }
     triggerDocsToast('CSS Copied', 'Active @layer cyn.utilities copied to clipboard.', 'success');
   }
 
@@ -289,8 +399,8 @@
     const m = document.getElementById('demo-modal');
     if (m) m.classList.add('open');
     document.body.style.overflow = 'hidden';
-    const firstBtn = document.querySelector('#demo-modal button');
-    setTimeout(() => firstBtn?.focus(), 50);
+    const primaryBtn = document.querySelector('#demo-modal .btn-primary') || document.querySelector('#demo-modal button');
+    setTimeout(() => primaryBtn?.focus(), 50);
   }
 
   function closeModal() {
@@ -400,10 +510,20 @@
     }
   }
 
-  function copyActiveTokens() {
+  function copyActiveTokens(btn) {
     const el = document.getElementById('token-export-code');
     if (!el) return;
-    navigator.clipboard.writeText(el.textContent);
+    navigator.clipboard.writeText(el.textContent.trim());
+    if (btn) {
+      const label = btn.querySelector('span') || btn;
+      const oldText = label.textContent;
+      label.textContent = 'Copied!';
+      btn.classList.add('copy-success');
+      setTimeout(() => {
+        label.textContent = oldText;
+        btn.classList.remove('copy-success');
+      }, 2000);
+    }
     triggerDocsToast('Tokens Copied', 'Exported CSS custom properties.', 'success');
   }
 
@@ -478,11 +598,27 @@
   }
 
   function copyCode(btn) {
-    const pre = btn.parentElement.querySelector('code');
-    if (pre) {
-      navigator.clipboard.writeText(pre.textContent);
-      btn.textContent = 'Copied!';
-      setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+    const container = btn.closest('.code-preview, .code-view, .terminal-window, .card, .spec-strip, .cli-bar') || btn.parentElement;
+    const pre = container ? container.querySelector('code') : null;
+    const textToCopy = pre ? pre.textContent.trim() : (btn.getAttribute('data-clipboard-text') || '');
+    if (textToCopy) {
+      navigator.clipboard.writeText(textToCopy).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = textToCopy;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      });
+      const label = btn.querySelector('span') || btn;
+      const oldText = label.textContent;
+      label.textContent = 'Copied!';
+      btn.classList.add('copy-success');
+      setTimeout(() => {
+        label.textContent = oldText;
+        btn.classList.remove('copy-success');
+      }, 2000);
+      triggerDocsToast('Copied to Clipboard', 'Code snippet copied.', 'success');
     }
   }
 
@@ -598,15 +734,15 @@
       this._box.className = 'modal-box';
 
       const header = document.createElement('div');
-      header.className = 'flex-between mb-4';
+      header.className = 'modal-header flex-between mb-4';
 
       this._titleEl = document.createElement('h3');
       this._titleEl.className = 'card-title-lg';
       this._titleEl.textContent = this.getAttribute('title') || '';
 
       const closeBtn = document.createElement('button');
-      closeBtn.className = 'btn btn-secondary';
-      closeBtn.style.padding = '0.25rem 0.5rem';
+      closeBtn.className = 'modal-close-btn';
+      closeBtn.setAttribute('aria-label', 'Close dialog');
       closeBtn.textContent = '✕';
       closeBtn.addEventListener('click', () => this.close());
 
@@ -674,15 +810,15 @@
       this._box.className = 'drawer-box';
 
       const header = document.createElement('div');
-      header.className = 'flex-between mb-4';
+      header.className = 'drawer-header flex-between mb-4';
 
       const title = document.createElement('h3');
       title.className = 'card-title-lg';
       title.textContent = this.getAttribute('title') || 'Drawer';
 
       const closeBtn = document.createElement('button');
-      closeBtn.className = 'btn btn-secondary';
-      closeBtn.style.padding = '0.25rem 0.5rem';
+      closeBtn.className = 'modal-close-btn';
+      closeBtn.setAttribute('aria-label', 'Close drawer');
       closeBtn.textContent = '✕';
       closeBtn.addEventListener('click', () => this.close());
 
@@ -750,15 +886,15 @@
       this._box.appendChild(grabHandle);
 
       const header = document.createElement('div');
-      header.className = 'flex-between mb-4';
+      header.className = 'bottomsheet-header flex-between mb-4';
 
       const title = document.createElement('h3');
       title.className = 'card-title-lg';
       title.textContent = this.getAttribute('title') || 'BottomSheet';
 
       const closeBtn = document.createElement('button');
-      closeBtn.className = 'btn btn-secondary';
-      closeBtn.style.padding = '0.25rem 0.5rem';
+      closeBtn.className = 'modal-close-btn';
+      closeBtn.setAttribute('aria-label', 'Close bottom sheet');
       closeBtn.textContent = '✕';
       closeBtn.addEventListener('click', () => this.close());
 
@@ -927,6 +1063,141 @@
     }
   }
 
+  class CynNavbarElement extends HTMLElement {
+    static get observedAttributes() { return ['pattern', 'open']; }
+    connectedCallback() {
+      this.classList.add('cyn-navbar');
+      const pattern = this.getAttribute('pattern') || 'ribbon';
+      this.classList.add(`cyn-nav-${pattern}`);
+
+      const btn = this.querySelector('.cyn-hamburger-btn, .nav-hamburger-btn');
+      btn?.addEventListener('click', () => this.toggle());
+
+      const backdrop = this.querySelector('.cyn-nav-backdrop, .nav-backdrop');
+      backdrop?.addEventListener('click', () => this.close());
+    }
+    attributeChangedCallback(name, oldVal, newVal) {
+      if (oldVal === newVal) return;
+      if (name === 'pattern') {
+        if (oldVal) this.classList.remove(`cyn-nav-${oldVal}`);
+        if (newVal) this.classList.add(`cyn-nav-${newVal}`);
+      } else if (name === 'open') {
+        const isOpen = this.hasAttribute('open');
+        const btn = this.querySelector('.cyn-hamburger-btn, .nav-hamburger-btn');
+        this.classList.toggle('is-open', isOpen);
+        btn?.classList.toggle('is-open', isOpen);
+        btn?.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        this.dispatchEvent(new CustomEvent(isOpen ? 'cyn-open' : 'cyn-close', {
+          bubbles: true,
+          composed: true,
+          detail: { open: isOpen, pattern: this.getAttribute('pattern') }
+        }));
+      }
+    }
+    show() { this.setAttribute('open', ''); }
+    close() { this.removeAttribute('open'); }
+    toggle() { if (this.hasAttribute('open')) this.close(); else this.show(); }
+  }
+
+  class CynTabsElement extends HTMLElement {
+    static get observedAttributes() { return ['variant']; }
+    connectedCallback() {
+      this.applyVariant();
+      this.setupTabs();
+    }
+    attributeChangedCallback(name) {
+      if (name === 'variant') this.applyVariant();
+    }
+    applyVariant() {
+      const variant = this.getAttribute('variant') || 'pills';
+      this.classList.remove('cyn-tabs-lifted', 'cyn-tabs-bordered', 'cyn-tabs-line', 'cyn-tabs-pills');
+      if (variant === 'lifted' || variant === 'bordered') {
+        this.classList.add('cyn-tabs-lifted');
+      } else if (variant === 'line' || variant === 'underline') {
+        this.classList.add('cyn-tabs-line');
+      } else {
+        this.classList.add('cyn-tabs-pills');
+      }
+    }
+    setupTabs() {
+      const tabList = this.querySelector('[role="tablist"]');
+      if (!tabList) return;
+      const tabs = Array.from(tabList.querySelectorAll('[role="tab"]'));
+      const panels = Array.from(this.querySelectorAll('[role="tabpanel"]'));
+      if (!tabs.length) return;
+
+      tabs.forEach((tab, idx) => {
+        tab.addEventListener('click', () => this.selectTab(idx));
+        tab.addEventListener('keydown', (e) => {
+          let nextIdx = idx;
+          if (e.key === 'ArrowRight') nextIdx = (idx + 1) % tabs.length;
+          else if (e.key === 'ArrowLeft') nextIdx = (idx - 1 + tabs.length) % tabs.length;
+          else if (e.key === 'Home') nextIdx = 0;
+          else if (e.key === 'End') nextIdx = tabs.length - 1;
+          else return;
+          e.preventDefault();
+          tabs[nextIdx].focus();
+          this.selectTab(nextIdx);
+        });
+      });
+      const initialIdx = Math.max(0, tabs.findIndex(t => t.getAttribute('aria-selected') === 'true' || t.classList.contains('active')));
+      this.selectTab(initialIdx);
+    }
+    selectTab(idx) {
+      const tabList = this.querySelector('[role="tablist"]');
+      const tabs = Array.from(tabList ? tabList.querySelectorAll('[role="tab"]') : []);
+      const panels = Array.from(this.querySelectorAll('[role="tabpanel"]'));
+      tabs.forEach((t, i) => {
+        const isSel = i === idx;
+        t.setAttribute('aria-selected', isSel ? 'true' : 'false');
+        t.setAttribute('tabindex', isSel ? '0' : '-1');
+        t.classList.toggle('active', isSel);
+      });
+      panels.forEach((p, i) => {
+        const isSel = i === idx;
+        p.style.display = isSel ? 'block' : 'none';
+        p.classList.toggle('active', isSel);
+        p.setAttribute('aria-hidden', isSel ? 'false' : 'true');
+      });
+      this.dispatchEvent(new CustomEvent('cyn-change', { bubbles: true, detail: { index: idx } }));
+    }
+  }
+
+  function switchComponentTab(containerId, tabId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const tabs = container.querySelectorAll('[role="tab"], .cyn-tab-btn, .tab-btn');
+    const panels = container.querySelectorAll('[role="tabpanel"], .cyn-tabpanel, .tabpanel');
+    tabs.forEach(t => {
+      const match = t.getAttribute('data-tab-target') === tabId || t.getAttribute('aria-controls') === tabId;
+      t.classList.toggle('active', match);
+      t.setAttribute('aria-selected', match ? 'true' : 'false');
+      t.setAttribute('tabindex', match ? '0' : '-1');
+    });
+    panels.forEach(p => {
+      const match = p.id === tabId;
+      p.classList.toggle('active', match);
+      p.setAttribute('aria-hidden', match ? 'false' : 'true');
+      p.style.display = match ? 'block' : 'none';
+    });
+  }
+
+  function setDemoTabsVariant(containerId, variant) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    el.classList.remove('cyn-tabs-lifted', 'cyn-tabs-bordered', 'cyn-tabs-line', 'cyn-tabs-pills');
+    if (variant === 'lifted' || variant === 'bordered') el.classList.add('cyn-tabs-lifted');
+    else if (variant === 'line') el.classList.add('cyn-tabs-line');
+    else el.classList.add('cyn-tabs-pills');
+
+    const card = el.closest('.card');
+    if (card) {
+      card.querySelectorAll('.tab-variant-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-variant') === variant);
+      });
+    }
+  }
+
   // Register All Web Component Custom Elements
   if ('customElements' in window) {
     if (!customElements.get('cyn-modal')) customElements.define('cyn-modal', CynModalElement);
@@ -936,6 +1207,8 @@
     if (!customElements.get('cyn-popover')) customElements.define('cyn-popover', CynPopoverElement);
     if (!customElements.get('cyn-dropdown')) customElements.define('cyn-dropdown', CynDropdownElement);
     if (!customElements.get('cyn-toast-container')) customElements.define('cyn-toast-container', CynToastContainerElement);
+    if (!customElements.get('cyn-navbar')) customElements.define('cyn-navbar', CynNavbarElement);
+    if (!customElements.get('cyn-tabs')) customElements.define('cyn-tabs', CynTabsElement);
   }
 
   // Global Telemetry Event Hook
@@ -986,6 +1259,9 @@
   Object.assign(window, {
     switchTab,
     applyTheme,
+    applyGlobalMotion,
+    applyNavPattern,
+    toggleDocsNavDrawer,
     loadReplPreset,
     runReplCompiler,
     copyReplCss,
@@ -1015,14 +1291,100 @@
     logWcEvent,
     clearWcEventLogs,
     triggerWcToast,
+    setDemoWcNavbarPattern,
     CynModalElement,
     CynDrawerElement,
     CynBottomSheetElement,
     CynSwitchElement,
     CynPopoverElement,
     CynDropdownElement,
-    CynToastContainerElement
+    CynToastContainerElement,
+    CynNavbarElement,
+    CynTabsElement,
+    switchComponentTab,
+    setDemoTabsVariant,
+    filterSidebarMenu,
+    setSimulatorPattern,
+    setSimulatorViewport,
+    toggleSimulatedDrawer
   });
+
+  function setSimulatorPattern(pat) {
+    const nav = document.querySelector('#navbarSimulatorFrame .simulated-navbar');
+    if (nav) {
+      nav.className = `navbar cyn-navbar cyn-nav-${pat} simulated-navbar`;
+      nav.classList.remove('is-open');
+    }
+    const drawer = document.getElementById('simulatedDrawerPanel');
+    if (drawer) drawer.classList.remove('is-open');
+    const backdrop = document.querySelector('#navbarSimulatorFrame .simulated-nav-backdrop');
+    if (backdrop) backdrop.classList.remove('is-open');
+    const burger = document.querySelector('#navbarSimulatorFrame .nav-hamburger-btn, #navbarSimulatorFrame .cyn-hamburger-btn');
+    if (burger) {
+      burger.classList.remove('is-open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+
+    document.querySelectorAll('.sim-pattern-btn').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-pattern') === pat);
+    });
+
+    const badge = document.getElementById('simActivePatternBadge');
+    if (badge) {
+      const labels = {
+        drawer: 'Pattern: Slide-Out Drawer (Morphing Hamburger)',
+        ribbon: 'Pattern: Touch Swipe Ribbon (Momentum Scroll)',
+        bottom: 'Pattern: Mobile Bottom Dock (iOS Safe Area)',
+        stacked: 'Pattern: Auto-Stacked Grid (Multi-Row)'
+      };
+      badge.textContent = labels[pat] || pat;
+    }
+  }
+
+  function setSimulatorViewport(mode) {
+    const frame = document.getElementById('navbarSimulatorFrame');
+    if (!frame) return;
+    frame.classList.toggle('view-mobile', mode === 'mobile');
+    frame.classList.toggle('view-desktop', mode === 'desktop');
+
+    document.querySelectorAll('.sim-viewport-btn').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-viewport') === mode);
+    });
+  }
+
+  function toggleSimulatedDrawer(force) {
+    const nav = document.querySelector('#navbarSimulatorFrame .simulated-navbar');
+    const drawer = document.getElementById('simulatedDrawerPanel');
+    const frame = document.getElementById('navbarSimulatorFrame');
+    if (!frame) return;
+
+    const isOpen = typeof force === 'boolean' ? force : !(drawer ? drawer.classList.contains('is-open') : (nav && nav.classList.contains('is-open')));
+    if (nav) nav.classList.toggle('is-open', isOpen);
+    if (drawer) drawer.classList.toggle('is-open', isOpen);
+
+    const burger = frame.querySelector('.nav-hamburger-btn, .cyn-hamburger-btn');
+    if (burger) {
+      burger.classList.toggle('is-open', isOpen);
+      burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    }
+
+    const backdrop = frame.querySelector('.simulated-nav-backdrop');
+    if (backdrop) {
+      backdrop.classList.toggle('is-open', isOpen);
+    }
+  }
+
+  function setDemoWcNavbarPattern(pat) {
+    const el = document.getElementById('demo-wc-navbar');
+    if (!el) return;
+    el.setAttribute('pattern', pat);
+    const label = document.getElementById('demo-wc-navbar-pattern-label');
+    if (label) label.textContent = `pattern="${pat}"`;
+    document.querySelectorAll('.demo-wc-nav-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-pattern') === pat);
+    });
+    triggerDocsToast('Navbar Pattern Swapped', `<cyn-navbar pattern="${pat}"> active.`, 'info');
+  }
 
   // Initialize on DOM load
   window.addEventListener('DOMContentLoaded', () => {

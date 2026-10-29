@@ -7,12 +7,13 @@ import {
   CynSwitch,
   CynTabs,
   CynToastContainer,
+  CynNavbar,
   CUSTOM_ELEMENTS_MAP,
   defineCustomElements,
 } from '../src/index';
 
 describe('CoherynUI Native Web Component Custom Elements', () => {
-  it('exposes all 8 official custom element constructors in the mapping', () => {
+  it('exposes all 9 official custom element constructors in the mapping', () => {
     expect(CUSTOM_ELEMENTS_MAP['cyn-modal']).toBe(CynModal);
     expect(CUSTOM_ELEMENTS_MAP['cyn-drawer']).toBe(CynDrawer);
     expect(CUSTOM_ELEMENTS_MAP['cyn-bottom-sheet']).toBe(CynBottomSheet);
@@ -21,6 +22,15 @@ describe('CoherynUI Native Web Component Custom Elements', () => {
     expect(CUSTOM_ELEMENTS_MAP['cyn-switch']).toBe(CynSwitch);
     expect(CUSTOM_ELEMENTS_MAP['cyn-tabs']).toBe(CynTabs);
     expect(CUSTOM_ELEMENTS_MAP['cyn-toast-container']).toBe(CynToastContainer);
+    expect(CUSTOM_ELEMENTS_MAP['cyn-navbar']).toBe(CynNavbar);
+  });
+
+  it('provides public imperative methods on CynNavbar', () => {
+    expect(typeof CynNavbar.prototype.toggle).toBe('function');
+    expect(typeof CynNavbar.prototype.show).toBe('function');
+    expect(typeof CynNavbar.prototype.close).toBe('function');
+    expect(CynNavbar.observedAttributes).toContain('open');
+    expect(CynNavbar.observedAttributes).toContain('pattern');
   });
 
   it('provides public imperative methods on CynModal', () => {

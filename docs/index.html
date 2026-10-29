@@ -3,42 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CoherynUI — Interactive Documentation, Cascade Layers & Live REPL Playground</title>
-  <meta name="description" content="Official interactive documentation, live REPL playground, cascade layer inspector, design token tuner, and accessible component workbench for CoherynUI.">
+  <title>CoherynUI — Deterministic Styling Architecture, W3C Cascade Layers &amp; Live REPL</title>
+  <meta name="description" content="Official documentation, interactive REPL playground, cascade layer inspector, design token tuner, accessible primitives, and responsive navigation architectures for CoherynUI.">
+  <meta name="keywords" content="CSS architecture, design tokens, W3C cascade layers, web components, zero runtime, accessible UI primitives, responsive navigation, liquid glass, WCAG 2.2 AA">
+  <meta name="author" content="Coheryn Technologies">
+  <meta name="theme-color" content="#0a0f18">
+  
+  <!-- OpenGraph / Social Metadata -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CoherynUI — Deterministic Styling Architecture &amp; Component Workbench">
+  <meta property="og:description" content="Incremental blake3 Rust engine, strict W3C @layer cascade isolation, zero-runtime accessible primitives, and responsive navigation architectures.">
+  <meta property="og:url" content="https://coherynui.com/">
+  <meta property="og:site_name" content="CoherynUI">
+  <meta property="og:image" content="assets/CoherynTech_Icon_Master_Gradient.svg">
+
+  <!-- Twitter Card Metadata -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="CoherynUI — Deterministic Styling Architecture &amp; Component Workbench">
+  <meta name="twitter:description" content="Incremental blake3 Rust engine, strict W3C @layer cascade isolation, and zero-runtime accessible primitives.">
+  <meta name="twitter:image" content="assets/CoherynTech_Icon_Master_Gradient.svg">
+
   <link rel="icon" type="image/svg+xml" href="assets/CoherynTech_Icon_Master_Gradient.svg">
   <link rel="icon" type="image/png" sizes="64x64" href="assets/CoherynTech_Icon_Gradient_64.png">
+  <link rel="canonical" href="https://coherynui.com/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="coherynui.css?v=3">
+
+  <!-- JSON-LD Structured Data for Technical SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "CoherynUI",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Universal",
+    "description": "Deterministic styling architecture with incremental blake3 Rust engine, strict W3C @layer cascade isolation, and zero-runtime accessible primitives.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
 </head>
 <body>
 
   <!-- ========================================================================= -->
-  <!-- NAVIGATION BAR                                                            -->
+  <!-- TOP APPLICATION NAVBAR                                                    -->
   <!-- ========================================================================= -->
-  <header class="navbar">
-    <div class="brand-lockup">
-      <div class="brand-icon">
-        <img class="brand-logo" src="assets/CoherynTech_Icon_Master_Gradient.svg" alt="CoherynTech Geometric Vector Logo">
+  <header class="navbar cyn-navbar cyn-glass docs-topbar" id="appNavbar">
+    <div class="d-flex items-center gap-3">
+      <!-- Animated Morphing Hamburger Trigger (visible on tablet/mobile to toggle the nested sidebar) -->
+      <button class="nav-hamburger-btn" id="docsHamburgerBtn" aria-label="Toggle Documentation Sidebar" aria-expanded="false" onclick="toggleDocsNavDrawer()">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+      <div class="brand-lockup">
+        <div class="brand-icon">
+          <img class="brand-logo" src="assets/CoherynTech_Icon_Master_Gradient.svg" alt="CoherynUI Vector Logo">
+        </div>
+        <span>Coheryn<span class="brand-divider">/</span>ui</span>
+        <span class="badge badge-subtle">v1.0.1</span>
       </div>
-      <span>Coheryn<span class="brand-divider">/</span>ui</span>
-      <span class="badge badge-subtle">v1.0.1</span>
     </div>
 
-    <nav aria-label="Documentation Sections">
-      <ul class="nav-links">
-        <li><button class="nav-btn active" data-tab="overview" onclick="switchTab('overview')">Overview</button></li>
-        <li><button class="nav-btn" data-tab="repl" onclick="switchTab('repl')">Live REPL</button></li>
-        <li><button class="nav-btn" data-tab="layers" onclick="switchTab('layers')">Cascade Layers</button></li>
-        <li><button class="nav-btn" data-tab="tokens" onclick="switchTab('tokens')">Token Inspector</button></li>
-        <li><button class="nav-btn" data-tab="components" onclick="switchTab('components')">Components</button></li>
-        <li><button class="nav-btn" data-tab="web-components" onclick="switchTab('web-components')">Web Components</button></li>
-        <li><button class="nav-btn" data-tab="motion" onclick="switchTab('motion')">Motion Physics</button></li>
-        <li><button class="nav-btn" data-tab="gpu" onclick="switchTab('gpu')">GPU Materials</button></li>
-        <li><button class="nav-btn" data-tab="agent" onclick="switchTab('agent')">Agent Portal</button></li>
-      </ul>
-    </nav>
+    <!-- Quick Search Input in Topbar -->
+    <div class="d-flex items-center gap-2 flex-1 justify-center max-w-prose">
+      <div class="sidebar-search-box mb-0 w-full">
+        <svg class="sidebar-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="search" class="sidebar-search-input" placeholder="Quick search components, tokens, layers (e.g. 'modal', 'tabs', 'refract')..." oninput="filterSidebarMenu(this.value)" aria-label="Search documentation">
+      </div>
+    </div>
 
     <!-- Theme Switcher & GitHub -->
     <div class="d-flex items-center gap-2">
@@ -58,8 +97,140 @@
   <!-- Live Toast Viewport -->
   <div class="toast-stack" id="docsToastViewport"></div>
 
-  <!-- Main Container -->
-  <main class="app-container">
+  <!-- ========================================================================= -->
+  <!-- DOCUMENTATION SHELL (STICKY NESTED LEFT SIDEBAR + MAIN CONTENT CANVAS)   -->
+  <!-- ========================================================================= -->
+  <div class="docs-shell">
+    <!-- Backdrop for Mobile Sidebar Drawer -->
+    <div class="docs-sidebar-backdrop" id="docsSidebarBackdrop" onclick="toggleDocsNavDrawer(false)"></div>
+
+    <!-- Sticky Left Sidebar Navigation -->
+    <aside class="docs-sidebar" id="docsSidebar" aria-label="Documentation Sidebar">
+      <div class="docs-sidebar-header">
+        <div class="brand-lockup">
+          <div class="brand-icon">
+            <img class="brand-logo" src="assets/CoherynTech_Icon_Master_Gradient.svg" alt="CoherynUI">
+          </div>
+          <span>Coheryn<span class="brand-divider">/</span>ui</span>
+        </div>
+        <button class="modal-close-btn" aria-label="Close Sidebar" onclick="toggleDocsNavDrawer(false)">✕</button>
+      </div>
+
+      <!-- Group 1: Getting Started -->
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">
+          <span>Getting Started</span>
+          <span class="badge badge-subtle">Core</span>
+        </div>
+        <ul class="sidebar-nav-list">
+          <li>
+            <button class="sidebar-link active" data-tab="overview" onclick="switchTab('overview')">
+              <span class="sidebar-link-content"><span class="sidebar-icon">❖</span> Overview</span>
+            </button>
+          </li>
+          <li>
+            <button class="sidebar-link" data-tab="layers" onclick="switchTab('layers')">
+              <span class="sidebar-link-content"><span class="sidebar-icon">📑</span> Cascade Layers</span>
+              <span class="badge badge-subtle">5 Layers</span>
+            </button>
+          </li>
+          <li>
+            <button class="sidebar-link" data-tab="tokens" onclick="switchTab('tokens')">
+              <span class="sidebar-link-content"><span class="sidebar-icon">🎨</span> Token Inspector</span>
+            </button>
+          </li>
+          <li>
+            <button class="sidebar-link" data-tab="repl" onclick="switchTab('repl')">
+              <span class="sidebar-link-content"><span class="sidebar-icon">⚡</span> Live REPL Compiler</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Group 2: UI Components (0 kB JS) -->
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">
+          <span>UI Components</span>
+          <span class="badge badge-brand">0 kB JS</span>
+        </div>
+        <ul class="sidebar-nav-list">
+          <li>
+            <button class="sidebar-link" data-tab="components" onclick="switchTab('components')">
+              <span class="sidebar-link-content"><span class="sidebar-icon">🧩</span> Components Hub</span>
+            </button>
+            <ul class="sidebar-subnav">
+              <li><button class="sidebar-sublink" data-target="comp-step-tabs" onclick="switchTab('components', 'comp-step-tabs')">📁 Lifted / Step Tabs</button></li>
+              <li><button class="sidebar-sublink" data-target="comp-modal" onclick="switchTab('components', 'comp-modal')">Accessible Modal</button></li>
+              <li><button class="sidebar-sublink" data-target="comp-bottomsheet" onclick="switchTab('components', 'comp-bottomsheet')">Mobile BottomSheet</button></li>
+              <li><button class="sidebar-sublink" data-target="comp-drawer" onclick="switchTab('components', 'comp-drawer')">Side Drawer</button></li>
+              <li><button class="sidebar-sublink" data-target="comp-popover" onclick="switchTab('components', 'comp-popover')">Anchored Popover</button></li>
+              <li><button class="sidebar-sublink" data-target="comp-roving" onclick="switchTab('components', 'comp-roving')">Roving Focus Menu</button></li>
+              <li><button class="sidebar-sublink" data-target="comp-toasts" onclick="switchTab('components', 'comp-toasts')">Toast Notifications</button></li>
+              <li><button class="sidebar-sublink" data-target="comp-navbars" onclick="switchTab('components', 'comp-navbars')">4 Responsive Navbars</button></li>
+              <li><button class="sidebar-sublink" data-target="comp-rings-dividers" onclick="switchTab('components', 'comp-rings-dividers')">Focus Rings &amp; Dividers</button></li>
+              <li><button class="sidebar-sublink" data-target="comp-prose" onclick="switchTab('components', 'comp-prose')">Prose Typography</button></li>
+              <li><button class="sidebar-sublink" data-target="comp-forms" onclick="switchTab('components', 'comp-forms')">Form Controls &amp; Validation</button></li>
+              <li><button class="sidebar-sublink" data-target="comp-assist" onclick="switchTab('components', 'comp-assist')">✨ Declarative JS Assist</button></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Group 3: Web Components (W3C Custom Elements) -->
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">
+          <span>Web Components</span>
+          <span class="badge badge-success">W3C</span>
+        </div>
+        <ul class="sidebar-nav-list">
+          <li>
+            <button class="sidebar-link" data-tab="web-components" onclick="switchTab('web-components')">
+              <span class="sidebar-link-content"><span class="sidebar-icon">⚡</span> Custom Elements</span>
+            </button>
+            <ul class="sidebar-subnav">
+              <li><button class="sidebar-sublink" data-target="wc-tabs" onclick="switchTab('web-components', 'wc-tabs')">&lt;cyn-tabs&gt; (Lifted/Line)</button></li>
+              <li><button class="sidebar-sublink" data-target="wc-modal" onclick="switchTab('web-components', 'wc-modal')">&lt;cyn-modal&gt;</button></li>
+              <li><button class="sidebar-sublink" data-target="wc-drawer" onclick="switchTab('web-components', 'wc-drawer')">&lt;cyn-drawer&gt;</button></li>
+              <li><button class="sidebar-sublink" data-target="wc-bottomsheet" onclick="switchTab('web-components', 'wc-bottomsheet')">&lt;cyn-bottom-sheet&gt;</button></li>
+              <li><button class="sidebar-sublink" data-target="wc-switch" onclick="switchTab('web-components', 'wc-switch')">&lt;cyn-switch&gt;</button></li>
+              <li><button class="sidebar-sublink" data-target="wc-dropdown" onclick="switchTab('web-components', 'wc-dropdown')">&lt;cyn-dropdown&gt; &amp; Popover</button></li>
+              <li><button class="sidebar-sublink" data-target="wc-toasts" onclick="switchTab('web-components', 'wc-toasts')">&lt;cyn-toast-container&gt;</button></li>
+              <li><button class="sidebar-sublink" data-target="wc-navbar-card" onclick="switchTab('web-components', 'wc-navbar-card')">&lt;cyn-navbar&gt; Element</button></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Group 4: Advanced Engine -->
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">
+          <span>Engine Physics</span>
+          <span class="badge badge-subtle">Advanced</span>
+        </div>
+        <ul class="sidebar-nav-list">
+          <li>
+            <button class="sidebar-link" data-tab="motion" onclick="switchTab('motion')">
+              <span class="sidebar-link-content"><span class="sidebar-icon">🌀</span> Motion Physics</span>
+            </button>
+          </li>
+          <li>
+            <button class="sidebar-link" data-tab="gpu" onclick="switchTab('gpu')">
+              <span class="sidebar-link-content"><span class="sidebar-icon">🧊</span> GPU &amp; Liquid Glass</span>
+              <span class="badge badge-subtle">WebGPU</span>
+            </button>
+          </li>
+          <li>
+            <button class="sidebar-link" data-tab="agent" onclick="switchTab('agent')">
+              <span class="sidebar-link-content"><span class="sidebar-icon">🤖</span> Agent Portal &amp; MCP</span>
+              <span class="badge badge-brand">10 Tools</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content Canvas -->
+    <main class="docs-content" id="docsContent">
 
     <!-- ======================================================================= -->
     <!-- TAB 1: OVERVIEW                                                         -->
@@ -84,7 +255,10 @@
           <div class="cli-bar">
             <span class="cli-prompt">$</span>
             <span>pnpm add @coheryn/coherynui-react @coheryn/coherynui-components</span>
-            <button class="cli-copy-btn" onclick="navigator.clipboard.writeText('pnpm add @coheryn/coherynui-react @coheryn/coherynui-components'); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy', 2000);">Copy</button>
+            <button class="cli-copy-btn" onclick="copyCode(this)" data-clipboard-text="pnpm add @coheryn/coherynui-react @coheryn/coherynui-components" aria-label="Copy Command">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
           </div>
         </div>
 
@@ -105,6 +279,54 @@
           <div class="spec-item">
             <div class="spec-value">WCAG 2.2 AA</div>
             <div class="spec-label">Accessible Component Primitives</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================================= -->
+      <!-- INTERACTIVE MOTION & NAVIGATION CONTROL CENTER                          -->
+      <!-- ======================================================================= -->
+      <div class="glass-card mb-8">
+        <div class="card-header">
+          <div>
+            <div class="badge badge-brand mb-1">Architecture // Interactive Control Center</div>
+            <h3 class="card-title-lg">Dynamic Motion Personalities & 4 Navigation Patterns</h3>
+          </div>
+          <span class="badge badge-subtle">Zero-Runtime Pure CSS Tokens</span>
+        </div>
+        <p class="text-sm text-muted mb-4">
+          Test real-time motion physics and switch responsive navigation modes live across your device viewports with zero page reloads.
+        </p>
+
+        <div class="grid-2">
+          <!-- Motion Personalities Controller -->
+          <div class="card p-4">
+            <h4 class="card-title-md mb-2 d-flex items-center justify-between">
+              <span>Global Motion Personality</span>
+              <code class="text-xs" id="activeMotionClassLabel">body.cyn-motion-smooth</code>
+            </h4>
+            <p class="text-xs text-muted mb-3">Controls duration, spring overshoot, and easing across all overlays, dialogs, dropdowns, and view transitions.</p>
+            <div class="d-flex gap-2 flex-wrap" role="radiogroup" aria-label="Global Motion Personality">
+              <button class="btn btn-secondary btn-sm motion-control-btn active" data-motion="smooth" onclick="applyGlobalMotion('smooth')">✨ Smooth (220ms)</button>
+              <button class="btn btn-secondary btn-sm motion-control-btn" data-motion="spring" onclick="applyGlobalMotion('spring')">🌸 Spring (300ms)</button>
+              <button class="btn btn-secondary btn-sm motion-control-btn" data-motion="subtle" onclick="applyGlobalMotion('subtle')">⚡ Subtle (120ms)</button>
+              <button class="btn btn-secondary btn-sm motion-control-btn" data-motion="none" onclick="applyGlobalMotion('none')">⛔ Instant (0ms)</button>
+            </div>
+          </div>
+
+          <!-- Navigation Pattern Controller -->
+          <div class="card p-4">
+            <h4 class="card-title-md mb-2 d-flex items-center justify-between">
+              <span>Header Navigation Pattern</span>
+              <code class="text-xs" id="activeNavPatternLabel">.nav-pattern-ribbon</code>
+            </h4>
+            <p class="text-xs text-muted mb-3">Single class selection on <code>&lt;header class="navbar ..."&gt;</code> to adapt mobile layout ergonomics.</p>
+            <div class="d-flex gap-2 flex-wrap" role="radiogroup" aria-label="Navigation Pattern">
+              <button class="btn btn-secondary btn-sm nav-pattern-btn active" data-pattern="ribbon" onclick="applyNavPattern('ribbon')">🌊 Touch Ribbon</button>
+              <button class="btn btn-secondary btn-sm nav-pattern-btn" data-pattern="drawer" onclick="applyNavPattern('drawer')">☰ Hamburger Drawer</button>
+              <button class="btn btn-secondary btn-sm nav-pattern-btn" data-pattern="bottom" onclick="applyNavPattern('bottom')">📱 Mobile Bottom Dock</button>
+              <button class="btn btn-secondary btn-sm nav-pattern-btn" data-pattern="stacked" onclick="applyNavPattern('stacked')">▦ Auto Stacked Grid</button>
+            </div>
           </div>
         </div>
       </div>
@@ -172,7 +394,10 @@
             </div>
             <div class="terminal-code-row">
               <code><span class="code-prompt">$</span> pnpm add @coheryn/coherynui-react @coheryn/coherynui-components</code>
-              <button class="cli-copy-btn" onclick="navigator.clipboard.writeText('pnpm add @coheryn/coherynui-react @coheryn/coherynui-components'); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy', 2000);">Copy</button>
+              <button class="cli-copy-btn" onclick="copyCode(this)" data-clipboard-text="pnpm add @coheryn/coherynui-react @coheryn/coherynui-components" aria-label="Copy Command">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                <span>Copy</span>
+              </button>
             </div>
           </div>
 
@@ -187,7 +412,10 @@
             </div>
             <div class="terminal-code-row">
               <code><span class="code-prompt">$</span> coherynui agent init --client all</code>
-              <button class="cli-copy-btn" onclick="navigator.clipboard.writeText('coherynui agent init --client all'); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy', 2000);">Copy</button>
+              <button class="cli-copy-btn" onclick="copyCode(this)" data-clipboard-text="coherynui agent init --client all" aria-label="Copy Command">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                <span>Copy</span>
+              </button>
             </div>
           </div>
         </div>
@@ -250,7 +478,10 @@
 
           <div class="flex-between mt-2">
             <span class="label-muted">Compiled W3C Cascade Rules (@layer cyn.utilities)</span>
-            <button class="btn btn-secondary btn-xs" onclick="copyReplCss()">Copy CSS</button>
+            <button class="btn btn-secondary btn-xs d-inline-flex items-center gap-1" onclick="copyReplCss(this)" aria-label="Copy Compiled CSS">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy CSS</span>
+            </button>
           </div>
 
           <pre id="replCssOutput" class="repl-css-box"><code>/* Compiled CSS will appear here */</code></pre>
@@ -332,6 +563,10 @@
           </p>
 
           <div class="code-view flex-1">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Layer Code">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
             <pre><code id="layerDetailCode">@layer cyn.utilities {
   .bg-brand { background-color: var(--cyn-color-brand); }
   .p-6 { padding: 1.5rem; }
@@ -413,9 +648,16 @@
           <div class="card">
             <div class="flex-between mb-2">
               <span class="label-muted">Active CSS Token Export</span>
-              <button class="btn btn-secondary btn-xs" onclick="copyActiveTokens()">Copy CSS</button>
+              <button class="btn btn-secondary btn-xs d-inline-flex items-center gap-1" onclick="copyActiveTokens(this)" aria-label="Copy Active Tokens">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                <span>Copy CSS</span>
+              </button>
             </div>
             <div class="code-view">
+              <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy CSS Code">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                <span>Copy</span>
+              </button>
               <pre><code id="token-export-code">:root {
   --cyn-color-brand: #6366f1;
   --cyn-radius-lg: 12px;
@@ -438,67 +680,138 @@
         </p>
       </div>
 
+      <!-- Architecture Comparison: Components vs. Web Components -->
+      <div class="card mb-6 card-callout-brand">
+        <div class="flex-between items-start flex-wrap gap-3">
+          <div>
+            <div class="d-flex items-center gap-2 mb-1">
+              <span class="badge badge-brand">Architecture Note</span>
+              <h3 class="card-title-md">UI Components vs. Native Web Components</h3>
+            </div>
+            <p class="text-xs text-muted max-w-prose">
+              <strong>UI Components (This Tab):</strong> Standard semantic HTML5 + W3C <code>@layer cyn.recipes</code> CSS + optional React bindings (<code>@coheryn/coherynui-react</code>). Operates with <strong>0 kB mandatory JavaScript runtime</strong>. Styled via pure cascade classes like <code>.cyn-navbar</code>, <code>.modal-box</code>, and <code>.btn</code>.<br>
+              <strong>Web Components (Next Tab):</strong> W3C Custom Elements (<code>&lt;cyn-modal&gt;</code>, <code>&lt;cyn-navbar&gt;</code>) powered by <code>@coheryn/coherynui-web-components</code>. Includes autonomous DOM encapsulation, two-way attribute reflection, lifecycle hooks, and universal support across <strong>Vue, Svelte, Angular, Solid, PHP, Django, and Vanilla HTML</strong> without React.
+            </p>
+          </div>
+          <button class="btn btn-secondary btn-sm" onclick="switchTab('web-components')">View Web Components →</button>
+        </div>
+      </div>
+
       <div class="grid-3">
         <!-- 1. Modal Dialog -->
-        <div class="card">
+        <div class="card" id="comp-modal">
           <span class="badge badge-brand">Overlay:Modal</span>
           <h3 class="card-title-md">Accessible Dialog Modal</h3>
           <p class="card-desc">
             Traps Tab/Shift-Tab focus, locks body scroll, and dismisses on Escape or backdrop click.
           </p>
-          <div class="card-actions">
+          <div class="card-actions mb-3">
             <button class="btn btn-primary w-full" data-action="open-modal" onclick="openModal()">Open Dialog Modal</button>
+          </div>
+          <div class="code-preview">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Modal Snippet">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
+            <pre><code>&lt;!-- Accessible Focus-Trapped Modal --&gt;
+&lt;div class="modal-backdrop" id="demoModal" role="dialog" aria-modal="true"&gt;
+  &lt;div class="modal-box"&gt;
+    &lt;h3 class="card-title-lg"&gt;Dialog Modal&lt;/h3&gt;
+    &lt;p class="modal-desc"&gt;Focus trapped inside dialog.&lt;/p&gt;
+    &lt;button class="btn btn-primary" onclick="closeModal()"&gt;Confirm&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
           </div>
         </div>
 
         <!-- 2. Tactile BottomSheet -->
-        <div class="card">
+        <div class="card" id="comp-bottomsheet">
           <span class="badge badge-brand">Mobile:BottomSheet</span>
           <h3 class="card-title-md">Tactile Mobile BottomSheet</h3>
           <p class="card-desc">
             Mobile-first slide-up drawer with tactile drag handle, touch-action isolation, and pull-down dismiss.
           </p>
-          <div class="card-actions">
+          <div class="card-actions mb-3">
             <button class="btn btn-secondary w-full" data-action="open-bottomsheet" onclick="openBottomSheet()">Open BottomSheet Drawer</button>
+          </div>
+          <div class="code-preview">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy BottomSheet Snippet">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
+            <pre><code>&lt;!-- Mobile Tactile BottomSheet --&gt;
+&lt;div class="bottomsheet-backdrop" id="demoSheet" role="dialog" aria-modal="true"&gt;
+  &lt;div class="bottomsheet-box"&gt;
+    &lt;div class="bottomsheet-handle"&gt;&lt;/div&gt;
+    &lt;h3 class="card-title-lg"&gt;Tactile Drawer&lt;/h3&gt;
+    &lt;button class="btn btn-primary w-full" onclick="closeBottomSheet()"&gt;Done&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
           </div>
         </div>
 
         <!-- 3. Side Drawer -->
-        <div class="card">
+        <div class="card" id="comp-drawer">
           <span class="badge badge-brand">Overlay:Drawer</span>
           <h3 class="card-title-md">Slide-In Side Drawer</h3>
           <p class="card-desc">
             Slide-in side navigation and configuration panel with smooth cubic-bezier transitions.
           </p>
-          <div class="card-actions">
+          <div class="card-actions mb-3">
             <button class="btn btn-glass w-full" data-action="open-drawer" onclick="openDrawer()">Open Side Drawer →</button>
+          </div>
+          <div class="code-preview">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Drawer Snippet">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
+            <pre><code>&lt;!-- Slide-In Side Drawer Overlay --&gt;
+&lt;div class="drawer-backdrop" id="demoDrawer" role="dialog" aria-modal="true"&gt;
+  &lt;div class="drawer-box"&gt;
+    &lt;h3 class="card-title-lg"&gt;System Drawer&lt;/h3&gt;
+    &lt;button class="btn btn-primary w-full" onclick="closeDrawer()"&gt;Close&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
           </div>
         </div>
 
         <!-- 4. Contextual Popover -->
-        <div class="card">
+        <div class="card" id="comp-popover">
           <span class="badge badge-brand">Context:Popover</span>
           <h3 class="card-title-md">Anchored Popover</h3>
           <p class="card-desc">
             Anchored floating card with pointer click outside dismissal and keyboard escape listener.
           </p>
-          <div class="card-actions popover-anchor">
+          <div class="card-actions popover-anchor mb-3">
             <button class="btn btn-secondary w-full" data-action="toggle-popover" onclick="toggleDocsPopover()">Toggle Popover Card</button>
             <div class="popover-card" id="docsPopoverCard">
               <h4>Popover Details</h4>
               <p>Anchored to trigger element with automated click-outside detection.</p>
             </div>
           </div>
+          <div class="code-preview">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Popover Snippet">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
+            <pre><code>&lt;!-- Anchored Popover Container --&gt;
+&lt;div class="popover-anchor"&gt;
+  &lt;button class="btn btn-secondary" onclick="togglePopover()"&gt;Toggle&lt;/button&gt;
+  &lt;div class="popover-card" id="myPop"&gt;
+    &lt;h4&gt;Popover Title&lt;/h4&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
         </div>
 
         <!-- 5. Dropdown Menu -->
-        <div class="card">
+        <div class="card" id="comp-roving">
           <span class="badge badge-brand">Menu:Dropdown</span>
           <h3 class="card-title-md">Roving Focus Menu</h3>
           <p class="card-desc">
             Accessible action menu with roving keyboard focus (↑/↓/Enter) and danger state actions.
           </p>
-          <div class="card-actions popover-anchor">
+          <div class="card-actions popover-anchor mb-3">
             <button class="btn btn-primary w-full" data-action="toggle-dropdown" onclick="toggleDocsDropdown()">Action Menu ▼</button>
             <div class="dropdown-box" id="docsDropdownBox">
               <button class="dropdown-item" onclick="triggerDocsToast('Account', 'Profile settings opened.', 'info'); toggleDocsDropdown();">Edit Profile</button>
@@ -506,18 +819,686 @@
               <button class="dropdown-item danger" onclick="triggerDocsToast('Revoke', 'Access revoked.', 'danger'); toggleDocsDropdown();">Revoke Access</button>
             </div>
           </div>
+          <div class="code-preview">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Dropdown Snippet">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
+            <pre><code>&lt;!-- Roving Keyboard Focus Dropdown --&gt;
+&lt;div class="popover-anchor"&gt;
+  &lt;button class="btn btn-primary" onclick="toggleDropdown()"&gt;Menu ▼&lt;/button&gt;
+  &lt;div class="dropdown-box" id="myDrop"&gt;
+    &lt;button class="dropdown-item"&gt;Edit Profile&lt;/button&gt;
+    &lt;button class="dropdown-item danger"&gt;Revoke&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
         </div>
 
         <!-- 6. Live Toast Notifications -->
-        <div class="card">
+        <div class="card" id="comp-toasts">
           <span class="badge badge-brand">Feedback:Toast</span>
           <h3 class="card-title-md">Stackable Notifications</h3>
           <p class="card-desc">
             Real-time notifications with accessible role="status", auto-dismiss timers, and variants.
           </p>
-          <div class="card-actions">
+          <div class="card-actions mb-3">
             <button class="btn btn-success flex-1 btn-sm" onclick="triggerDocsToast('Success', 'Compiled in 3.1ms.', 'success')">✓ Success</button>
             <button class="btn btn-danger flex-1 btn-sm" onclick="triggerDocsToast('Error', 'Connection failed.', 'danger')">✕ Danger</button>
+          </div>
+          <div class="code-preview">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Toast Snippet">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
+            <pre><code>&lt;!-- Real-Time Notification Stack --&gt;
+&lt;div class="toast-stack" id="toastStack"&gt;
+  &lt;div class="toast-node success" role="status"&gt;
+    &lt;span&gt;✓&lt;/span&gt;
+    &lt;div&gt;&lt;h4&gt;Build Succeeded&lt;/h4&gt;&lt;p&gt;Zero runtime overhead.&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- 7. Accessible Tab Panel & Lifted Step Tabs -->
+        <div class="card" id="comp-step-tabs">
+          <div class="card-header">
+            <span class="badge badge-brand">Layout:Tabs</span>
+            <div class="d-flex gap-1">
+              <button class="btn btn-secondary btn-xs tab-variant-btn active" data-variant="lifted" onclick="setDemoTabsVariant('demo-step-tabs', 'lifted')">📁 Lifted</button>
+              <button class="btn btn-secondary btn-xs tab-variant-btn" data-variant="pills" onclick="setDemoTabsVariant('demo-step-tabs', 'pills')">💊 Pills</button>
+              <button class="btn btn-secondary btn-xs tab-variant-btn" data-variant="line" onclick="setDemoTabsVariant('demo-step-tabs', 'line')">⎯ Underline</button>
+            </div>
+          </div>
+          <h3 class="card-title-md">Bordered &amp; Lifted Folder Tabs (`.cyn-tabs-lifted`)</h3>
+          <p class="card-desc">
+            Supports classic lifted folder tabs, pill badges, and underline navigation with WCAG 2.2 roving focus and seamless baseline integration.
+          </p>
+
+          <!-- Interactive Live Step Tabs matching user screenshot -->
+          <div class="tab-preview-light my-3">
+            <div class="cyn-tabs cyn-tabs-lifted" id="demo-step-tabs">
+              <div class="cyn-tablist" role="tablist" aria-label="Step Wizard Tabs">
+                <button class="cyn-tab-btn" role="tab" aria-selected="false" aria-controls="panel-step-1" onclick="switchComponentTab('demo-step-tabs', 'panel-step-1')">1 Step</button>
+                <button class="cyn-tab-btn active" role="tab" aria-selected="true" aria-controls="panel-step-2" onclick="switchComponentTab('demo-step-tabs', 'panel-step-2')">2 Step</button>
+                <button class="cyn-tab-btn" role="tab" aria-selected="false" aria-controls="panel-step-3" onclick="switchComponentTab('demo-step-tabs', 'panel-step-3')">3 Step</button>
+              </div>
+              <div class="cyn-tabpanel" id="panel-step-1" role="tabpanel" aria-labelledby="tab-step-1">
+                <h3 class="text-xl font-bold mb-2">1 Step</h3>
+                <p class="text-sm text-muted">This is the 1 Step tab content.</p>
+              </div>
+              <div class="cyn-tabpanel active" id="panel-step-2" role="tabpanel" aria-labelledby="tab-step-2">
+                <h3 class="text-xl font-bold mb-2">2 Step</h3>
+                <p class="text-sm text-muted">This is the 2 Step tab content.</p>
+              </div>
+              <div class="cyn-tabpanel" id="panel-step-3" role="tabpanel" aria-labelledby="tab-step-3">
+                <h3 class="text-xl font-bold mb-2">3 Step</h3>
+                <p class="text-sm text-muted">This is the 3 Step tab content.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="code-preview mt-2">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Bordered Tabs Snippet">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
+            <pre><code>&lt;!-- Bordered / Lifted Folder Tabs (.cyn-tabs-lifted) --&gt;
+&lt;div class="cyn-tabs cyn-tabs-lifted" id="stepTabs"&gt;
+  &lt;div class="cyn-tablist" role="tablist"&gt;
+    &lt;button class="cyn-tab-btn" role="tab" aria-selected="false" aria-controls="step1"&gt;1 Step&lt;/button&gt;
+    &lt;button class="cyn-tab-btn active" role="tab" aria-selected="true" aria-controls="step2"&gt;2 Step&lt;/button&gt;
+    &lt;button class="cyn-tab-btn" role="tab" aria-selected="false" aria-controls="step3"&gt;3 Step&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="cyn-tabpanel active" id="step2" role="tabpanel"&gt;
+    &lt;h3&gt;2 Step&lt;/h3&gt;
+    &lt;p&gt;This is the 2 Step tab content.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- 8. Four Responsive Navigation Architectures (Master Showcase) -->
+        <div class="card col-full" id="comp-navbars">
+          <div class="card-header">
+            <div>
+              <span class="badge badge-brand">Navigation // Responsive Architectures</span>
+              <h3 class="card-title-lg mt-1">Four Responsive Navigation Patterns (Single Class Selection)</h3>
+            </div>
+            <span class="badge badge-subtle">HTML, React &amp; Web Components</span>
+          </div>
+          <p class="card-desc">
+            Developers write clean, semantic markup once and switch mobile navigation behaviors simply by swapping a class on <code>&lt;header class="cyn-navbar ..."&gt;</code>. No custom JavaScript, media query recalculations, or markup rewrites required:
+          </p>
+
+          <!-- Interactive Live Navbar Simulator Workbench -->
+          <div class="nav-simulator-stage" id="navbarSimulator">
+            <div class="nav-simulator-toolbar">
+              <div>
+                <div class="d-flex items-center gap-2 mb-1">
+                  <span class="badge badge-brand">Live Simulator</span>
+                  <span class="badge badge-subtle" id="simActivePatternBadge">Pattern: Slide-Out Drawer (Morphing Hamburger)</span>
+                </div>
+                <p class="text-xs text-muted">Test how the navbar responds to touch gestures, viewport sizes, and pattern classes in real time:</p>
+              </div>
+
+              <div class="d-flex items-center gap-3 flex-wrap">
+                <!-- Pattern Selector -->
+                <div class="d-flex gap-1" role="radiogroup" aria-label="Select Navbar Pattern">
+                  <button class="btn btn-secondary btn-xs sim-pattern-btn active" data-pattern="drawer" onclick="setSimulatorPattern('drawer')">☰ Drawer</button>
+                  <button class="btn btn-secondary btn-xs sim-pattern-btn" data-pattern="ribbon" onclick="setSimulatorPattern('ribbon')">🌊 Ribbon</button>
+                  <button class="btn btn-secondary btn-xs sim-pattern-btn" data-pattern="bottom" onclick="setSimulatorPattern('bottom')">📱 Bottom Dock</button>
+                  <button class="btn btn-secondary btn-xs sim-pattern-btn" data-pattern="stacked" onclick="setSimulatorPattern('stacked')">▦ Stacked Grid</button>
+                </div>
+
+                <!-- Viewport Mode Selector -->
+                <div class="d-flex gap-1" role="radiogroup" aria-label="Simulated Viewport">
+                  <button class="btn btn-secondary btn-xs sim-viewport-btn active" data-viewport="mobile" onclick="setSimulatorViewport('mobile')">📱 Mobile (375px)</button>
+                  <button class="btn btn-secondary btn-xs sim-viewport-btn" data-viewport="desktop" onclick="setSimulatorViewport('desktop')">💻 Desktop (100%)</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Device Frame (defaults to view-mobile so mobile ergonomics are visible on any screen) -->
+            <div class="nav-simulator-frame view-mobile" id="navbarSimulatorFrame">
+              <div class="nav-simulator-speaker"></div>
+
+              <!-- Real Live Rendered Navbar Inside Simulator -->
+              <header class="navbar cyn-navbar cyn-nav-drawer simulated-navbar">
+                <div class="brand-lockup">
+                  <div class="brand-icon">
+                    <img class="brand-logo" src="assets/CoherynTech_Icon_Master_Gradient.svg" alt="CoherynUI">
+                  </div>
+                  <span>Coheryn<span class="brand-divider">/</span>ui</span>
+                </div>
+
+                <!-- Animated Morphing Hamburger Button -->
+                <button class="nav-hamburger-btn cyn-hamburger-btn" aria-label="Toggle Simulator Drawer" onclick="toggleSimulatedDrawer()">
+                  <span class="hamburger-line cyn-hamburger-line"></span>
+                  <span class="hamburger-line cyn-hamburger-line"></span>
+                  <span class="hamburger-line cyn-hamburger-line"></span>
+                </button>
+
+                <nav aria-label="Simulated Navigation">
+                  <ul class="nav-links cyn-nav-links">
+                    <li><button class="nav-btn active" onclick="toggleSimulatedDrawer(false)">Overview</button></li>
+                    <li><button class="nav-btn" onclick="toggleSimulatedDrawer(false)">Components</button></li>
+                    <li><button class="nav-btn" onclick="toggleSimulatedDrawer(false)">Tokens</button></li>
+                    <li><button class="nav-btn" onclick="toggleSimulatedDrawer(false)">Physics</button></li>
+                    <li><button class="nav-btn" onclick="toggleSimulatedDrawer(false)">Shaders</button></li>
+                  </ul>
+                </nav>
+              </header>
+
+              <!-- Off-Canvas Full-Height Drawer Panel (Direct child for complete stacking context isolation) -->
+              <aside class="simulated-drawer-panel" id="simulatedDrawerPanel" aria-label="Simulated Mobile Drawer">
+                <div class="simulated-drawer-header">
+                  <div class="brand-lockup">
+                    <div class="brand-icon">
+                      <img class="brand-logo" src="assets/CoherynTech_Icon_Master_Gradient.svg" alt="CoherynUI">
+                    </div>
+                    <span>Coheryn<span class="brand-divider">/</span>ui</span>
+                  </div>
+                  <button class="modal-close-btn" aria-label="Close Navigation Drawer" onclick="toggleSimulatedDrawer(false)">✕</button>
+                </div>
+                <ul class="simulated-drawer-links">
+                  <li><button class="nav-btn active" onclick="toggleSimulatedDrawer(false)"><span>❖</span> Overview</button></li>
+                  <li><button class="nav-btn" onclick="toggleSimulatedDrawer(false)"><span>🧩</span> Components</button></li>
+                  <li><button class="nav-btn" onclick="toggleSimulatedDrawer(false)"><span>🎨</span> Tokens</button></li>
+                  <li><button class="nav-btn" onclick="toggleSimulatedDrawer(false)"><span>⚡</span> Physics</button></li>
+                  <li><button class="nav-btn" onclick="toggleSimulatedDrawer(false)"><span>✨</span> Shaders</button></li>
+                </ul>
+                <div class="simulated-drawer-footer">
+                  <button class="btn btn-primary btn-sm w-100" onclick="toggleSimulatedDrawer(false); triggerDocsToast('Drawer Action', 'Navigation selection confirmed.', 'info')">Get Started</button>
+                </div>
+              </aside>
+
+              <!-- Simulated Drawer Dark Glass Backdrop -->
+              <div class="simulated-nav-backdrop" onclick="toggleSimulatedDrawer(false)"></div>
+
+              <!-- Simulated Page Content -->
+              <div class="nav-simulator-content">
+                <div class="card p-3 card-sim-surface">
+                  <div class="d-flex items-center gap-2 mb-1">
+                    <span class="indicator-dot"></span>
+                    <strong class="text-xs">Live Interactive Simulator Surface</strong>
+                  </div>
+                  <p class="text-xs text-muted lh-snug">
+                    Click the 3-line hamburger button in the simulated header above to watch it morph into an 'X' and slide out the off-canvas drawer. Tap the buttons above to test the Ribbon, Bottom Dock, or Desktop views live!
+                  </p>
+                </div>
+                <div class="d-flex gap-2">
+                  <button class="btn btn-primary btn-sm flex-1" onclick="triggerDocsToast('Simulator Action', 'Primary action confirmed.', 'success')">Action</button>
+                  <button class="btn btn-secondary btn-sm flex-1" onclick="toggleSimulatedDrawer()">Toggle Menu</button>
+                </div>
+              </div>
+
+              <div class="nav-simulator-home-bar"></div>
+            </div>
+          </div>
+
+          <div class="grid-2 mt-5 gap-4">
+            <!-- Pattern 1: Drawer -->
+            <div class="card p-4">
+              <div class="d-flex items-center justify-between mb-2">
+                <h4 class="card-title-md">1. Animated Drawer (`.cyn-nav-drawer`)</h4>
+                <span class="badge badge-brand">Hamburger + Off-Canvas</span>
+              </div>
+              <p class="text-xs text-muted mb-3">
+                Animated 3-line hamburger morphs smoothly into an 'X'. Drawer slides out with hardware-accelerated <code>translate3d</code>, dark glass backdrop, and staggered child item cascades.
+              </p>
+              <div class="code-preview">
+                <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Drawer Navbar HTML">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  <span>Copy</span>
+                </button>
+                <pre><code>&lt;header class="cyn-navbar cyn-nav-drawer"&gt;
+  &lt;div class="cyn-brand"&gt;Logo&lt;/div&gt;
+  &lt;button class="cyn-hamburger-btn" aria-label="Toggle Drawer"&gt;
+    &lt;span class="hamburger-line"&gt;&lt;/span&gt;
+    &lt;span class="hamburger-line"&gt;&lt;/span&gt;
+    &lt;span class="hamburger-line"&gt;&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;div class="cyn-nav-backdrop"&gt;&lt;/div&gt;
+  &lt;ul class="cyn-nav-links"&gt;...&lt;/ul&gt;
+&lt;/header&gt;</code></pre>
+              </div>
+            </div>
+
+            <!-- Pattern 2: Touch Ribbon -->
+            <div class="card p-4">
+              <div class="d-flex items-center justify-between mb-2">
+                <h4 class="card-title-md">2. Touch Swipe Ribbon (`.cyn-nav-ribbon`)</h4>
+                <span class="badge badge-brand">Horizontal Momentum</span>
+              </div>
+              <p class="text-xs text-muted mb-3">
+                Native horizontal momentum scrolling track (<code>-webkit-overflow-scrolling: touch</code>) with dual-edge gradient masks and hidden scrollbars. Zero hamburger button clutter on touchscreens.
+              </p>
+              <div class="code-preview">
+                <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Ribbon Navbar HTML">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  <span>Copy</span>
+                </button>
+                <pre><code>&lt;header class="cyn-navbar cyn-nav-ribbon"&gt;
+  &lt;div class="cyn-brand"&gt;Logo&lt;/div&gt;
+  &lt;!-- Momentum swipe track; hamburger is automatically hidden --&gt;
+  &lt;ul class="cyn-nav-links"&gt;
+    &lt;li&gt;&lt;a href="#feed"&gt;Feed&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#explore"&gt;Explore&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/header&gt;</code></pre>
+              </div>
+            </div>
+
+            <!-- Pattern 3: Bottom Dock -->
+            <div class="card p-4">
+              <div class="d-flex items-center justify-between mb-2">
+                <h4 class="card-title-md">3. Mobile Bottom Dock (`.cyn-nav-bottom`)</h4>
+                <span class="badge badge-brand">iOS Safe-Area Dock</span>
+              </div>
+              <p class="text-xs text-muted mb-3">
+                Desktop header transforms on mobile (&lt; 768px): navigation links detach and dock fixed to the viewport bottom with <code>env(safe-area-inset-bottom)</code> padding for ergonomic thumb reachability.
+              </p>
+              <div class="code-preview">
+                <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Bottom Dock Navbar HTML">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  <span>Copy</span>
+                </button>
+                <pre><code>&lt;header class="cyn-navbar cyn-nav-bottom"&gt;
+  &lt;div class="cyn-brand"&gt;App&lt;/div&gt;
+  &lt;!-- Top header on desktop; fixed bottom thumb dock on mobile --&gt;
+  &lt;ul class="cyn-nav-links"&gt;
+    &lt;li&gt;&lt;a href="#home"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#search"&gt;Search&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/header&gt;</code></pre>
+              </div>
+            </div>
+
+            <!-- Pattern 4: Stacked Grid -->
+            <div class="card p-4">
+              <div class="d-flex items-center justify-between mb-2">
+                <h4 class="card-title-md">4. Responsive Stacked Grid (`.cyn-nav-stacked`)</h4>
+                <span class="badge badge-brand">Auto-Fitted Layout</span>
+              </div>
+              <p class="text-xs text-muted mb-3">
+                CSS Grid layout that auto-wraps and centers navigation items on smaller screens without hiding links inside a hamburger menu or requiring horizontal swipe gestures.
+              </p>
+              <div class="code-preview">
+                <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Stacked Grid Navbar HTML">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  <span>Copy</span>
+                </button>
+                <pre><code>&lt;header class="cyn-navbar cyn-nav-stacked"&gt;
+  &lt;div class="cyn-brand"&gt;Portal&lt;/div&gt;
+  &lt;!-- Automatically balances rows across varying display widths --&gt;
+  &lt;ul class="cyn-nav-links"&gt;
+    &lt;li&gt;&lt;a href="#a"&gt;Section A&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#b"&gt;Section B&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/header&gt;</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- Framework Bindings for Navbar -->
+          <div class="grid-2 mt-4 gap-4">
+            <div class="card p-4">
+              <h4 class="card-title-md mb-2">React Framework Component Reference</h4>
+              <p class="text-xs text-muted mb-3">Full TypeScript types with animated hamburger button, backdrop click detection, and keyboard accessibility built-in.</p>
+              <div class="code-preview">
+                <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy React Navbar Snippet">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  <span>Copy</span>
+                </button>
+                <pre><code>import { Navbar } from '@coheryn/coherynui-react';
+
+export function Header() {
+  return (
+    &lt;Navbar pattern="drawer" brand={&lt;span&gt;CoherynUI&lt;/span&gt;}&gt;
+      &lt;ul className="cyn-nav-links"&gt;
+        &lt;li&gt;&lt;a href="#features"&gt;Features&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#pricing"&gt;Pricing&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/Navbar&gt;
+  );
+}</code></pre>
+              </div>
+            </div>
+
+            <div class="card p-4">
+              <h4 class="card-title-md mb-2">Web Component Custom Element Reference</h4>
+              <p class="text-xs text-muted mb-3">Works across Vue, Svelte, Angular, Solid, or Vanilla HTML with zero JavaScript dependencies.</p>
+              <div class="code-preview">
+                <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Web Component Navbar Snippet">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  <span>Copy</span>
+                </button>
+                <pre><code>&lt;!-- Native &lt;cyn-navbar&gt; custom element --&gt;
+&lt;cyn-navbar pattern="bottom"&gt;
+  &lt;div slot="brand"&gt;CoherynUI&lt;/div&gt;
+  &lt;ul class="cyn-nav-links"&gt;
+    &lt;li&gt;&lt;a href="#home"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#dashboard"&gt;Dashboard&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/cyn-navbar&gt;</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Accessible Focus Rings & Child Dividers -->
+        <div class="card" id="comp-rings-dividers">
+          <div class="card-header">
+            <span class="badge badge-brand">Access // Utilities</span>
+            <span class="badge badge-success">WCAG 2.2 AA</span>
+          </div>
+          <h3 class="card-title-md">Focus Ring System &amp; Child Dividers</h3>
+          <p class="card-desc">
+            Compound box-shadow focus rings that never shift layout boundaries, paired with automatic child divider borders.
+          </p>
+
+          <div class="d-flex gap-2 flex-wrap my-3">
+            <button class="btn btn-secondary ring-2 ring-brand ring-offset-2">Brand Ring</button>
+            <button class="btn btn-secondary ring-2 ring-danger ring-offset-2">Danger Ring</button>
+            <button class="btn btn-secondary ring-4 ring-brand ring-offset-2">4px Heavy Ring</button>
+          </div>
+
+          <div class="card-sim-surface p-3 radius-md my-3 divide-y divide-subtle">
+            <div class="py-2 text-xs text-muted flex-between">
+              <span>Security Token Service</span>
+              <span class="badge badge-brand">Online</span>
+            </div>
+            <div class="py-2 text-xs text-muted flex-between">
+              <span>Edge Proxy Ingress</span>
+              <span class="badge badge-success">Healthy</span>
+            </div>
+            <div class="py-2 text-xs text-muted flex-between">
+              <span>GPU WebGL Pipeline</span>
+              <span class="badge badge-subtle">Accelerated</span>
+            </div>
+          </div>
+
+          <div class="code-preview mt-2">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Focus Ring Snippet">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
+            <pre><code>&lt;!-- Non-Layout-Shifting Accessible Focus Ring --&gt;
+&lt;button class="btn ring-2 ring-brand ring-offset-2"&gt;Action&lt;/button&gt;
+
+&lt;!-- Automatic Child Dividers --&gt;
+&lt;div class="divide-y divide-subtle"&gt;
+  &lt;div class="py-2"&gt;Row 1&lt;/div&gt;
+  &lt;div class="py-2"&gt;Row 2&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- 10. Markdown Typography -->
+        <div class="card" id="comp-prose">
+          <div class="card-header">
+            <span class="badge badge-brand">Content // Typography</span>
+            <span class="badge badge-subtle">.cyn-prose</span>
+          </div>
+          <h3 class="card-title-md">Prose Typography Engine</h3>
+          <p class="card-desc">
+            Automated proportional typography with balanced line-heights for documentation, articles, and release notes.
+          </p>
+
+          <div class="cyn-prose cyn-prose-compact my-3 p-3 card-sim-surface radius-md">
+            <h4>Deterministic Design Standards</h4>
+            <p>
+              Composite layers operate with <a href="#layers">sub-millisecond</a> latency. Press <kbd>⌘K</kbd> for quick command lookup.
+            </p>
+            <blockquote>"Zero specificity collisions through standardized W3C cascade layers."</blockquote>
+            <table>
+              <thead>
+                <tr>
+                  <th>Layer</th>
+                  <th>Order</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>cyn.base</code></td>
+                  <td>3 / 5</td>
+                  <td>Active</td>
+                </tr>
+                <tr>
+                  <td><code>cyn.recipes</code></td>
+                  <td>4 / 5</td>
+                  <td>Optimized</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="code-preview mt-2">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Prose Snippet">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
+            <pre><code>&lt;!-- Proportional Markdown Typography --&gt;
+&lt;article class="cyn-prose"&gt;
+  &lt;h2&gt;Title&lt;/h2&gt;
+  &lt;p&gt;Paragraph with &lt;a href="#"&gt;link&lt;/a&gt; and &lt;code&gt;token&lt;/code&gt;.&lt;/p&gt;
+  &lt;blockquote&gt;Direct citation.&lt;/blockquote&gt;
+&lt;/article&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- 11. Comprehensive Form Controls & Validation -->
+        <div class="card" id="comp-forms">
+          <div class="card-header">
+            <span class="badge badge-brand">Form // Controls</span>
+            <span class="badge badge-success">Accessible</span>
+          </div>
+          <h3 class="card-title-md">Form Controls &amp; Validation</h3>
+          <p class="card-desc">
+            Normalized native inputs, error indicators, custom select chevrons, styled checkboxes, and radio groups.
+          </p>
+
+          <div class="p-3 card-sim-surface radius-md my-3">
+            <div class="cyn-form-group mb-3">
+              <label class="cyn-form-label" for="demo-form-name">Full Name</label>
+              <input class="cyn-form-input" id="demo-form-name" type="text" placeholder="Alex Morgan" value="Alex Morgan">
+            </div>
+
+            <div class="cyn-form-group mb-3">
+              <label class="cyn-form-label" for="demo-form-email">Work Email</label>
+              <input class="cyn-form-input is-invalid" id="demo-form-email" type="email" value="alex.morgan@invalid-host">
+              <span class="cyn-form-error">✕ Please provide a valid enterprise email address.</span>
+            </div>
+
+            <div class="cyn-form-group mb-3">
+              <label class="cyn-form-label" for="demo-form-region">Deployment Target</label>
+              <select class="cyn-form-select" id="demo-form-region">
+                <option>Production Cluster (us-east-1)</option>
+                <option>Edge Canary Network (global)</option>
+                <option>Staging Environment (eu-central-1)</option>
+              </select>
+            </div>
+
+            <div class="cyn-form-group mb-3">
+              <label class="cyn-form-label">Compute Allocation</label>
+              <div class="d-flex gap-3 flex-wrap mt-1">
+                <label class="d-flex items-center gap-2 text-xs">
+                  <input class="cyn-form-radio" type="radio" name="demo-compute" checked>
+                  <span>Dedicated GPU</span>
+                </label>
+                <label class="d-flex items-center gap-2 text-xs">
+                  <input class="cyn-form-radio" type="radio" name="demo-compute">
+                  <span>Serverless Micro</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="cyn-form-group mb-3">
+              <label class="cyn-form-label" for="demo-form-notes">Audit Notes</label>
+              <textarea class="cyn-form-textarea" id="demo-form-notes" rows="2" placeholder="Deployment notes...">Zero runtime overhead verified against W3C AA standards.</textarea>
+            </div>
+
+            <div class="d-flex items-center gap-2 mb-3">
+              <input class="cyn-form-checkbox" id="demo-form-terms" type="checkbox" checked>
+              <label class="text-xs text-muted" for="demo-form-terms">Require MFA confirmation on deploy</label>
+            </div>
+
+            <div class="d-flex gap-2 justify-end">
+              <button class="btn btn-secondary btn-sm" onclick="triggerDocsToast('Form Reset', 'Form fields reset.', 'info')">Reset</button>
+              <button class="btn btn-primary btn-sm ring-2 ring-brand ring-offset-2" onclick="triggerDocsToast('Deployment Queued', 'Config verified and dispatched.', 'success')">Submit Form →</button>
+            </div>
+          </div>
+
+          <div class="code-preview mt-2">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Form Snippet">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
+            <pre><code>&lt;!-- Normalized Form Group with Validation --&gt;
+&lt;div class="cyn-form-group"&gt;
+  &lt;label class="cyn-form-label" for="email"&gt;Email&lt;/label&gt;
+  &lt;input class="cyn-form-input is-invalid" id="email" type="email" /&gt;
+  &lt;span class="cyn-form-error"&gt;Invalid email format.&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Styled Select Dropdown &amp; Checkbox --&gt;
+&lt;select class="cyn-form-select"&gt;&lt;option&gt;Production&lt;/option&gt;&lt;/select&gt;
+&lt;input class="cyn-form-checkbox" type="checkbox" checked /&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- 12. Declarative JavaScript Assist (@coheryn/coherynui-js-assist) -->
+        <div class="card col-span-full" id="comp-assist">
+          <div class="card-header">
+            <span class="badge badge-brand">Optional Progressive Enhancement</span>
+            <div class="d-flex gap-1">
+              <span class="badge badge-success">~2.5 kB Brotli</span>
+              <span class="badge badge-secondary">data-cyn-*</span>
+              <span class="badge badge-info">Zero Config</span>
+            </div>
+          </div>
+          <h3 class="card-title-md">Declarative JavaScript Assist (`@coheryn/coherynui-js-assist`)</h3>
+          <p class="card-desc">
+            CoherynUI is CSS-first. For full WCAG 2.2 Level AA accessibility (focus trapping, roving arrow navigation, outside-click and escape dismissal, focus restoration) without writing imperative JavaScript, include the optional assist script.
+          </p>
+
+          <div class="grid-2 my-3">
+            <!-- Left Column: Interactive Live Demos -->
+            <div class="p-4 card-sim-surface radius-md">
+              <div class="d-flex items-center justify-between mb-3 flex-wrap gap-2">
+                <span class="text-xs text-muted font-bold tracking-wide">INTERACTIVE BEHAVIORAL DEMOS</span>
+                <span class="badge badge-brand text-xs">Single Delegated Listener</span>
+              </div>
+
+              <!-- Demo 1: Declarative Modal Trigger -->
+              <div class="mb-4 pb-3 border-b border-subtle">
+                <div class="d-flex justify-between items-center mb-2">
+                  <span class="text-xs font-semibold">1. Dialog Modal (`data-cyn-toggle="modal"`)</span>
+                  <span class="text-xs text-muted">Focus trapped + Trigger restored</span>
+                </div>
+                <button class="btn btn-primary btn-sm" id="btnOpenAssistModal" data-cyn-toggle="modal" data-cyn-target="#assistModal" aria-haspopup="dialog">
+                  ⚡ Open Assist Modal
+                </button>
+              </div>
+
+              <!-- Demo 2: Declarative Dropdown -->
+              <div class="mb-4 pb-3 border-b border-subtle">
+                <div class="d-flex justify-between items-center mb-2">
+                  <span class="text-xs font-semibold">2. Popover Dropdown (`data-cyn-toggle="dropdown"`)</span>
+                  <span class="text-xs text-muted">Outside click &amp; Escape dismiss</span>
+                </div>
+                <div class="popover-anchor">
+                  <button class="btn btn-secondary btn-sm" id="btnOpenAssistDropdown" data-cyn-toggle="dropdown" data-cyn-target="#assistDropdownMenu" aria-expanded="false" aria-haspopup="menu">
+                    Actions Menu ▾
+                  </button>
+                  <div class="dropdown-box" id="assistDropdownMenu" role="menu" aria-hidden="true">
+                    <button class="dropdown-item" role="menuitem">View Telemetry</button>
+                    <button class="dropdown-item" role="menuitem">Audit Performance</button>
+                    <button class="dropdown-item text-danger" role="menuitem">Revoke Access</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Demo 3: Declarative Collapse -->
+              <div class="mb-4 pb-3 border-b border-subtle">
+                <div class="d-flex justify-between items-center mb-2">
+                  <span class="text-xs font-semibold">3. Accordion / Collapse (`data-cyn-toggle="collapse"`)</span>
+                  <span class="text-xs text-muted">Automatic aria-expanded sync</span>
+                </div>
+                <button class="btn btn-secondary btn-sm" id="btnToggleAssistCollapse" data-cyn-toggle="collapse" data-cyn-target="#assistCollapsePanel" aria-expanded="false">
+                  Toggle Assist Details ▾
+                </button>
+                <div class="cyn-collapse-panel mt-2 p-3 card-sim-surface radius-sm text-xs text-muted" id="assistCollapsePanel" aria-hidden="true">
+                  The assist layer attaches a single delegated event listener at document root. When elements are injected dynamically via HTMX, Fetch, or SPA page transitions, data-cyn-* attributes work immediately without requiring re-initialization.
+                </div>
+              </div>
+
+              <!-- Demo 4: Declarative Tabs with Roving Focus -->
+              <div>
+                <div class="d-flex justify-between items-center mb-2">
+                  <span class="text-xs font-semibold">4. Accessible Tabs (`data-cyn-tabs`)</span>
+                  <span class="text-xs text-muted">Arrow key roving focus</span>
+                </div>
+                <div class="cyn-tabs cyn-tabs-pills" data-cyn-tabs>
+                  <div class="cyn-tablist" role="tablist">
+                    <button class="cyn-tab-btn active text-xs" role="tab" aria-selected="true" data-cyn-tab-target="#assistTabSummary">Summary</button>
+                    <button class="cyn-tab-btn text-xs" role="tab" aria-selected="false" data-cyn-tab-target="#assistTabArchitecture">Architecture</button>
+                    <button class="cyn-tab-btn text-xs" role="tab" aria-selected="false" data-cyn-tab-target="#assistTabSpecs">Bundle Specs</button>
+                  </div>
+                  <div class="mt-2">
+                    <div class="cyn-tabpanel active text-xs text-muted p-2" id="assistTabSummary" role="tabpanel">
+                      Zero-dependency progressive enhancement layer. Works across any server-side rendered HTML, static site, or modern frontend without bundler lock-in.
+                    </div>
+                    <div class="cyn-tabpanel text-xs text-muted p-2" id="assistTabArchitecture" role="tabpanel">
+                      Built upon @coheryn/ui-core headless primitives with 1 delegated listener for pointer and keyboard interactions.
+                    </div>
+                    <div class="cyn-tabpanel text-xs text-muted p-2" id="assistTabSpecs" role="tabpanel">
+                      Under 2.8 kB brotli-compressed. Distributed via npm (@coheryn/coherynui-js-assist) and standalone CDN (coherynui-assist.min.js).
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Code Snippet & Architecture Ladder -->
+            <div class="d-flex flex-col gap-3">
+              <div class="code-preview flex-1">
+                <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Assist Snippet">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  <span>Copy</span>
+                </button>
+                <pre><code>&lt;!-- 1. Declarative Trigger --&gt;
+&lt;button class="btn btn-primary" data-cyn-toggle="modal" data-cyn-target="#myModal"&gt;
+  Open Modal
+&lt;/button&gt;
+
+&lt;!-- 2. Accessible Target (Focus trapped, ESC dismissed, Focus restored) --&gt;
+&lt;div class="modal-backdrop" id="myModal" role="dialog" aria-modal="true" aria-hidden="true"&gt;
+  &lt;div class="modal-box"&gt;
+    &lt;button class="modal-close-btn" data-cyn-dismiss="modal"&gt;✕&lt;/button&gt;
+    &lt;h3&gt;Progressive Assist Modal&lt;/h3&gt;
+    &lt;p&gt;WCAG 2.2 AA compliant focus cycling &amp; scroll lock.&lt;/p&gt;
+    &lt;button class="btn btn-secondary" data-cyn-dismiss="modal"&gt;Close&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- 3. Optional Script (~2.5 kB brotli) --&gt;
+&lt;script src="coherynui-assist.min.js" defer&gt;&lt;/script&gt;</code></pre>
+              </div>
+
+              <div class="p-3 card-sim-surface radius-md text-xs text-muted">
+                <div class="font-bold text-foreground mb-1">CoherynUI Progressive Enhancement Ladder</div>
+                <div class="d-flex flex-col gap-1 mt-1">
+                  <div><strong class="text-success">Tier 0 (0 kB JS):</strong> Pure semantic HTML &amp; CSS recipes (details, dialog, focus-within).</div>
+                  <div><strong class="text-brand">Tier 1 (~2.5 kB):</strong> Optional declarative assist (`data-cyn-*`) for auto-ARIA and focus traps.</div>
+                  <div><strong class="text-info">Tier 2 (Headless):</strong> Framework-neutral programmatic core (`@coheryn/ui-core`).</div>
+                  <div><strong class="text-warning">Tier 3 (Web Components):</strong> Autonomous custom elements (`&lt;cyn-modal&gt;`, `&lt;cyn-tabs&gt;`).</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -537,10 +1518,10 @@
         </p>
       </div>
 
-      <!-- Live Custom Elements Grid (3x2 Balanced Layout) -->
+      <!-- Live Custom Elements Grid -->
       <div class="grid-3 mb-8">
         <!-- 1. cyn-modal -->
-        <div class="card">
+        <div class="card" id="wc-modal">
           <div class="card-header">
             <span class="badge badge-subtle">&lt;cyn-modal&gt;</span>
             <span class="badge badge-success">Active</span>
@@ -549,14 +1530,23 @@
           <p class="card-desc">
             Native dialog with focus trapping, scroll locking, and Escape/backdrop dismissal.
           </p>
-          <div class="card-actions">
+          <div class="card-actions mb-3">
             <button class="btn btn-primary flex-1" onclick="document.getElementById('demo-wc-modal').show()">Open Modal</button>
             <button class="btn btn-secondary" onclick="toggleAttr('demo-wc-modal', 'open')">Toggle</button>
+          </div>
+          <div class="code-preview">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy cyn-modal snippet">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
+            <pre><code>&lt;cyn-modal id="myModal" title="Confirm"&gt;
+  &lt;p&gt;Accessible custom element modal.&lt;/p&gt;
+&lt;/cyn-modal&gt;</code></pre>
           </div>
         </div>
 
         <!-- 2. cyn-drawer -->
-        <div class="card">
+        <div class="card" id="wc-drawer">
           <div class="card-header">
             <span class="badge badge-subtle">&lt;cyn-drawer&gt;</span>
             <span class="badge badge-subtle">placement="right"</span>
@@ -565,14 +1555,23 @@
           <p class="card-desc">
             Slide-in side navigation panel with smooth transitions and scroll locking.
           </p>
-          <div class="card-actions">
+          <div class="card-actions mb-3">
             <button class="btn btn-glass flex-1" onclick="document.getElementById('demo-wc-drawer').show()">Open Drawer →</button>
             <button class="btn btn-secondary" onclick="toggleAttr('demo-wc-drawer', 'open')">Toggle</button>
+          </div>
+          <div class="code-preview">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy cyn-drawer snippet">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
+            <pre><code>&lt;cyn-drawer id="myDrawer" placement="right"&gt;
+  &lt;h3&gt;Side Panel&lt;/h3&gt;
+&lt;/cyn-drawer&gt;</code></pre>
           </div>
         </div>
 
         <!-- 3. cyn-bottom-sheet -->
-        <div class="card">
+        <div class="card" id="wc-bottomsheet">
           <div class="card-header">
             <span class="badge badge-subtle">&lt;cyn-bottom-sheet&gt;</span>
             <span class="badge badge-subtle">Mobile</span>
@@ -581,14 +1580,23 @@
           <p class="card-desc">
             Mobile-first pull-down sheet with tactile drag handle and touch target sizing.
           </p>
-          <div class="card-actions">
+          <div class="card-actions mb-3">
             <button class="btn btn-secondary flex-1" onclick="document.getElementById('demo-wc-bottom-sheet').show()">Open Sheet</button>
             <button class="btn btn-secondary" onclick="toggleAttr('demo-wc-bottom-sheet', 'open')">Toggle</button>
+          </div>
+          <div class="code-preview">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy cyn-bottom-sheet snippet">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
+            <pre><code>&lt;cyn-bottom-sheet id="mySheet"&gt;
+  &lt;h3&gt;Tactile Mobile Sheet&lt;/h3&gt;
+&lt;/cyn-bottom-sheet&gt;</code></pre>
           </div>
         </div>
 
         <!-- 4. cyn-switch -->
-        <div class="card">
+        <div class="card" id="wc-switch">
           <div class="card-header">
             <span class="badge badge-subtle">&lt;cyn-switch&gt;</span>
             <span class="badge badge-brand">cyn-change</span>
@@ -597,14 +1605,21 @@
           <p class="card-desc">
             ARIA role="switch", keyboard spacebar toggle, and <code>cyn-change</code> custom event.
           </p>
-          <div class="flex-col gap-3 mt-5">
+          <div class="flex-col gap-3 my-3">
             <cyn-switch id="demo-wc-switch-gpu" label="GPU Shader Pipeline" checked></cyn-switch>
             <cyn-switch id="demo-wc-switch-audio" label="Sound Effects"></cyn-switch>
+          </div>
+          <div class="code-preview">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy cyn-switch snippet">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
+            <pre><code>&lt;cyn-switch label="Dark Mode" checked&gt;&lt;/cyn-switch&gt;</code></pre>
           </div>
         </div>
 
         <!-- 5. cyn-dropdown & cyn-popover -->
-        <div class="card">
+        <div class="card" id="wc-dropdown">
           <div class="card-header">
             <span class="badge badge-subtle">&lt;cyn-dropdown&gt;</span>
             <span class="badge badge-subtle">Context</span>
@@ -613,7 +1628,7 @@
           <p class="card-desc">
             Contextual floating menus and popovers with automated outside-click dismissal.
           </p>
-          <div class="card-actions flex-wrap">
+          <div class="card-actions flex-wrap mb-3">
             <cyn-dropdown id="demo-wc-dropdown">
               <button class="btn btn-primary" onclick="this.closest('cyn-dropdown').toggle()">Actions Menu ▼</button>
               <div class="dropdown-box">
@@ -631,10 +1646,20 @@
               </div>
             </cyn-popover>
           </div>
+          <div class="code-preview">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy cyn-dropdown snippet">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
+            <pre><code>&lt;cyn-dropdown&gt;
+  &lt;button class="btn btn-primary"&gt;Menu&lt;/button&gt;
+  &lt;div class="dropdown-box"&gt;...&lt;/div&gt;
+&lt;/cyn-dropdown&gt;</code></pre>
+          </div>
         </div>
 
         <!-- 6. cyn-toast-container -->
-        <div class="card">
+        <div class="card" id="wc-toasts">
           <div class="card-header">
             <span class="badge badge-subtle">&lt;cyn-toast-container&gt;</span>
             <span class="badge badge-success">Telemetry</span>
@@ -643,9 +1668,129 @@
           <p class="card-desc">
             Declarative notification stack responding to element pushToast API calls.
           </p>
-          <div class="card-actions">
+          <div class="card-actions mb-3">
             <button class="btn btn-secondary flex-1 btn-sm" onclick="triggerWcToast('Native Element Success', 'Dispatched from custom element container.', 'success')">Success Toast</button>
             <button class="btn btn-secondary flex-1 btn-sm" onclick="triggerWcToast('Native Element Warning', 'High memory usage detected.', 'warning')">Warning Toast</button>
+          </div>
+          <div class="code-preview">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy cyn-toast-container snippet">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
+            <pre><code>&lt;cyn-toast-container id="toasts"&gt;&lt;/cyn-toast-container&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- 7. cyn-tabs Custom Element -->
+        <div class="card" id="wc-tabs">
+          <div class="card-header">
+            <div>
+              <span class="badge badge-subtle">&lt;cyn-tabs&gt;</span>
+              <span class="badge badge-brand">cyn-change</span>
+            </div>
+            <div class="d-flex gap-1">
+              <button class="btn btn-secondary btn-xs demo-wc-variant-btn active" onclick="document.getElementById('demo-wc-tabs').setAttribute('variant', 'lifted'); this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active')); this.classList.add('active');">📁 Lifted</button>
+              <button class="btn btn-secondary btn-xs demo-wc-variant-btn" onclick="document.getElementById('demo-wc-tabs').setAttribute('variant', 'pills'); this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active')); this.classList.add('active');">💊 Pills</button>
+              <button class="btn btn-secondary btn-xs demo-wc-variant-btn" onclick="document.getElementById('demo-wc-tabs').setAttribute('variant', 'line'); this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active')); this.classList.add('active');">⎯ Line</button>
+            </div>
+          </div>
+          <h3 class="card-title">Accessible Tabs Element</h3>
+          <p class="card-desc">
+            Autonomous roving keyboard focus (Left/Right arrows, Home/End), ARIA attribute reflection, and <code>cyn-change</code> telemetry events with <code>variant="lifted" | "pills" | "line"</code>.
+          </p>
+          <div class="my-2">
+            <cyn-tabs id="demo-wc-tabs" variant="lifted">
+              <div role="tablist" class="cyn-tablist" aria-label="Web Component Tabs">
+                <button role="tab" class="cyn-tab-btn active" aria-selected="true">Design</button>
+                <button role="tab" class="cyn-tab-btn" aria-selected="false">Performance</button>
+                <button role="tab" class="cyn-tab-btn" aria-selected="false">Compliance</button>
+              </div>
+              <div role="tabpanel" class="cyn-tabpanel active">
+                <p class="text-xs text-muted mb-2">GPU-accelerated design tokens with native HDR color spaces (Display-P3).</p>
+                <span class="badge badge-subtle">Display-P3 Ready</span>
+              </div>
+              <div role="tabpanel" class="cyn-tabpanel">
+                <p class="text-xs text-muted mb-2">Sub-millisecond composite layers running directly on the browser compositor thread.</p>
+                <span class="badge badge-success">60+ FPS Main Thread</span>
+              </div>
+              <div role="tabpanel" class="cyn-tabpanel">
+                <p class="text-xs text-muted mb-2">Automated WCAG 2.2 Level AA accessibility scoring with APG keyboard patterns.</p>
+                <span class="badge badge-brand">WCAG 2.2 AA Verified</span>
+              </div>
+            </cyn-tabs>
+          </div>
+          <div class="code-preview mt-2">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy cyn-tabs snippet">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
+            <pre><code>&lt;cyn-tabs&gt;
+  &lt;div role="tablist" class="cyn-tablist"&gt;
+    &lt;button role="tab" class="cyn-tab-btn active" aria-selected="true"&gt;Overview&lt;/button&gt;
+    &lt;button role="tab" class="cyn-tab-btn" aria-selected="false"&gt;Details&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div role="tabpanel" class="cyn-tabpanel active"&gt;Overview content&lt;/div&gt;
+  &lt;div role="tabpanel" class="cyn-tabpanel"&gt;Details content&lt;/div&gt;
+&lt;/cyn-tabs&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- 8. cyn-navbar Custom Element (Full-Width Showcase) -->
+        <div class="card col-full" id="wc-navbar-card">
+          <div class="card-header">
+            <div>
+              <span class="badge badge-brand">&lt;cyn-navbar&gt;</span>
+              <h3 class="card-title-lg mt-1">Responsive Custom Element Navbar</h3>
+            </div>
+            <span class="badge badge-subtle" id="demo-wc-navbar-pattern-label">pattern="ribbon"</span>
+          </div>
+          <p class="card-desc">
+            Autonomous W3C custom element with real-time attribute synchronization, outside click dismissal, and 4 responsive navigation patterns. Test the pattern switches live:
+          </p>
+
+          <div class="d-flex gap-2 flex-wrap my-4" role="radiogroup" aria-label="Demo Web Component Navbar Pattern">
+            <button class="btn btn-secondary btn-sm demo-wc-nav-btn active" data-pattern="ribbon" onclick="setDemoWcNavbarPattern('ribbon')">🌊 Ribbon</button>
+            <button class="btn btn-secondary btn-sm demo-wc-nav-btn" data-pattern="drawer" onclick="setDemoWcNavbarPattern('drawer')">☰ Drawer</button>
+            <button class="btn btn-secondary btn-sm demo-wc-nav-btn" data-pattern="bottom" onclick="setDemoWcNavbarPattern('bottom')">📱 Bottom Dock</button>
+            <button class="btn btn-secondary btn-sm demo-wc-nav-btn" data-pattern="stacked" onclick="setDemoWcNavbarPattern('stacked')">▦ Stacked Grid</button>
+          </div>
+
+          <!-- Live Custom Element Instance -->
+          <div class="p-3 mb-4 stage-preview-box">
+            <cyn-navbar id="demo-wc-navbar" pattern="ribbon">
+              <div slot="brand" class="brand-lockup">
+                <span class="font-bold">CoherynUI Custom Element</span>
+              </div>
+              <button class="nav-hamburger-btn" aria-label="Toggle Navigation"><span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span></button>
+              <div class="nav-backdrop"></div>
+              <ul class="nav-links">
+                <li><button class="nav-btn active" onclick="logWcEvent('&lt;cyn-navbar&gt;', 'nav-select', { page: 'Dashboard' }); triggerWcToast('Navigation', 'Switched to Dashboard view.', 'info');">Dashboard</button></li>
+                <li><button class="nav-btn" onclick="logWcEvent('&lt;cyn-navbar&gt;', 'nav-select', { page: 'Analytics' }); triggerWcToast('Navigation', 'Switched to Analytics view.', 'info');">Analytics</button></li>
+                <li><button class="nav-btn" onclick="logWcEvent('&lt;cyn-navbar&gt;', 'nav-select', { page: 'Integrations' }); triggerWcToast('Navigation', 'Switched to Integrations view.', 'info');">Integrations</button></li>
+                <li><button class="nav-btn" onclick="logWcEvent('&lt;cyn-navbar&gt;', 'nav-select', { page: 'Settings' }); triggerWcToast('Navigation', 'Switched to Settings view.', 'info');">Settings</button></li>
+              </ul>
+            </cyn-navbar>
+          </div>
+
+          <div class="code-preview">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Custom Element Navbar">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
+            <pre><code>&lt;!-- Native &lt;cyn-navbar&gt; custom element with attribute synchronization --&gt;
+&lt;cyn-navbar pattern="drawer"&gt;
+  &lt;div slot="brand"&gt;&lt;strong&gt;Acme App&lt;/strong&gt;&lt;/div&gt;
+  &lt;button class="nav-hamburger-btn" aria-label="Toggle Navigation"&gt;
+    &lt;span class="hamburger-line"&gt;&lt;/span&gt;
+    &lt;span class="hamburger-line"&gt;&lt;/span&gt;
+    &lt;span class="hamburger-line"&gt;&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;div class="nav-backdrop"&gt;&lt;/div&gt;
+  &lt;ul class="nav-links"&gt;
+    &lt;li&gt;&lt;a href="#dashboard"&gt;Dashboard&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#settings"&gt;Settings&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/cyn-navbar&gt;</code></pre>
           </div>
         </div>
       </div>
@@ -691,7 +1836,10 @@
 
         <div id="framework-vanilla" class="framework-snippet active">
           <div class="code-preview">
-            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)">Copy</button>
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Vanilla HTML Snippet">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
             <pre><code>&lt;!-- 1. Include CoherynUI CSS &amp; Web Components --&gt;
 &lt;link rel="stylesheet" href="https://cdn.coheryntech.com/coherynui/v1/coherynui.css"&gt;
 &lt;script type="module" src="https://cdn.coheryntech.com/coherynui/v1/web-components.js"&gt;&lt;/script&gt;
@@ -714,7 +1862,10 @@
 
         <div id="framework-vue" class="framework-snippet">
           <div class="code-preview">
-            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)">Copy</button>
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Vue 3 Snippet">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
             <pre><code>// vite.config.ts - Allow cyn-* custom elements
 export default defineConfig({
   plugins: [
@@ -747,7 +1898,10 @@ function onSwitchChange(event) {
 
         <div id="framework-angular" class="framework-snippet">
           <div class="code-preview">
-            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)">Copy</button>
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Angular Snippet">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
             <pre><code>// app.module.ts - Enable CUSTOM_ELEMENTS_SCHEMA
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import '@coheryn/coherynui-web-components';
@@ -769,7 +1923,10 @@ export class AppModule {}
 
         <div id="framework-svelte" class="framework-snippet">
           <div class="code-preview">
-            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)">Copy</button>
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Svelte Snippet">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
             <pre><code>&lt;!-- App.svelte --&gt;
 &lt;script&gt;
   import '@coheryn/coherynui-web-components';
@@ -791,10 +1948,7 @@ export class AppModule {}
     </section>
 
     <!-- ======================================================================= -->
-    <!-- TAB 6: MOTION PHYSICS SOLVER                                            -->
-    <!-- ======================================================================= -->
-    <!-- ======================================================================= -->
-    <!-- TAB 6: MOTION PHYSICS SOLVER                                            -->
+    <!-- TAB 7: MOTION PHYSICS DYNAMICS                                          -->
     <!-- ======================================================================= -->
     <section id="tab-motion" class="tab-panel">
       <div class="section-header">
@@ -857,10 +2011,72 @@ export class AppModule {}
           </p>
         </div>
       </div>
+
+      <!-- Universal Motion Tokens & Body Personalities Reference -->
+      <div class="glass-card mt-8">
+        <h3 class="card-title-lg mb-2">Universal Motion Tokens &amp; Body Personalities</h3>
+        <p class="section-desc mb-5">
+          Zero-runtime CSS variables driving smooth animations across all dialogs, drawers, dropdowns, and view transitions. Switch global physics with a single class on <code>&lt;body&gt;</code>, or use modular transition classes on any element.
+        </p>
+
+        <div class="grid-3">
+          <div class="card p-4">
+            <h4 class="card-title-md mb-2">1. Global Body Personalities</h4>
+            <div class="code-preview mb-3">
+              <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Body Personalities Snippet">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                <span>Copy</span>
+              </button>
+              <pre><code>&lt;!-- Apply to &lt;body&gt; for global physics --&gt;
+&lt;body class="cyn-motion-spring"&gt; &lt;!-- 300ms spring --&gt;
+&lt;body class="cyn-motion-smooth"&gt; &lt;!-- 220ms curve --&gt;
+&lt;body class="cyn-motion-subtle"&gt; &lt;!-- 120ms fade --&gt;
+&lt;body class="cyn-motion-none"&gt;   &lt;!-- 0ms instant --&gt;</code></pre>
+            </div>
+            <p class="text-xs text-muted">Dynamically adjusts <code>--cyn-transition-duration</code>, <code>--cyn-transition-fn</code>, and <code>--cyn-motion-scale-enter</code>.</p>
+          </div>
+
+          <div class="card p-4">
+            <h4 class="card-title-md mb-2">2. Transition Utility Classes</h4>
+            <div class="code-preview mb-3">
+              <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Transition Utilities Snippet">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                <span>Copy</span>
+              </button>
+              <pre><code>&lt;!-- Per-element transition classes --&gt;
+&lt;div class="cyn-transition-scale"&gt;...&lt;/div&gt;
+&lt;div class="cyn-transition-fade"&gt;...&lt;/div&gt;
+&lt;div class="cyn-transition-slide-up"&gt;...&lt;/div&gt;
+&lt;ul class="cyn-stagger-list"&gt;
+  &lt;li&gt;Child 1&lt;/li&gt;
+  &lt;li&gt;Child 2&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+            </div>
+            <p class="text-xs text-muted">Combine with origins: <code>.cyn-origin-top-left</code>, <code>.cyn-origin-center</code>.</p>
+          </div>
+
+          <div class="card p-4">
+            <h4 class="card-title-md mb-2">3. W3C View Transitions</h4>
+            <div class="code-preview mb-3">
+              <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy View Transitions Snippet">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                <span>Copy</span>
+              </button>
+              <pre><code>// Trigger smooth W3C View Transition
+if (document.startViewTransition) {
+  document.startViewTransition(() =&gt; {
+    updateDomState();
+  });
+}</code></pre>
+            </div>
+            <p class="text-xs text-muted">Leverages <code>cynViewExit</code> and <code>cynViewEnter</code> keyframes with token timing.</p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ======================================================================= -->
-    <!-- TAB 7: GPU MATERIALS & LIQUID GLASS                                     -->
+    <!-- TAB 8: GPU MATERIALS & LIQUID GLASS                                     -->
     <!-- ======================================================================= -->
     <section id="tab-gpu" class="tab-panel">
       <div class="section-header">
@@ -889,10 +2105,43 @@ export class AppModule {}
           </div>
         </div>
       </div>
+
+      <!-- Liquid Glass CSS Specification Recipe -->
+      <div class="card mt-6">
+        <div class="flex-between items-baseline mb-3">
+          <h3 class="card-title">Pure CSS Liquid Glass Recipe</h3>
+          <span class="badge badge-brand">Optical Material</span>
+        </div>
+        <p class="card-desc mb-4">
+          Physical glass surface with dual-pass blur, chromatic edge reflection, and automatic fallback for reduced-transparency environments:
+        </p>
+        <div class="code-preview">
+          <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Liquid Glass CSS">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <span>Copy</span>
+          </button>
+          <pre><code>/* Physical Liquid Glass Recipe */
+.glass-card {
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(var(--cyn-glass-blur, 16px));
+  -webkit-backdrop-filter: blur(var(--cyn-glass-blur, 16px));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--cyn-radius-lg, 12px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass-card {
+    background: #0f172a;
+    backdrop-filter: none;
+  }
+}</code></pre>
+        </div>
+      </div>
     </section>
 
     <!-- ======================================================================= -->
-    <!-- TAB 8: AGENT & MCP PORTAL                                               -->
+    <!-- TAB 9: AGENT & MCP PORTAL                                               -->
     <!-- ======================================================================= -->
     <section id="tab-agent" class="tab-panel">
       <div class="section-header">
@@ -928,12 +2177,34 @@ export class AppModule {}
             Initialize canonical rules and 7 official skills with one command:
           </p>
           <div class="code-view mb-4">
-            <pre><code># Initialize Claude Code, Cursor, Copilot & Codex
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy Agent Commands">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
+            <pre><code># Initialize Claude Code, Cursor, Copilot &amp; Codex
 coherynui agent init --client all
 
 # Install 7 canonical offline skills
 coherynui agent skills install</code></pre>
           </div>
+
+          <h4 class="card-title-md mb-2">MCP Stdio Configuration</h4>
+          <div class="code-view mb-4">
+            <button class="btn btn-secondary copy-btn" onclick="copyCode(this)" aria-label="Copy MCP Config JSON">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            </button>
+            <pre><code>// claude_desktop_config.json or .cursor/mcp.json
+{
+  "mcpServers": {
+    "coherynui": {
+      "command": "coherynui",
+      "args": ["mcp", "serve"]
+    }
+  }
+}</code></pre>
+          </div>
+
           <div class="d-flex gap-3">
             <a href="../llms-full.txt" target="_blank" class="btn btn-primary">Open llms-full.txt</a>
             <a href="../registry/index.json" target="_blank" class="btn btn-secondary">Open Registry JSON</a>
@@ -943,6 +2214,7 @@ coherynui agent skills install</code></pre>
     </section>
 
   </main>
+</div>
 
   <!-- ========================================================================= -->
   <!-- OVERLAY DOM ELEMENTS (MODAL, BOTTOMSHEET, DRAWER)                         -->
@@ -950,9 +2222,9 @@ coherynui agent skills install</code></pre>
   <!-- Modal Dialog -->
   <div class="modal-backdrop" id="demo-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-box">
-      <div class="flex-between">
+      <div class="modal-header flex-between">
         <h3 class="card-title-lg" id="modal-title">Accessible Focus-Trapped Modal</h3>
-        <button class="btn btn-secondary btn-xs" onclick="closeModal()">✕</button>
+        <button class="modal-close-btn" onclick="closeModal()" aria-label="Close dialog">✕</button>
       </div>
       <p class="modal-desc">
         Keyboard focus is strictly trapped inside this dialog. Press <kbd>Tab</kbd> to cycle between targets, or press <kbd>Escape</kbd> to dismiss.
@@ -968,9 +2240,9 @@ coherynui agent skills install</code></pre>
   <div class="bottomsheet-backdrop" id="docsBottomSheet" role="dialog" aria-modal="true" onclick="if(event.target === this) closeBottomSheet()">
     <div class="bottomsheet-box">
       <div class="bottomsheet-handle"></div>
-      <div class="flex-between">
+      <div class="bottomsheet-header flex-between">
         <h3 class="card-title-lg">Tactile BottomSheet Drawer</h3>
-        <button class="btn btn-secondary btn-xs" onclick="closeBottomSheet()">✕</button>
+        <button class="modal-close-btn" onclick="closeBottomSheet()" aria-label="Close bottom sheet">✕</button>
       </div>
       <p class="modal-desc">
         Supports native mobile pull-down gestures and 44px touch targets.
@@ -984,9 +2256,9 @@ coherynui agent skills install</code></pre>
   <!-- Side Drawer -->
   <div class="drawer-backdrop" id="docsDrawer" role="dialog" aria-modal="true" onclick="if(event.target === this) closeDrawer()">
     <div class="drawer-box">
-      <div class="flex-between">
+      <div class="drawer-header flex-between">
         <h3 class="card-title-lg">System Drawer</h3>
-        <button class="btn btn-secondary btn-xs" onclick="closeDrawer()">✕</button>
+        <button class="modal-close-btn" onclick="closeDrawer()" aria-label="Close drawer">✕</button>
       </div>
       <p class="modal-desc">
         Slide-in side panel with smooth spring transitions and scroll locking.
@@ -1030,6 +2302,28 @@ coherynui agent skills install</code></pre>
 
   <cyn-toast-container id="demo-wc-toast-container"></cyn-toast-container>
 
+  <!-- Declarative Assist Demo Modal -->
+  <div class="modal-backdrop" id="assistModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="card-title-md">⚡ Declarative Assist Dialog</h3>
+        <button class="btn btn-secondary btn-xs" data-cyn-dismiss="modal" aria-label="Close Assist Modal">✕</button>
+      </div>
+      <p class="text-xs text-muted mb-3">
+        This dialog was opened via <code>data-cyn-toggle="modal"</code>. Focus is strictly trapped within this box. Pressing <kbd class="px-1 py-0.5 card-sim-surface radius-sm">Escape</kbd> or clicking the backdrop automatically closes it and restores focus back to the opening trigger button.
+      </p>
+      <div class="cyn-form-group mb-3">
+        <label class="cyn-form-label" for="assist-test-input">Test Focus Input</label>
+        <input class="cyn-form-input" id="assist-test-input" type="text" placeholder="Type here..." value="WCAG 2.2 AA compliant">
+      </div>
+      <div class="d-flex justify-end gap-2">
+        <button class="btn btn-secondary btn-sm" data-cyn-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary btn-sm" data-cyn-dismiss="modal">Confirm &amp; Dismiss</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="coherynui-assist.js" defer></script>
   <script src="docs.js" defer></script>
 </body>
 </html>

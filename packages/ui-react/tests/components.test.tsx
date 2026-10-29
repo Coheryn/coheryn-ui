@@ -7,6 +7,7 @@ import {
   Drawer,
   Popover,
   Dropdown,
+  Navbar,
   ToastProvider,
   Tabs,
   Input,
@@ -112,6 +113,22 @@ describe('CoherynUI React Component Catalog', () => {
       </ToastProvider>
     );
     expect(toastApp).toBeDefined();
+  });
+
+  it('renders Navbar across all 4 navigation patterns', () => {
+    const navDrawer = (
+      <Navbar pattern="drawer" brand={<span>Logo</span>}>
+        <ul><li><a href="#test">Home</a></li></ul>
+      </Navbar>
+    );
+    const navRibbon = <Navbar pattern="ribbon" />;
+    const navBottom = <Navbar pattern="bottom" />;
+    const navStacked = <Navbar pattern="stacked" />;
+
+    expect(navDrawer.props.pattern).toBe('drawer');
+    expect(navRibbon.props.pattern).toBe('ribbon');
+    expect(navBottom.props.pattern).toBe('bottom');
+    expect(navStacked.props.pattern).toBe('stacked');
   });
 });
 

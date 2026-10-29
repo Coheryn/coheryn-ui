@@ -107,7 +107,7 @@ export class CynModal extends CustomElementBase {
     titleEl.textContent = this.getAttribute('title') || '';
 
     const closeBtn = document.createElement('button');
-    closeBtn.className = 'btn btn-subtle p-1.5 radius-md';
+    closeBtn.className = 'btn btn-subtle p-1.5 radius-md modal-close-btn';
     closeBtn.setAttribute('aria-label', 'Close modal');
     closeBtn.textContent = '✕';
     closeBtn.addEventListener('click', () => this.close());
@@ -235,7 +235,8 @@ export class CynDrawer extends CustomElementBase {
     titleEl.textContent = this.getAttribute('title') || 'Drawer';
 
     const closeBtn = document.createElement('button');
-    closeBtn.className = 'btn btn-subtle p-1.5 radius-md';
+    closeBtn.className = 'btn btn-subtle p-1.5 radius-md modal-close-btn';
+    closeBtn.setAttribute('aria-label', 'Close drawer');
     closeBtn.textContent = '✕';
     closeBtn.addEventListener('click', () => this.close());
 
@@ -352,7 +353,8 @@ export class CynBottomSheet extends CustomElementBase {
     titleEl.textContent = this.getAttribute('title') || '';
 
     const closeBtn = document.createElement('button');
-    closeBtn.className = 'btn btn-subtle p-1 radius-md';
+    closeBtn.className = 'btn btn-subtle p-1 radius-md modal-close-btn';
+    closeBtn.setAttribute('aria-label', 'Close bottom sheet');
     closeBtn.textContent = '✕';
     closeBtn.addEventListener('click', () => this.close());
 
@@ -596,9 +598,32 @@ export class CynSwitch extends CustomElementBase {
 /* -------------------------------------------------------------------------- */
 
 export class CynTabs extends CustomElementBase {
+  static get observedAttributes() {
+    return ['variant'];
+  }
+
   connectedCallback() {
     if (!isBrowser) return;
+    this.applyVariant();
     this.setupTabs();
+  }
+
+  attributeChangedCallback(name: string, _oldVal: string | null, _newVal: string | null) {
+    if (name === 'variant') {
+      this.applyVariant();
+    }
+  }
+
+  private applyVariant() {
+    const variant = this.getAttribute('variant') || 'pills';
+    this.classList.remove('cyn-tabs-lifted', 'cyn-tabs-bordered', 'cyn-tabs-line', 'cyn-tabs-pills');
+    if (variant === 'lifted' || variant === 'bordered') {
+      this.classList.add('cyn-tabs-lifted');
+    } else if (variant === 'line' || variant === 'underline') {
+      this.classList.add('cyn-tabs-line');
+    } else {
+      this.classList.add('cyn-tabs-pills');
+    }
   }
 
   private setupTabs() {
@@ -685,6 +710,81 @@ export class CynToastContainer extends CustomElementBase {
 }
 
 /* -------------------------------------------------------------------------- */
+/*                                  CYN-NAVBAR                                */
+/* -------------------------------------------------------------------------- */
+
+export class CynNavbar extends CustomElementBase {
+  static get observedAttributes() {
+    return ['pattern', 'open'];
+  }
+
+  private _unbindOutside: (() => void) | null = null;
+  private _unbindEsc: (() => void) | null = null;
+
+  connectedCallback() {
+    if (!isBrowser) return;
+    this.classList.add('cyn-navbar');
+    const pattern = this.getAttribute('pattern') || 'ribbon';
+    this.classList.add(`cyn-nav-${pattern}`);
+
+    // Wire up hamburger click if present
+    const btn = this.querySelector('.cyn-hamburger-btn, .nav-hamburger-btn');
+    btn?.addEventListener('click', () => this.toggle());
+
+    // Wire up backdrop click if present
+    const backdrop = this.querySelector('.cyn-nav-backdrop, .nav-backdrop');
+    backdrop?.addEventListener('click', () => this.close());
+  }
+
+  attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
+    if (oldValue === newValue) return;
+    if (name === 'pattern') {
+      if (oldValue) this.classList.remove(`cyn-nav-${oldValue}`);
+      if (newValue) this.classList.add(`cyn-nav-${newValue}`);
+    } else if (name === 'open') {
+      const isOpen = this.hasAttribute('open');
+      const btn = this.querySelector('.cyn-hamburger-btn, .nav-hamburger-btn');
+      if (isOpen) {
+        this.classList.add('is-open');
+        btn?.classList.add('is-open');
+        btn?.setAttribute('aria-expanded', 'true');
+        this.bindListeners();
+      } else {
+        this.classList.remove('is-open');
+        btn?.classList.remove('is-open');
+        btn?.setAttribute('aria-expanded', 'false');
+        this.cleanupListeners();
+      }
+    }
+  }
+
+  public show() {
+    this.setAttribute('open', '');
+  }
+
+  public close() {
+    this.removeAttribute('open');
+  }
+
+  public toggle() {
+    if (this.hasAttribute('open')) this.close();
+    else this.show();
+  }
+
+  private bindListeners() {
+    this._unbindOutside = dismissOnOutsideClick(this, () => this.close());
+    this._unbindEsc = dismissOnEscape(() => this.close());
+  }
+
+  private cleanupListeners() {
+    this._unbindOutside?.();
+    this._unbindOutside = null;
+    this._unbindEsc?.();
+    this._unbindEsc = null;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
 /*                         CUSTOM ELEMENT REGISTRATION                        */
 /* -------------------------------------------------------------------------- */
 
@@ -697,6 +797,7 @@ export const CUSTOM_ELEMENTS_MAP = {
   'cyn-switch': CynSwitch,
   'cyn-tabs': CynTabs,
   'cyn-toast-container': CynToastContainer,
+  'cyn-navbar': CynNavbar,
 } as const;
 
 export function defineCustomElements() {

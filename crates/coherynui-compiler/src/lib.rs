@@ -125,12 +125,17 @@ impl CoherynCompiler {
             let mut indent = "  ".to_string();
             let mut prefix = String::new();
             let mut suffix = String::new();
+            let mut group_prefix = String::new();
+            let mut peer_prefix = String::new();
             let mut pseudo_suffix = String::new();
+            let mut element_suffix = String::new();
+            let mut has_suffix = String::new();
             let mut theme_prefix = String::new();
 
             // Process variants
             for variant in &variants {
-                match variant.0.as_str() {
+                let v = variant.0.as_str();
+                match v {
                     // Viewport responsive
                     "sm" => {
                         prefix.push_str("  @media (min-width: 640px) {\n");
@@ -180,23 +185,96 @@ impl CoherynCompiler {
                         indent.push_str("  ");
                     }
 
+                    // Media feature variants
+                    "motion-safe" => {
+                        prefix.push_str("  @media (prefers-reduced-motion: no-preference) {\n");
+                        suffix.insert_str(0, "  }\n");
+                        indent.push_str("  ");
+                    }
+                    "motion-reduce" => {
+                        prefix.push_str("  @media (prefers-reduced-motion: reduce) {\n");
+                        suffix.insert_str(0, "  }\n");
+                        indent.push_str("  ");
+                    }
+                    "print" => {
+                        prefix.push_str("  @media print {\n");
+                        suffix.insert_str(0, "  }\n");
+                        indent.push_str("  ");
+                    }
+                    "contrast-more" => {
+                        prefix.push_str("  @media (prefers-contrast: more) {\n");
+                        suffix.insert_str(0, "  }\n");
+                        indent.push_str("  ");
+                    }
+                    "portrait" => {
+                        prefix.push_str("  @media (orientation: portrait) {\n");
+                        suffix.insert_str(0, "  }\n");
+                        indent.push_str("  ");
+                    }
+                    "landscape" => {
+                        prefix.push_str("  @media (orientation: landscape) {\n");
+                        suffix.insert_str(0, "  }\n");
+                        indent.push_str("  ");
+                    }
+
                     // Interactive state pseudos
                     "hover" => pseudo_suffix.push_str(":hover"),
                     "focus" => pseudo_suffix.push_str(":focus"),
                     "focus-visible" => pseudo_suffix.push_str(":focus-visible"),
+                    "focus-within" => pseudo_suffix.push_str(":focus-within"),
                     "active" => pseudo_suffix.push_str(":active"),
                     "disabled" => pseudo_suffix.push_str(":disabled"),
+                    "visited" => pseudo_suffix.push_str(":visited"),
+                    "checked" => pseudo_suffix.push_str(":checked"),
+                    "first" => pseudo_suffix.push_str(":first-child"),
+                    "last" => pseudo_suffix.push_str(":last-child"),
+                    "odd" => pseudo_suffix.push_str(":nth-child(odd)"),
+                    "even" => pseudo_suffix.push_str(":nth-child(even)"),
+
+                    // Pseudo-elements
+                    "before" => element_suffix.push_str("::before"),
+                    "after" => element_suffix.push_str("::after"),
+                    "placeholder" => element_suffix.push_str("::placeholder"),
+                    "selection" => element_suffix.push_str("::selection"),
+                    "marker" => element_suffix.push_str("::marker"),
 
                     // Themes
                     "dark" => {
                         theme_prefix = "[data-theme=\"dark\"] ".to_string();
                     }
 
-                    _ => {}
+                    // Group variants
+                    "group-hover" => group_prefix.push_str(".group:hover "),
+                    "group-focus" => group_prefix.push_str(".group:focus "),
+                    "group-focus-within" => group_prefix.push_str(".group:focus-within "),
+                    "group-focus-visible" => group_prefix.push_str(".group:focus-visible "),
+                    "group-active" => group_prefix.push_str(".group:active "),
+
+                    // Peer variants
+                    "peer-checked" => peer_prefix.push_str(".peer:checked ~ "),
+                    "peer-focus" => peer_prefix.push_str(".peer:focus ~ "),
+                    "peer-hover" => peer_prefix.push_str(".peer:hover ~ "),
+                    "peer-disabled" => peer_prefix.push_str(".peer:disabled ~ "),
+
+                    // Dynamic / arbitrary group, peer, and has-[...]
+                    other => {
+                        if other.starts_with("has-[") && other.ends_with(']') {
+                            let inner = &other[5..other.len() - 1];
+                            let clean_inner = inner.replace('_', " ");
+                            has_suffix.push_str(&format!(":has({})", clean_inner));
+                        } else if let Some(stripped) = other.strip_prefix("group-") {
+                            group_prefix.push_str(&format!(".group:{} ", stripped));
+                        } else if let Some(stripped) = other.strip_prefix("peer-") {
+                            peer_prefix.push_str(&format!(".peer:{} ~ ", stripped));
+                        }
+                    }
                 }
             }
 
-            let final_selector = format!("{}{}{}", theme_prefix, selector, pseudo_suffix);
+            let final_selector = format!(
+                "{}{}{}{}{}{}{}",
+                theme_prefix, peer_prefix, group_prefix, selector, has_suffix, pseudo_suffix, element_suffix
+            );
 
             out.push_str(&prefix);
             out.push_str(&format!("{}{final_selector} {{\n", indent));
@@ -305,6 +383,20 @@ impl CoherynCompiler {
             ("w", Some("screen")) => decl("width", "100vw", token.important),
             ("w", Some("auto")) => decl("width", "auto", token.important),
             ("w", Some("fit")) => decl("width", "fit-content", token.important),
+            ("w", Some("1/2")) => decl("width", "50%", token.important),
+            ("w", Some("1/3")) => decl("width", "33.333333%", token.important),
+            ("w", Some("2/3")) => decl("width", "66.666667%", token.important),
+            ("w", Some("1/4")) => decl("width", "25%", token.important),
+            ("w", Some("2/4")) => decl("width", "50%", token.important),
+            ("w", Some("3/4")) => decl("width", "75%", token.important),
+            ("w", Some("1/5")) => decl("width", "20%", token.important),
+            ("w", Some("2/5")) => decl("width", "40%", token.important),
+            ("w", Some("3/5")) => decl("width", "60%", token.important),
+            ("w", Some("4/5")) => decl("width", "80%", token.important),
+            ("w", Some("1/6")) => decl("width", "16.666667%", token.important),
+            ("w", Some("5/6")) => decl("width", "83.333333%", token.important),
+            ("w", Some("1/12")) => decl("width", "8.333333%", token.important),
+            ("w", Some("11/12")) => decl("width", "91.666667%", token.important),
             ("min-w", Some("0")) => decl("min-width", "0px", token.important),
             ("min-w", Some("full")) => decl("min-width", "100%", token.important),
             ("max-w", Some("xs")) => decl("max-width", "20rem", token.important),
@@ -313,14 +405,21 @@ impl CoherynCompiler {
             ("max-w", Some("lg")) => decl("max-width", "32rem", token.important),
             ("max-w", Some("xl")) => decl("max-width", "36rem", token.important),
             ("max-w", Some("2xl")) => decl("max-width", "42rem", token.important),
+            ("max-w", Some("prose")) => decl("max-width", "65ch", token.important),
 
             ("h", Some("full")) => decl("height", "100%", token.important),
             ("h", Some("screen")) => decl("height", "100vh", token.important),
+            ("h", Some("dvh")) => decl("height", "100dvh", token.important),
+            ("h", Some("svh")) => decl("height", "100svh", token.important),
+            ("h", Some("lvh")) => decl("height", "100lvh", token.important),
             ("h", Some("auto")) => decl("height", "auto", token.important),
             ("min-h", Some("0")) => decl("min-height", "0px", token.important),
             ("min-h", Some("screen")) => decl("min-height", "100vh", token.important),
+            ("min-h", Some("dvh")) => decl("min-height", "100dvh", token.important),
+            ("min-h", Some("svh")) => decl("min-height", "100svh", token.important),
             ("max-h", Some("full")) => decl("max-height", "100%", token.important),
             ("max-h", Some("screen")) => decl("max-height", "100vh", token.important),
+            ("max-h", Some("dvh")) => decl("max-height", "100dvh", token.important),
 
             // Spacing: Padding
             ("p", Some(val)) => decl("padding", &format_spacing(val), token.important),
@@ -461,6 +560,45 @@ impl CoherynCompiler {
             ("shadow-md", None) => decl("box-shadow", "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)", token.important),
             ("shadow-lg", None) => decl("box-shadow", "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)", token.important),
             ("shadow-xl", None) => decl("box-shadow", "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)", token.important),
+
+            // Focus Ring System (Accessible Non-Layout-Shifting Rings)
+            ("ring", None) => decl("box-shadow", "var(--cyn-ring-offset-shadow, 0 0 #0000), 0 0 0 calc(3px + var(--cyn-ring-offset-width, 0px)) var(--cyn-ring-color, var(--cyn-color-brand, #3b82f6)), var(--cyn-shadow, 0 0 #0000)", token.important),
+            ("ring", Some("0")) => decl("box-shadow", "0 0 #0000", token.important),
+            ("ring", Some("1")) => decl("box-shadow", "var(--cyn-ring-offset-shadow, 0 0 #0000), 0 0 0 calc(1px + var(--cyn-ring-offset-width, 0px)) var(--cyn-ring-color, var(--cyn-color-brand, #3b82f6)), var(--cyn-shadow, 0 0 #0000)", token.important),
+            ("ring", Some("2")) => decl("box-shadow", "var(--cyn-ring-offset-shadow, 0 0 #0000), 0 0 0 calc(2px + var(--cyn-ring-offset-width, 0px)) var(--cyn-ring-color, var(--cyn-color-brand, #3b82f6)), var(--cyn-shadow, 0 0 #0000)", token.important),
+            ("ring", Some("4")) => decl("box-shadow", "var(--cyn-ring-offset-shadow, 0 0 #0000), 0 0 0 calc(4px + var(--cyn-ring-offset-width, 0px)) var(--cyn-ring-color, var(--cyn-color-brand, #3b82f6)), var(--cyn-shadow, 0 0 #0000)", token.important),
+            ("ring", Some("8")) => decl("box-shadow", "var(--cyn-ring-offset-shadow, 0 0 #0000), 0 0 0 calc(8px + var(--cyn-ring-offset-width, 0px)) var(--cyn-ring-color, var(--cyn-color-brand, #3b82f6)), var(--cyn-shadow, 0 0 #0000)", token.important),
+            ("ring", Some("brand")) => decl("--cyn-ring-color", "var(--cyn-color-brand, #3b82f6)", token.important),
+            ("ring", Some("subtle")) => decl("--cyn-ring-color", "rgba(226, 232, 240, 0.6)", token.important),
+            ("ring", Some("danger")) => decl("--cyn-ring-color", "#ef4444", token.important),
+            ("ring", Some("success")) => decl("--cyn-ring-color", "#10b981", token.important),
+            ("ring", Some("white")) => decl("--cyn-ring-color", "#ffffff", token.important),
+            ("ring-offset", Some("0")) => decl("--cyn-ring-offset-width", "0px", token.important),
+            ("ring-offset", Some("1")) => decl("--cyn-ring-offset-width", "1px", token.important),
+            ("ring-offset", Some("2")) => decl("--cyn-ring-offset-width", "2px", token.important),
+            ("ring-offset", Some("4")) => decl("--cyn-ring-offset-width", "4px", token.important),
+            ("ring-offset", Some("surface")) => decl("--cyn-ring-offset-color", "var(--cyn-color-surface, #ffffff)", token.important),
+            ("ring-inset", None) => decl("--cyn-ring-inset", "inset", token.important),
+
+            // Extended Transforms
+            ("rotate", Some("0")) => decl("transform", "rotate(0deg)", token.important),
+            ("rotate", Some("45")) => decl("transform", "rotate(45deg)", token.important),
+            ("rotate", Some("90")) => decl("transform", "rotate(90deg)", token.important),
+            ("rotate", Some("180")) => decl("transform", "rotate(180deg)", token.important),
+            ("-rotate", Some("45")) | ("rotate", Some("-45")) => decl("transform", "rotate(-45deg)", token.important),
+            ("-rotate", Some("90")) | ("rotate", Some("-90")) => decl("transform", "rotate(-90deg)", token.important),
+            ("scale", Some("75")) => decl("transform", "scale(0.75)", token.important),
+            ("scale", Some("90")) => decl("transform", "scale(0.9)", token.important),
+            ("scale", Some("95")) => decl("transform", "scale(0.95)", token.important),
+            ("scale", Some("100")) => decl("transform", "scale(1)", token.important),
+            ("scale", Some("105")) => decl("transform", "scale(1.05)", token.important),
+            ("scale", Some("110")) => decl("transform", "scale(1.1)", token.important),
+            ("translate-x", Some("1/2")) => decl("transform", "translateX(50%)", token.important),
+            ("translate-y", Some("1/2")) => decl("transform", "translateY(50%)", token.important),
+            ("-translate-x", Some("1/2")) => decl("transform", "translateX(-50%)", token.important),
+            ("-translate-y", Some("1/2")) => decl("transform", "translateY(-50%)", token.important),
+            ("-translate-x", Some("full")) => decl("transform", "translateX(-100%)", token.important),
+            ("-translate-y", Some("full")) => decl("transform", "translateY(-100%)", token.important),
 
             // Opacity
             ("opacity", Some("0")) => decl("opacity", "0", token.important),
@@ -764,5 +902,46 @@ mod tests {
         assert!(result.css.contains(".overscroll-contain {\n    overscroll-behavior: contain;\n  }"));
         assert!(result.css.contains("var(--cyn-touch-min, 44px)"));
         assert!(result.css.contains("-webkit-tap-highlight-color: transparent;"));
+    }
+
+    #[test]
+    fn test_advanced_modifier_pipeline_and_ring_system() {
+        let compiler = CoherynCompiler::new(CoherynConfig::default());
+        let candidates = vec![
+            SourceCandidate { value: "group-hover:bg-brand".into(), span: SourceSpan::dummy() },
+            SourceCandidate { value: "peer-checked:hidden".into(), span: SourceSpan::dummy() },
+            SourceCandidate { value: "has-[:checked]:bg-surface".into(), span: SourceSpan::dummy() },
+            SourceCandidate { value: "before:block".into(), span: SourceSpan::dummy() },
+            SourceCandidate { value: "selection:bg-brand".into(), span: SourceSpan::dummy() },
+            SourceCandidate { value: "motion-safe:transition-all".into(), span: SourceSpan::dummy() },
+            SourceCandidate { value: "ring-2".into(), span: SourceSpan::dummy() },
+            SourceCandidate { value: "ring-brand".into(), span: SourceSpan::dummy() },
+            SourceCandidate { value: "ring-offset-2".into(), span: SourceSpan::dummy() },
+            SourceCandidate { value: "w-1/2".into(), span: SourceSpan::dummy() },
+            SourceCandidate { value: "w-3/4".into(), span: SourceSpan::dummy() },
+            SourceCandidate { value: "h-dvh".into(), span: SourceSpan::dummy() },
+            SourceCandidate { value: "rotate-45".into(), span: SourceSpan::dummy() },
+            SourceCandidate { value: "-rotate-45".into(), span: SourceSpan::dummy() },
+            SourceCandidate { value: "scale-95".into(), span: SourceSpan::dummy() },
+            SourceCandidate { value: "-translate-x-1/2".into(), span: SourceSpan::dummy() },
+        ];
+
+        let result = compiler.compile_candidates(&candidates);
+        assert!(result.css.contains(".group:hover .group-hover\\:bg-brand"));
+        assert!(result.css.contains(".peer:checked ~ .peer-checked\\:hidden"));
+        assert!(result.css.contains(".has-\\[\\:checked\\]\\:bg-surface:has(:checked)"));
+        assert!(result.css.contains(".before\\:block::before"));
+        assert!(result.css.contains(".selection\\:bg-brand::selection"));
+        assert!(result.css.contains("@media (prefers-reduced-motion: no-preference)"));
+        assert!(result.css.contains(".ring-2 {"));
+        assert!(result.css.contains(".ring-brand {"));
+        assert!(result.css.contains(".ring-offset-2 {"));
+        assert!(result.css.contains(".w-1\\/2 {"));
+        assert!(result.css.contains(".w-3\\/4 {"));
+        assert!(result.css.contains(".h-dvh {"));
+        assert!(result.css.contains(".rotate-45 {"));
+        assert!(result.css.contains(".-rotate-45 {"));
+        assert!(result.css.contains(".scale-95 {"));
+        assert!(result.css.contains(".-translate-x-1\\/2 {"));
     }
 }

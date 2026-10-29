@@ -16,12 +16,14 @@
     <!-- Sidebar Navigation -->
     <aside class="sidebar">
       <div>
-        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 2rem;">
-          <img src="../assets/CoherynTech_Icon_Master_Gradient.svg" alt="CoherynTech Logo" style="width: 32px; height: 32px; display: block;">
-          <span style="font-weight: 800; font-size: 1.15rem;">CoherynUI</span>
+        <div class="brand-lockup mb-8">
+          <div class="brand-icon">
+            <img class="brand-logo" src="../assets/CoherynTech_Icon_Master_Gradient.svg" alt="CoherynTech Logo">
+          </div>
+          <span class="font-bold text-lg">CoherynUI</span>
         </div>
 
-        <nav style="display: flex; flex-direction: column; gap: 0.4rem;">
+        <nav class="flex-col gap-2">
           <a href="#" class="nav-item active">📊 Telemetry</a>
           <a href="#" class="nav-item">⚡ Edge Nodes</a>
           <a href="#" class="nav-item">🛡️ Security Sandboxes</a>
@@ -29,18 +31,18 @@
         </nav>
       </div>
 
-      <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1.5rem; border-top: 1px solid var(--cyn-color-border);">
-        <span style="font-size: 0.8rem; color: var(--cyn-color-muted);">Prefix: <code>cyn</code></span>
+      <div class="flex-between pt-6 border-t">
+        <span class="text-xs text-muted">Prefix: <code>cyn</code></span>
         <button class="theme-btn" id="themeToggle">Toggle Theme</button>
       </div>
     </aside>
 
     <!-- Main Content -->
     <main class="main-content">
-      <header style="display: flex; justify-content: space-between; align-items: center;">
+      <header class="flex-between">
         <div>
-          <h1 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em;">SaaS Cloud Telemetry</h1>
-          <p style="color: var(--cyn-color-muted); margin-top: 0.25rem;">Real-time infrastructure metrics compiled with CoherynUI CSS Engine.</p>
+          <h1 class="text-xl font-bold">SaaS Cloud Telemetry</h1>
+          <p class="text-muted text-sm mt-1">Real-time infrastructure metrics compiled with CoherynUI CSS Engine.</p>
         </div>
         <span class="badge-pill badge-success">● Global Mesh Normal</span>
       </header>
